@@ -14,8 +14,7 @@ prototype · [`BASARILAR.md`](BASARILAR.md) — milestone results digest ·
 [`PROGRESS.md`](PROGRESS.md) — chronological dev journal (full history of
 what was tried, including the bugs).
 
-**Launch article (English):** [Running a 4B model in 6 GB and training 3B
-parameters on a laptop](ARTICLE.md) · [HTML version](article.html)
+**Launch article (English):** [DEV Community](https://dev.to/mycute_97b39c4e34027570f9/running-a-4b-model-in-6-gb-and-training-3b-parameters-on-a-laptop-4al) · [Markdown](ARTICLE.md) · [HTML](article.html)
 
 ## Product: LCGA Local — one-command local chat
 
