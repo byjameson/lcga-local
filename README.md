@@ -14,6 +14,9 @@ prototype · [`BASARILAR.md`](BASARILAR.md) — milestone results digest ·
 [`PROGRESS.md`](PROGRESS.md) — chronological dev journal (full history of
 what was tried, including the bugs).
 
+**Launch article (English):** [Running a 4B model in 6 GB and training 3B
+parameters on a laptop](ARTICLE.md) · [HTML version](article.html)
+
 ## Product: LCGA Local — one-command local chat
 
 The product surface is not an API. It is a local chat assistant:
