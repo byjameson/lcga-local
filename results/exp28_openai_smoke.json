@@ -1,0 +1,13 @@
+{
+  "exp": "exp28_openai_smoke",
+  "tag": "exp28_openai_smoke",
+  "nonstream_s": 0.018,
+  "stream_total_s": 2.697,
+  "stream_ttft_s": 0.443,
+  "stream_chunks": 12,
+  "done": true,
+  "content_chars": 26,
+  "stream_chars": 78,
+  "measurement": "ttft measured on first incremental SSE content line",
+  "ts": "2026-10-20 17:09:32"
+}

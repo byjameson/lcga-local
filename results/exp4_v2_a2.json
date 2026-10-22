@@ -1,0 +1,115 @@
+{
+ "exp": "exp4_speed",
+ "ts": "2026-10-16 09:33:24",
+ "ckpt": "checkpoints\\v2_best.pt",
+ "tag": "v2_a2",
+ "meta": {
+  "args": {
+   "steps": 2000,
+   "seq": 1024,
+   "batch": 1,
+   "lr_router": 0.0003,
+   "lr_lora": 0.001,
+   "lam_kl": 0.5,
+   "lam_mse": 0.3,
+   "budget": 0.25,
+   "lora_attn": 16,
+   "lora_mlp": 0,
+   "tag": "v2",
+   "eval_every": 250,
+   "log_every": 20,
+   "seed": 0,
+   "warmup": 100,
+   "init_ckpt": "checkpoints\\v1_best.pt",
+   "dense_control": false,
+   "ckpt_gather": true,
+   "tf32": false,
+   "mem_profile": false
+  },
+  "step": 1250,
+  "dev_sparse_ppl": 14.63968276977539,
+  "dev_dense_ppl": 11.500496864318848
+ },
+ "prefill": {
+  "T1024": {
+   "dense_pinned": true,
+   "dense_ms": 111.3969,
+   "dense_min": 109.8117,
+   "sparse_ms": 120.7142,
+   "sparse_min": 119.4587,
+   "speedup": 0.923,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 6.488,
+    "kernel_ms": 3.18,
+    "coarse_ms": 17.478
+   }
+  },
+  "T2048": {
+   "dense_pinned": true,
+   "dense_ms": 217.6804,
+   "dense_min": 217.318,
+   "sparse_ms": 230.6656,
+   "sparse_min": 230.1583,
+   "speedup": 0.944,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 10.982,
+    "kernel_ms": 8.357,
+    "coarse_ms": 29.502
+   }
+  },
+  "T4096": {
+   "dense_pinned": true,
+   "dense_ms": 436.5491,
+   "dense_min": 435.762,
+   "sparse_ms": 446.5981,
+   "sparse_min": 445.9803,
+   "speedup": 0.977,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 22.951,
+    "kernel_ms": 27.087,
+    "coarse_ms": 55.544
+   }
+  },
+  "T8192": {
+   "dense_pinned": true,
+   "dense_ms": 969.5666,
+   "dense_min": 968.1664,
+   "sparse_ms": 928.8233,
+   "sparse_min": 928.4739,
+   "speedup": 1.044,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 49.309,
+    "kernel_ms": 98.387,
+    "coarse_ms": 106.001
+   }
+  },
+  "T12288": {
+   "dense_pinned": true,
+   "dense_ms": 1689.1297,
+   "dense_min": 1686.3949,
+   "sparse_ms": 1463.9625,
+   "sparse_min": 1463.5447,
+   "speedup": 1.154,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 62.295,
+    "kernel_ms": 214.781,
+    "coarse_ms": 173.364
+   }
+  },
+  "T16384": {
+   "dense_pinned": true,
+   "dense_ms": 2560.278,
+   "dense_min": 2559.1921,
+   "sparse_ms": 2040.9588,
+   "sparse_min": 2040.4254,
+   "speedup": 1.254,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 83.392,
+    "kernel_ms": 375.109,
+    "coarse_ms": 222.245
+   }
+  }
+ },
+ "decode": {},
+ "note": "clean dense-first, backends pinned"
+}

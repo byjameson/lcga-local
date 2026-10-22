@@ -1,0 +1,13 @@
+[data] train=221093014 tok | valid=602715 tok | valid_bytes=2493514
+[shards] 4 x ~55.3M tok (tok2_ctrl8k_train.pt)
+[plan] full: 1000 adim/isci x 4 isci x 32x512 = 66M token toplam
+[model] params=17.31M cfg={'arch': 'minilm', 'vocab': 8192, 'dim': 384, 'layers': 8, 'heads': 6, 'ctx': 512, 'mlp_hidden': 1024, 'loops': 1}
+  [eval @0] val_loss=9.0780 bpb=3.1657
+  [eval @250] val_loss=2.4650 bpb=0.8596
+  [eval @500] val_loss=2.0150 bpb=0.7027
+  [eval @750] val_loss=1.8472 bpb=0.6442
+  [eval @1000] val_loss=1.7752 bpb=0.619
+  [sample 3.1s] Once upon a time, there was a little boy named Timmy. Timmy had a toy train that he loved to play with. One day, Timmy's friend Billy came over to play. Billy said, "Timmy, we can't play with my new train. It's so fun!"   Timmy said, "Okay, Mommy. I'll play with the train more." So, Timmy went outsi
+  [sample 2.5s] Once upon a time, there was a little boy named Tim. Tim loved to play with his toy cars. One day, he wanted to play with his cars, but he didn't know how to fix them.  Tim's mom asked him to help her fix the toy car. Tim was happy to help. He found a little tape and started to fix it. He fixed the c
+[ckpt] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\e13_full.pt
+[done] tag=e13_full mode=full final_bpb=0.619 wall=31.4min med_step=1872ms

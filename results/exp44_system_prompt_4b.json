@@ -1,0 +1,38 @@
+[
+  {
+    "prompt": "Translate 'The dog is in the garden.' into Turkish.",
+    "current": "Kedi garden'da.",
+    "none": "Kedi gardende.",
+    "product": "Köyde köpek var."
+  },
+  {
+    "prompt": "Write one short sentence containing the word 'ocean'.",
+    "current": "The ocean is vast and full of mystery.",
+    "none": "The vast ocean stretches endlessly under a clear blue sky.",
+    "product": "The vast ocean stretches endlessly beneath the blue sky."
+  },
+  {
+    "prompt": "At what temperature does water boil (Celsius)?",
+    "current": "Water boils at 100°C at standard atmospheric pressure.",
+    "none": "Water boils at **100°C** (degrees Celsius) at standard atmospheric pressure (1 atmosphere or 101.3 kPa).",
+    "product": "Water boils at 100 degrees Celsius at standard atmospheric pressure (1 atm or 101.3 kPa).  \n\nThis is the standard boiling point of water under normal conditions. However, the boiling point can change with altitude or pressure—such as in high mountains where water boils below 100°C.  \n\n✅ Verified from scientific sources."
+  },
+  {
+    "prompt": "Misir'in baskenti neresi?",
+    "current": "Misir'in baskenti **Kairo**'dur.",
+    "none": "Misir'in başkenti **Kairo**'dır.",
+    "product": "Misir'in baskenti **Kairo**'dur.\n\nKairo, Misir'in en büyük şehri ve resmi başkenti olarak kabul edilir. Bu bilgi, genel bilgiler ve coğrafya kaynaklarından doğrulanmıştır."
+  },
+  {
+    "prompt": "Dunyanin en buyuk colu hangisi?",
+    "current": "Dünyanın en büyük çölü **Antarktika**'dır. Ancak, \"çöl\" kavramı genellikle kurak, bitki örtüsü az olan bölgeleri ifade eder. Bu nedenle, en büyük çöl olarak bilinen bölge **Sahara**'dır.  \n\n✅ **Cevap:",
+    "none": "\"Dunyanın en büyük colu\" ifadesi, biraz karışık olabilir çünkü \"colu\" kelimesi Türkçe'de genellikle \"kol\" anlamına gelir. Ancak bu soru, muhtemelen **\"dunyanın en büyük şehri\"** ya da **\"en büyük deniz\"** ya da **\"en büyük",
+    "product": "Dünyanın en büyük çölü, **Antarktika**'dır.\n\nAncak, bu soruyu daha dikkatli ele alalım: Antarktika, genellikle bir \"çöl\" olarak değil, bir \"kutup bölgesi\" olarak tanımlanır. Çünkü burada çok az yağış olur ve buzlar ve kar"
+  },
+  {
+    "prompt": "Insan kalbinde kac odacik vardir?",
+    "current": "İnsan kalbinde **dört odacık** vardır:  \n- Sağ atriyum (sağ kalp odacığı)  \n- Sol atriyum (sol kalp odacığı)  \n- Sağ ventrikül (sağ kalp odacığı)  \n- Sol ventrikül (sol kalp odacığı)",
+    "none": "İnsan kalbinde **dört odacık** vardır.\n\nBu odacıklar şunlardır:\n\n1. **Sol kalp odacığı (sol atrium)**  \n2. **Sağ kalp odacığı (sağ atrium)**  \n3. **Sol ventrikül (sol kabuk)**  \n4. **Sağ ventrikül (sağ",
+    "product": "İnsan kalbinde **dört odacık** vardır.  \n\nBu odacıklar şunlardır:  \n1. **Sol kalp odacığı** (sol odacık)  \n2. **Sağ kalp odacığı** (sağ odacık)  \n3. **Sol atriyum** (sol atriyum)  \n4. **"
+  }
+]

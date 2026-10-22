@@ -1,0 +1,90 @@
+[data] train=466759153 tok (ts_train.pt) | valid=4691305 tok (ts_valid.pt)
+[plan] 18000 adim x 48x512 = 442M token (~0.95 epoch)
+[model] params=17.31M cfg={'arch': 'minilm', 'vocab': 8192, 'dim': 384, 'layers': 8, 'heads': 6, 'ctx': 512, 'mlp_hidden': 1024, 'loops': 1}
+[resume] step=3001 best_val=1.7135 vram=0.25G (bosaltildi)
+  [step 3100] loss=1.6357 lr=9.52e-04 655ms emb_norm=97.21 vram=5.90G
+  [step 3200] loss=1.6326 lr=9.48e-04 656ms emb_norm=97.24 vram=5.90G
+  [step 3300] loss=1.6356 lr=9.44e-04 657ms emb_norm=97.22 vram=5.90G
+  [step 3400] loss=1.6378 lr=9.40e-04 656ms emb_norm=97.11 vram=5.90G
+  [eval @3500] val_loss=1.6871 ppl=5.40
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_best.pt
+  [step 3500] loss=1.6365 lr=9.36e-04 657ms emb_norm=97.02 vram=5.90G
+  [step 3600] loss=1.7070 lr=9.32e-04 656ms emb_norm=96.97 vram=5.90G
+  [step 3700] loss=1.6749 lr=9.28e-04 656ms emb_norm=96.84 vram=5.90G
+  [step 3800] loss=1.6277 lr=9.23e-04 657ms emb_norm=96.65 vram=5.90G
+  [step 3900] loss=1.6130 lr=9.19e-04 656ms emb_norm=96.48 vram=5.90G
+  [eval @4000] val_loss=1.6807 ppl=5.37
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_best.pt
+  [sample @4000 2.5s] Once upon a time, there was a little boy named Timmy. Timmy had a toy truck that he loved to play with. One day, Timmy's friend Billy came over to play. Billy saw Timmy's truck and said, "Wow, that truck is very cool! Can I play with it?"  Timmy said, "Sure, you can play with it, but be careful not 
+  [step 4000] loss=1.6547 lr=9.14e-04 682ms emb_norm=96.34 vram=5.90G
+  [ckpt] step 4000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_ckpt.pt
+  [step 4100] loss=1.6294 lr=9.09e-04 657ms emb_norm=95.69 vram=5.90G
+  [step 4200] loss=1.7158 lr=9.04e-04 655ms emb_norm=95.32 vram=5.90G
+  [step 4300] loss=1.5671 lr=8.99e-04 723ms emb_norm=95.09 vram=5.90G
+  [step 4400] loss=1.6133 lr=8.94e-04 659ms emb_norm=94.82 vram=5.90G
+  [eval @4500] val_loss=1.6435 ppl=5.17
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_best.pt
+  [step 4500] loss=1.7317 lr=8.89e-04 656ms emb_norm=94.74 vram=5.90G
+  [step 4600] loss=1.6099 lr=8.84e-04 654ms emb_norm=94.48 vram=5.90G
+  [step 4700] loss=1.6438 lr=8.78e-04 657ms emb_norm=94.22 vram=5.90G
+  [step 4800] loss=1.6083 lr=8.72e-04 655ms emb_norm=94.10 vram=5.90G
+  [step 4900] loss=1.6265 lr=8.67e-04 658ms emb_norm=94.01 vram=5.90G
+  [eval @5000] val_loss=1.6182 ppl=5.04
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_best.pt
+  [step 5000] loss=1.6425 lr=8.61e-04 657ms emb_norm=93.86 vram=5.90G
+  [ckpt] step 5000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_ckpt.pt
+  [step 5100] loss=1.6177 lr=8.55e-04 655ms emb_norm=93.54 vram=5.90G
+  [step 5200] loss=1.5786 lr=8.49e-04 656ms emb_norm=93.29 vram=5.90G
+  [step 5300] loss=1.5929 lr=8.43e-04 654ms emb_norm=93.37 vram=5.90G
+  [step 5400] loss=1.6369 lr=8.37e-04 656ms emb_norm=93.19 vram=5.90G
+  [eval @5500] val_loss=1.6005 ppl=4.96
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_best.pt
+  [step 5500] loss=1.6203 lr=8.31e-04 656ms emb_norm=92.77 vram=5.90G
+  [step 5600] loss=1.6268 lr=8.24e-04 657ms emb_norm=92.41 vram=5.90G
+  [step 5700] loss=1.5616 lr=8.18e-04 658ms emb_norm=92.06 vram=5.90G
+  [step 5800] loss=1.5968 lr=8.11e-04 654ms emb_norm=91.62 vram=5.90G
+  [step 5900] loss=1.5756 lr=8.05e-04 657ms emb_norm=91.20 vram=5.90G
+  [eval @6000] val_loss=1.5846 ppl=4.88
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_best.pt
+  [sample @6000 1.8s] Once upon a time, there was a little girl named Lily. She loved to play with her toys and have fun. One day, she went to the park to play on the swings. But when she got there, she noticed that she couldn't see anything.   Lily felt scared because she thought she would always miss the park. But then
+  [step 6000] loss=1.4967 lr=7.98e-04 674ms emb_norm=91.03 vram=5.90G
+  [ckpt] step 6000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_ckpt.pt
+  [step 6100] loss=1.5858 lr=7.91e-04 656ms emb_norm=90.90 vram=5.90G
+  [step 6200] loss=1.5789 lr=7.84e-04 658ms emb_norm=90.65 vram=5.90G
+  [step 6300] loss=1.5756 lr=7.77e-04 656ms emb_norm=90.54 vram=5.90G
+  [step 6400] loss=1.5475 lr=7.70e-04 655ms emb_norm=90.44 vram=5.90G
+  [eval @6500] val_loss=1.5719 ppl=4.82
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_best.pt
+  [step 6500] loss=1.5705 lr=7.63e-04 656ms emb_norm=90.07 vram=5.90G
+  [step 6600] loss=1.6072 lr=7.56e-04 657ms emb_norm=89.73 vram=5.90G
+  [step 6700] loss=1.6891 lr=7.49e-04 658ms emb_norm=89.58 vram=5.90G
+  [step 6800] loss=1.6058 lr=7.42e-04 656ms emb_norm=89.52 vram=5.90G
+  [step 6900] loss=1.6343 lr=7.34e-04 655ms emb_norm=89.34 vram=5.90G
+  [eval @7000] val_loss=1.5600 ppl=4.76
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_best.pt
+  [step 7000] loss=1.6458 lr=7.27e-04 657ms emb_norm=89.35 vram=5.90G
+  [ckpt] step 7000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_ckpt.pt
+  [step 7100] loss=1.6201 lr=7.19e-04 657ms emb_norm=89.04 vram=5.90G
+  [step 7200] loss=1.5457 lr=7.12e-04 657ms emb_norm=88.85 vram=5.90G
+  [step 7300] loss=1.6129 lr=7.04e-04 655ms emb_norm=88.76 vram=5.90G
+  [step 7400] loss=1.5995 lr=6.97e-04 657ms emb_norm=88.52 vram=5.90G
+  [eval @7500] val_loss=1.5458 ppl=4.69
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_best.pt
+  [step 7500] loss=1.6136 lr=6.89e-04 655ms emb_norm=88.41 vram=5.90G
+  [step 7600] loss=1.6534 lr=6.81e-04 656ms emb_norm=88.27 vram=5.90G
+  [step 7700] loss=1.6074 lr=6.74e-04 656ms emb_norm=88.21 vram=5.90G
+  [step 7800] loss=1.4368 lr=6.66e-04 659ms emb_norm=88.09 vram=5.90G
+  [step 7900] loss=1.4693 lr=6.58e-04 656ms emb_norm=87.86 vram=5.90G
+  [eval @8000] val_loss=1.5338 ppl=4.64
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_best.pt
+  [sample @8000 1.9s] Once upon a time, there was a little girl named Lily. She loved to play with her dolls and stuffed animals. One day, she decided to go to the park with her mommy. At the park, she saw a big, black bird. She was so excited to see the bird and talk to it.  Lily: "Mommy, can we introduce ourselves to t
+  [step 8000] loss=1.5911 lr=6.50e-04 662ms emb_norm=87.53 vram=5.90G
+  [ckpt] step 8000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_ckpt.pt
+  [step 8100] loss=1.5283 lr=6.42e-04 655ms emb_norm=87.34 vram=5.90G
+  [step 8200] loss=1.5165 lr=6.34e-04 655ms emb_norm=87.00 vram=5.90G
+  [step 8300] loss=1.5047 lr=6.26e-04 655ms emb_norm=87.04 vram=5.90G
+  [step 8400] loss=1.4948 lr=6.18e-04 655ms emb_norm=86.82 vram=5.90G
+  [eval @8500] val_loss=1.5181 ppl=4.56
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_best.pt
+  [step 8500] loss=1.4800 lr=6.10e-04 657ms emb_norm=86.67 vram=5.90G
+  [step 8600] loss=1.4755 lr=6.02e-04 658ms emb_norm=86.50 vram=5.90G

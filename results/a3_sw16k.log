@@ -1,0 +1,192 @@
+[data] train=122729085 tok (tok2_sw16k_train.pt) | valid=336613 tok (tok2_sw16k_valid.pt) | valid_bytes=2493514
+[plan] 12000 adim x 32x512 = 197M token (~1.60 epoch)
+[model] params=20.45M cfg={'arch': 'minilm', 'vocab': 16384, 'dim': 384, 'layers': 8, 'heads': 6, 'ctx': 512, 'mlp_hidden': 1024}
+  [eval @0] val_loss=9.7810 ppl=17694.53 bpb=1.9049
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 0] loss=9.7797 lr=3.33e-06 704ms emb_norm=50.17 vram=5.66G
+  [step 100] loss=8.7756 lr=3.37e-04 561ms emb_norm=51.11 vram=5.67G
+  [step 200] loss=7.0352 lr=6.70e-04 562ms emb_norm=58.49 vram=5.67G
+  [step 300] loss=5.9609 lr=1.00e-03 563ms emb_norm=71.62 vram=5.67G
+  [step 400] loss=5.3565 lr=1.00e-03 562ms emb_norm=83.23 vram=5.67G
+  [eval @500] val_loss=4.9156 ppl=136.40 bpb=0.9573
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 500] loss=4.9498 lr=9.99e-04 563ms emb_norm=91.34 vram=5.67G
+  [step 600] loss=4.4810 lr=9.99e-04 563ms emb_norm=96.88 vram=5.67G
+  [step 700] loss=4.2811 lr=9.97e-04 563ms emb_norm=101.03 vram=5.67G
+  [step 800] loss=3.9861 lr=9.96e-04 564ms emb_norm=103.89 vram=5.67G
+  [step 900] loss=3.9812 lr=9.94e-04 563ms emb_norm=105.82 vram=5.67G
+  [eval @1000] val_loss=3.9972 ppl=54.45 bpb=0.7785
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 1000] loss=4.0097 lr=9.92e-04 563ms emb_norm=107.42 vram=5.67G
+  [ckpt] step 1000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_ckpt.pt
+  [step 1100] loss=3.8312 lr=9.90e-04 564ms emb_norm=108.68 vram=5.67G
+  [step 1200] loss=3.8190 lr=9.87e-04 563ms emb_norm=109.74 vram=5.67G
+  [step 1300] loss=3.6831 lr=9.84e-04 564ms emb_norm=110.59 vram=5.67G
+  [step 1400] loss=3.6651 lr=9.81e-04 563ms emb_norm=111.36 vram=5.67G
+  [eval @1500] val_loss=3.6882 ppl=39.97 bpb=0.7183
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 1500] loss=3.6193 lr=9.77e-04 563ms emb_norm=112.07 vram=5.67G
+  [step 1600] loss=3.5740 lr=9.73e-04 563ms emb_norm=112.75 vram=5.67G
+  [step 1700] loss=3.5312 lr=9.69e-04 563ms emb_norm=113.42 vram=5.67G
+  [step 1800] loss=3.5751 lr=9.64e-04 563ms emb_norm=113.85 vram=5.67G
+  [step 1900] loss=3.5164 lr=9.59e-04 563ms emb_norm=114.30 vram=5.67G
+  [eval @2000] val_loss=3.5084 ppl=33.39 bpb=0.6833
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [sample @2000 2.3s] Once upon a time, as Timmy went to school, borrowed his toy car, and said he wanted to have his toy car back. Timmy thought for a moment and decided to lend his toy car to his friend, Johnny, who loved cars.  She gave him the toy car with play with every day. One day, Johnny noticed that Johnny was 
+  [step 2000] loss=3.4399 lr=9.54e-04 610ms emb_norm=114.69 vram=5.67G
+  [ckpt] step 2000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_ckpt.pt
+  [step 2100] loss=3.5661 lr=9.48e-04 562ms emb_norm=115.03 vram=5.67G
+  [step 2200] loss=3.4734 lr=9.43e-04 563ms emb_norm=115.44 vram=5.67G
+  [step 2300] loss=3.3344 lr=9.37e-04 564ms emb_norm=115.83 vram=5.67G
+  [step 2400] loss=3.3938 lr=9.30e-04 562ms emb_norm=116.16 vram=5.67G
+  [eval @2500] val_loss=3.4189 ppl=30.54 bpb=0.6659
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 2500] loss=3.4096 lr=9.24e-04 562ms emb_norm=116.53 vram=5.67G
+  [step 2600] loss=3.2943 lr=9.17e-04 563ms emb_norm=116.92 vram=5.67G
+  [step 2700] loss=3.3306 lr=9.10e-04 564ms emb_norm=117.23 vram=5.67G
+  [step 2800] loss=3.3609 lr=9.02e-04 563ms emb_norm=117.33 vram=5.67G
+  [step 2900] loss=3.2063 lr=8.95e-04 565ms emb_norm=117.58 vram=5.67G
+  [eval @3000] val_loss=3.3452 ppl=28.37 bpb=0.6515
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 3000] loss=3.2547 lr=8.87e-04 564ms emb_norm=117.77 vram=5.67G
+  [ckpt] step 3000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_ckpt.pt
+  [step 3100] loss=3.2656 lr=8.79e-04 563ms emb_norm=117.87 vram=5.67G
+  [step 3200] loss=3.3373 lr=8.70e-04 564ms emb_norm=118.08 vram=5.67G
+  [step 3300] loss=3.1557 lr=8.62e-04 563ms emb_norm=118.27 vram=5.67G
+  [step 3400] loss=3.3346 lr=8.53e-04 563ms emb_norm=118.27 vram=5.67G
+  [eval @3500] val_loss=3.2717 ppl=26.36 bpb=0.6372
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 3500] loss=3.1777 lr=8.44e-04 564ms emb_norm=118.30 vram=5.67G
+  [step 3600] loss=3.1766 lr=8.35e-04 563ms emb_norm=118.29 vram=5.67G
+  [step 3700] loss=3.3470 lr=8.25e-04 563ms emb_norm=118.30 vram=5.67G
+  [step 3800] loss=3.1163 lr=8.15e-04 564ms emb_norm=118.30 vram=5.67G
+  [step 3900] loss=3.0438 lr=8.06e-04 564ms emb_norm=118.27 vram=5.67G
+  [eval @4000] val_loss=3.2242 ppl=25.13 bpb=0.6279
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [sample @4000 0.4s] Once upon a time."  Cam was very pleased with his plan and was filled with hope: "Careful!"
+  [step 4000] loss=3.2901 lr=7.96e-04 564ms emb_norm=118.38 vram=5.67G
+  [ckpt] step 4000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_ckpt.pt
+  [step 4100] loss=3.2092 lr=7.85e-04 563ms emb_norm=118.38 vram=5.67G
+  [step 4200] loss=3.1277 lr=7.75e-04 563ms emb_norm=118.28 vram=5.67G
+  [step 4300] loss=3.0853 lr=7.64e-04 564ms emb_norm=118.20 vram=5.67G
+  [step 4400] loss=3.1789 lr=7.54e-04 563ms emb_norm=118.24 vram=5.67G
+  [eval @4500] val_loss=3.1786 ppl=24.01 bpb=0.6191
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 4500] loss=3.0929 lr=7.43e-04 563ms emb_norm=118.14 vram=5.67G
+  [step 4600] loss=3.0931 lr=7.32e-04 564ms emb_norm=118.05 vram=5.67G
+  [step 4700] loss=3.2052 lr=7.21e-04 563ms emb_norm=118.03 vram=5.67G
+  [step 4800] loss=3.1597 lr=7.10e-04 563ms emb_norm=117.89 vram=5.67G
+  [step 4900] loss=3.0373 lr=6.98e-04 563ms emb_norm=117.74 vram=5.67G
+  [eval @5000] val_loss=3.1327 ppl=22.94 bpb=0.6101
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 5000] loss=3.0814 lr=6.87e-04 563ms emb_norm=117.56 vram=5.67G
+  [ckpt] step 5000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_ckpt.pt
+  [step 5100] loss=3.0345 lr=6.75e-04 562ms emb_norm=117.44 vram=5.67G
+  [step 5200] loss=2.9899 lr=6.64e-04 562ms emb_norm=117.32 vram=5.67G
+  [step 5300] loss=2.9703 lr=6.52e-04 563ms emb_norm=117.14 vram=5.67G
+  [step 5400] loss=2.8949 lr=6.40e-04 564ms emb_norm=117.01 vram=5.67G
+  [eval @5500] val_loss=3.0970 ppl=22.13 bpb=0.6032
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 5500] loss=3.0245 lr=6.28e-04 564ms emb_norm=116.88 vram=5.67G
+  [step 5600] loss=3.0153 lr=6.16e-04 563ms emb_norm=116.75 vram=5.67G
+  [step 5700] loss=2.9848 lr=6.04e-04 563ms emb_norm=116.51 vram=5.67G
+  [step 5800] loss=3.0217 lr=5.92e-04 563ms emb_norm=116.32 vram=5.67G
+  [step 5900] loss=2.9759 lr=5.80e-04 563ms emb_norm=116.16 vram=5.67G
+  [eval @6000] val_loss=3.0555 ppl=21.23 bpb=0.5951
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [sample @6000 2.2s] Once upon a time. Shhenied travelled far and wide, exploring every corner of the lake. The village was huge and strong, and soon a weight was completely revealed. Sheni was amazed. She wanted to explore what was at the top of the big cliff.  Sheni took a deep breath and bravely moved forward. She wa
+  [step 6000] loss=3.0014 lr=5.68e-04 572ms emb_norm=115.85 vram=5.67G
+  [ckpt] step 6000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_ckpt.pt
+  [step 6100] loss=2.9143 lr=5.56e-04 562ms emb_norm=115.62 vram=5.67G
+  [step 6200] loss=3.0344 lr=5.44e-04 562ms emb_norm=115.44 vram=5.67G
+  [step 6300] loss=2.8949 lr=5.32e-04 563ms emb_norm=115.25 vram=5.67G
+  [step 6400] loss=2.9000 lr=5.20e-04 563ms emb_norm=114.99 vram=5.67G
+  [eval @6500] val_loss=3.0159 ppl=20.41 bpb=0.5874
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 6500] loss=3.0196 lr=5.08e-04 564ms emb_norm=114.72 vram=5.67G
+  [step 6600] loss=2.9481 lr=4.96e-04 563ms emb_norm=114.52 vram=5.67G
+  [step 6700] loss=3.0129 lr=4.84e-04 562ms emb_norm=114.30 vram=5.67G
+  [step 6800] loss=2.8991 lr=4.72e-04 563ms emb_norm=114.16 vram=5.67G
+  [step 6900] loss=2.9523 lr=4.60e-04 563ms emb_norm=113.92 vram=5.67G
+  [eval @7000] val_loss=2.9863 ppl=19.81 bpb=0.5816
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 7000] loss=2.8606 lr=4.48e-04 563ms emb_norm=113.73 vram=5.67G
+  [ckpt] step 7000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_ckpt.pt
+  [step 7100] loss=2.8667 lr=4.36e-04 563ms emb_norm=113.45 vram=5.67G
+  [step 7200] loss=2.9217 lr=4.25e-04 563ms emb_norm=113.17 vram=5.67G
+  [step 7300] loss=3.0065 lr=4.13e-04 564ms emb_norm=112.97 vram=5.67G
+  [step 7400] loss=2.9827 lr=4.02e-04 566ms emb_norm=112.72 vram=5.67G
+  [eval @7500] val_loss=2.9479 ppl=19.07 bpb=0.5741
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 7500] loss=2.8489 lr=3.90e-04 563ms emb_norm=112.49 vram=5.67G
+  [step 7600] loss=2.8530 lr=3.79e-04 564ms emb_norm=112.22 vram=5.67G
+  [step 7700] loss=2.8620 lr=3.68e-04 564ms emb_norm=112.01 vram=5.67G
+  [step 7800] loss=2.9394 lr=3.57e-04 564ms emb_norm=111.81 vram=5.67G
+  [step 7900] loss=2.8823 lr=3.46e-04 564ms emb_norm=111.58 vram=5.67G
+  [eval @8000] val_loss=2.9221 ppl=18.58 bpb=0.5691
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [sample @8000 2.0s] Once upon a time,there lived a little girl named Lisa. Lisa was three years old, and she loved to explore. One day, she went outside and saw something amazing - a bird! Lisa was so excited that she started to dance in the bird.  The bird was so surprised! He wanted to watch Lisa dance with him, so s
+  [step 8000] loss=2.8784 lr=3.36e-04 582ms emb_norm=111.32 vram=5.67G
+  [ckpt] step 8000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_ckpt.pt
+  [step 8100] loss=2.8520 lr=3.25e-04 564ms emb_norm=111.13 vram=5.67G
+  [step 8200] loss=2.7550 lr=3.15e-04 563ms emb_norm=110.89 vram=5.67G
+  [step 8300] loss=2.7686 lr=3.04e-04 563ms emb_norm=110.71 vram=5.67G
+  [step 8400] loss=2.8171 lr=2.94e-04 563ms emb_norm=110.53 vram=5.67G
+  [eval @8500] val_loss=2.8973 ppl=18.13 bpb=0.5643
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 8500] loss=2.8692 lr=2.85e-04 563ms emb_norm=110.34 vram=5.67G
+  [step 8600] loss=2.8604 lr=2.75e-04 563ms emb_norm=110.12 vram=5.67G
+  [step 8700] loss=2.7947 lr=2.65e-04 562ms emb_norm=109.90 vram=5.67G
+  [step 8800] loss=2.8183 lr=2.56e-04 563ms emb_norm=109.71 vram=5.67G
+  [step 8900] loss=2.7144 lr=2.47e-04 563ms emb_norm=109.50 vram=5.67G
+  [eval @9000] val_loss=2.8674 ppl=17.59 bpb=0.5585
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 9000] loss=2.8696 lr=2.38e-04 562ms emb_norm=109.29 vram=5.67G
+  [ckpt] step 9000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_ckpt.pt
+  [step 9100] loss=2.7611 lr=2.30e-04 562ms emb_norm=109.11 vram=5.67G
+  [step 9200] loss=2.7728 lr=2.21e-04 563ms emb_norm=108.94 vram=5.67G
+  [step 9300] loss=2.7326 lr=2.13e-04 563ms emb_norm=108.76 vram=5.67G
+  [step 9400] loss=2.6564 lr=2.05e-04 563ms emb_norm=108.60 vram=5.67G
+  [eval @9500] val_loss=2.8474 ppl=17.24 bpb=0.5545
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 9500] loss=2.7938 lr=1.98e-04 563ms emb_norm=108.43 vram=5.67G
+  [step 9600] loss=2.7549 lr=1.90e-04 563ms emb_norm=108.27 vram=5.67G
+  [step 9700] loss=2.7349 lr=1.83e-04 562ms emb_norm=108.13 vram=5.67G
+  [step 9800] loss=2.8034 lr=1.76e-04 563ms emb_norm=107.96 vram=5.67G
+  [step 9900] loss=2.7205 lr=1.70e-04 562ms emb_norm=107.82 vram=5.67G
+  [eval @10000] val_loss=2.8286 ppl=16.92 bpb=0.5509
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [sample @10000 1.1s] Once upon a time, asking how to be kind and share.  Joe looked at Sam and asked, "Will you be friends with me?"  Sam smiled and said, "Of course I will be your friend!" He handed Sam a big bag of popcorn and said, "Let's make some popcorn!"  Sam was very happy. He said, "Let's do it!"  They both wen
+  [step 10000] loss=2.6730 lr=1.63e-04 562ms emb_norm=107.65 vram=5.67G
+  [ckpt] step 10000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_ckpt.pt
+  [step 10100] loss=2.6882 lr=1.57e-04 563ms emb_norm=107.51 vram=5.67G
+  [step 10200] loss=2.8105 lr=1.52e-04 563ms emb_norm=107.38 vram=5.67G
+  [step 10300] loss=2.6522 lr=1.46e-04 563ms emb_norm=107.27 vram=5.67G
+  [step 10400] loss=2.7014 lr=1.41e-04 563ms emb_norm=107.14 vram=5.67G
+  [eval @10500] val_loss=2.8115 ppl=16.63 bpb=0.5476
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 10500] loss=2.8302 lr=1.36e-04 562ms emb_norm=107.01 vram=5.67G
+  [step 10600] loss=2.7438 lr=1.31e-04 563ms emb_norm=106.89 vram=5.67G
+  [step 10700] loss=2.7634 lr=1.27e-04 562ms emb_norm=106.78 vram=5.67G
+  [step 10800] loss=2.5993 lr=1.23e-04 563ms emb_norm=106.66 vram=5.67G
+  [step 10900] loss=2.7308 lr=1.19e-04 562ms emb_norm=106.55 vram=5.67G
+  [eval @11000] val_loss=2.8034 ppl=16.50 bpb=0.5460
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 11000] loss=2.6592 lr=1.16e-04 563ms emb_norm=106.45 vram=5.67G
+  [ckpt] step 11000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_ckpt.pt
+  [step 11100] loss=2.7458 lr=1.13e-04 562ms emb_norm=106.34 vram=5.67G
+  [step 11200] loss=2.6363 lr=1.10e-04 563ms emb_norm=106.23 vram=5.67G
+  [step 11300] loss=2.7359 lr=1.08e-04 563ms emb_norm=106.12 vram=5.67G
+  [step 11400] loss=2.6475 lr=1.06e-04 563ms emb_norm=106.02 vram=5.67G
+  [eval @11500] val_loss=2.7927 ppl=16.32 bpb=0.5439
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [step 11500] loss=2.6894 lr=1.04e-04 562ms emb_norm=105.91 vram=5.67G
+  [step 11600] loss=2.6588 lr=1.03e-04 563ms emb_norm=105.81 vram=5.67G
+  [step 11700] loss=2.8269 lr=1.01e-04 562ms emb_norm=105.73 vram=5.67G
+  [step 11800] loss=2.6987 lr=1.01e-04 563ms emb_norm=105.62 vram=5.67G
+  [step 11900] loss=2.5946 lr=1.00e-04 563ms emb_norm=105.55 vram=5.67G
+  [eval @12000] val_loss=2.7838 ppl=16.18 bpb=0.5422
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a3_sw16k_best.pt
+  [sample @12000 1.2s] Once upon a time, added new material and new material to create something new. Tom was excited to see what would happen. The next day Tom's dad gave him a brand new material to add to his bike project. Tom was so excited to try it out.  Tom's dad showed him how to move the part to his bike material.
+  [sample @12001 1.2s] Once upon a time", the cat saw a dead bird in a tree. He stopped and looked closer. Then, he heard a voice say, "I need your help!". The cat looked around and he saw a little mouse, who was looking very sad. The mouse asked, "What's wrong?". The cat replied, "I am lost, and I don't know how to get h
+[done] best_val=2.7838 ppl=16.18 bpb=0.5422 wall=113.4min tokens/s=28905

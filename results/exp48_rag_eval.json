@@ -1,0 +1,4398 @@
+{
+  "exp": "exp48_rag_eval",
+  "tag": "exp48",
+  "note": "50 covered soru (20 exp47 regresyon + 30 yeni, korpustaki Wikipedia sayfalariyla ortusur) ve 20 korpus disi/kontrol sorusu. Genel benchmark degildir.",
+  "n_covered": 50,
+  "n_regression": 20,
+  "n_new_covered": 30,
+  "n_uncovered": 20,
+  "max_new": 64,
+  "summaries": [
+    {
+      "set": "covered",
+      "mode": "baseline",
+      "ids": "all",
+      "n": 50,
+      "keyword_hit": "42/50",
+      "exact_hit": "4/36",
+      "list_hit": "n/a",
+      "citation": "0/50",
+      "rag_used": "0/50",
+      "avg_elapsed_s": 5.82,
+      "avg_gen_s": 5.74,
+      "peak_vram_mb_max": 4517.8
+    },
+    {
+      "set": "covered",
+      "mode": "rag",
+      "ids": "all",
+      "n": 50,
+      "keyword_hit": "49/50",
+      "exact_hit": "0/36",
+      "list_hit": "n/a",
+      "citation": "50/50",
+      "rag_used": "50/50",
+      "avg_elapsed_s": 5.85,
+      "avg_gen_s": 5.33,
+      "peak_vram_mb_max": 4547.7
+    },
+    {
+      "set": "uncovered",
+      "mode": "baseline",
+      "ids": "all",
+      "n": 20,
+      "keyword_hit": "n/a",
+      "exact_hit": "n/a",
+      "list_hit": "2/2",
+      "citation": "0/20",
+      "rag_used": "0/20",
+      "avg_elapsed_s": 13.88,
+      "avg_gen_s": 13.74,
+      "peak_vram_mb_max": 4518.1
+    },
+    {
+      "set": "uncovered",
+      "mode": "rag",
+      "ids": "all",
+      "n": 20,
+      "keyword_hit": "n/a",
+      "exact_hit": "n/a",
+      "list_hit": "2/2",
+      "citation": "0/20",
+      "rag_used": "0/20",
+      "avg_elapsed_s": 13.75,
+      "avg_gen_s": 13.61,
+      "peak_vram_mb_max": 4518.1
+    },
+    {
+      "set": "covered",
+      "mode": "baseline",
+      "ids": "new",
+      "n": 30,
+      "keyword_hit": "24/30",
+      "exact_hit": "3/21",
+      "list_hit": "n/a",
+      "citation": "0/30",
+      "rag_used": "0/30",
+      "avg_elapsed_s": 6.43,
+      "avg_gen_s": 6.34,
+      "peak_vram_mb_max": 4517.8
+    },
+    {
+      "set": "covered",
+      "mode": "rag",
+      "ids": "new",
+      "n": 30,
+      "keyword_hit": "30/30",
+      "exact_hit": "0/21",
+      "list_hit": "n/a",
+      "citation": "30/30",
+      "rag_used": "30/30",
+      "avg_elapsed_s": 6.28,
+      "avg_gen_s": 5.71,
+      "peak_vram_mb_max": 4547.7
+    }
+  ],
+  "rows": [
+    {
+      "id": "tr-eg",
+      "lang": "tr",
+      "query": "Mısır'ın başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Mısır'ın başkenti **Kairo**'dur.",
+      "answer_chars": 32,
+      "elapsed_s": 4.995,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.914,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.4,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": false,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-eg",
+      "lang": "tr",
+      "query": "Mısır'ın başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Kahire"
+      ],
+      "answer": "Mısır'ın başkenti Kahire'dir [1].",
+      "answer_chars": 33,
+      "elapsed_s": 5.32,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.134,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4541.2,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-tr",
+      "lang": "tr",
+      "query": "Türkiye'nin başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Türkiye'nin başkenti Ankara'dır.",
+      "answer_chars": 32,
+      "elapsed_s": 3.449,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.372,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.1,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-tr",
+      "lang": "tr",
+      "query": "Türkiye'nin başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Türkiye"
+      ],
+      "answer": "Türkiye'nin başkenti Ankara'dır [1].",
+      "answer_chars": 36,
+      "elapsed_s": 4.416,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.207,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4540.1,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-fr",
+      "lang": "tr",
+      "query": "Fransa'nın başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Fransa'nın başkenti Paris'tir.",
+      "answer_chars": 30,
+      "elapsed_s": 3.772,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.685,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.2,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-fr",
+      "lang": "tr",
+      "query": "Fransa'nın başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Paris"
+      ],
+      "answer": "Fransa'nın başkenti Paris'tir [1].",
+      "answer_chars": 34,
+      "elapsed_s": 4.76,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.527,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4544.2,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-jp",
+      "lang": "tr",
+      "query": "Japonya'nın başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Japonya'nın başkenti **Tokyo**'dur.",
+      "answer_chars": 35,
+      "elapsed_s": 5.291,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.209,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.5,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-jp",
+      "lang": "tr",
+      "query": "Japonya'nın başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Tokyo"
+      ],
+      "answer": "Japonya'nın başkenti Tokyo'dur [1].",
+      "answer_chars": 35,
+      "elapsed_s": 5.295,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.103,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4536.0,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-au",
+      "lang": "tr",
+      "query": "Avustralya'nın başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Avustralya'nın başkenti **Canberra**'dır.",
+      "answer_chars": 41,
+      "elapsed_s": 4.982,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.9,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.4,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-au",
+      "lang": "tr",
+      "query": "Avustralya'nın başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Avustralya"
+      ],
+      "answer": "Avustralya'nın başkenti Canberra'dır. [1]",
+      "answer_chars": 41,
+      "elapsed_s": 5.256,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.096,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4539.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-de",
+      "lang": "tr",
+      "query": "Almanya'nın başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Almanya'nın başkenti Berlin'dir.",
+      "answer_chars": 32,
+      "elapsed_s": 4.072,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.985,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.4,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-de",
+      "lang": "tr",
+      "query": "Almanya'nın başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Berlin"
+      ],
+      "answer": "Almanya'nın başkenti Berlin'dir [1].",
+      "answer_chars": 36,
+      "elapsed_s": 4.975,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.795,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4536.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-ca",
+      "lang": "tr",
+      "query": "Kanada'nın başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Kanada'nın başkenti **Ottawa**'dır.",
+      "answer_chars": 35,
+      "elapsed_s": 5.286,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.206,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.4,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-ca",
+      "lang": "tr",
+      "query": "Kanada'nın başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Kanada"
+      ],
+      "answer": "Kanada'nın başkenti Ottawa'dır [1].",
+      "answer_chars": 35,
+      "elapsed_s": 4.963,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.79,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4535.3,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-it",
+      "lang": "tr",
+      "query": "İtalya'nın başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "İtalya'nın başkenti **Roma**'dır.",
+      "answer_chars": 33,
+      "elapsed_s": 5.281,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.202,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.5,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-it",
+      "lang": "tr",
+      "query": "İtalya'nın başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "İtalya"
+      ],
+      "answer": "İtalya'nın başkenti Roma'dır [1].",
+      "answer_chars": 33,
+      "elapsed_s": 5.337,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.136,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4543.8,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-ocean",
+      "lang": "tr",
+      "query": "Dünyanın en büyük okyanusu hangisi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Dünyanın en büyük okyanusu **Hint Okyanusu**'dur.",
+      "answer_chars": 49,
+      "elapsed_s": 6.2,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 6.122,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.5,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": false,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-ocean",
+      "lang": "tr",
+      "query": "Dünyanın en büyük okyanusu hangisi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Büyük Okyanus"
+      ],
+      "answer": "Dünyanın en büyük okyanusu Büyük Okyanustur [1].",
+      "answer_chars": 48,
+      "elapsed_s": 8.243,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 6.188,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4539.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": false,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-au-sym",
+      "lang": "tr",
+      "query": "Altının kimyasal sembolü nedir?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Altının kimyasal sembolü **Au**'dur.",
+      "answer_chars": 36,
+      "elapsed_s": 4.675,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.595,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.2,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-au-sym",
+      "lang": "tr",
+      "query": "Altının kimyasal sembolü nedir?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Altın"
+      ],
+      "answer": "Altının kimyasal sembolü Au'dur [1].",
+      "answer_chars": 36,
+      "elapsed_s": 4.948,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.798,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4537.0,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-water",
+      "lang": "tr",
+      "query": "Su kaç derecede kaynar?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Su, 100 derece Celsius'te (1 atm basıncında) kaynar.",
+      "answer_chars": 52,
+      "elapsed_s": 7.112,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 7.034,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-water",
+      "lang": "tr",
+      "query": "Su kaç derecede kaynar?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Su"
+      ],
+      "answer": "Su, 100 °C'de kaynar. [1]",
+      "answer_chars": 25,
+      "elapsed_s": 5.604,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.416,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4536.8,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-heart",
+      "lang": "tr",
+      "query": "İnsan kalbinde kaç odacık vardır?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "İnsan kalbinde **4 odacık** vardır:  \n- Sağ atrium (sağ kalp odacığı)  \n- Sol atrium (sol kalp odacığı)  \n- Sağ ventrikül (sağ kalp odacığı)  \n- Sol ventrikül (sol",
+      "answer_chars": 163,
+      "elapsed_s": 19.965,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 19.798,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-heart",
+      "lang": "tr",
+      "query": "İnsan kalbinde kaç odacık vardır?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Kalp"
+      ],
+      "answer": "İnsan kalbinde dört odacık vardır: iki üst atriyum ve iki alt ventrikül [1].",
+      "answer_chars": 76,
+      "elapsed_s": 9.638,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 9.436,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4537.1,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-eg",
+      "lang": "en",
+      "query": "What is the capital of Egypt?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "The capital of Egypt is Cairo.",
+      "answer_chars": 30,
+      "elapsed_s": 2.532,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 2.453,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-eg",
+      "lang": "en",
+      "query": "What is the capital of Egypt?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Cairo"
+      ],
+      "answer": "The capital of Egypt is Cairo [1].",
+      "answer_chars": 34,
+      "elapsed_s": 3.406,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.237,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4532.2,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-au",
+      "lang": "en",
+      "query": "What is the capital of Australia?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "The capital of Australia is Canberra.",
+      "answer_chars": 37,
+      "elapsed_s": 2.53,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 2.453,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-au",
+      "lang": "en",
+      "query": "What is the capital of Australia?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Canberra"
+      ],
+      "answer": "The capital of Australia is Canberra [1].",
+      "answer_chars": 41,
+      "elapsed_s": 3.383,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.252,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4535.9,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-ca",
+      "lang": "en",
+      "query": "What is the capital of Canada?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "The capital of Canada is Ottawa.",
+      "answer_chars": 32,
+      "elapsed_s": 2.53,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 2.453,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-ca",
+      "lang": "en",
+      "query": "What is the capital of Canada?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Ottawa"
+      ],
+      "answer": "The capital of Canada is Ottawa [1].",
+      "answer_chars": 36,
+      "elapsed_s": 3.406,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.242,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4534.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-gold",
+      "lang": "en",
+      "query": "What is the chemical symbol for gold?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Au",
+      "answer_chars": 2,
+      "elapsed_s": 0.701,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 0.622,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.8,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": true,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-gold",
+      "lang": "en",
+      "query": "What is the chemical symbol for gold?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Gold"
+      ],
+      "answer": "The chemical symbol for gold is Au [1].",
+      "answer_chars": 39,
+      "elapsed_s": 3.714,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.554,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4534.8,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-water",
+      "lang": "en",
+      "query": "At what temperature does water boil?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Water boils at 100°C (212°F) at sea level.",
+      "answer_chars": 42,
+      "elapsed_s": 5.889,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.812,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-water",
+      "lang": "en",
+      "query": "At what temperature does water boil?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Boiling point"
+      ],
+      "answer": "Water boils at 100 °C at standard atmospheric pressure [1].",
+      "answer_chars": 59,
+      "elapsed_s": 5.634,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.424,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4537.9,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-heart",
+      "lang": "en",
+      "query": "How many chambers does the human heart have?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "The human heart has four chambers.",
+      "answer_chars": 34,
+      "elapsed_s": 2.531,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 2.452,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.0,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-heart",
+      "lang": "en",
+      "query": "How many chambers does the human heart have?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Heart"
+      ],
+      "answer": "The human heart has four chambers. [1]",
+      "answer_chars": 38,
+      "elapsed_s": 3.742,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.555,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4535.1,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-ocean",
+      "lang": "en",
+      "query": "What is the largest ocean?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "The largest ocean is the Pacific Ocean.",
+      "answer_chars": 39,
+      "elapsed_s": 2.839,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 2.758,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-ocean",
+      "lang": "en",
+      "query": "What is the largest ocean?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Pacific Ocean"
+      ],
+      "answer": "The largest ocean is the Pacific Ocean [1].",
+      "answer_chars": 43,
+      "elapsed_s": 5.729,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.71,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4532.2,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-planet",
+      "lang": "en",
+      "query": "What is the largest planet?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Jupiter is the largest planet in our solar system.",
+      "answer_chars": 50,
+      "elapsed_s": 3.755,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.676,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-planet",
+      "lang": "en",
+      "query": "What is the largest planet?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Jupiter"
+      ],
+      "answer": "The largest planet in the Solar System is Jupiter [1].",
+      "answer_chars": 54,
+      "elapsed_s": 6.43,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.348,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4539.8,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-no",
+      "lang": "tr",
+      "query": "Norveç'in başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Norveç'in başkenti **Oslo**'dur.",
+      "answer_chars": 32,
+      "elapsed_s": 4.673,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.594,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.2,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-no",
+      "lang": "tr",
+      "query": "Norveç'in başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Oslo"
+      ],
+      "answer": "Norveç'in başkenti Oslo'dur [1].",
+      "answer_chars": 32,
+      "elapsed_s": 4.636,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.477,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4534.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-pl",
+      "lang": "tr",
+      "query": "Polonya'nın başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Polonya'nın başkenti **Varşova**dır.",
+      "answer_chars": 36,
+      "elapsed_s": 4.981,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.9,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.4,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-pl",
+      "lang": "tr",
+      "query": "Polonya'nın başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Varşova"
+      ],
+      "answer": "Polonya'nın başkenti Varşova'dır [1].",
+      "answer_chars": 37,
+      "elapsed_s": 5.58,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.416,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4536.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-pt",
+      "lang": "tr",
+      "query": "Portekiz'in başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Portekiz'in başkenti **Lisbon**'dir.",
+      "answer_chars": 36,
+      "elapsed_s": 4.984,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.91,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.2,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": false,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-pt",
+      "lang": "tr",
+      "query": "Portekiz'in başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Lizbon"
+      ],
+      "answer": "Portekiz'in başkenti Lizbon'dur [1].",
+      "answer_chars": 36,
+      "elapsed_s": 5.036,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.857,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4547.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-gr",
+      "lang": "tr",
+      "query": "Yunanistan'ın başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Yunanistan'ın başkenti **Atina**dır.",
+      "answer_chars": 36,
+      "elapsed_s": 4.677,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.597,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.4,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-gr",
+      "lang": "tr",
+      "query": "Yunanistan'ın başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Atina"
+      ],
+      "answer": "Yunanistan'ın başkenti Atina'dır [1].",
+      "answer_chars": 37,
+      "elapsed_s": 5.294,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.146,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4543.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-ke",
+      "lang": "tr",
+      "query": "Kenya'nın başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Kenya'nın başkenti Nairobi'dir.",
+      "answer_chars": 31,
+      "elapsed_s": 3.756,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.678,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.2,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-ke",
+      "lang": "tr",
+      "query": "Kenya'nın başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Kenya"
+      ],
+      "answer": "Kenya'nın başkenti Nairobi'dir [1].",
+      "answer_chars": 35,
+      "elapsed_s": 4.576,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.476,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4533.1,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-nl",
+      "lang": "tr",
+      "query": "Hollanda'nın başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Hollanda'nın başkenti **Amsterdam**'dır.",
+      "answer_chars": 40,
+      "elapsed_s": 4.982,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.901,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.4,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-nl",
+      "lang": "tr",
+      "query": "Hollanda'nın başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Amsterdam"
+      ],
+      "answer": "Hollanda'nın başkenti Amsterdam'dır [1].",
+      "answer_chars": 40,
+      "elapsed_s": 4.969,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.786,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4534.5,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-ng",
+      "lang": "tr",
+      "query": "Nijerya'nın başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Nijerya'nın başkenti **Lagos** değildir. Başkenti **Nairobi** değildir. Doğru cevap: **Nijerya'nın başkenti **(Nairobi) değil.  \n\n**Doğru cevap: **(Nijerya'n",
+      "answer_chars": 157,
+      "elapsed_s": 19.96,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 19.792,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": false,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-ng",
+      "lang": "tr",
+      "query": "Nijerya'nın başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Nijerya"
+      ],
+      "answer": "Nijerya'nın başkenti Abuja'dır [1].",
+      "answer_chars": 35,
+      "elapsed_s": 5.536,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.427,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4538.5,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-br",
+      "lang": "tr",
+      "query": "Brezilya'nın başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Brezilya'nın başkenti **Brasília**'dır.",
+      "answer_chars": 39,
+      "elapsed_s": 5.589,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.509,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.5,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-br",
+      "lang": "tr",
+      "query": "Brezilya'nın başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Brezilya"
+      ],
+      "answer": "Brezilya'nın başkenti Brasília'dır [1].",
+      "answer_chars": 39,
+      "elapsed_s": 5.582,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.429,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4537.4,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-h",
+      "lang": "tr",
+      "query": "Hidrojenin kimyasal sembolü nedir?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "H",
+      "answer_chars": 1,
+      "elapsed_s": 0.699,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 0.623,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": true,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-h",
+      "lang": "tr",
+      "query": "Hidrojenin kimyasal sembolü nedir?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Hidrojen"
+      ],
+      "answer": "Hidrojenin kimyasal sembolü H'dir [1].",
+      "answer_chars": 38,
+      "elapsed_s": 5.869,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.722,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4535.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-he",
+      "lang": "tr",
+      "query": "Helyumun kimyasal sembolü nedir?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Helyumun kimyasal sembolü **He**'dir.",
+      "answer_chars": 37,
+      "elapsed_s": 5.283,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.207,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.5,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-he",
+      "lang": "tr",
+      "query": "Helyumun kimyasal sembolü nedir?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Helyum"
+      ],
+      "answer": "Helyumun kimyasal sembolü He [1].",
+      "answer_chars": 33,
+      "elapsed_s": 4.915,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.782,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4539.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-ag",
+      "lang": "tr",
+      "query": "Gümüşün kimyasal sembolü nedir?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Gümüşün kimyasal sembolü **Ag**'dir.",
+      "answer_chars": 36,
+      "elapsed_s": 5.284,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.205,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.5,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-ag",
+      "lang": "tr",
+      "query": "Gümüşün kimyasal sembolü nedir?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Gümüş"
+      ],
+      "answer": "Gümüşün kimyasal sembolü Ag'dir [1].",
+      "answer_chars": 36,
+      "elapsed_s": 5.557,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.407,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4539.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-asia",
+      "lang": "tr",
+      "query": "Dünyanın en büyük kıtası hangisi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Dünyanın en büyük kıtası **Asya**'dır.",
+      "answer_chars": 38,
+      "elapsed_s": 5.59,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.511,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.5,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-asia",
+      "lang": "tr",
+      "query": "Dünyanın en büyük kıtası hangisi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Asya"
+      ],
+      "answer": "Dünyanın en büyük kıtası Asya'dır [1].",
+      "answer_chars": 38,
+      "elapsed_s": 8.363,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.942,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4544.9,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-nile",
+      "lang": "tr",
+      "query": "Dünyanın en uzun nehri hangisi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Dünyanın en uzun nehrinin tanımlanması, bazı kaynaklarda \"Ner\" olarak bilinen **Niger Nehri**'nin uzunluğunu gösterir. Ancak genellikle **Amazon Nehri**'nin dünyada en uzun nehr",
+      "answer_chars": 177,
+      "elapsed_s": 19.982,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 19.798,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": false,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-nile",
+      "lang": "tr",
+      "query": "Dünyanın en uzun nehri hangisi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Nil"
+      ],
+      "answer": "Dünyanın en uzun nehrinin adı Nil Nehri'dir [1].",
+      "answer_chars": 48,
+      "elapsed_s": 9.698,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 7.254,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4533.3,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-everest",
+      "lang": "tr",
+      "query": "Dünyanın en yüksek dağı hangisi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Dünyanın en yüksek dağı **Mount Everest** (8.848 metre)dir.",
+      "answer_chars": 59,
+      "elapsed_s": 7.121,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 7.041,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.2,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-everest",
+      "lang": "tr",
+      "query": "Dünyanın en yüksek dağı hangisi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Everest Dağı"
+      ],
+      "answer": "Dünyanın en yüksek dağı Everest Dir [1].",
+      "answer_chars": 40,
+      "elapsed_s": 7.654,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.832,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4545.2,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-atlantic",
+      "lang": "tr",
+      "query": "Dünyanın en büyük ikinci okyanusu hangisi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Dünyanın en büyük ikinci okyanusu **Seyahat Okyanusu** (Seyahat Okyanusu) değildir. Doğru cevap: **Seyahat Okyanusu** değil, **Seyahat Okyanusu** değil.\n\nDüny",
+      "answer_chars": 158,
+      "elapsed_s": 19.964,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 19.798,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.8,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": false,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-atlantic",
+      "lang": "tr",
+      "query": "Dünyanın en büyük ikinci okyanusu hangisi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Atlas Okyanusu"
+      ],
+      "answer": "Dünyanın en büyük ikinci okyanusu Atlas Okyanusu'dur [1].",
+      "answer_chars": 57,
+      "elapsed_s": 10.063,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 7.213,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4539.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-ww1",
+      "lang": "tr",
+      "query": "I. Dünya Savaşı hangi yıllar arasında oldu?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "I. Dünya Savaşı 1914–1918 yılları arasında oldu.",
+      "answer_chars": 48,
+      "elapsed_s": 6.815,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 6.736,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.5,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-ww1",
+      "lang": "tr",
+      "query": "I. Dünya Savaşı hangi yıllar arasında oldu?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "I. Dünya Savaşı"
+      ],
+      "answer": "I. Dünya Savaşı 1914 ile 1918 yılları arasında oldu [1].",
+      "answer_chars": 56,
+      "elapsed_s": 8.136,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 7.925,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4542.3,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-ww2",
+      "lang": "tr",
+      "query": "II. Dünya Savaşı hangi yıl bitti?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "II. Dünya Savaşı 1945 yılında bitti.",
+      "answer_chars": 36,
+      "elapsed_s": 4.982,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 4.905,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.4,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-ww2",
+      "lang": "tr",
+      "query": "II. Dünya Savaşı hangi yıl bitti?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "II. Dünya Savaşı"
+      ],
+      "answer": "II. Dünya Savaşı 1945 yılında bitti [1].",
+      "answer_chars": 40,
+      "elapsed_s": 5.939,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.729,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4537.0,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-lang",
+      "lang": "tr",
+      "query": "Türkçe hangi dil ailesine aittir?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Türkçe, **Yunan dili** ailesine ait değildir. Türkçe **Türkçe dili ailesine** aittir. Bu aile, **Türkçe dili ailesi** olarak bilinir ve **Yakın Doğu dilleri** grubuna girer",
+      "answer_chars": 172,
+      "elapsed_s": 19.969,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 19.794,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": false,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-lang",
+      "lang": "tr",
+      "query": "Türkçe hangi dil ailesine aittir?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Türkçe"
+      ],
+      "answer": "Türkçe Türk dilleri dil ailesine aittir [1].",
+      "answer_chars": 44,
+      "elapsed_s": 5.883,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.709,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4539.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "tr-whale",
+      "lang": "tr",
+      "query": "Dünyanın en büyük hayvanı hangisi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Dünyanın en büyük hayvanı **beyaz balina**dır.",
+      "answer_chars": 46,
+      "elapsed_s": 6.205,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 6.125,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.5,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "tr-whale",
+      "lang": "tr",
+      "query": "Dünyanın en büyük hayvanı hangisi?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Mavi balina"
+      ],
+      "answer": "Dünyanın en büyük hayvanı mavi balinadır ve 140 tonu geçebilen ağırlığına sahiptir [1].",
+      "answer_chars": 87,
+      "elapsed_s": 14.52,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 12.118,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4537.9,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-no",
+      "lang": "en",
+      "query": "What is the capital of Norway?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "The capital of Norway is Oslo.",
+      "answer_chars": 30,
+      "elapsed_s": 2.534,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 2.455,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-no",
+      "lang": "en",
+      "query": "What is the capital of Norway?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Oslo"
+      ],
+      "answer": "The capital of Norway is Oslo [1].",
+      "answer_chars": 34,
+      "elapsed_s": 3.395,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.236,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4531.8,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-pl",
+      "lang": "en",
+      "query": "What is the capital of Poland?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "The capital of Poland is Warsaw.",
+      "answer_chars": 32,
+      "elapsed_s": 2.53,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 2.453,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-pl",
+      "lang": "en",
+      "query": "What is the capital of Poland?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Warsaw"
+      ],
+      "answer": "The capital of Poland is Warsaw [1].",
+      "answer_chars": 36,
+      "elapsed_s": 3.41,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.243,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4533.1,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-pt",
+      "lang": "en",
+      "query": "What is the capital of Portugal?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "The capital of Portugal is Lisbon.",
+      "answer_chars": 34,
+      "elapsed_s": 2.532,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 2.455,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-pt",
+      "lang": "en",
+      "query": "What is the capital of Portugal?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Lisbon"
+      ],
+      "answer": "The capital of Portugal is Lisbon [1].",
+      "answer_chars": 38,
+      "elapsed_s": 3.434,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.292,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4544.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-gr",
+      "lang": "en",
+      "query": "What is the capital of Greece?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "The capital of Greece is Athens.",
+      "answer_chars": 32,
+      "elapsed_s": 2.532,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 2.454,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-gr",
+      "lang": "en",
+      "query": "What is the capital of Greece?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Athens"
+      ],
+      "answer": "The capital of Greece is Athens [1].",
+      "answer_chars": 36,
+      "elapsed_s": 3.382,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.233,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4531.8,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-ng",
+      "lang": "en",
+      "query": "What is the capital of Nigeria?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "The capital of Nigeria is Abuja.",
+      "answer_chars": 32,
+      "elapsed_s": 2.838,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 2.759,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-ng",
+      "lang": "en",
+      "query": "What is the capital of Nigeria?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Abuja"
+      ],
+      "answer": "The capital of Nigeria is Abuja. [1]",
+      "answer_chars": 36,
+      "elapsed_s": 3.987,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.867,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4535.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-br",
+      "lang": "en",
+      "query": "What is the capital of Brazil?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "The capital of Brazil is Brasília.",
+      "answer_chars": 34,
+      "elapsed_s": 2.837,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 2.758,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-br",
+      "lang": "en",
+      "query": "What is the capital of Brazil?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Brasília"
+      ],
+      "answer": "The capital of Brazil is Brasília [1].",
+      "answer_chars": 38,
+      "elapsed_s": 3.742,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.568,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4537.7,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-c",
+      "lang": "en",
+      "query": "What is the chemical symbol for carbon?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "C",
+      "answer_chars": 1,
+      "elapsed_s": 0.699,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 0.622,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.8,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": true,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-c",
+      "lang": "en",
+      "query": "What is the chemical symbol for carbon?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Carbon"
+      ],
+      "answer": "The chemical symbol for carbon is C [1].",
+      "answer_chars": 40,
+      "elapsed_s": 3.723,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.553,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4534.8,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-o",
+      "lang": "en",
+      "query": "What is the chemical symbol for oxygen?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "O₂",
+      "answer_chars": 2,
+      "elapsed_s": 1.005,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 0.926,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.8,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": false,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-o",
+      "lang": "en",
+      "query": "What is the chemical symbol for oxygen?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Oxygen"
+      ],
+      "answer": "The chemical symbol for oxygen is O [1].",
+      "answer_chars": 40,
+      "elapsed_s": 3.714,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.552,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4533.3,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-na",
+      "lang": "en",
+      "query": "What is the chemical symbol for sodium?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Na",
+      "answer_chars": 2,
+      "elapsed_s": 0.699,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 0.622,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.8,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": true,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-na",
+      "lang": "en",
+      "query": "What is the chemical symbol for sodium?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Sodium"
+      ],
+      "answer": "The chemical symbol for sodium is Na [1].",
+      "answer_chars": 41,
+      "elapsed_s": 3.71,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.554,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4535.1,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": false,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-light",
+      "lang": "en",
+      "query": "What is the speed of light in a vacuum?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "The speed of light in a vacuum is exactly **299,792,458 meters per second**.",
+      "answer_chars": 76,
+      "elapsed_s": 8.338,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 8.257,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.1,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-light",
+      "lang": "en",
+      "query": "What is the speed of light in a vacuum?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Speed of light"
+      ],
+      "answer": "The speed of light in a vacuum is exactly 299,792,458 meters per second [1].",
+      "answer_chars": 76,
+      "elapsed_s": 8.99,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 8.812,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4539.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "en-sound",
+      "lang": "en",
+      "query": "What is the speed of sound in air?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "The speed of sound in air is approximately **343 meters per second** (m/s) at 20°C (68°F) at sea level.",
+      "answer_chars": 103,
+      "elapsed_s": 10.781,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 10.706,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.0,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "covered",
+      "mode": "baseline"
+    },
+    {
+      "id": "en-sound",
+      "lang": "en",
+      "query": "What is the speed of sound in air?",
+      "rag_requested": true,
+      "rag_used": true,
+      "sources": [
+        "Speed of sound"
+      ],
+      "answer": "The speed of sound in air at 20 °C (68 °F) is about 343 m/s (1,125 ft/s; 1,235 km/h; 767 mph; 667 kn). [1]",
+      "answer_chars": 106,
+      "elapsed_s": 19.036,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 18.852,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4544.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct + yerel RAG (1 kaynak)",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": true,
+      "set": "covered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-greet",
+      "lang": "tr",
+      "query": "Merhaba, nasılsın?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Merhaba! İyi teşekkür ederim, sen nasılsın? 😊",
+      "answer_chars": 45,
+      "elapsed_s": 5.902,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.822,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.0,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-greet",
+      "lang": "tr",
+      "query": "Merhaba, nasılsın?",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Merhaba! İyi teşekkür ederim, sen nasılsın? 😊",
+      "answer_chars": 45,
+      "elapsed_s": 5.892,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.813,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.0,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-blue",
+      "lang": "tr",
+      "query": "Sadece 'mavi' yaz.",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "mavi",
+      "answer_chars": 4,
+      "elapsed_s": 1.008,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 0.929,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.0,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-blue",
+      "lang": "tr",
+      "query": "Sadece 'mavi' yaz.",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "mavi",
+      "answer_chars": 4,
+      "elapsed_s": 1.009,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 0.931,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.0,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-math",
+      "lang": "tr",
+      "query": "2 + 2 kaç eder?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "2 + 2 = 4",
+      "answer_chars": 9,
+      "elapsed_s": 2.532,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 2.454,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.8,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-math",
+      "lang": "tr",
+      "query": "2 + 2 kaç eder?",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "2 + 2 = 4",
+      "answer_chars": 9,
+      "elapsed_s": 2.54,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 2.461,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.8,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-list",
+      "lang": "tr",
+      "query": "Üç meyve listele.",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "1. Elma\n2. muz\n3. armut",
+      "answer_chars": 23,
+      "elapsed_s": 3.152,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.073,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.8,
+      "route": {
+        "reason": "quality: liste -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": true,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-list",
+      "lang": "tr",
+      "query": "Üç meyve listele.",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "1. Elma\n2. muz\n3. armut",
+      "answer_chars": 23,
+      "elapsed_s": 3.151,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 3.073,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.8,
+      "route": {
+        "reason": "quality: liste -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": true,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-code",
+      "lang": "tr",
+      "query": "İki sayıyı toplayan bir Python fonksiyonu yaz.",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "```python\ndef topla(a, b):\n    return a + b\n```",
+      "answer_chars": 47,
+      "elapsed_s": 5.601,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.523,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4518.1,
+      "route": {
+        "reason": "quality: kod/akil yurutme (python) -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-code",
+      "lang": "tr",
+      "query": "İki sayıyı toplayan bir Python fonksiyonu yaz.",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "```python\ndef topla(a, b):\n    return a + b\n```",
+      "answer_chars": 47,
+      "elapsed_s": 5.602,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.522,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4518.1,
+      "route": {
+        "reason": "quality: kod/akil yurutme (python) -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-joke",
+      "lang": "tr",
+      "query": "Bana kısa bir şaka yap.",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Neden okula gittin?  \n— Çünki yemek yemek istedim, ama annem dedi: \"Sadece öğrenmek için gittin!\" 😄",
+      "answer_chars": 99,
+      "elapsed_s": 13.241,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 13.163,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.8,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-joke",
+      "lang": "tr",
+      "query": "Bana kısa bir şaka yap.",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Neden okula gittin?  \n— Çünki yemek yemek istedim, ama annem dedi: \"Sadece öğrenmek için gittin!\" 😄",
+      "answer_chars": 99,
+      "elapsed_s": 13.233,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 13.153,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.8,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-birthday",
+      "lang": "tr",
+      "query": "Bir arkadaşıma doğum günü mesajı yaz.",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Elbette! İşte kısaca ve duygusal bir doğum günü mesajı:\n\n\"Seninle birlikte olmak beni çok mutlu ediyor! Sağlıklı, mutlu ve dört gözle izlenen bir yıl dilerim! 🎉🎂\"\n\nİstersen",
+      "answer_chars": 172,
+      "elapsed_s": 19.964,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 19.789,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-birthday",
+      "lang": "tr",
+      "query": "Bir arkadaşıma doğum günü mesajı yaz.",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Elbette! İşte kısaca ve duygusal bir doğum günü mesajı:\n\n\"Seninle birlikte olmak beni çok mutlu ediyor! Sağlıklı, mutlu ve dört gözle izlenen bir yıl dilerim! 🎉🎂\"\n\nİstersen",
+      "answer_chars": 172,
+      "elapsed_s": 19.972,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 19.806,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-motivation",
+      "lang": "tr",
+      "query": "Bana kısa bir motivasyon sözü yaz.",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Her gün biraz daha iyi olmak için başla. Başarı, sabırın sonucu değil, her adımda ilerlemekle başlar. 💪",
+      "answer_chars": 103,
+      "elapsed_s": 12.322,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 12.242,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.2,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-motivation",
+      "lang": "tr",
+      "query": "Bana kısa bir motivasyon sözü yaz.",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Her gün biraz daha iyi olmak için başla. Başarı, sabırın sonucu değil, her adımda ilerlemekle başlar. 💪",
+      "answer_chars": 103,
+      "elapsed_s": 12.324,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 12.247,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.2,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-narnia",
+      "lang": "tr",
+      "query": "Narnia'nın başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Narnia'nın resmi bir başkenti yoktur. Olaylar genellikle Narnia'nın kuzeyindeki \"Kraliyet\" veya \"Kraliçe\" gibi yerlerde geçer. Ancak, Narnia'nın en bilinen yerler",
+      "answer_chars": 162,
+      "elapsed_s": 19.979,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 19.81,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-narnia",
+      "lang": "tr",
+      "query": "Narnia'nın başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Narnia'nın resmi bir başkenti yoktur. Olaylar genellikle Narnia'nın kuzeyindeki \"Kraliyet\" veya \"Kraliçe\" gibi yerlerde geçer. Ancak, Narnia'nın en bilinen yerler",
+      "answer_chars": 162,
+      "elapsed_s": 19.978,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 19.806,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-narnia-en",
+      "lang": "tr",
+      "query": "What is the capital of Narnia?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Narnia doesn't have a real capital because it's a fictional world from C.S. Lewis's books. However, in the stories, the capital of Narnia is often considered to be **Caerleon** or **Narnia's central city**, though it's not clearly defined. The most commonly",
+      "answer_chars": 257,
+      "elapsed_s": 19.978,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 19.809,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.4,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-narnia-en",
+      "lang": "tr",
+      "query": "What is the capital of Narnia?",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Narnia doesn't have a real capital because it's a fictional world from C.S. Lewis's books. However, in the stories, the capital of Narnia is often considered to be **Caerleon** or **Narnia's central city**, though it's not clearly defined. The most commonly",
+      "answer_chars": 257,
+      "elapsed_s": 19.983,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 19.817,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.4,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-poem",
+      "lang": "tr",
+      "query": "Bana kısa bir şiir yaz.",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Gökyüzüne bak,  \nyıldızlar dudaklarında,  \nrüzgâr, sessiz bir şarkı söyler.  \nSen de bir an,  \ndüşüyorsun...  \nve dünya, sadece seni bekliyor.",
+      "answer_chars": 142,
+      "elapsed_s": 18.448,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 18.371,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.0,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-poem",
+      "lang": "tr",
+      "query": "Bana kısa bir şiir yaz.",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Gökyüzüne bak,  \nyıldızlar dudaklarında,  \nrüzgâr, sessiz bir şarkı söyler.  \nSen de bir an,  \ndüşüyorsun...  \nve dünya, sadece seni bekliyor.",
+      "answer_chars": 142,
+      "elapsed_s": 18.436,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 18.358,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.0,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-story",
+      "lang": "tr",
+      "query": "Bana kısa bir hikaye yaz.",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Güneş, yorgun bir kediye bir kahve bardağı verdi. Kedi, kahvenin içini yemek yerine, güneşin yüzüne baktı. “Nasıl bir gün geçti?” diye sordu güneş. Kedi,",
+      "answer_chars": 153,
+      "elapsed_s": 24.828,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 24.631,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.4,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-story",
+      "lang": "tr",
+      "query": "Bana kısa bir hikaye yaz.",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Güneş, yorgun bir kediye bir kahve bardağı verdi. Kedi, kahvenin içini yemek yerine, güneşin yüzüne baktı. “Nasıl bir gün geçti?” diye sordu güneş. Kedi,",
+      "answer_chars": 153,
+      "elapsed_s": 23.683,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 23.449,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.4,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-email",
+      "lang": "tr",
+      "query": "Bir e-posta taslağı yaz.",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Elbette! Lütfen e-postanın konusunu, alıcısını ve içeriğini biraz belirtirsen, size uygun bir e-posta taslağı hazırlarım. Örneğin:  \n- Konu: İş görüşmesi  \n- Alıcı:",
+      "answer_chars": 164,
+      "elapsed_s": 23.773,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 23.529,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.5,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-email",
+      "lang": "tr",
+      "query": "Bir e-posta taslağı yaz.",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Elbette! Lütfen e-postanın konusunu, alıcısını ve içeriğini biraz belirtirsen, size uygun bir e-posta taslağı hazırlarım. Örneğin:  \n- Konu: İş görüşmesi  \n- Alıcı:",
+      "answer_chars": 164,
+      "elapsed_s": 23.401,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 23.163,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.5,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-apology",
+      "lang": "tr",
+      "query": "Bir arkadaşıma özür mesajı yaz.",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Elbette! İşte kısaca ve duygusal bir özür mesajı:\n\n\"Arkadaşıma selam, benim için çok üzüldüm. Seninle olan bu durumda beni çok etkiledi, özür dilerim. Gelecekte daha i",
+      "answer_chars": 167,
+      "elapsed_s": 24.137,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 23.892,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-apology",
+      "lang": "tr",
+      "query": "Bir arkadaşıma özür mesajı yaz.",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Elbette! İşte kısaca ve duygusal bir özür mesajı:\n\n\"Arkadaşıma selam, benim için çok üzüldüm. Seninle olan bu durumda beni çok etkiledi, özür dilerim. Gelecekte daha i",
+      "answer_chars": 167,
+      "elapsed_s": 23.396,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 23.143,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.6,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-multiply",
+      "lang": "tr",
+      "query": "İki sayıyı çarpan bir Python fonksiyonu yaz.",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "```python\ndef carp(a, b):\n    return a * b\n```",
+      "answer_chars": 46,
+      "elapsed_s": 6.384,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 6.246,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4518.1,
+      "route": {
+        "reason": "quality: kod/akil yurutme (python) -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-multiply",
+      "lang": "tr",
+      "query": "İki sayıyı çarpan bir Python fonksiyonu yaz.",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "```python\ndef carp(a, b):\n    return a * b\n```",
+      "answer_chars": 46,
+      "elapsed_s": 6.996,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 6.866,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4518.1,
+      "route": {
+        "reason": "quality: kod/akil yurutme (python) -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-list5",
+      "lang": "tr",
+      "query": "Beş renk listele.",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "1. Kırmızı\n2. yeşil\n3. mavi",
+      "answer_chars": 27,
+      "elapsed_s": 7.575,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 7.441,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.7,
+      "route": {
+        "reason": "quality: liste -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": true,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-list5",
+      "lang": "tr",
+      "query": "Beş renk listele.",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "1. Kırmızı\n2. yeşil\n3. mavi",
+      "answer_chars": 27,
+      "elapsed_s": 7.452,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 7.313,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4516.7,
+      "route": {
+        "reason": "quality: liste -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": true,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-exact",
+      "lang": "tr",
+      "query": "Sadece 'merhaba' yaz.",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Merhaba",
+      "answer_chars": 7,
+      "elapsed_s": 1.572,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 1.438,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.1,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-exact",
+      "lang": "tr",
+      "query": "Sadece 'merhaba' yaz.",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Merhaba",
+      "answer_chars": 7,
+      "elapsed_s": 1.645,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 1.551,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.1,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-zorbania",
+      "lang": "tr",
+      "query": "Zorbania'nın başkenti neresi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Zorbania bir gerçek ülke değildir ve bu ad, bilinen bir yer olarak bilinmez. Muhtemelen bir yanlışlık ya da sanal bir isim olabilir. Lütfen daha doğrusu bir soru sorun.",
+      "answer_chars": 168,
+      "elapsed_s": 19.167,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 19.074,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.5,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-zorbania",
+      "lang": "tr",
+      "query": "Zorbania'nın başkenti neresi?",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Zorbania bir gerçek ülke değildir ve bu ad, bilinen bir yer olarak bilinmez. Muhtemelen bir yanlışlık ya da sanal bir isim olabilir. Lütfen daha doğrusu bir soru sorun.",
+      "answer_chars": 168,
+      "elapsed_s": 19.351,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 19.214,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.5,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-atlantis",
+      "lang": "tr",
+      "query": "Atlantis'in kralı kimdi?",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Atlantis'in kralı hakkında kesin bilgi yoktur. Atlantis, MÖ 10.000'lerde bir kralın yönettiği bir adaları ifade eden bir fikir olup, gerçek bir tarihî kaynak değil. Bu konu, Platon",
+      "answer_chars": 180,
+      "elapsed_s": 24.022,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 23.788,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.4,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-atlantis",
+      "lang": "tr",
+      "query": "Atlantis'in kralı kimdi?",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Atlantis'in kralı hakkında kesin bilgi yoktur. Atlantis, MÖ 10.000'lerde bir kralın yönettiği bir adaları ifade eden bir fikir olup, gerçek bir tarihî kaynak değil. Bu konu, Platon",
+      "answer_chars": 180,
+      "elapsed_s": 23.468,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 23.216,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.4,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    },
+    {
+      "id": "ctl-riddle",
+      "lang": "tr",
+      "query": "Bana kısa bir bilmece sor.",
+      "rag_requested": false,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Elbette! 🎯  \nBilmece:  \nNe var ki, herkesin elinde olur ama kendi elinde olmaz?  \n\nCevap: **İsim**.  \n\n(İpucu: Herkesin elinde olur ama kendi elinde ol",
+      "answer_chars": 151,
+      "elapsed_s": 24.06,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 23.809,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.4,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "baseline"
+    },
+    {
+      "id": "ctl-riddle",
+      "lang": "tr",
+      "query": "Bana kısa bir bilmece sor.",
+      "rag_requested": true,
+      "rag_used": false,
+      "sources": [],
+      "answer": "Elbette! 🎯  \nBilmece:  \nNe var ki, herkesin elinde olur ama kendi elinde olmaz?  \n\nCevap: **İsim**.  \n\n(İpucu: Herkesin elinde olur ama kendi elinde ol",
+      "answer_chars": 151,
+      "elapsed_s": 23.477,
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 23.235,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4517.4,
+      "route": {
+        "reason": "quality: genel -> 4B Instruct",
+        "units": [
+          "chat4b"
+        ]
+      },
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": null,
+      "citation": false,
+      "set": "uncovered",
+      "mode": "rag"
+    }
+  ]
+}

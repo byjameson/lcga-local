@@ -1,0 +1,380 @@
+{
+  "rows": [
+    {
+      "exp": "exp22_service",
+      "tag": "exp22b_fact_en",
+      "query": "The capital of France is",
+      "mode": "auto",
+      "n_new": 12,
+      "wall_s": 9.677,
+      "error": null,
+      "route_units": [
+        "fast"
+      ],
+      "route_reason": "auto: kisa sorgu -> yalniz 0.5B",
+      "n_groups": 1,
+      "parallel": false,
+      "plan": [
+        {
+          "units": [
+            "fast"
+          ],
+          "kind": "dense",
+          "wall_s": 9.645
+        }
+      ],
+      "load_s": 8.65,
+      "gen_s": 0.99,
+      "peak_vram_mb": 966.6,
+      "free_vram_gb": 4.0,
+      "answer": "Paris. It is the largest city in Europe and the second",
+      "per_unit": {
+        "fast": {
+          "gen_s": 0.99,
+          "score": -0.9532,
+          "text": "Paris. It is the largest city in Europe and the second"
+        }
+      }
+    },
+    {
+      "exp": "exp22_service",
+      "tag": "exp22b_greeting_tr",
+      "query": "Merhaba, nasilsin?",
+      "mode": "auto",
+      "n_new": 12,
+      "wall_s": 0.59,
+      "error": null,
+      "route_units": [
+        "fast"
+      ],
+      "route_reason": "auto: kisa selamlama -> yalniz 0.5B",
+      "n_groups": 1,
+      "parallel": false,
+      "plan": [
+        {
+          "units": [
+            "fast"
+          ],
+          "kind": "dense",
+          "wall_s": 0.589
+        }
+      ],
+      "load_s": 0.0,
+      "gen_s": 0.587,
+      "peak_vram_mb": 974.8,
+      "free_vram_gb": 3.97,
+      "answer": "- 1000000000",
+      "per_unit": {
+        "fast": {
+          "gen_s": 0.587,
+          "score": -1.6604,
+          "text": "- 1000000000"
+        }
+      }
+    },
+    {
+      "exp": "exp22_service",
+      "tag": "exp22b_story_en",
+      "query": "Once upon a time, there was a little girl",
+      "mode": "auto",
+      "n_new": 12,
+      "wall_s": 6.047,
+      "error": null,
+      "route_units": [
+        "fast",
+        "balanced"
+      ],
+      "route_reason": "auto: genel sorgu -> 0.5B + 1.5B paralel, en guvenilir cevap secilir",
+      "n_groups": 1,
+      "parallel": true,
+      "plan": [
+        {
+          "units": [
+            "fast",
+            "balanced"
+          ],
+          "kind": "dense",
+          "wall_s": 6.046
+        }
+      ],
+      "load_s": 4.829,
+      "gen_s": 1.212,
+      "peak_vram_mb": 3942.7,
+      "free_vram_gb": 0.84,
+      "answer": "named Lily. She lived in a small village with her parents",
+      "per_unit": {
+        "fast": {
+          "gen_s": 1.122,
+          "score": -0.9226,
+          "text": "named Lily. She loved to play with her toys and watch"
+        },
+        "balanced": {
+          "gen_s": 1.212,
+          "score": -0.6442,
+          "text": "named Lily. She lived in a small village with her parents"
+        }
+      }
+    },
+    {
+      "exp": "exp22_service",
+      "tag": "exp22b_code_tr",
+      "query": "Python kodunda bir sayinin tersini yazan fonksiyon",
+      "mode": "auto",
+      "n_new": 12,
+      "wall_s": 17.312,
+      "error": null,
+      "route_units": [
+        "deep"
+      ],
+      "route_reason": "auto: karmasik sorgu (kod, python) -> 3B int8 paged",
+      "n_groups": 1,
+      "parallel": false,
+      "plan": [
+        {
+          "units": [
+            "deep"
+          ],
+          "kind": "paged",
+          "wall_s": 17.311
+        }
+      ],
+      "load_s": 0.0,
+      "gen_s": 4.812,
+      "peak_vram_mb": 4629.8,
+      "free_vram_gb": 0.31,
+      "answer": "u yaziniz. def tersi(sayi):",
+      "per_unit": {
+        "deep": {
+          "gen_s": 4.812,
+          "score": null,
+          "text": "u yaziniz. def tersi(sayi):"
+        }
+      }
+    },
+    {
+      "exp": "exp22_service",
+      "tag": "exp22b_why_en",
+      "query": "Why is the sky blue?",
+      "mode": "auto",
+      "n_new": 12,
+      "wall_s": 4.795,
+      "error": null,
+      "route_units": [
+        "deep"
+      ],
+      "route_reason": "auto: karmasik sorgu (why) -> 3B int8 paged",
+      "n_groups": 1,
+      "parallel": false,
+      "plan": [
+        {
+          "units": [
+            "deep"
+          ],
+          "kind": "paged",
+          "wall_s": 4.793
+        }
+      ],
+      "load_s": 0.0,
+      "gen_s": 4.656,
+      "peak_vram_mb": 4629.6,
+      "free_vram_gb": 0.31,
+      "answer": "The sky appears blue because of a phenomenon called Rayleigh scattering",
+      "per_unit": {
+        "deep": {
+          "gen_s": 4.656,
+          "score": null,
+          "text": "The sky appears blue because of a phenomenon called Rayleigh scattering"
+        }
+      }
+    },
+    {
+      "exp": "exp22_service",
+      "tag": "exp22b_gen_en",
+      "query": "The quick brown fox jumps over the lazy dog",
+      "mode": "auto",
+      "n_new": 12,
+      "wall_s": 3.016,
+      "error": null,
+      "route_units": [
+        "fast",
+        "balanced"
+      ],
+      "route_reason": "auto: genel sorgu -> 0.5B + 1.5B paralel, en guvenilir cevap secilir",
+      "n_groups": 1,
+      "parallel": true,
+      "plan": [
+        {
+          "units": [
+            "fast",
+            "balanced"
+          ],
+          "kind": "dense",
+          "wall_s": 3.016
+        }
+      ],
+      "load_s": 1.89,
+      "gen_s": 1.074,
+      "peak_vram_mb": 4628.8,
+      "free_vram_gb": 0.78,
+      "answer": ". The quick brown fox jumps over the lazy dog.",
+      "per_unit": {
+        "fast": {
+          "gen_s": 0.976,
+          "score": -0.6736,
+          "text": "def is_anagram(word1, word2):"
+        },
+        "balanced": {
+          "gen_s": 1.074,
+          "score": -0.6242,
+          "text": ". The quick brown fox jumps over the lazy dog."
+        }
+      }
+    },
+    {
+      "exp": "exp22_service",
+      "tag": "exp22b_math_tr",
+      "query": "Hesapla: 3 + 7 kactir?",
+      "mode": "auto",
+      "n_new": 12,
+      "wall_s": 7.991,
+      "error": null,
+      "route_units": [
+        "deep"
+      ],
+      "route_reason": "auto: karmasik sorgu (hesapla) -> 3B int8 paged",
+      "n_groups": 1,
+      "parallel": false,
+      "plan": [
+        {
+          "units": [
+            "deep"
+          ],
+          "kind": "paged",
+          "wall_s": 7.991
+        }
+      ],
+      "load_s": 0.0,
+      "gen_s": 6.439,
+      "peak_vram_mb": 4646.1,
+      "free_vram_gb": 0.27,
+      "answer": "10  Hesapla: 10",
+      "per_unit": {
+        "deep": {
+          "gen_s": 6.439,
+          "score": null,
+          "text": "10  Hesapla: 10"
+        }
+      }
+    },
+    {
+      "exp": "exp22_service",
+      "tag": "exp22b_fact_en_warm",
+      "query": "The capital of France is",
+      "mode": "auto",
+      "n_new": 12,
+      "wall_s": 1.545,
+      "error": null,
+      "route_units": [
+        "fast"
+      ],
+      "route_reason": "auto: kisa sorgu -> yalniz 0.5B",
+      "n_groups": 1,
+      "parallel": false,
+      "plan": [
+        {
+          "units": [
+            "fast"
+          ],
+          "kind": "dense",
+          "wall_s": 1.544
+        }
+      ],
+      "load_s": 0.461,
+      "gen_s": 1.023,
+      "peak_vram_mb": 4645.1,
+      "free_vram_gb": 3.83,
+      "answer": "Paris. It is the largest city in Europe and the second",
+      "per_unit": {
+        "fast": {
+          "gen_s": 1.023,
+          "score": -0.9532,
+          "text": "Paris. It is the largest city in Europe and the second"
+        }
+      }
+    }
+  ],
+  "summary": {
+    "exp": "exp22_service",
+    "tag": "exp22b_summary",
+    "n_requests": 8,
+    "n_ok": 8,
+    "n_errors": 0,
+    "median_wall_s": 5.421,
+    "max_wall_s": 17.312,
+    "median_gen_s": 1.143,
+    "peak_vram_mb_max": 4646.1,
+    "cold_first_s": 9.677,
+    "warm_repeat_s": 1.545,
+    "parallel_s": 2.686,
+    "sequential_s": 2.366,
+    "speedup_parallel_vs_seq": 0.881,
+    "deep_cached_1_s": 6.556,
+    "deep_cached_2_s": 3.555,
+    "scenarios": {
+      "parallel": {
+        "budget_gb": 5.0,
+        "wall_s": 2.686,
+        "n_groups": 1,
+        "parallel": true,
+        "load_s": 1.308,
+        "gen_s": 1.369,
+        "peak_vram_mb": 4010.3,
+        "answer": "Berlin. The capital of France is Paris. The capital of"
+      },
+      "sequential": {
+        "budget_gb": 2.0,
+        "wall_s": 2.366,
+        "n_groups": 2,
+        "parallel": false,
+        "load_s": 0.0,
+        "gen_s": 2.354,
+        "peak_vram_mb": 4020.5,
+        "answer": "Berlin. The capital of France is Paris. The capital of"
+      }
+    },
+    "stats": {
+      "counters": {
+        "requests": 12,
+        "errors": 0,
+        "paged_loads": 1,
+        "total_s": 66.13,
+        "gen_s": 32.86
+      },
+      "avg_elapsed_s": 5.51,
+      "avg_gen_s": 2.74,
+      "pool": {
+        "budget_gb": 5.0,
+        "resident": [],
+        "host": [
+          "Qwen2.5-0.5B",
+          "Qwen2.5-1.5B"
+        ],
+        "resident_gb": 0,
+        "evictions": 5,
+        "reloads": 4,
+        "disk_loads": 2,
+        "reload_s": 3.659,
+        "load_s": 13.478
+      },
+      "paged": {
+        "Qwen2.5-3B": {
+          "layers": 36,
+          "quant": "int8"
+        }
+      },
+      "budget_gb": 5.0,
+      "free_vram_gb": 0.17
+    },
+    "ts": "2026-10-20 15:37:48"
+  }
+}

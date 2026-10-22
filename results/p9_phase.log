@@ -1,0 +1,16 @@
+[data] train=221093014 tok | valid=602715 tok | valid_bytes=2493514
+[shards] 4 x ~55.3M tok (tok2_ctrl8k_train.pt)
+[plan] phase: 1000 adim/isci x 4 isci x 32x512 = 66M token toplam
+[model] params=17.31M cfg={'arch': 'minilm', 'vocab': 8192, 'dim': 384, 'layers': 8, 'heads': 6, 'ctx': 512, 'mlp_hidden': 1024, 'loops': 1, 'moe': 0}
+  [phase] C0 = ['tok', 'L0.attn', 'L0.mlp', 'L1.attn', 'L2.attn', 'L3.attn', 'L4.attn', 'L5.attn', 'L6.attn', 'L7.attn', 'L7.mlp', 'norm']
+  [phase] C1 = ['L1.mlp', 'L2.mlp', 'L3.mlp', 'L4.mlp', 'L5.mlp', 'L6.mlp']
+  [phase] aktif-param orani: C0=0.591, C1=0.409
+  [eval @0] val_loss=9.0780 bpb=3.1657
+  [eval @250] val_loss=2.5401 bpb=0.8858 sync_frac_avg=0.591
+  [eval @500] val_loss=2.2440 bpb=0.7825 sync_frac_avg=0.518
+  [eval @750] val_loss=2.0797 bpb=0.7252 sync_frac_avg=0.518
+  [eval @1000] val_loss=1.9905 bpb=0.6941 sync_frac_avg=0.518
+  [sample 3.9s] Once upon a time, there was a little boy named Timmy who loved to play with his cat, Mr. Snuggles. One day, Timmy's mom made him a yummy sandwich with sandwich and some juice. Timmy ate a lot of it and gave it to his mom.  Later that day, Timmy's friend, Timmy, came over to play. Timmy found a big b
+  [sample 3.4s] Once upon a time, there was a little girl named Lily. She loved to play with her toys and have fun. One day, she went to the park to play with her friends. They played on the swings and the slide. Lily's friends were happy because they could play on the swings and slide.  Lily found a big ball that 
+[ckpt] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p9_phase.pt
+[done] tag=p9_phase mode=phase final_bpb=0.6941 wall=26.3min med_step=1659ms

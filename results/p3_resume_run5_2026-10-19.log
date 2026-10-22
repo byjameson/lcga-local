@@ -1,0 +1,37 @@
+[data] train=466759153 tok (ts_train.pt) | valid=4691305 tok (ts_valid.pt)
+[plan] 18000 adim x 48x512 = 442M token (~0.95 epoch)
+[model] params=17.31M cfg={'arch': 'minilm', 'vocab': 8192, 'dim': 384, 'layers': 8, 'heads': 6, 'ctx': 512, 'mlp_hidden': 1024, 'loops': 1}
+[resume] step=8001 best_val=1.5338 vram=0.25G (bosaltildi)
+  [step 8100] loss=1.4890 lr=6.42e-04 654ms emb_norm=87.43 vram=5.90G
+  [step 8200] loss=1.4801 lr=6.34e-04 654ms emb_norm=87.11 vram=5.90G
+  [step 8300] loss=1.4918 lr=6.26e-04 655ms emb_norm=86.96 vram=5.90G
+  [step 8400] loss=1.4987 lr=6.18e-04 654ms emb_norm=86.74 vram=5.90G
+  [eval @8500] val_loss=1.5159 ppl=4.55
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_best.pt
+  [step 8500] loss=1.5058 lr=6.10e-04 655ms emb_norm=86.61 vram=5.90G
+  [step 8600] loss=1.5788 lr=6.02e-04 655ms emb_norm=86.44 vram=5.90G
+  [step 8700] loss=1.5532 lr=5.94e-04 655ms emb_norm=86.28 vram=5.90G
+  [step 8800] loss=1.5098 lr=5.86e-04 654ms emb_norm=86.04 vram=5.90G
+  [step 8900] loss=1.4818 lr=5.78e-04 657ms emb_norm=85.92 vram=5.90G
+  [eval @9000] val_loss=1.5135 ppl=4.54
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_best.pt
+  [step 9000] loss=1.5274 lr=5.70e-04 654ms emb_norm=85.68 vram=5.90G
+  [ckpt] step 9000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_ckpt.pt
+  [step 9100] loss=1.4699 lr=5.62e-04 655ms emb_norm=85.46 vram=5.90G
+  [step 9200] loss=1.5423 lr=5.54e-04 655ms emb_norm=85.32 vram=5.90G
+  [step 9300] loss=1.4106 lr=5.46e-04 655ms emb_norm=85.23 vram=5.90G
+  [step 9400] loss=1.4513 lr=5.38e-04 654ms emb_norm=85.05 vram=5.90G
+  [eval @9500] val_loss=1.5022 ppl=4.49
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_best.pt
+  [step 9500] loss=1.5722 lr=5.30e-04 655ms emb_norm=84.94 vram=5.90G
+  [step 9600] loss=1.4643 lr=5.22e-04 655ms emb_norm=84.68 vram=5.90G
+  [step 9700] loss=1.4948 lr=5.14e-04 654ms emb_norm=84.50 vram=5.90G
+  [step 9800] loss=1.4605 lr=5.06e-04 655ms emb_norm=84.40 vram=5.90G
+  [step 9900] loss=1.4850 lr=4.98e-04 654ms emb_norm=84.23 vram=5.90G
+  [eval @10000] val_loss=1.4900 ppl=4.44
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_best.pt
+  [sample @10000 1.4s] Once upon a time, there was a little boy named Timmy. Timmy had a toy truck that he loved to play with. One day, Timmy's friend Billy came over to play. Billy saw the toy truck and became envious. He wanted to play with it too, but Timmy didn't want to share.  Billy saw that Timmy was not wanting to
+  [step 10000] loss=1.5020 lr=4.90e-04 654ms emb_norm=84.09 vram=5.90G
+  [ckpt] step 10000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p3_ckpt.pt
+  [step 10100] loss=1.4691 lr=4.82e-04 655ms emb_norm=83.86 vram=5.90G
+  [step 10200] loss=1.4275 lr=4.74e-04 654ms emb_norm=83.64 vram=5.90G

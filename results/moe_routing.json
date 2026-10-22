@@ -1,0 +1,1878 @@
+{
+ "ckpt": "moe4_best.pt",
+ "n_win": 48,
+ "n_tok": 24576,
+ "usage": [
+  [
+   0.2536,
+   0.2613,
+   0.2354,
+   0.2497
+  ],
+  [
+   0.2636,
+   0.2497,
+   0.2548,
+   0.2319
+  ],
+  [
+   0.2408,
+   0.2609,
+   0.2386,
+   0.2598
+  ],
+  [
+   0.2367,
+   0.2476,
+   0.2591,
+   0.2566
+  ],
+  [
+   0.2509,
+   0.2465,
+   0.2466,
+   0.256
+  ],
+  [
+   0.2542,
+   0.2054,
+   0.266,
+   0.2744
+  ],
+  [
+   0.2621,
+   0.2325,
+   0.2588,
+   0.2466
+  ],
+  [
+   0.2738,
+   0.2552,
+   0.1918,
+   0.2792
+  ]
+ ],
+ "router_conf_mean": [
+  0.358,
+  0.457,
+  0.385,
+  0.473,
+  0.617,
+  0.7,
+  0.8,
+  0.851
+ ],
+ "router_lowconf_frac": [
+  0.973,
+  0.754,
+  0.886,
+  0.81,
+  0.523,
+  0.364,
+  0.183,
+  0.122
+ ],
+ "nmi": {
+  "word_init": {
+   "per_layer": [
+    0.0138,
+    0.0616,
+    0.0091,
+    0.0081,
+    0.0532,
+    0.057,
+    0.0866,
+    0.123
+   ],
+   "mean": 0.0515,
+   "shuffle_mean": 0.0001
+  },
+  "punct": {
+   "per_layer": [
+    0.0929,
+    0.12,
+    0.0043,
+    0.0183,
+    0.0744,
+    0.0499,
+    0.0962,
+    0.138
+   ],
+   "mean": 0.0742,
+   "shuffle_mean": 0.0001
+  },
+  "digit": {
+   "per_layer": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "mean": 0.0,
+   "shuffle_mean": 0.0
+  },
+  "long_tok": {
+   "per_layer": [
+    0.0242,
+    0.057,
+    0.005,
+    0.0065,
+    0.0485,
+    0.0155,
+    0.042,
+    0.0168
+   ],
+   "mean": 0.0269,
+   "shuffle_mean": 0.0001
+  },
+  "freq_bucket": {
+   "per_layer": [
+    0.0757,
+    0.132,
+    0.0054,
+    0.0134,
+    0.0538,
+    0.0288,
+    0.0472,
+    0.0266
+   ],
+   "mean": 0.0479,
+   "shuffle_mean": 0.0002
+  },
+  "pos_bucket": {
+   "per_layer": [
+    0.0006,
+    0.001,
+    0.0012,
+    0.001,
+    0.0005,
+    0.0005,
+    0.0002,
+    0.0003
+   ],
+   "mean": 0.0007,
+   "shuffle_mean": 0.0001
+  }
+ },
+ "token_entropy": [
+  {
+   "observed": 0.2209,
+   "shuffle": 0.9892
+  },
+  {
+   "observed": 0.2977,
+   "shuffle": 0.9891
+  },
+  {
+   "observed": 0.6437,
+   "shuffle": 0.9883
+  },
+  {
+   "observed": 0.632,
+   "shuffle": 0.9877
+  },
+  {
+   "observed": 0.6446,
+   "shuffle": 0.9876
+  },
+  {
+   "observed": 0.5867,
+   "shuffle": 0.9847
+  },
+  {
+   "observed": 0.4046,
+   "shuffle": 0.9884
+  },
+  {
+   "observed": 0.3066,
+   "shuffle": 0.981
+  }
+ ],
+ "cat_usage": {
+  "word_init": [
+   {
+    "cat": "cont",
+    "n": 5212,
+    "usage_mean": [
+     0.158,
+     0.212,
+     0.204,
+     0.425
+    ],
+    "usage_L4": [
+     0.164,
+     0.083,
+     0.277,
+     0.475
+    ]
+   },
+   {
+    "cat": "word_start",
+    "n": 19364,
+    "usage_mean": [
+     0.28,
+     0.254,
+     0.255,
+     0.211
+    ],
+    "usage_L4": [
+     0.274,
+     0.29,
+     0.238,
+     0.197
+    ]
+   }
+  ],
+  "punct": [
+   {
+    "cat": "other",
+    "n": 21374,
+    "usage_mean": [
+     0.277,
+     0.25,
+     0.251,
+     0.222
+    ],
+    "usage_L4": [
+     0.265,
+     0.277,
+     0.258,
+     0.2
+    ]
+   },
+   {
+    "cat": "punct",
+    "n": 3202,
+    "usage_mean": [
+     0.101,
+     0.214,
+     0.194,
+     0.491
+    ],
+    "usage_L4": [
+     0.159,
+     0.041,
+     0.172,
+     0.629
+    ]
+   }
+  ],
+  "digit": [
+   {
+    "cat": "other",
+    "n": 24576,
+    "usage_mean": [
+     0.254,
+     0.245,
+     0.244,
+     0.257
+    ],
+    "usage_L4": [
+     0.251,
+     0.247,
+     0.247,
+     0.256
+    ]
+   }
+  ],
+  "long_tok": [
+   {
+    "cat": "short",
+    "n": 21487,
+    "usage_mean": [
+     0.244,
+     0.246,
+     0.248,
+     0.263
+    ],
+    "usage_L4": [
+     0.25,
+     0.206,
+     0.272,
+     0.272
+    ]
+   },
+   {
+    "cat": "long",
+    "n": 3089,
+    "usage_mean": [
+     0.33,
+     0.236,
+     0.218,
+     0.216
+    ],
+    "usage_L4": [
+     0.256,
+     0.532,
+     0.07,
+     0.142
+    ]
+   }
+  ],
+  "freq_bucket": [
+   {
+    "cat": "<50",
+    "n": 402,
+    "usage_mean": [
+     0.315,
+     0.22,
+     0.202,
+     0.263
+    ],
+    "usage_L4": [
+     0.254,
+     0.507,
+     0.169,
+     0.07
+    ]
+   },
+   {
+    "cat": "50-500",
+    "n": 2395,
+    "usage_mean": [
+     0.338,
+     0.223,
+     0.209,
+     0.23
+    ],
+    "usage_L4": [
+     0.374,
+     0.441,
+     0.101,
+     0.084
+    ]
+   },
+   {
+    "cat": "500-5k",
+    "n": 5184,
+    "usage_mean": [
+     0.301,
+     0.25,
+     0.233,
+     0.215
+    ],
+    "usage_L4": [
+     0.266,
+     0.403,
+     0.161,
+     0.169
+    ]
+   },
+   {
+    "cat": ">5k",
+    "n": 16595,
+    "usage_mean": [
+     0.226,
+     0.247,
+     0.253,
+     0.273
+    ],
+    "usage_L4": [
+     0.228,
+     0.163,
+     0.296,
+     0.312
+    ]
+   }
+  ],
+  "pos_bucket": [
+   {
+    "cat": "0-63",
+    "n": 3072,
+    "usage_mean": [
+     0.246,
+     0.24,
+     0.253,
+     0.261
+    ],
+    "usage_L4": [
+     0.247,
+     0.239,
+     0.255,
+     0.258
+    ]
+   },
+   {
+    "cat": "64-255",
+    "n": 9216,
+    "usage_mean": [
+     0.261,
+     0.243,
+     0.243,
+     0.253
+    ],
+    "usage_L4": [
+     0.261,
+     0.258,
+     0.236,
+     0.245
+    ]
+   },
+   {
+    "cat": "256-511",
+    "n": 12288,
+    "usage_mean": [
+     0.252,
+     0.247,
+     0.242,
+     0.259
+    ],
+    "usage_L4": [
+     0.244,
+     0.239,
+     0.253,
+     0.264
+    ]
+   }
+  ]
+ },
+ "top_tokens": {
+  "L0": [
+   [
+    {
+     "tok": " the",
+     "count": 876,
+     "p_expert": 0.994
+    },
+    {
+     "tok": "\\n",
+     "count": 766,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " a",
+     "count": 561,
+     "p_expert": 0.895
+    },
+    {
+     "tok": " He",
+     "count": 247,
+     "p_expert": 0.826
+    },
+    {
+     "tok": " They",
+     "count": 229,
+     "p_expert": 0.979
+    },
+    {
+     "tok": " She",
+     "count": 209,
+     "p_expert": 0.963
+    },
+    {
+     "tok": " with",
+     "count": 179,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " her",
+     "count": 179,
+     "p_expert": 0.957
+    }
+   ],
+   [
+    {
+     "tok": ".",
+     "count": 1861,
+     "p_expert": 0.986
+    },
+    {
+     "tok": " and",
+     "count": 973,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " to",
+     "count": 312,
+     "p_expert": 0.424
+    },
+    {
+     "tok": " it",
+     "count": 129,
+     "p_expert": 0.471
+    },
+    {
+     "tok": "!",
+     "count": 102,
+     "p_expert": 0.944
+    },
+    {
+     "tok": " big",
+     "count": 73,
+     "p_expert": 0.723
+    },
+    {
+     "tok": " on",
+     "count": 72,
+     "p_expert": 0.571
+    },
+    {
+     "tok": " was",
+     "count": 61,
+     "p_expert": 0.121
+    }
+   ],
+   [
+    {
+     "tok": ",",
+     "count": 751,
+     "p_expert": 0.951
+    },
+    {
+     "tok": " was",
+     "count": 324,
+     "p_expert": 0.64
+    },
+    {
+     "tok": " he",
+     "count": 217,
+     "p_expert": 0.96
+    },
+    {
+     "tok": " they",
+     "count": 158,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " she",
+     "count": 150,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " said",
+     "count": 147,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " \"",
+     "count": 139,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " had",
+     "count": 129,
+     "p_expert": 0.97
+    }
+   ],
+   [
+    {
+     "tok": " his",
+     "count": 184,
+     "p_expert": 0.974
+    },
+    {
+     "tok": " to",
+     "count": 159,
+     "p_expert": 0.216
+    },
+    {
+     "tok": " day",
+     "count": 154,
+     "p_expert": 0.994
+    },
+    {
+     "tok": " him",
+     "count": 105,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " \\n",
+     "count": 92,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " you",
+     "count": 86,
+     "p_expert": 1.0
+    },
+    {
+     "tok": "Once",
+     "count": 76,
+     "p_expert": 0.987
+    },
+    {
+     "tok": " have",
+     "count": 66,
+     "p_expert": 1.0
+    }
+   ]
+  ],
+  "L1": [
+   [
+    {
+     "tok": " it",
+     "count": 215,
+     "p_expert": 0.785
+    },
+    {
+     "tok": " Lily",
+     "count": 117,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " happy",
+     "count": 98,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " there",
+     "count": 92,
+     "p_expert": 0.968
+    },
+    {
+     "tok": " and",
+     "count": 87,
+     "p_expert": 0.089
+    },
+    {
+     "tok": " Timmy",
+     "count": 71,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " not",
+     "count": 70,
+     "p_expert": 0.833
+    },
+    {
+     "tok": " upon",
+     "count": 66,
+     "p_expert": 0.971
+    }
+   ],
+   [
+    {
+     "tok": ",",
+     "count": 781,
+     "p_expert": 0.989
+    },
+    {
+     "tok": " was",
+     "count": 506,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " the",
+     "count": 315,
+     "p_expert": 0.358
+    },
+    {
+     "tok": " to",
+     "count": 217,
+     "p_expert": 0.295
+    },
+    {
+     "tok": " and",
+     "count": 199,
+     "p_expert": 0.205
+    },
+    {
+     "tok": " in",
+     "count": 141,
+     "p_expert": 0.993
+    },
+    {
+     "tok": " had",
+     "count": 133,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " on",
+     "count": 126,
+     "p_expert": 1.0
+    }
+   ],
+   [
+    {
+     "tok": " a",
+     "count": 627,
+     "p_expert": 1.0
+    },
+    {
+     "tok": "\\n",
+     "count": 610,
+     "p_expert": 0.796
+    },
+    {
+     "tok": " and",
+     "count": 423,
+     "p_expert": 0.435
+    },
+    {
+     "tok": " to",
+     "count": 307,
+     "p_expert": 0.417
+    },
+    {
+     "tok": " He",
+     "count": 299,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " the",
+     "count": 290,
+     "p_expert": 0.329
+    },
+    {
+     "tok": " he",
+     "count": 226,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " She",
+     "count": 212,
+     "p_expert": 0.977
+    }
+   ],
+   [
+    {
+     "tok": ".",
+     "count": 1772,
+     "p_expert": 0.939
+    },
+    {
+     "tok": " the",
+     "count": 276,
+     "p_expert": 0.313
+    },
+    {
+     "tok": " and",
+     "count": 264,
+     "p_expert": 0.271
+    },
+    {
+     "tok": " to",
+     "count": 212,
+     "p_expert": 0.288
+    },
+    {
+     "tok": "\\n",
+     "count": 156,
+     "p_expert": 0.204
+    },
+    {
+     "tok": " said",
+     "count": 144,
+     "p_expert": 0.98
+    },
+    {
+     "tok": " his",
+     "count": 124,
+     "p_expert": 0.656
+    },
+    {
+     "tok": " day",
+     "count": 109,
+     "p_expert": 0.703
+    }
+   ]
+  ],
+  "L2": [
+   [
+    {
+     "tok": " was",
+     "count": 352,
+     "p_expert": 0.696
+    },
+    {
+     "tok": ",",
+     "count": 339,
+     "p_expert": 0.429
+    },
+    {
+     "tok": " and",
+     "count": 260,
+     "p_expert": 0.267
+    },
+    {
+     "tok": " a",
+     "count": 257,
+     "p_expert": 0.41
+    },
+    {
+     "tok": ".",
+     "count": 235,
+     "p_expert": 0.125
+    },
+    {
+     "tok": " the",
+     "count": 143,
+     "p_expert": 0.162
+    },
+    {
+     "tok": "\\n",
+     "count": 120,
+     "p_expert": 0.157
+    },
+    {
+     "tok": " He",
+     "count": 119,
+     "p_expert": 0.398
+    }
+   ],
+   [
+    {
+     "tok": " the",
+     "count": 372,
+     "p_expert": 0.422
+    },
+    {
+     "tok": " and",
+     "count": 340,
+     "p_expert": 0.349
+    },
+    {
+     "tok": ",",
+     "count": 323,
+     "p_expert": 0.409
+    },
+    {
+     "tok": " a",
+     "count": 248,
+     "p_expert": 0.396
+    },
+    {
+     "tok": ".",
+     "count": 242,
+     "p_expert": 0.128
+    },
+    {
+     "tok": " it",
+     "count": 155,
+     "p_expert": 0.566
+    },
+    {
+     "tok": " his",
+     "count": 112,
+     "p_expert": 0.593
+    },
+    {
+     "tok": " They",
+     "count": 103,
+     "p_expert": 0.44
+    }
+   ],
+   [
+    {
+     "tok": ".",
+     "count": 726,
+     "p_expert": 0.385
+    },
+    {
+     "tok": "\\n",
+     "count": 281,
+     "p_expert": 0.367
+    },
+    {
+     "tok": " the",
+     "count": 228,
+     "p_expert": 0.259
+    },
+    {
+     "tok": " and",
+     "count": 226,
+     "p_expert": 0.232
+    },
+    {
+     "tok": " She",
+     "count": 145,
+     "p_expert": 0.668
+    },
+    {
+     "tok": " he",
+     "count": 140,
+     "p_expert": 0.619
+    },
+    {
+     "tok": " a",
+     "count": 111,
+     "p_expert": 0.177
+    },
+    {
+     "tok": " very",
+     "count": 105,
+     "p_expert": 0.868
+    }
+   ],
+   [
+    {
+     "tok": " to",
+     "count": 736,
+     "p_expert": 1.0
+    },
+    {
+     "tok": ".",
+     "count": 684,
+     "p_expert": 0.362
+    },
+    {
+     "tok": "\\n",
+     "count": 338,
+     "p_expert": 0.441
+    },
+    {
+     "tok": " and",
+     "count": 147,
+     "p_expert": 0.151
+    },
+    {
+     "tok": " in",
+     "count": 142,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " the",
+     "count": 138,
+     "p_expert": 0.157
+    },
+    {
+     "tok": " \\n",
+     "count": 84,
+     "p_expert": 0.913
+    },
+    {
+     "tok": " but",
+     "count": 78,
+     "p_expert": 1.0
+    }
+   ]
+  ],
+  "L3": [
+   [
+    {
+     "tok": ",",
+     "count": 362,
+     "p_expert": 0.458
+    },
+    {
+     "tok": " the",
+     "count": 262,
+     "p_expert": 0.297
+    },
+    {
+     "tok": " and",
+     "count": 215,
+     "p_expert": 0.221
+    },
+    {
+     "tok": " was",
+     "count": 193,
+     "p_expert": 0.381
+    },
+    {
+     "tok": " a",
+     "count": 163,
+     "p_expert": 0.26
+    },
+    {
+     "tok": " day",
+     "count": 155,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " to",
+     "count": 130,
+     "p_expert": 0.177
+    },
+    {
+     "tok": " so",
+     "count": 123,
+     "p_expert": 0.969
+    }
+   ],
+   [
+    {
+     "tok": "\\n",
+     "count": 668,
+     "p_expert": 0.872
+    },
+    {
+     "tok": " and",
+     "count": 385,
+     "p_expert": 0.396
+    },
+    {
+     "tok": ".",
+     "count": 233,
+     "p_expert": 0.123
+    },
+    {
+     "tok": ",",
+     "count": 177,
+     "p_expert": 0.224
+    },
+    {
+     "tok": " his",
+     "count": 167,
+     "p_expert": 0.884
+    },
+    {
+     "tok": " He",
+     "count": 164,
+     "p_expert": 0.548
+    },
+    {
+     "tok": " her",
+     "count": 148,
+     "p_expert": 0.791
+    },
+    {
+     "tok": " he",
+     "count": 138,
+     "p_expert": 0.611
+    }
+   ],
+   [
+    {
+     "tok": ".",
+     "count": 443,
+     "p_expert": 0.235
+    },
+    {
+     "tok": " it",
+     "count": 210,
+     "p_expert": 0.766
+    },
+    {
+     "tok": " and",
+     "count": 174,
+     "p_expert": 0.179
+    },
+    {
+     "tok": " a",
+     "count": 168,
+     "p_expert": 0.268
+    },
+    {
+     "tok": " the",
+     "count": 123,
+     "p_expert": 0.14
+    },
+    {
+     "tok": "!",
+     "count": 103,
+     "p_expert": 0.954
+    },
+    {
+     "tok": " had",
+     "count": 93,
+     "p_expert": 0.699
+    },
+    {
+     "tok": " in",
+     "count": 90,
+     "p_expert": 0.634
+    }
+   ],
+   [
+    {
+     "tok": ".",
+     "count": 1176,
+     "p_expert": 0.623
+    },
+    {
+     "tok": " to",
+     "count": 489,
+     "p_expert": 0.664
+    },
+    {
+     "tok": " the",
+     "count": 375,
+     "p_expert": 0.426
+    },
+    {
+     "tok": " was",
+     "count": 248,
+     "p_expert": 0.49
+    },
+    {
+     "tok": " a",
+     "count": 232,
+     "p_expert": 0.37
+    },
+    {
+     "tok": " and",
+     "count": 199,
+     "p_expert": 0.205
+    },
+    {
+     "tok": ",",
+     "count": 179,
+     "p_expert": 0.227
+    },
+    {
+     "tok": " She",
+     "count": 87,
+     "p_expert": 0.401
+    }
+   ]
+  ],
+  "L4": [
+   [
+    {
+     "tok": " the",
+     "count": 462,
+     "p_expert": 0.524
+    },
+    {
+     "tok": ",",
+     "count": 338,
+     "p_expert": 0.428
+    },
+    {
+     "tok": " it",
+     "count": 227,
+     "p_expert": 0.828
+    },
+    {
+     "tok": " a",
+     "count": 188,
+     "p_expert": 0.3
+    },
+    {
+     "tok": " to",
+     "count": 186,
+     "p_expert": 0.253
+    },
+    {
+     "tok": " her",
+     "count": 133,
+     "p_expert": 0.711
+    },
+    {
+     "tok": " was",
+     "count": 116,
+     "p_expert": 0.229
+    },
+    {
+     "tok": " him",
+     "count": 92,
+     "p_expert": 0.876
+    }
+   ],
+   [
+    {
+     "tok": " a",
+     "count": 156,
+     "p_expert": 0.249
+    },
+    {
+     "tok": " and",
+     "count": 129,
+     "p_expert": 0.133
+    },
+    {
+     "tok": "\\n",
+     "count": 120,
+     "p_expert": 0.157
+    },
+    {
+     "tok": " with",
+     "count": 114,
+     "p_expert": 0.637
+    },
+    {
+     "tok": " day",
+     "count": 113,
+     "p_expert": 0.729
+    },
+    {
+     "tok": " big",
+     "count": 98,
+     "p_expert": 0.97
+    },
+    {
+     "tok": " happy",
+     "count": 90,
+     "p_expert": 0.918
+    },
+    {
+     "tok": ",",
+     "count": 79,
+     "p_expert": 0.1
+    }
+   ],
+   [
+    {
+     "tok": " and",
+     "count": 474,
+     "p_expert": 0.487
+    },
+    {
+     "tok": ".",
+     "count": 323,
+     "p_expert": 0.171
+    },
+    {
+     "tok": " to",
+     "count": 301,
+     "p_expert": 0.409
+    },
+    {
+     "tok": "\\n",
+     "count": 234,
+     "p_expert": 0.305
+    },
+    {
+     "tok": " was",
+     "count": 228,
+     "p_expert": 0.451
+    },
+    {
+     "tok": " They",
+     "count": 202,
+     "p_expert": 0.863
+    },
+    {
+     "tok": " He",
+     "count": 201,
+     "p_expert": 0.672
+    },
+    {
+     "tok": " the",
+     "count": 182,
+     "p_expert": 0.207
+    }
+   ],
+   [
+    {
+     "tok": ".",
+     "count": 1531,
+     "p_expert": 0.811
+    },
+    {
+     "tok": "\\n",
+     "count": 325,
+     "p_expert": 0.424
+    },
+    {
+     "tok": " and",
+     "count": 314,
+     "p_expert": 0.323
+    },
+    {
+     "tok": ",",
+     "count": 299,
+     "p_expert": 0.378
+    },
+    {
+     "tok": " to",
+     "count": 177,
+     "p_expert": 0.24
+    },
+    {
+     "tok": " the",
+     "count": 171,
+     "p_expert": 0.194
+    },
+    {
+     "tok": " was",
+     "count": 157,
+     "p_expert": 0.31
+    },
+    {
+     "tok": " he",
+     "count": 120,
+     "p_expert": 0.531
+    }
+   ]
+  ],
+  "L5": [
+   [
+    {
+     "tok": "\\n",
+     "count": 663,
+     "p_expert": 0.866
+    },
+    {
+     "tok": " the",
+     "count": 425,
+     "p_expert": 0.482
+    },
+    {
+     "tok": ".",
+     "count": 356,
+     "p_expert": 0.189
+    },
+    {
+     "tok": " to",
+     "count": 266,
+     "p_expert": 0.361
+    },
+    {
+     "tok": ",",
+     "count": 265,
+     "p_expert": 0.335
+    },
+    {
+     "tok": " and",
+     "count": 250,
+     "p_expert": 0.257
+    },
+    {
+     "tok": " in",
+     "count": 142,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " was",
+     "count": 127,
+     "p_expert": 0.251
+    }
+   ],
+   [
+    {
+     "tok": " to",
+     "count": 456,
+     "p_expert": 0.62
+    },
+    {
+     "tok": ".",
+     "count": 376,
+     "p_expert": 0.199
+    },
+    {
+     "tok": " a",
+     "count": 209,
+     "p_expert": 0.333
+    },
+    {
+     "tok": " the",
+     "count": 167,
+     "p_expert": 0.19
+    },
+    {
+     "tok": ",",
+     "count": 162,
+     "p_expert": 0.205
+    },
+    {
+     "tok": " and",
+     "count": 149,
+     "p_expert": 0.153
+    },
+    {
+     "tok": " was",
+     "count": 80,
+     "p_expert": 0.158
+    },
+    {
+     "tok": "\\n",
+     "count": 76,
+     "p_expert": 0.099
+    }
+   ],
+   [
+    {
+     "tok": " a",
+     "count": 294,
+     "p_expert": 0.469
+    },
+    {
+     "tok": " was",
+     "count": 241,
+     "p_expert": 0.476
+    },
+    {
+     "tok": " the",
+     "count": 174,
+     "p_expert": 0.198
+    },
+    {
+     "tok": " it",
+     "count": 143,
+     "p_expert": 0.522
+    },
+    {
+     "tok": " her",
+     "count": 137,
+     "p_expert": 0.733
+    },
+    {
+     "tok": " his",
+     "count": 101,
+     "p_expert": 0.534
+    },
+    {
+     "tok": " him",
+     "count": 99,
+     "p_expert": 0.943
+    },
+    {
+     "tok": " saw",
+     "count": 90,
+     "p_expert": 0.989
+    }
+   ],
+   [
+    {
+     "tok": ".",
+     "count": 1131,
+     "p_expert": 0.599
+    },
+    {
+     "tok": " and",
+     "count": 495,
+     "p_expert": 0.509
+    },
+    {
+     "tok": ",",
+     "count": 346,
+     "p_expert": 0.438
+    },
+    {
+     "tok": " He",
+     "count": 293,
+     "p_expert": 0.98
+    },
+    {
+     "tok": " They",
+     "count": 225,
+     "p_expert": 0.962
+    },
+    {
+     "tok": " She",
+     "count": 212,
+     "p_expert": 0.977
+    },
+    {
+     "tok": " he",
+     "count": 157,
+     "p_expert": 0.695
+    },
+    {
+     "tok": " the",
+     "count": 115,
+     "p_expert": 0.131
+    }
+   ]
+  ],
+  "L6": [
+   [
+    {
+     "tok": " was",
+     "count": 403,
+     "p_expert": 0.796
+    },
+    {
+     "tok": " and",
+     "count": 149,
+     "p_expert": 0.153
+    },
+    {
+     "tok": " it",
+     "count": 131,
+     "p_expert": 0.478
+    },
+    {
+     "tok": " very",
+     "count": 111,
+     "p_expert": 0.917
+    },
+    {
+     "tok": " so",
+     "count": 96,
+     "p_expert": 0.756
+    },
+    {
+     "tok": " happy",
+     "count": 95,
+     "p_expert": 0.969
+    },
+    {
+     "tok": " a",
+     "count": 92,
+     "p_expert": 0.147
+    },
+    {
+     "tok": " were",
+     "count": 82,
+     "p_expert": 0.854
+    }
+   ],
+   [
+    {
+     "tok": " to",
+     "count": 597,
+     "p_expert": 0.811
+    },
+    {
+     "tok": "\\n",
+     "count": 572,
+     "p_expert": 0.747
+    },
+    {
+     "tok": ".",
+     "count": 349,
+     "p_expert": 0.185
+    },
+    {
+     "tok": " the",
+     "count": 290,
+     "p_expert": 0.329
+    },
+    {
+     "tok": " a",
+     "count": 135,
+     "p_expert": 0.215
+    },
+    {
+     "tok": " and",
+     "count": 99,
+     "p_expert": 0.102
+    },
+    {
+     "tok": " her",
+     "count": 93,
+     "p_expert": 0.497
+    },
+    {
+     "tok": "'t",
+     "count": 83,
+     "p_expert": 0.943
+    }
+   ],
+   [
+    {
+     "tok": ",",
+     "count": 790,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " and",
+     "count": 722,
+     "p_expert": 0.742
+    },
+    {
+     "tok": " the",
+     "count": 378,
+     "p_expert": 0.429
+    },
+    {
+     "tok": " a",
+     "count": 364,
+     "p_expert": 0.581
+    },
+    {
+     "tok": " with",
+     "count": 160,
+     "p_expert": 0.894
+    },
+    {
+     "tok": " to",
+     "count": 139,
+     "p_expert": 0.189
+    },
+    {
+     "tok": " said",
+     "count": 120,
+     "p_expert": 0.816
+    },
+    {
+     "tok": " for",
+     "count": 108,
+     "p_expert": 0.982
+    }
+   ],
+   [
+    {
+     "tok": ".",
+     "count": 1538,
+     "p_expert": 0.815
+    },
+    {
+     "tok": " He",
+     "count": 290,
+     "p_expert": 0.97
+    },
+    {
+     "tok": " She",
+     "count": 213,
+     "p_expert": 0.982
+    },
+    {
+     "tok": " he",
+     "count": 180,
+     "p_expert": 0.796
+    },
+    {
+     "tok": " They",
+     "count": 178,
+     "p_expert": 0.761
+    },
+    {
+     "tok": " the",
+     "count": 167,
+     "p_expert": 0.19
+    },
+    {
+     "tok": " she",
+     "count": 122,
+     "p_expert": 0.813
+    },
+    {
+     "tok": " they",
+     "count": 121,
+     "p_expert": 0.766
+    }
+   ]
+  ],
+  "L7": [
+   [
+    {
+     "tok": " He",
+     "count": 295,
+     "p_expert": 0.987
+    },
+    {
+     "tok": " They",
+     "count": 228,
+     "p_expert": 0.974
+    },
+    {
+     "tok": " he",
+     "count": 223,
+     "p_expert": 0.987
+    },
+    {
+     "tok": " She",
+     "count": 215,
+     "p_expert": 0.991
+    },
+    {
+     "tok": " it",
+     "count": 151,
+     "p_expert": 0.551
+    },
+    {
+     "tok": " she",
+     "count": 149,
+     "p_expert": 0.993
+    },
+    {
+     "tok": " they",
+     "count": 147,
+     "p_expert": 0.93
+    },
+    {
+     "tok": " said",
+     "count": 110,
+     "p_expert": 0.748
+    }
+   ],
+   [
+    {
+     "tok": " and",
+     "count": 965,
+     "p_expert": 0.992
+    },
+    {
+     "tok": " the",
+     "count": 880,
+     "p_expert": 0.999
+    },
+    {
+     "tok": " a",
+     "count": 561,
+     "p_expert": 0.895
+    },
+    {
+     "tok": " to",
+     "count": 340,
+     "p_expert": 0.462
+    },
+    {
+     "tok": ",",
+     "count": 308,
+     "p_expert": 0.39
+    },
+    {
+     "tok": " was",
+     "count": 210,
+     "p_expert": 0.415
+    },
+    {
+     "tok": " his",
+     "count": 189,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " her",
+     "count": 168,
+     "p_expert": 0.898
+    }
+   ],
+   [
+    {
+     "tok": " to",
+     "count": 351,
+     "p_expert": 0.477
+    },
+    {
+     "tok": " was",
+     "count": 296,
+     "p_expert": 0.585
+    },
+    {
+     "tok": ",",
+     "count": 170,
+     "p_expert": 0.215
+    },
+    {
+     "tok": " had",
+     "count": 133,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " in",
+     "count": 132,
+     "p_expert": 0.93
+    },
+    {
+     "tok": ".",
+     "count": 113,
+     "p_expert": 0.06
+    },
+    {
+     "tok": " you",
+     "count": 85,
+     "p_expert": 0.988
+    },
+    {
+     "tok": " there",
+     "count": 81,
+     "p_expert": 0.853
+    }
+   ],
+   [
+    {
+     "tok": ".",
+     "count": 1774,
+     "p_expert": 0.94
+    },
+    {
+     "tok": "\\n",
+     "count": 766,
+     "p_expert": 1.0
+    },
+    {
+     "tok": ",",
+     "count": 302,
+     "p_expert": 0.382
+    },
+    {
+     "tok": " \"",
+     "count": 139,
+     "p_expert": 1.0
+    },
+    {
+     "tok": "",
+     "count": 116,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " day",
+     "count": 99,
+     "p_expert": 0.639
+    },
+    {
+     "tok": " \\n",
+     "count": 92,
+     "p_expert": 1.0
+    },
+    {
+     "tok": " happy",
+     "count": 87,
+     "p_expert": 0.888
+    }
+   ]
+  ]
+ },
+ "layer_nmi": [
+  [
+   1.0,
+   0.044,
+   0.007,
+   0.017,
+   0.014,
+   0.017,
+   0.013,
+   0.042
+  ],
+  [
+   0.044,
+   1.0,
+   0.024,
+   0.018,
+   0.051,
+   0.028,
+   0.125,
+   0.064
+  ],
+  [
+   0.007,
+   0.024,
+   1.0,
+   0.008,
+   0.011,
+   0.01,
+   0.034,
+   0.006
+  ],
+  [
+   0.017,
+   0.018,
+   0.008,
+   1.0,
+   0.01,
+   0.005,
+   0.022,
+   0.005
+  ],
+  [
+   0.014,
+   0.051,
+   0.011,
+   0.01,
+   1.0,
+   0.048,
+   0.058,
+   0.019
+  ],
+  [
+   0.017,
+   0.028,
+   0.01,
+   0.005,
+   0.048,
+   1.0,
+   0.122,
+   0.063
+  ],
+  [
+   0.013,
+   0.125,
+   0.034,
+   0.022,
+   0.058,
+   0.122,
+   1.0,
+   0.043
+  ],
+  [
+   0.042,
+   0.064,
+   0.006,
+   0.005,
+   0.019,
+   0.063,
+   0.043,
+   1.0
+  ]
+ ],
+ "layer_nmi_offdiag_mean": 0.0332
+}

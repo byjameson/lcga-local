@@ -1,0 +1,35 @@
+{
+  "tag": "exp8_eval_smoke",
+  "model": "models/Qwen2.5-0.5B",
+  "mode": "stream",
+  "steps": 3,
+  "seq": 512,
+  "lr": 0.001,
+  "r": 16,
+  "chunk": 128,
+  "cap_fraction": null,
+  "seed": 0,
+  "gpu_total_gb": 6.44,
+  "stream": {
+    "losses": [
+      3.277665,
+      2.910644,
+      2.514275
+    ],
+    "times_s": [
+      1.206,
+      1.127,
+      1.154
+    ],
+    "peak_gb": [
+      0.77,
+      0.77,
+      0.77
+    ],
+    "n_lora": 2162688,
+    "host_rss_gb": 2.18,
+    "ce_before": 2.873691,
+    "ce_after": 2.832619,
+    "eval_chunks": 4
+  }
+}

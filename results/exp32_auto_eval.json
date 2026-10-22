@@ -1,0 +1,455 @@
+{
+  "rows": [
+    {
+      "variant": "auto",
+      "category": "ins_tr",
+      "prompt": "Sadece 'mavi' yaz.",
+      "text": "Mavi",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 0.762,
+      "load_s": 5.278,
+      "elapsed_s": 6.087,
+      "wall_s": 6.087,
+      "peak_vram_mb": 2958.0,
+      "keyword_hit": true,
+      "exact_hit": true,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "ins_tr",
+      "prompt": "2 + 2 kac? Sadece sayiyi yaz.",
+      "text": "4",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 0.133,
+      "load_s": 0.0,
+      "elapsed_s": 0.135,
+      "wall_s": 0.136,
+      "peak_vram_mb": 2966.5,
+      "keyword_hit": true,
+      "exact_hit": true,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "ins_tr",
+      "prompt": "Uc maddede su icmenin faydalarini yaz.",
+      "text": "1. **Kontrolü Arttırır:** Su icmen, vücudun kontrol sistemi üzerinde önemli bir etkiye sahiptir. Bu, oksijen alımını artırmak için sağlar.\n\n2. **Yüksek Üretim Durumu:** Su icmen, vücud",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 3.083,
+      "load_s": 0.0,
+      "elapsed_s": 3.091,
+      "wall_s": 3.091,
+      "peak_vram_mb": 3012.4,
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": false
+    },
+    {
+      "variant": "auto",
+      "category": "ins_tr",
+      "prompt": "Su cumleyi Turkceye cevir: The cat is on the table.",
+      "text": "The cat is on the table. The cat is on the table.\nThe cat is on the table. The cat is on the table. The cat is on the table.\nThe cat is on the table. The cat is on the table. The cat is on the table.\nThe cat is on the table. The",
+      "units": [
+        "fast",
+        "balanced"
+      ],
+      "reason": "auto: genel sorgu -> 0.5B + 1.5B paralel, en guvenilir cevap secilir",
+      "gen_s": 6.426,
+      "load_s": 8.827,
+      "elapsed_s": 15.267,
+      "wall_s": 15.267,
+      "peak_vram_mb": 4013.5,
+      "keyword_hit": false,
+      "exact_hit": null,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "ins_tr",
+      "prompt": "Istanbul mu daha kalabalik, Ankara mi? Kisa cevap ver.",
+      "text": "Ankara'da daha kalabalık olabilir.",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 1.474,
+      "load_s": 3.084,
+      "elapsed_s": 4.562,
+      "wall_s": 4.563,
+      "peak_vram_mb": 3939.1,
+      "keyword_hit": false,
+      "exact_hit": null,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "ins_tr",
+      "prompt": "Merhaba, nasilsin?",
+      "text": "Merhaba! Ben bir asistanım. Size nasıl yardımcı olabilirim?",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: kisa selamlama -> 1.5B Instruct",
+      "gen_s": 1.769,
+      "load_s": 0.0,
+      "elapsed_s": 1.774,
+      "wall_s": 1.774,
+      "peak_vram_mb": 3015.8,
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "fact_tr",
+      "prompt": "Fransa'nin baskenti neresi?",
+      "text": "Fransa'nın başkenti Paris'dir.",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 1.19,
+      "load_s": 0.0,
+      "elapsed_s": 1.194,
+      "wall_s": 1.194,
+      "peak_vram_mb": 3020.4,
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "fact_tr",
+      "prompt": "Turkiye'nin baskenti neresi?",
+      "text": "Türkiye'nin başkenti Ankara'dır.",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 1.135,
+      "load_s": 0.0,
+      "elapsed_s": 1.139,
+      "wall_s": 1.139,
+      "peak_vram_mb": 3027.9,
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "fact_tr",
+      "prompt": "Gunes sistemindeki en buyuk gezegen hangisi?",
+      "text": "Gunes sistemindeki en büyük gezegende, Jupiter'dur.",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 1.656,
+      "load_s": 0.0,
+      "elapsed_s": 1.661,
+      "wall_s": 1.662,
+      "peak_vram_mb": 3039.8,
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "fact_tr",
+      "prompt": "Altinin kimyasal sembolu nedir?",
+      "text": "Altın (Cu) kimyasal sembolü C.",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 1.34,
+      "load_s": 0.0,
+      "elapsed_s": 1.344,
+      "wall_s": 1.344,
+      "peak_vram_mb": 3046.0,
+      "keyword_hit": false,
+      "exact_hit": null,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "fact_tr",
+      "prompt": "Su kac derecede kaynar?",
+      "text": "Su 100 dereceden kaynar.",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 1.094,
+      "load_s": 0.0,
+      "elapsed_s": 1.098,
+      "wall_s": 1.099,
+      "peak_vram_mb": 3052.8,
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "fact_tr",
+      "prompt": "Bir yilda kac ay vardir?",
+      "text": "Bir yıldır 12 ay var.",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 1.046,
+      "load_s": 0.0,
+      "elapsed_s": 1.05,
+      "wall_s": 1.05,
+      "peak_vram_mb": 3061.0,
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "fact_en",
+      "prompt": "What is the capital of France?",
+      "text": "Paris.",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 0.17,
+      "load_s": 0.0,
+      "elapsed_s": 0.171,
+      "wall_s": 0.171,
+      "peak_vram_mb": 3063.6,
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "fact_en",
+      "prompt": "What is the capital of Germany?",
+      "text": "Berlin",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 0.136,
+      "load_s": 0.0,
+      "elapsed_s": 0.137,
+      "wall_s": 0.137,
+      "peak_vram_mb": 3071.4,
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "fact_en",
+      "prompt": "What is the largest planet in the solar system?",
+      "text": "The largest planet in the solar system is Jupiter.",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 0.783,
+      "load_s": 0.0,
+      "elapsed_s": 0.786,
+      "wall_s": 0.786,
+      "peak_vram_mb": 3084.8,
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "fact_en",
+      "prompt": "What is the chemical symbol for gold?",
+      "text": "Au",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 0.112,
+      "load_s": 0.0,
+      "elapsed_s": 0.113,
+      "wall_s": 0.113,
+      "peak_vram_mb": 3087.8,
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "fact_en",
+      "prompt": "At what temperature does water boil (Celsius)?",
+      "text": "100°C",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 0.325,
+      "load_s": 0.0,
+      "elapsed_s": 0.327,
+      "wall_s": 0.327,
+      "peak_vram_mb": 3097.4,
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "fact_en",
+      "prompt": "How many months are there in a year?",
+      "text": "There are 12 months in a year.",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 0.689,
+      "load_s": 0.0,
+      "elapsed_s": 0.692,
+      "wall_s": 0.692,
+      "peak_vram_mb": 3109.1,
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "ins_en",
+      "prompt": "Reply with exactly the word 'blue'.",
+      "text": "Blue.",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 0.177,
+      "load_s": 0.0,
+      "elapsed_s": 0.178,
+      "wall_s": 0.178,
+      "peak_vram_mb": 3112.3,
+      "keyword_hit": true,
+      "exact_hit": true,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "ins_en",
+      "prompt": "What is 7 * 8? Answer with just the number.",
+      "text": "56",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 0.168,
+      "load_s": 0.0,
+      "elapsed_s": 0.169,
+      "wall_s": 0.169,
+      "peak_vram_mb": 3120.8,
+      "keyword_hit": true,
+      "exact_hit": true,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "ins_en",
+      "prompt": "List three primary colors.",
+      "text": "Red, blue, and yellow are the primary colors.",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 0.671,
+      "load_s": 0.0,
+      "elapsed_s": 0.673,
+      "wall_s": 0.673,
+      "peak_vram_mb": 3134.0,
+      "keyword_hit": null,
+      "exact_hit": null,
+      "list_hit": false
+    },
+    {
+      "variant": "auto",
+      "category": "ins_en",
+      "prompt": "Translate 'good morning' into Turkish.",
+      "text": "\"Good morning\" in Turkish is \"Merhaba\".",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 0.762,
+      "load_s": 0.0,
+      "elapsed_s": 0.765,
+      "wall_s": 0.765,
+      "peak_vram_mb": 3142.8,
+      "keyword_hit": false,
+      "exact_hit": null,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "ins_en",
+      "prompt": "Write one short sentence about the sea.",
+      "text": "The ocean is a vast and mysterious body of water covering most of Earth's surface.",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: soru/sohbet -> 1.5B Instruct",
+      "gen_s": 1.128,
+      "load_s": 0.0,
+      "elapsed_s": 1.133,
+      "wall_s": 1.133,
+      "peak_vram_mb": 3154.0,
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null
+    },
+    {
+      "variant": "auto",
+      "category": "ins_en",
+      "prompt": "Say hello in Turkish.",
+      "text": "Merhaba!",
+      "units": [
+        "chat"
+      ],
+      "reason": "auto: kisa selamlama -> 1.5B Instruct",
+      "gen_s": 0.336,
+      "load_s": 0.0,
+      "elapsed_s": 0.338,
+      "wall_s": 0.338,
+      "peak_vram_mb": 3154.1,
+      "keyword_hit": true,
+      "exact_hit": null,
+      "list_hit": null
+    }
+  ],
+  "summary": {
+    "exp": "exp32_auto_eval",
+    "tag": "exp32_summary",
+    "n": 24,
+    "max_new_tokens": 64,
+    "keyword_hit_rate": 0.818,
+    "exact_hit_rate": 1.0,
+    "list_hit_rate": 0.0,
+    "avg_elapsed_s": 1.829,
+    "avg_gen_s": 1.107,
+    "peak_vram_mb": 4013.5,
+    "unit_counts": {
+      "balanced": 1,
+      "chat": 23,
+      "fast": 1
+    },
+    "ts": "2026-10-20 18:22:19"
+  }
+}

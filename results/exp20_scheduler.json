@@ -1,0 +1,91 @@
+{
+  "ref": {},
+  "rows": [
+    {
+      "exp": "exp20_scheduler",
+      "tag": "m4_merge_story_par",
+      "scenario": "par",
+      "free_before_gb": 5.04,
+      "budget_gb": 5.0,
+      "est_gb": {
+        "qwen0.5b": 1.1,
+        "qwen1.5b": 3.3
+      },
+      "groups": [
+        [
+          "qwen0.5b",
+          "qwen1.5b"
+        ]
+      ],
+      "n_groups": 1,
+      "load_s": 8.61,
+      "gen_s": 2.49,
+      "unload_s": 1.11,
+      "total_s": 12.25,
+      "ref_gen_s": 0,
+      "ref_total_s": 0,
+      "speedup_gen": 0.0,
+      "speedup_total": 0.0,
+      "texts": {
+        "qwen0.5b": " lived a young man named Jack. Jack was a very good student, and he was always trying to learn new things. He was also very good at sports.",
+        "qwen1.5b": ", there was a wise old owl who lived in a tree. One day, a young rabbit named Binkley came to visit the owl. Binkley"
+      },
+      "scores": {
+        "qwen0.5b": -1.1744,
+        "qwen1.5b": -0.7706
+      },
+      "merge_policy": "best",
+      "best_pick": "qwen1.5b",
+      "merged_concat": "[qwen0.5b] lived a young man named Jack. Jack was a very good student, and he was always trying to learn new things. He was also very good at sports. | [qwen1.5b] , there was a wise old owl who lived in a tree. One day, a young rabbit named Binkley came to visit the owl. Binkley",
+      "merged_best": ", there was a wise old owl who lived in a tree. One day, a young rabbit named Binkley came to visit the owl. Binkley",
+      "outputs_match_ref": null,
+      "merged": ", there was a wise old owl who lived in a tree. One day, a young rabbit named Binkley came to visit the owl. Binkley",
+      "peak_alloc_mb": 3949.2,
+      "peak_reserved_mb": 4210.0
+    },
+    {
+      "exp": "exp20_scheduler",
+      "tag": "m4_merge_story_seq",
+      "scenario": "seq",
+      "free_before_gb": 4.95,
+      "budget_gb": 2.5,
+      "est_gb": {
+        "qwen0.5b": 1.1,
+        "qwen1.5b": 3.3
+      },
+      "groups": [
+        [
+          "qwen0.5b"
+        ],
+        [
+          "qwen1.5b"
+        ]
+      ],
+      "n_groups": 2,
+      "load_s": 5.6,
+      "gen_s": 3.12,
+      "unload_s": 1.05,
+      "total_s": 9.9,
+      "ref_gen_s": 0,
+      "ref_total_s": 0,
+      "speedup_gen": 0.0,
+      "speedup_total": 0.0,
+      "texts": {
+        "qwen0.5b": " lived a young man named Jack. Jack was a very good student, and he was always trying to learn new things. He was also very good at sports.",
+        "qwen1.5b": ", there was a wise old owl who lived in a tree. One day, a young rabbit named Binkley came to visit the owl. Binkley"
+      },
+      "scores": {
+        "qwen0.5b": -1.1744,
+        "qwen1.5b": -0.7706
+      },
+      "merge_policy": "best",
+      "best_pick": "qwen1.5b",
+      "merged_concat": "[qwen0.5b] lived a young man named Jack. Jack was a very good student, and he was always trying to learn new things. He was also very good at sports. | [qwen1.5b] , there was a wise old owl who lived in a tree. One day, a young rabbit named Binkley came to visit the owl. Binkley",
+      "merged_best": ", there was a wise old owl who lived in a tree. One day, a young rabbit named Binkley came to visit the owl. Binkley",
+      "outputs_match_ref": null,
+      "merged": ", there was a wise old owl who lived in a tree. One day, a young rabbit named Binkley came to visit the owl. Binkley",
+      "peak_alloc_mb": 2998.6,
+      "peak_reserved_mb": 3238.0
+    }
+  ]
+}

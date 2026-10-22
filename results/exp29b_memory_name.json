@@ -1,0 +1,35 @@
+{
+  "exp": "exp29b_memory_name",
+  "n": 4,
+  "summary": {
+    "hits": 3,
+    "n": 4
+  },
+  "rows": [
+    {
+      "variant": "user_fact",
+      "answer": "Ben sizin adınız.",
+      "keyword_hit": false,
+      "elapsed_s": 0.871
+    },
+    {
+      "variant": "user_fact_q",
+      "answer": "Adiniz Ali'dir.",
+      "keyword_hit": true,
+      "elapsed_s": 0.601
+    },
+    {
+      "variant": "repeat",
+      "answer": "Adınız Ali'dir.",
+      "keyword_hit": true,
+      "elapsed_s": 0.592
+    },
+    {
+      "variant": "label_q",
+      "answer": "Adınız Ali'dir.",
+      "keyword_hit": true,
+      "elapsed_s": 0.646
+    }
+  ],
+  "ts": "2026-10-20 17:19:07"
+}

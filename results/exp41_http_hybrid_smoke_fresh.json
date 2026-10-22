@@ -1,0 +1,108 @@
+{
+  "exp": "exp41_http_hybrid_smoke_fresh",
+  "tag": "exp41_http_hybrid_smoke_fresh_summary",
+  "rows": [
+    {
+      "case": "quality_tr_list",
+      "path": "/v1/answer",
+      "wall_s": 11.977,
+      "answer": "1. Elma\n2. Muz\n3. Kiraz",
+      "route": {
+        "reason": "quality: TR liste -> 3B + numarali format",
+        "units": [
+          "chat3b"
+        ]
+      },
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 5.016,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4752.9,
+      "warnings": []
+    },
+    {
+      "case": "quality_en_list",
+      "path": "/v1/answer",
+      "wall_s": 6.399,
+      "answer": "1. Apple\n2. banana\n3. orange",
+      "route": {
+        "reason": "quality: EN liste -> 1.5B + format duzeltme",
+        "units": [
+          "chat"
+        ]
+      },
+      "timings": {
+        "load_s": 5.902,
+        "gen_s": 0.438,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4746.3,
+      "warnings": []
+    },
+    {
+      "case": "quality_fact",
+      "path": "/v1/answer",
+      "wall_s": 3.671,
+      "answer": "Paris'dır.",
+      "route": {
+        "reason": "quality: genel -> 3B Instruct",
+        "units": [
+          "chat3b"
+        ]
+      },
+      "timings": {
+        "load_s": 0.0,
+        "gen_s": 2.624,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4758.7,
+      "warnings": []
+    },
+    {
+      "case": "alt_fact",
+      "path": "/v1/answer",
+      "wall_s": 6.858,
+      "answer": "Paris",
+      "route": {
+        "reason": "mode=alt (kullanici secti)",
+        "units": [
+          "alt"
+        ]
+      },
+      "timings": {
+        "load_s": 6.694,
+        "gen_s": 0.106,
+        "unload_s": 0.0,
+        "queue_s": 0.0
+      },
+      "peak_vram_mb": 4754.4,
+      "warnings": []
+    },
+    {
+      "case": "openai_quality_en_list",
+      "path": "/v1/chat/completions",
+      "wall_s": 3.298,
+      "answer": "1. Red\n2. Blue\n3. Green",
+      "model": "lcga-quality",
+      "usage": null
+    },
+    {
+      "case": "stream_quality_en_list",
+      "wall_s": 0.91,
+      "n_events": 2,
+      "n_token_events": 0,
+      "final_answer": "1. Dog\n2. Cat\n3. Bird",
+      "final_route": {
+        "reason": "quality: EN liste -> 1.5B + format duzeltme",
+        "units": [
+          "chat"
+        ]
+      }
+    }
+  ],
+  "ts": "2026-10-20 19:51:22"
+}

@@ -1,0 +1,234 @@
+{
+  "variants": [
+    {
+      "label": "plain",
+      "model": "Qwen2.5-1.5B-Instruct",
+      "load_s": 3.82,
+      "peak_vram_mb": 2957.9,
+      "rows": [
+        {
+          "variant": "plain",
+          "category": "list",
+          "prompt": "Uc meyve listele.",
+          "text": "1. Elma\n2. Avocado (Avocado)\n3. Moro (Moro)",
+          "gen_s": 1.632,
+          "n_new": 22,
+          "tok_s": 13.48,
+          "list_hit": true
+        },
+        {
+          "variant": "plain",
+          "category": "list",
+          "prompt": "List three animals.",
+          "text": "1. Dog\n2. Cat\n3. Bird",
+          "gen_s": 0.635,
+          "n_new": 12,
+          "tok_s": 18.89,
+          "list_hit": true
+        },
+        {
+          "variant": "plain",
+          "category": "list",
+          "prompt": "Uc renk listele.",
+          "text": "Renkler: \n1. Mavi\n2. Sari\n3. Beyaz",
+          "gen_s": 1.004,
+          "n_new": 20,
+          "tok_s": 19.93,
+          "list_hit": true
+        },
+        {
+          "variant": "plain",
+          "category": "list",
+          "prompt": "List three programming languages.",
+          "text": "1. Python\n2. Java\n3. C++",
+          "gen_s": 0.629,
+          "n_new": 13,
+          "tok_s": 20.68,
+          "list_hit": true
+        },
+        {
+          "variant": "plain",
+          "category": "list",
+          "prompt": "Uc ulke listele.",
+          "text": "1. Amerika Birleşik Devletleri\n2. Avustralya\n3. İtalya",
+          "gen_s": 1.213,
+          "n_new": 24,
+          "tok_s": 19.78,
+          "list_hit": true
+        },
+        {
+          "variant": "plain",
+          "category": "list",
+          "prompt": "List three days of the week.",
+          "text": "Monday, Tuesday, Wednesday",
+          "gen_s": 0.354,
+          "n_new": 6,
+          "tok_s": 16.95,
+          "list_hit": false
+        }
+      ],
+      "summary": {
+        "n": 6,
+        "list_hit_rate": 0.833,
+        "avg_gen_s": 0.911
+      }
+    },
+    {
+      "label": "suffix",
+      "model": "Qwen2.5-1.5B-Instruct",
+      "load_s": 3.82,
+      "peak_vram_mb": 2961.1,
+      "rows": [
+        {
+          "variant": "suffix",
+          "category": "list",
+          "prompt": "Uc meyve listele.",
+          "text": "Armut, banan, domates",
+          "gen_s": 0.509,
+          "n_new": 9,
+          "tok_s": 17.68,
+          "list_hit": false
+        },
+        {
+          "variant": "suffix",
+          "category": "list",
+          "prompt": "List three animals.",
+          "text": "1. Kedi\n2. Cekici\n3. Balon",
+          "gen_s": 0.763,
+          "n_new": 16,
+          "tok_s": 20.98,
+          "list_hit": true
+        },
+        {
+          "variant": "suffix",
+          "category": "list",
+          "prompt": "Uc renk listele.",
+          "text": "1. Red: -Red-\n2. Green: -Green-\n3. Blue: -Blue-",
+          "gen_s": 1.137,
+          "n_new": 22,
+          "tok_s": 19.35,
+          "list_hit": true
+        },
+        {
+          "variant": "suffix",
+          "category": "list",
+          "prompt": "List three programming languages.",
+          "text": "Python - Java - C++",
+          "gen_s": 0.356,
+          "n_new": 7,
+          "tok_s": 19.69,
+          "list_hit": false
+        },
+        {
+          "variant": "suffix",
+          "category": "list",
+          "prompt": "Uc ulke listele.",
+          "text": "İtalya, İsrail, İran",
+          "gen_s": 0.667,
+          "n_new": 12,
+          "tok_s": 17.99,
+          "list_hit": false
+        },
+        {
+          "variant": "suffix",
+          "category": "list",
+          "prompt": "List three days of the week.",
+          "text": "Pazartesi (-)\nSalı (-)\nÇarşamba (-)",
+          "gen_s": 0.872,
+          "n_new": 17,
+          "tok_s": 19.5,
+          "list_hit": false
+        }
+      ],
+      "summary": {
+        "n": 6,
+        "list_hit_rate": 0.333,
+        "avg_gen_s": 0.717
+      }
+    },
+    {
+      "label": "system",
+      "model": "Qwen2.5-1.5B-Instruct",
+      "load_s": 3.82,
+      "peak_vram_mb": 2961.3,
+      "rows": [
+        {
+          "variant": "system",
+          "category": "list",
+          "prompt": "Uc meyve listele.",
+          "text": "Meyveler: - karaya, - portakal, - domates",
+          "gen_s": 0.9,
+          "n_new": 18,
+          "tok_s": 19.99,
+          "list_hit": false
+        },
+        {
+          "variant": "system",
+          "category": "list",
+          "prompt": "List three animals.",
+          "text": "1. Dog\n2. Cat\n3. Elephant",
+          "gen_s": 0.624,
+          "n_new": 12,
+          "tok_s": 19.23,
+          "list_hit": true
+        },
+        {
+          "variant": "system",
+          "category": "list",
+          "prompt": "Uc renk listele.",
+          "text": "Renkler: - Beyaz, - Sari, - Mavi",
+          "gen_s": 0.826,
+          "n_new": 16,
+          "tok_s": 19.37,
+          "list_hit": false
+        },
+        {
+          "variant": "system",
+          "category": "list",
+          "prompt": "List three programming languages.",
+          "text": "1. Python\n2. Java\n3. C++",
+          "gen_s": 0.751,
+          "n_new": 13,
+          "tok_s": 17.31,
+          "list_hit": true
+        },
+        {
+          "variant": "system",
+          "category": "list",
+          "prompt": "Uc ulke listele.",
+          "text": "1. Amerika Birleşik Devletleri\n2. Avrupa Birliği\n3. Türkiye",
+          "gen_s": 1.087,
+          "n_new": 22,
+          "tok_s": 20.25,
+          "list_hit": true
+        },
+        {
+          "variant": "system",
+          "category": "list",
+          "prompt": "List three days of the week.",
+          "text": "Monday, Tuesday, Wednesday",
+          "gen_s": 0.311,
+          "n_new": 6,
+          "tok_s": 19.31,
+          "list_hit": false
+        }
+      ],
+      "summary": {
+        "n": 6,
+        "list_hit_rate": 0.5,
+        "avg_gen_s": 0.75
+      }
+    }
+  ],
+  "summary": {
+    "exp": "exp27_list_prompt",
+    "n": 6,
+    "max_new_tokens": 64,
+    "rates": {
+      "plain": 0.833,
+      "suffix": 0.333,
+      "system": 0.5
+    },
+    "ts": "2026-10-20 17:05:39"
+  }
+}

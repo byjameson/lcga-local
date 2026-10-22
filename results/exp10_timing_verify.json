@@ -1,0 +1,26 @@
+{
+ "exp": "exp10_byte_verify",
+ "tag": "p2_sync",
+ "ts": "2026-10-16 16:32:09",
+ "note": "sync li adim suresi + kalite dogrulamasi (2 kosu, stabil). exp10 ici step_med_ms/train_min flat icin WDDM enqueue artefakti; gercek duvar 49.7 dk ~ 250ms x 12000 ile uyumlu.",
+ "flat": {
+  "ms_sync": 250.7,
+  "ms_nosync": 247.0,
+  "eval64_sec": 0.145,
+  "valid_bpb": 1.6579,
+  "test_bpb": 1.6449
+ },
+ "patch": {
+  "ms_sync": 150.1,
+  "ms_nosync": 154.1,
+  "eval64_sec": 0.089,
+  "valid_bpb": 2.0947,
+  "test_bpb": 2.0509
+ },
+ "exp10_rows": {
+  "flat_step_med_ms": 16.55,
+  "patch_step_med_ms": 68.56,
+  "flat_wall_min": 49.7
+ },
+ "script": "scripts/verify_p2_timing.py"
+}

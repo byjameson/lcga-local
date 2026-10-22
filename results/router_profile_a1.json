@@ -1,0 +1,52 @@
+{
+ "tag": "a1",
+ "ts": "2026-10-16 09:25:01",
+ "d_model": 896,
+ "ckpt": "checkpoints\\v2_best.pt",
+ "micro_per_layer": {
+  "1024": {
+   "cast_f16_f32": 0.051,
+   "concept_logits": 0.18,
+   "block_scores": 0.783,
+   "select_blocks": 0.315,
+   "masked_probs": 0.13,
+   "pipeline": 1.44,
+   "pipeline_x24": 34.56
+  },
+  "4096": {
+   "cast_f16_f32": 0.186,
+   "concept_logits": 0.541,
+   "block_scores": 0.677,
+   "select_blocks": 0.944,
+   "masked_probs": 0.345,
+   "pipeline": 2.205,
+   "pipeline_x24": 52.92
+  },
+  "8192": {
+   "cast_f16_f32": 0.369,
+   "concept_logits": 1.272,
+   "block_scores": 0.674,
+   "select_blocks": 0.839,
+   "masked_probs": 0.27,
+   "pipeline": 2.248,
+   "pipeline_x24": 53.964
+  }
+ },
+ "real_buckets": {
+  "1024": {
+   "router_ms": 12.906,
+   "kernel_ms": 4.31,
+   "coarse_ms": 19.508
+  },
+  "4096": {
+   "router_ms": 22.874,
+   "kernel_ms": 27.095,
+   "coarse_ms": 55.692
+  },
+  "8192": {
+   "router_ms": 42.17,
+   "kernel_ms": 98.039,
+   "coarse_ms": 106.764
+  }
+ }
+}

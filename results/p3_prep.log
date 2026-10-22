@@ -1,0 +1,35 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[data] train=2119719 valid=21990 hikaye
+[tok] egitim icin 300000 hikaye
+
+
+
+[tok] bitti (21s) vocab=8192
+[tok] kaydedildi: C:\Users\biris\Desktop\opencode\ai gelistir\data\ts_bpe8k.json
+  [train] 4000/2119719 hikaye | 0s
+  [train] 104000/2119719 hikaye | 9s
+  [train] 204000/2119719 hikaye | 16s
+  [train] 304000/2119719 hikaye | 23s
+  [train] 404000/2119719 hikaye | 31s
+  [train] 504000/2119719 hikaye | 39s
+  [train] 604000/2119719 hikaye | 47s
+  [train] 704000/2119719 hikaye | 54s
+  [train] 804000/2119719 hikaye | 62s
+  [train] 904000/2119719 hikaye | 70s
+  [train] 1004000/2119719 hikaye | 77s
+  [train] 1104000/2119719 hikaye | 84s
+  [train] 1204000/2119719 hikaye | 92s
+  [train] 1304000/2119719 hikaye | 99s
+  [train] 1404000/2119719 hikaye | 108s
+  [train] 1504000/2119719 hikaye | 116s
+  [train] 1604000/2119719 hikaye | 125s
+  [train] 1704000/2119719 hikaye | 133s
+  [train] 1804000/2119719 hikaye | 141s
+  [train] 1904000/2119719 hikaye | 150s
+  [train] 2004000/2119719 hikaye | 158s
+  [train] 2104000/2119719 hikaye | 166s
+  [train] bitti: 466759153 token | 1902.9M byte | 4.08 byte/token | 168s
+  [valid] 4000/21990 hikaye | 0s
+  [valid] bitti: 4691305 token | 19.2M byte | 4.10 byte/token | 2s
+[ok] ts_train.pt=466759153 tok | ts_valid.pt=4691305 tok
+[roundtrip] Spot. Spot saw the shiny car and said, "Wow, Kitty, your car is so bright and clean!" Kitty smiled and replied, "Thank you, Spot. I polish it every day."  After playing with the car, Kitty and Spot fe

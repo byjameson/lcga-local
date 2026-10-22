@@ -1,0 +1,49 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[data] train=1000000 hikaye (ilk) | valid=3000 hikaye
+[arm] ctrl8k <- ts_bpe8k.json (vocab=8192)
+  [ctrl8k_train] 4000/1000000 hikaye | 0s
+  [ctrl8k_train] 204000/1000000 hikaye | 15s
+  [ctrl8k_train] 404000/1000000 hikaye | 30s
+  [ctrl8k_train] 604000/1000000 hikaye | 46s
+  [ctrl8k_train] 804000/1000000 hikaye | 61s
+  [ctrl8k_train] bitti: 221093014 token | 900.88M byte | 4.075 byte/token | 77s
+  [ctrl8k_valid] 3000/3000 hikaye | 0s
+  [ctrl8k_valid] bitti: 602715 token | 2.49M byte | 4.137 byte/token | 0s
+[ok] ctrl8k kaydedildi
+[arm] wb16k <- tok2\bpe_wb_16k.json (vocab=16384)
+  [wb16k_train] 4000/1000000 hikaye | 0s
+  [wb16k_train] 204000/1000000 hikaye | 18s
+  [wb16k_train] 404000/1000000 hikaye | 36s
+  [wb16k_train] 604000/1000000 hikaye | 54s
+  [wb16k_train] 804000/1000000 hikaye | 69s
+  [wb16k_train] bitti: 219375754 token | 900.88M byte | 4.107 byte/token | 85s
+  [wb16k_valid] 3000/3000 hikaye | 0s
+  [wb16k_valid] bitti: 597635 token | 2.49M byte | 4.172 byte/token | 0s
+[ok] wb16k kaydedildi
+[arm] sw8k <- tok2\bpe_sw_8k.json (vocab=8192)
+  [sw8k_train] 4000/1000000 hikaye | 0s
+  [sw8k_train] 204000/1000000 hikaye | 13s
+  [sw8k_train] 404000/1000000 hikaye | 26s
+  [sw8k_train] 604000/1000000 hikaye | 38s
+  [sw8k_train] 804000/1000000 hikaye | 50s
+  [sw8k_train] bitti: 144520003 token | 900.88M byte | 6.234 byte/token | 63s
+  [sw8k_valid] 3000/3000 hikaye | 0s
+  [sw8k_valid] bitti: 396690 token | 2.49M byte | 6.286 byte/token | 0s
+[ok] sw8k kaydedildi
+[arm] sw16k <- tok2\bpe_sw_16k.json (vocab=16384)
+  [sw16k_train] 4000/1000000 hikaye | 0s
+  [sw16k_train] 204000/1000000 hikaye | 10s
+  [sw16k_train] 404000/1000000 hikaye | 21s
+  [sw16k_train] 604000/1000000 hikaye | 34s
+  [sw16k_train] 804000/1000000 hikaye | 46s
+  [sw16k_train] bitti: 122729085 token | 900.88M byte | 7.340 byte/token | 60s
+  [sw16k_valid] 3000/3000 hikaye | 0s
+  [sw16k_valid] bitti: 336613 token | 2.49M byte | 7.408 byte/token | 0s
+[ok] sw16k kaydedildi
+
+== TOK2 VERI OZETI ==
+kol       vocab   train_tok train B/t valid B/t step_kap
+ctrl8k     8192   221093014     4.075     4.137     8996
+wb16k     16384   219375754     4.107     4.172     8926
+sw8k       8192   144520003     6.234     6.286     5880
+sw16k     16384   122729085     7.340     7.408     4993

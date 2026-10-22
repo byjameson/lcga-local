@@ -1,0 +1,36 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[data] tok egitimi: 300000 hikaye | valid olcum: 3000 hikaye
+
+
+
+[tok] bpe_wb_4k: egitim 30s | 3.99 byte/tok | enc 16.3 MB/s
+
+
+
+[tok] bpe_wb_8k: egitim 29s | 4.16 byte/tok | enc 16.5 MB/s
+
+
+
+[tok] bpe_wb_16k: egitim 29s | 4.19 byte/tok | enc 15.9 MB/s
+
+
+
+[tok] bpe_sw_4k: egitim 798s | 5.26 byte/tok | enc 6.3 MB/s
+
+
+
+[tok] bpe_sw_8k: egitim 1159s | 6.33 byte/tok | enc 5.3 MB/s
+
+
+
+[tok] bpe_sw_16k: egitim 1457s | 7.47 byte/tok | enc 4.8 MB/s
+
+== TABLO (held-out valid, 3000 hikaye) ==
+isim                  vocab  byte/tok  tok/byte  enc MB/s  rt
+p3_bpe8k_kontrol       8192     4.158    0.2405      14.7  ok
+bpe_wb_4k              4096     3.988    0.2507      16.3  ok
+bpe_wb_8k              8192     4.158    0.2405      16.5  ok
+bpe_wb_16k            16384     4.193    0.2385      15.9  ok
+bpe_sw_4k              4096     5.258    0.1902       6.3  ok
+bpe_sw_8k              8192     6.334    0.1579       5.3  ok
+bpe_sw_16k            16384     7.474    0.1338       4.8  ok

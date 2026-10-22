@@ -1,0 +1,32 @@
+﻿{"corpus": "data\\rag\\world_facts.jsonl", "bytes": 4793376, "docs": 326, "index_s": 1.55, "missing_key_titles": []}
+{"set": "covered", "id": "tr-eg", "q": "M\u0131s\u0131r'\u0131n ba\u015fkenti neresi?", "rag": true, "expected_in_ctx": true, "sources": ["M\u0131s\u0131r", "Kahire"], "top": ["M\u0131s\u0131r", "Afrika", "Nil"], "ctx_chars": 595}
+{"set": "covered", "id": "tr-tr", "q": "T\u00fcrkiye'nin ba\u015fkenti neresi?", "rag": true, "expected_in_ctx": true, "sources": ["T\u00fcrkiye", "Ankara"], "top": ["T\u00fcrkiye", "Ankara", "K\u00e2bil"], "ctx_chars": 580}
+{"set": "covered", "id": "tr-fr", "q": "Fransa'n\u0131n ba\u015fkenti neresi?", "rag": true, "expected_in_ctx": true, "sources": ["Paris", "Fransa"], "top": ["Fransa", "Bel\u00e7ika", "Paris"], "ctx_chars": 568}
+{"set": "covered", "id": "tr-jp", "q": "Japonya'n\u0131n ba\u015fkenti neresi?", "rag": true, "expected_in_ctx": true, "sources": ["Tokyo", "Pekin"], "top": ["Japonya", "Tokyo", "II. D\u00fcnya Sava\u015f\u0131"], "ctx_chars": 688}
+{"set": "covered", "id": "tr-au", "q": "Avustralya'n\u0131n ba\u015fkenti neresi?", "rag": true, "expected_in_ctx": true, "sources": ["Avustralya", "Canberra"], "top": ["Avustralya", "Canberra", "Ottawa"], "ctx_chars": 661}
+{"set": "covered", "id": "tr-de", "q": "Almanya'n\u0131n ba\u015fkenti neresi?", "rag": true, "expected_in_ctx": true, "sources": ["Berlin", "Almanya"], "top": ["Almanya", "Berlin", "Bel\u00e7ika"], "ctx_chars": 539}
+{"set": "covered", "id": "tr-ca", "q": "Kanada'n\u0131n ba\u015fkenti neresi?", "rag": true, "expected_in_ctx": true, "sources": ["Kanada", "Ottawa"], "top": ["Kanada", "Ottawa", "Amerika Birle\u015fik Devletleri"], "ctx_chars": 470}
+{"set": "covered", "id": "tr-it", "q": "\u0130talya'n\u0131n ba\u015fkenti neresi?", "rag": true, "expected_in_ctx": true, "sources": ["\u0130talya", "Roma"], "top": ["\u0130talya", "Roma", "II. D\u00fcnya Sava\u015f\u0131"], "ctx_chars": 605}
+{"set": "covered", "id": "tr-ocean", "q": "D\u00fcnyan\u0131n en b\u00fcy\u00fck okyanusu hangisi?", "rag": true, "expected_in_ctx": true, "sources": ["B\u00fcy\u00fck Okyanus", "Atlas Okyanusu"], "top": ["B\u00fcy\u00fck Okyanus", "Okyanus", "Atlas Okyanusu"], "ctx_chars": 592}
+{"set": "covered", "id": "tr-au-sym", "q": "Alt\u0131n\u0131n kimyasal sembol\u00fc nedir?", "rag": true, "expected_in_ctx": true, "sources": ["Alt\u0131n", "Alt\u0131n oran"], "top": ["Alt\u0131n", "Alt\u0131n oran", "C\u0131va"], "ctx_chars": 497}
+{"set": "covered", "id": "tr-water", "q": "Su ka\u00e7 derecede kaynar?", "rag": true, "expected_in_ctx": true, "sources": ["Kur\u015fun", "Su"], "top": ["Su", "Kur\u015fun", "Kalsiyum"], "ctx_chars": 453}
+{"set": "covered", "id": "tr-heart", "q": "\u0130nsan kalbinde ka\u00e7 odac\u0131k vard\u0131r?", "rag": true, "expected_in_ctx": true, "sources": ["Kalp", "K\u00f6pek"], "top": ["Kalp", "Amsterdam", "Mavi balina"], "ctx_chars": 473}
+{"set": "covered", "id": "en-eg", "q": "What is the capital of Egypt?", "rag": true, "expected_in_ctx": true, "sources": ["Egypt", "Cairo"], "top": ["Egypt", "Cairo", "Nile"], "ctx_chars": 525}
+{"set": "covered", "id": "en-au", "q": "What is the capital of Australia?", "rag": true, "expected_in_ctx": true, "sources": ["Canberra", "Australia"], "top": ["Australia", "Canberra", "Avustralya"], "ctx_chars": 622}
+{"set": "covered", "id": "en-ca", "q": "What is the capital of Canada?", "rag": true, "expected_in_ctx": true, "sources": ["Ottawa", "Canada"], "top": ["Canada", "Ottawa", "North America"], "ctx_chars": 504}
+{"set": "covered", "id": "en-gold", "q": "What is the chemical symbol for gold?", "rag": true, "expected_in_ctx": true, "sources": ["Gold", "Potassium"], "top": ["Gold", "Mercury (element)", "Potassium"], "ctx_chars": 551}
+{"set": "covered", "id": "en-water", "q": "At what temperature does water boil?", "rag": true, "expected_in_ctx": true, "sources": ["Water", "Boiling point"], "top": ["Water", "Boiling point", "Calcium"], "ctx_chars": 706}
+{"set": "covered", "id": "en-heart", "q": "How many chambers does the human heart have?", "rag": true, "expected_in_ctx": true, "sources": ["Heart", "Human body"], "top": ["Heart", "Human body", "Dolphin"], "ctx_chars": 722}
+{"set": "covered", "id": "en-ocean", "q": "What is the largest ocean?", "rag": true, "expected_in_ctx": true, "sources": ["Pacific Ocean", "Arctic Ocean"], "top": ["Indian Ocean", "Arctic Ocean", "Pacific Ocean"], "ctx_chars": 556}
+{"set": "covered", "id": "en-planet", "q": "What is the largest planet?", "rag": true, "expected_in_ctx": true, "sources": ["Mercury (planet)", "Jupiter"], "top": ["Mercury (planet)", "Jupiter", "Moon"], "ctx_chars": 573}
+{"set": "control", "id": "ctl-greet", "q": "Merhaba, nas\u0131ls\u0131n?", "rag": false, "sources": [], "top": [], "ctx_chars": 0}
+{"set": "control", "id": "ctl-blue", "q": "Sadece 'mavi' yaz.", "rag": false, "sources": [], "top": ["Nept\u00fcn", "Danimarka", "Oksijen"], "ctx_chars": 0}
+{"set": "control", "id": "ctl-math", "q": "2 + 2 ka\u00e7 eder?", "rag": false, "sources": [], "top": ["Pythagorean theorem", "Pisagor teoremi", "Prime number"], "ctx_chars": 0}
+{"set": "control", "id": "ctl-list", "q": "\u00dc\u00e7 meyve listele.", "rag": false, "sources": [], "top": ["Kalsiyum", "Ar\u0131", "Potasyum"], "ctx_chars": 0}
+{"set": "control", "id": "ctl-code", "q": "\u0130ki say\u0131y\u0131 toplayan bir Python fonksiyonu yaz.", "rag": false, "sources": [], "top": ["Washington, DC"], "ctx_chars": 0}
+{"set": "control", "id": "ctl-joke", "q": "Bana k\u0131sa bir \u015faka yap.", "rag": false, "sources": [], "top": ["Azerbaycan", "Asya"], "ctx_chars": 0}
+{"set": "control", "id": "ctl-birthday", "q": "Bir arkada\u015f\u0131ma do\u011fum g\u00fcn\u00fc mesaj\u0131 yaz.", "rag": false, "sources": [], "top": ["Mustafa Kemal Atat\u00fcrk"], "ctx_chars": 0}
+{"set": "control", "id": "ctl-motivation", "q": "Bana k\u0131sa bir motivasyon s\u00f6z\u00fc yaz.", "rag": false, "sources": [], "top": [], "ctx_chars": 0}
+{"set": "control", "id": "ctl-narnia", "q": "Narnia'n\u0131n ba\u015fkenti neresi?", "rag": false, "sources": [], "top": [], "ctx_chars": 0}
+{"set": "control", "id": "ctl-narnia-en", "q": "What is the capital of Narnia?", "rag": false, "sources": [], "top": [], "ctx_chars": 0}
+{"covered_with_context": "20/20", "covered_expected_in_context": "20/20", "controls_without_rag": "10/10"}

@@ -1,0 +1,98 @@
+{
+  "exp": "exp39_list_format_probe",
+  "tag": "exp39_summary",
+  "instruction": "Cevabi tam olarak 3 satir halinde ver. Her satir '1. ', '2. ', '3. ' ile baslasin. Baska aciklama ekleme.",
+  "n": 11,
+  "list_hit": 1.0,
+  "avg_gen_s": 5.515,
+  "rows": [
+    {
+      "set": "exp26",
+      "prompt": "Uc meyve listele.",
+      "text": "1. Elma\n2. Muz\n3. Kiraz",
+      "gen_s": 4.862,
+      "list_hit": true,
+      "keyword_hit": null
+    },
+    {
+      "set": "exp26",
+      "prompt": "List three animals.",
+      "text": "1. Lion\n2. Elephant\n3. Giraffe",
+      "gen_s": 3.732,
+      "list_hit": true,
+      "keyword_hit": null
+    },
+    {
+      "set": "exp26",
+      "prompt": "Uc renk listele.",
+      "text": "1. Kırmızı\n2. Mavi\n3. Yeşil",
+      "gen_s": 5.186,
+      "list_hit": true,
+      "keyword_hit": null
+    },
+    {
+      "set": "exp26",
+      "prompt": "List three programming languages.",
+      "text": "1. Python\n2. Java\n3. JavaScript",
+      "gen_s": 3.484,
+      "list_hit": true,
+      "keyword_hit": null
+    },
+    {
+      "set": "exp26",
+      "prompt": "Uc ulke listele.",
+      "text": "1. Almanya\n2. Fransa\n3. İngiltere",
+      "gen_s": 5.459,
+      "list_hit": true,
+      "keyword_hit": null
+    },
+    {
+      "set": "exp26",
+      "prompt": "List three days of the week.",
+      "text": "1. Monday\n2. Tuesday\n3. Wednesday",
+      "gen_s": 3.81,
+      "list_hit": true,
+      "keyword_hit": null
+    },
+    {
+      "set": "holdout",
+      "prompt": "Uc hayvan listele.",
+      "text": "1. Hayvan: Kus\n2. Hayvan: Kedi\n3. Hayvan: Kopek",
+      "gen_s": 7.252,
+      "list_hit": true,
+      "keyword_hit": null
+    },
+    {
+      "set": "holdout",
+      "prompt": "List three fruits.",
+      "text": "1. 1. Banana\n2. 2. Apple\n3. 3. Orange",
+      "gen_s": 6.055,
+      "list_hit": true,
+      "keyword_hit": null
+    },
+    {
+      "set": "holdout",
+      "prompt": "Uc meslek listele.",
+      "text": "1. 1. Mühendis\n2. 2. Sanatçı\n3. 3. Öğretmen",
+      "gen_s": 8.539,
+      "list_hit": true,
+      "keyword_hit": null
+    },
+    {
+      "set": "holdout",
+      "prompt": "List three European countries.",
+      "text": "1. Germany\n2. France\n3. Italy",
+      "gen_s": 3.549,
+      "list_hit": true,
+      "keyword_hit": null
+    },
+    {
+      "set": "holdout",
+      "prompt": "Uc sebze listele.",
+      "text": "1. Sebze: Zeytin\n2. Sebze: Mısır\n3. Sebze: Domates",
+      "gen_s": 8.736,
+      "list_hit": true,
+      "keyword_hit": null
+    }
+  ]
+}

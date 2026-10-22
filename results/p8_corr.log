@@ -1,0 +1,12 @@
+[corr] data=466759153 tok (ts_train.pt) device=cuda
+[corr] N=18 birim | params=17308032 eps=0.001
+  [corr] batch 1/6 (8.2s)
+  [corr] batch 2/6 (16.2s)
+  [corr] batch 3/6 (24.3s)
+  [corr] batch 4/6 (32.3s)
+  [corr] batch 5/6 (40.3s)
+  [corr] batch 6/6 (48.4s)
+[corr] kesim skoru: related=21.1949 (frac0=0.591) | random=33.9842 (frac0=0.546)
+[corr] related: C0=['tok', 'L0.attn', 'L0.mlp', 'L1.attn', 'L2.attn', 'L3.attn', 'L4.attn', 'L5.attn', 'L6.attn', 'L7.attn', 'L7.mlp', 'norm'] | C1=['L1.mlp', 'L2.mlp', 'L3.mlp', 'L4.mlp', 'L5.mlp', 'L6.mlp']
+[corr] random: C0=['L0.mlp', 'L1.attn', 'L1.mlp', 'L2.mlp', 'L3.attn', 'L4.attn', 'L4.mlp', 'L5.attn', 'L6.attn', 'L6.mlp', 'L7.attn', 'norm'] | C1=['tok', 'L0.attn', 'L2.attn', 'L3.mlp', 'L5.mlp', 'L7.mlp']
+[corr] -> results\p8_clusters.npz

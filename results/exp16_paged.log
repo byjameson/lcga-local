@@ -1,0 +1,55 @@
+{"tag": "m1_parity", "model": "Qwen2.5-0.5B", "device": "cuda", "dtype": "float32", "layers": 24, "resident_k": 24, "streamed_layers": 0, "layer_mb": 28.4, "embed_mb": 259.7, "prompt_tokens": 5, "new_tokens": 8, "prefill_s": 0.032, "decode_s": 0.559, "tok_s": 14.31, "wall_s": 0.64, "load_s": 0.81, "streamed_mb_per_pass": 0.0, "streamed_mb_total": 0.0, "streamed_gb_per_token": 0.0, "pin": false, "temperature": 0.0, "seed": 1234, "peak_alloc_mb": 1897.0, "peak_reserved_mb": 2024.0, "free_mb_after": 3115.0, "parity": {"model": "Qwen2.5-0.5B", "max_abs_diff": 3.260374069213867e-05, "mean_abs_diff": 4.158747287874576e-06, "argmax_match": 1.0, "ref_shape": [1, 5, 151936]}}
+PROMPT: The capital of France is
+TEXT: The capital of France is Paris. It is the largest city in
+
+{"tag": "m1_3b_paged", "model": "Qwen2.5-3B", "device": "cuda", "dtype": "bf16", "layers": 36, "resident_k": 26, "streamed_layers": 10, "layer_mb": 147.0, "embed_mb": 593.5, "prompt_tokens": 5, "new_tokens": 17, "prefill_s": 0.907, "decode_s": 6.18, "tok_s": 2.75, "wall_s": 7.09, "load_s": 3.77, "streamed_mb_per_pass": 1470.0, "streamed_mb_total": 24992.0, "streamed_gb_per_token": 1.436, "pin": true, "temperature": 0.7, "seed": 1234, "peak_alloc_mb": 4659.0, "peak_reserved_mb": 4778.0, "free_mb_after": 355.0, "parity": null}
+PROMPT: The capital of France is
+TEXT: The capital of France is Paris. What is the capital of Germany?
+The capital of Germany is Berlin.
+
+{"tag": "m1_3b_k20", "model": "Qwen2.5-3B", "device": "cuda", "dtype": "bf16", "layers": 36, "resident_k": 20, "streamed_layers": 16, "layer_mb": 147.0, "embed_mb": 593.5, "prompt_tokens": 5, "new_tokens": 16, "prefill_s": 1.033, "decode_s": 8.07, "tok_s": 1.98, "wall_s": 9.11, "load_s": 3.63, "streamed_mb_per_pass": 2352.0, "streamed_mb_total": 39987.0, "streamed_gb_per_token": 2.297, "pin": true, "temperature": 0.7, "seed": 1234, "peak_alloc_mb": 3759.0, "peak_reserved_mb": 3854.0, "free_mb_after": 1279.0, "parity": null}
+PROMPT: The capital of France is
+TEXT: The capital of France is Paris. What is the capital of Germany?
+The capital of Germany is Berlin.
+
+{"tag": "m1_3b_k14", "model": "Qwen2.5-3B", "device": "cuda", "dtype": "bf16", "layers": 36, "resident_k": 14, "streamed_layers": 22, "layer_mb": 147.0, "embed_mb": 593.5, "prompt_tokens": 5, "new_tokens": 16, "prefill_s": 1.169, "decode_s": 10.173, "tok_s": 1.57, "wall_s": 11.35, "load_s": 3.36, "streamed_mb_per_pass": 3234.0, "streamed_mb_total": 54983.0, "streamed_gb_per_token": 3.158, "pin": true, "temperature": 0.7, "seed": 1234, "peak_alloc_mb": 2859.0, "peak_reserved_mb": 2930.0, "free_mb_after": 2203.0, "parity": null}
+PROMPT: The capital of France is
+TEXT: The capital of France is Paris. What is the capital of Germany?
+The capital of Germany is Berlin.
+
+{"tag": "m1_3b_cpu", "model": "Qwen2.5-3B", "device": "cpu", "dtype": "bf16", "layers": 36, "resident_k": 36, "streamed_layers": 0, "layer_mb": 147.0, "embed_mb": 593.5, "prompt_tokens": 5, "new_tokens": 8, "prefill_s": 1.292, "decode_s": 2.654, "tok_s": 3.01, "wall_s": 3.95, "load_s": 0.03, "streamed_mb_per_pass": 0.0, "streamed_mb_total": 0.0, "streamed_gb_per_token": 0.0, "pin": false, "temperature": 0.7, "seed": 1234, "peak_alloc_mb": 0, "peak_reserved_mb": 0, "free_mb_after": 0, "parity": null}
+PROMPT: The capital of France is
+TEXT: The capital of France is Paris. It is the country's most
+
+{"tag": "m1_3b_copybench", "model": "Qwen2.5-3B", "device": "cuda", "dtype": "bf16", "layers": 36, "resident_k": 26, "streamed_layers": 10, "layer_mb": 147.0, "embed_mb": 593.5, "prompt_tokens": 5, "new_tokens": 1, "prefill_s": 0.847, "decode_s": 0.15, "tok_s": 6.66, "wall_s": 1.0, "load_s": 3.79, "streamed_mb_per_pass": 1470.0, "streamed_mb_total": 10291.0, "streamed_gb_per_token": 1.436, "pin": true, "temperature": 0.0, "seed": 1234, "peak_alloc_mb": 4654.0, "peak_reserved_mb": 4774.0, "free_mb_after": 359.0, "parity": null}
+PROMPT: The capital of France is
+TEXT: The capital of France is Paris
+
+{"tag": "m1_3b_int8", "model": "Qwen2.5-3B", "device": "cuda", "dtype": "bf16", "quant": "int8", "quant_err_max": 0.003937020207082988, "layers": 36, "resident_k": 26, "streamed_layers": 10, "layer_mb": 147.0, "embed_mb": 593.5, "prompt_tokens": 5, "new_tokens": 16, "prefill_s": 0.547, "decode_s": 3.827, "tok_s": 4.18, "wall_s": 4.38, "load_s": 5.49, "streamed_mb_per_pass": 735.0, "streamed_mb_total": 12497.0, "streamed_gb_per_token": 0.718, "pin": true, "temperature": 0.7, "seed": 1234, "peak_alloc_mb": 4735.0, "peak_reserved_mb": 4846.0, "free_mb_after": 287.0, "parity": null}
+PROMPT: The capital of France is
+TEXT: The capital of France is Paris. What is the capital of Germany?
+The capital of Germany is Berlin.
+
+{"tag": "m1_3b_int4", "model": "Qwen2.5-3B", "device": "cuda", "dtype": "bf16", "quant": "int4", "quant_err_max": 0.07142858567580677, "layers": 36, "resident_k": 26, "streamed_layers": 10, "layer_mb": 147.0, "embed_mb": 593.5, "prompt_tokens": 5, "new_tokens": 16, "prefill_s": 0.907, "decode_s": 4.565, "tok_s": 3.5, "wall_s": 5.48, "load_s": 7.65, "streamed_mb_per_pass": 391.0, "streamed_mb_total": 6640.0, "streamed_gb_per_token": 0.381, "pin": true, "temperature": 0.7, "seed": 1234, "peak_alloc_mb": 4724.0, "peak_reserved_mb": 4840.0, "free_mb_after": 293.0, "parity": null}
+PROMPT: The capital of France is
+TEXT: The capital of France is Paris. What is the name of the capital of England?
+What is the answer
+
+{"tag": "m1_cpu_regress", "model": "Qwen2.5-0.5B", "device": "cpu", "dtype": "float32", "state_dict": null, "quant": "none", "quant_err_max": 0.0, "layers": 24, "resident_k": 24, "streamed_layers": 0, "layer_mb": 28.4, "embed_mb": 259.7, "prompt_tokens": 5, "new_tokens": 2, "prefill_s": 0.165, "decode_s": 0.275, "tok_s": 7.27, "wall_s": 0.45, "load_s": 0.79, "streamed_mb_per_pass": 0.0, "streamed_mb_total": 0.0, "streamed_gb_per_token": 0.0, "pin": false, "temperature": 0.0, "seed": 1234, "peak_alloc_mb": 0, "peak_reserved_mb": 0, "free_mb_after": 0, "parity": null}
+PROMPT: The capital of France is
+TEXT: The capital of France is Paris.
+
+{"tag": "m5_ckpt_gen_int8", "model": "Qwen2.5-3B", "device": "cuda", "dtype": "bf16", "state_dict": "checkpoints/qwen3b_full_sgd_t100.pt", "quant": "int8", "quant_err_max": 0.003937020207082988, "layers": 36, "resident_k": 26, "streamed_layers": 10, "layer_mb": 147.0, "embed_mb": 593.5, "prompt_tokens": 5, "new_tokens": 17, "prefill_s": 0.877, "decode_s": 4.473, "tok_s": 3.8, "wall_s": 5.36, "load_s": 7.26, "streamed_mb_per_pass": 736.0, "streamed_mb_total": 12506.0, "streamed_gb_per_token": 0.718, "pin": true, "temperature": 0.7, "seed": 1234, "peak_alloc_mb": 4735.0, "peak_reserved_mb": 4846.0, "free_mb_after": 287.0, "parity": null}
+PROMPT: The capital of France is
+TEXT: The capital of France is Paris. What is the capital of Germany?
+The capital of Germany is Berlin.
+
+{"tag": "m5_ckpt_gen_clean_int8", "model": "Qwen2.5-3B", "device": "cuda", "dtype": "bf16", "state_dict": "checkpoints/qwen3b_full_sgd_t150_clean.pt", "quant": "int8", "quant_err_max": 0.003937020207082988, "layers": 36, "resident_k": 26, "streamed_layers": 10, "layer_mb": 147.0, "embed_mb": 593.5, "prompt_tokens": 5, "new_tokens": 17, "prefill_s": 0.813, "decode_s": 4.323, "tok_s": 3.93, "wall_s": 5.14, "load_s": 5.74, "streamed_mb_per_pass": 736.0, "streamed_mb_total": 12506.0, "streamed_gb_per_token": 0.718, "pin": true, "temperature": 0.7, "seed": 1234, "peak_alloc_mb": 4735.0, "peak_reserved_mb": 4846.0, "free_mb_after": 287.0, "parity": null, "sample": "The capital of France is Paris. What is the capital of Germany? The capital of Germany is Berlin."}
+PROMPT: The capital of France is
+TEXT: The capital of France is Paris. What is the capital of Germany?
+The capital of Germany is Berlin.
+
+{"tag": "m5_ckpt_gen_adaf_int8", "model": "Qwen2.5-3B", "device": "cuda", "dtype": "bf16", "state_dict": "checkpoints/qwen3b_full_adaf_t150.pt", "quant": "int8", "quant_err_max": 0.003937020207082988, "layers": 36, "resident_k": 26, "streamed_layers": 10, "layer_mb": 147.0, "embed_mb": 593.5, "prompt_tokens": 5, "new_tokens": 32, "prefill_s": 0.772, "decode_s": 8.238, "tok_s": 3.88, "wall_s": 9.02, "load_s": 6.45, "streamed_mb_per_pass": 736.0, "streamed_mb_total": 24277.0, "streamed_gb_per_token": 0.718, "pin": true, "temperature": 0.7, "seed": 1234, "peak_alloc_mb": 4735.0, "peak_reserved_mb": 4846.0, "free_mb_after": 287.0, "parity": null, "sample": "The capital of France is Paris . Paris is the most visited city in the world , with 22 million tourists visiting in 2014 . The City of Light , \""}
+PROMPT: The capital of France is
+TEXT: The capital of France is Paris . Paris is the most visited city in the world , with 22 million tourists visiting in 2014 . The City of Light , "
+

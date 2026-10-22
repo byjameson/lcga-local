@@ -1,0 +1,132 @@
+{
+  "exp": "exp46_multiturn_4b",
+  "tag": "exp46",
+  "n": 5,
+  "short_cases_hit": "4/4",
+  "window_overflow_hit": false,
+  "cases": [
+    {
+      "case": "name",
+      "turns": [
+        {
+          "q": "Benim adim Ali.",
+          "a": "Merhaba Ali! Nasıl yardımcı olabilirim? 😊",
+          "gen_s": 4.543,
+          "load_s": 2.368
+        },
+        {
+          "q": "Benim adim ne? Sadece adi yaz.",
+          "a": "Ali",
+          "gen_s": 0.635,
+          "load_s": 0.0
+        }
+      ],
+      "hit": true
+    },
+    {
+      "case": "preference",
+      "turns": [
+        {
+          "q": "En sevdigim renk mavi.",
+          "a": "Harika! Mavi, çok güzel bir seçim. 🌌",
+          "gen_s": 4.617,
+          "load_s": 0.0
+        },
+        {
+          "q": "En sevdigim renk ne? Sadece rengi yaz.",
+          "a": "Mavi",
+          "gen_s": 0.946,
+          "load_s": 0.0
+        }
+      ],
+      "hit": true
+    },
+    {
+      "case": "topic",
+      "turns": [
+        {
+          "q": "Python'da liste nedir? Kisa acikla.",
+          "a": "Python'da liste, sıralı ve değiştirilebilir bir veri yapısıdır. Birden fazla elemanı (sayı, metin, başka liste vs.) aynı anda tutar. Örneğin:",
+          "gen_s": 14.914,
+          "load_s": 0.0
+        },
+        {
+          "q": "Az once ne hakkinda konusuyorduk? Tek cumle.",
+          "a": "Python'da liste, sıralı ve değiştirilebilir bir veri yapısıdır.",
+          "gen_s": 6.511,
+          "load_s": 0.0
+        }
+      ],
+      "hit": true
+    },
+    {
+      "case": "correction",
+      "turns": [
+        {
+          "q": "Benim adim Ali.",
+          "a": "Merhaba Ali! Nasıl yardımcı olabilirim? 😊",
+          "gen_s": 4.292,
+          "load_s": 0.0
+        },
+        {
+          "q": "Aslinda adim Veli.",
+          "a": "Ah, özür dilerim Ali, aslında Veli'sin! 😊 Nasıl yardımcı olabilirim?",
+          "gen_s": 7.985,
+          "load_s": 0.0
+        },
+        {
+          "q": "Benim adim ne? Sadece adi yaz.",
+          "a": "Veli",
+          "gen_s": 0.967,
+          "load_s": 0.0
+        }
+      ],
+      "hit": true
+    },
+    {
+      "case": "window_overflow",
+      "turns": [
+        {
+          "q": "En sevdigim sayi 4731.",
+          "a": "İlginç bir sayı! 4731, asal mı? Hayır, 4731 = 3 × 1577. 😊  \nAma sevdigin sayi olmasi",
+          "gen_s": 14.927,
+          "load_s": 0.0
+        },
+        {
+          "q": "Bir elma kac kalori?",
+          "a": "Bir elma (ortalama 150-200 gram) yaklaşık **95 kalori** içerir. 🍎",
+          "gen_s": 9.574,
+          "load_s": 0.0
+        },
+        {
+          "q": "Bir armut kac kalori?",
+          "a": "Bir armut (ortalama 150 gram) yaklaşık **95 kalori** içerir. 🍎",
+          "gen_s": 8.515,
+          "load_s": 0.0
+        },
+        {
+          "q": "Bir muz kac kalori?",
+          "a": "Bir muz (ortalama 150 gram) yaklaşık **60-70 kalori** içerir. 🍌",
+          "gen_s": 9.504,
+          "load_s": 0.0
+        },
+        {
+          "q": "Bir portakal kac kalori?",
+          "a": "Bir portakal (ortalama 150 gram) yaklaşık **60 kalori** içerir. 🍊",
+          "gen_s": 8.932,
+          "load_s": 0.0
+        },
+        {
+          "q": "En sevdigim sayi kac? Sadece sayiyi yaz.",
+          "a": "7",
+          "gen_s": 0.818,
+          "load_s": 0.0
+        }
+      ],
+      "hit": false,
+      "expected": "failure (first fact is outside the 8-message window)"
+    }
+  ],
+  "note": "short name/preference/topic/correction probes; the last case intentionally drops the first fact; not a general memory benchmark",
+  "ts": "2026-10-21 10:51:49"
+}

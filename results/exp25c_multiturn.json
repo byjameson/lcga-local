@@ -1,0 +1,146 @@
+{
+  "variants": [
+    {
+      "label": "base",
+      "system": "Sen yardimci bir asistansin. Kullanicinin dilinde, kisa ve dogru cevap ver.",
+      "rows": [
+        {
+          "scenario": "isim",
+          "fact": "Benim adim Ali.",
+          "question": "Benim adim ne?",
+          "first_answer": "Merhaba Ali! Ben sizinle ilgili yardımcı olabilirim. Size nasıl yardımcı olabilirim?",
+          "second_answer": "Ben sizin adınız.",
+          "keyword_hit": false,
+          "gen_s": 0.648
+        },
+        {
+          "scenario": "kedi",
+          "fact": "Kedimin adi Pamuk.",
+          "question": "Kedimin adi ne?",
+          "first_answer": "Evet, kedim Pamuk'un adıdır.",
+          "second_answer": "Kedim Pamuk'un adıdır.",
+          "keyword_hit": true,
+          "gen_s": 0.668
+        },
+        {
+          "scenario": "renk",
+          "fact": "En sevdigim renk mavi.",
+          "question": "En sevdigim renk ne?",
+          "first_answer": "Evet, mavi çok güzel bir renktir. En sevdiğiniz renkte ne diye sorularınızı yanıtlamak için de yardımcı ol",
+          "second_answer": "En sevdiginiz renk miydi?",
+          "keyword_hit": false,
+          "gen_s": 0.915
+        },
+        {
+          "scenario": "hava",
+          "fact": "Bugun hava cok guzel.",
+          "question": "Bugun hava nasil?",
+          "first_answer": "Güzel! Hava güzel olurdu. Size nasıl yardımcı olabilirim?",
+          "second_answer": "Hava bugün güzel görünüyor.",
+          "keyword_hit": true,
+          "gen_s": 0.702
+        },
+        {
+          "scenario": "toplanti",
+          "fact": "Yarin sabah toplantim var.",
+          "question": "Yarin ne var?",
+          "first_answer": "Evet, Yari sabah toplantımı var. Size nasıl yardımcı olabilirim?",
+          "second_answer": "Üzgünüm, benim bilgilerim yok. Size nasıl yardımcı olabilirim?",
+          "keyword_hit": false,
+          "gen_s": 1.65
+        }
+      ],
+      "summary": {
+        "label": "base",
+        "n": 5,
+        "keyword_hit_rate": 0.4,
+        "avg_gen_s": 0.917,
+        "model": "Qwen2.5-1.5B-Instruct"
+      }
+    },
+    {
+      "label": "memory",
+      "system": "Sen yardimci bir asistansin. Kullanicinin dilinde, kisa ve dogru cevap ver. Kullanicinin onceki mesajlarindaki bilgileri hatirla ve soruldugunda dogru cevap ver.",
+      "rows": [
+        {
+          "scenario": "isim",
+          "fact": "Benim adim Ali.",
+          "question": "Benim adim ne?",
+          "first_answer": "Merhaba Ali! Ben sizinle iletişime geçiyorum. Size nasıl yardımcı olabilirim?",
+          "second_answer": "Ben sizin adınız.",
+          "keyword_hit": false,
+          "gen_s": 0.433
+        },
+        {
+          "scenario": "kedi",
+          "fact": "Kedimin adi Pamuk.",
+          "question": "Kedimin adi ne?",
+          "first_answer": "Pamuk, bir tür kedidir.",
+          "second_answer": "Kedimin adı Pamuk'dır.",
+          "keyword_hit": true,
+          "gen_s": 0.639
+        },
+        {
+          "scenario": "renk",
+          "fact": "En sevdigim renk mavi.",
+          "question": "En sevdigim renk ne?",
+          "first_answer": "Mavi, en sevdiğiniz renktir.",
+          "second_answer": "Sevgilinizle beraber düşünmek için bu konuda yardımcı olmak isterim.",
+          "keyword_hit": false,
+          "gen_s": 1.403
+        },
+        {
+          "scenario": "hava",
+          "fact": "Bugun hava cok guzel.",
+          "question": "Bugun hava nasil?",
+          "first_answer": "Güzel! Hava nasıl?",
+          "second_answer": "Hava çok güzel görünüyor.",
+          "keyword_hit": true,
+          "gen_s": 0.465
+        },
+        {
+          "scenario": "toplanti",
+          "fact": "Yarin sabah toplantim var.",
+          "question": "Yarin ne var?",
+          "first_answer": "Tabii, Yari! Hangi konuda toplantı oluyor?",
+          "second_answer": "Üzgünüm, ben seninle beraber değilim. Size yardımcı olabilmem için lütfen daha fazla bilgiye ihtiy",
+          "keyword_hit": false,
+          "gen_s": 1.875
+        }
+      ],
+      "summary": {
+        "label": "memory",
+        "n": 5,
+        "keyword_hit_rate": 0.4,
+        "avg_gen_s": 0.963,
+        "model": "Qwen2.5-1.5B-Instruct"
+      }
+    }
+  ],
+  "summary": {
+    "exp": "exp25c_multiturn_probe",
+    "tag": "exp25c_summary",
+    "model": "Qwen2.5-1.5B-Instruct",
+    "n": 5,
+    "max_new_tokens": 32,
+    "load_s": 4.9,
+    "peak_vram_mb": 2964.0,
+    "variants": {
+      "base": {
+        "label": "base",
+        "n": 5,
+        "keyword_hit_rate": 0.4,
+        "avg_gen_s": 0.917,
+        "model": "Qwen2.5-1.5B-Instruct"
+      },
+      "memory": {
+        "label": "memory",
+        "n": 5,
+        "keyword_hit_rate": 0.4,
+        "avg_gen_s": 0.963,
+        "model": "Qwen2.5-1.5B-Instruct"
+      }
+    },
+    "ts": "2026-10-20 16:38:22"
+  }
+}

@@ -1,0 +1,21 @@
+[data] train=10951562 valid=1148007 test=1292013 bytes
+[p2/flat] params=4.94M cfg={'arch': 'flat', 'W': 512, 'dim': 256, 'layers': 6, 'heads': 8}
+  [flat @0] valid_bpb=8.1059
+  [flat @1000] valid_bpb=2.3648
+  [flat @2000] valid_bpb=2.0016
+  [flat @3000] valid_bpb=1.8498
+  [flat @4000] valid_bpb=1.7948
+  [flat @5000] valid_bpb=1.7413
+  [flat @6000] valid_bpb=1.7237
+  [flat @7000] valid_bpb=1.6995
+  [flat @8000] valid_bpb=1.6834
+  [flat @9000] valid_bpb=1.6674
+  [flat @10000] valid_bpb=1.6628
+  [flat @11000] valid_bpb=1.6582
+  [flat @12000] valid_bpb=1.6607
+  [flat] best_valid_bpb=1.6582 test_bpb=1.6452 step_med=16.5ms
+  [flat] sample (1.5s for 240B):
+    \n Israel points have been divided on all times that land and white speaks at the chapters and became safe an insect . In a way in response to the same as a hybrid , and they were again as a hungry version as a rare established to form a hou
+  [flat] ckpt -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p2_flat.pt
+[p2/flat] done in 49.7 min
+

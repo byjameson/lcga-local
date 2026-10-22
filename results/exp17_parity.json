@@ -1,0 +1,42 @@
+{
+  "exp": "exp17_full_parity",
+  "tag": "full05_parity_fixed",
+  "model": "Qwen2.5-0.5B",
+  "seq": 256,
+  "loss_stream": 2.649752,
+  "loss_naive": 2.649752,
+  "loss_abs_diff": 2.384185791015625e-07,
+  "stream_peak_gb": 1.271,
+  "grads": [
+    {
+      "name": "model.embed_tokens.weight",
+      "max_abs_diff": 0.015625,
+      "rel_rmse": 0.00686436138242929,
+      "cosine": 1.000378966331482
+    },
+    {
+      "name": "model.layers.0.self_attn.q_proj.weight",
+      "max_abs_diff": 0.0006103515625,
+      "rel_rmse": 0.02261815102087111,
+      "cosine": 0.9998570680618286
+    },
+    {
+      "name": "model.layers.0.mlp.down_proj.weight",
+      "max_abs_diff": 0.001708984375,
+      "rel_rmse": 0.021360015993035754,
+      "cosine": 0.9999390840530396
+    },
+    {
+      "name": "model.layers.23.mlp.down_proj.weight",
+      "max_abs_diff": 0.0009765625,
+      "rel_rmse": 0.0040897966303126585,
+      "cosine": 1.000957727432251
+    },
+    {
+      "name": "model.norm.weight",
+      "max_abs_diff": 6.103515625e-05,
+      "rel_rmse": 0.004775016642821599,
+      "cosine": 0.9999887943267822
+    }
+  ]
+}
