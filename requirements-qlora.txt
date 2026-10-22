@@ -1,0 +1,7 @@
+# Optional QLoRA path (experiments/exp49_qlora_3b.py).
+# Core streaming/attention tests do not need these packages.
+# Install after the main requirements:
+#   pip install -r requirements.txt
+#   pip install -r requirements-qlora.txt
+bitsandbytes==0.50.2
+peft==0.21.2
