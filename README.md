@@ -16,6 +16,8 @@ what was tried, including the bugs).
 
 **Launch article (English):** [DEV Community](https://dev.to/mycute_97b39c4e34027570f9/running-a-4b-model-in-6-gb-and-training-3b-parameters-on-a-laptop-4al) · [Markdown](ARTICLE.md) · [HTML](article.html)
 
+**Research checkpoints (Hugging Face):** [LCGA v3 0.5B](https://huggingface.co/byjameson/lcga-v3-0.5b) · [LCGA P3 17M](https://huggingface.co/byjameson/lcga-p3-17m) — model cards there link back to the full reports and raw evidence in this repository.
+
 ## Product: LCGA Local — one-command local chat
 
 The product surface is not an API. It is a local chat assistant:
@@ -355,6 +357,10 @@ Python 3.11 + CUDA-enabled PyTorch (see `requirements.txt`; Windows/WDDM notes i
 pip install -r requirements.txt
 python download_model.py                   # Qwen2.5-0.5B -> models/ (fp16, frozen base)
 python experiments/exp1_data_baseline.py   # builds data/*.pt + dense baselines (GPU)
+
+# Optional product path: 4B local chat (~8 GB download; first run builds a 3.4 GB int8 cache)
+python scripts/download_qwen3_4b.py        # Qwen3-4B-Instruct-2507 -> models/
+python llm.py                              # local chat (uses 4B when present, 1.5B/3B otherwise)
 ```
 
 ## Reproduce the core pipeline
