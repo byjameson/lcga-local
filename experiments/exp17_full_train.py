@@ -70,6 +70,9 @@ def main() -> int:
                     help="per-block GPU buffers; forward pass skips the copy-back")
     ap.add_argument("--pinned", action="store_true",
                     help="pinned host staging for block transfers (implies --buffers)")
+    ap.add_argument("--double-buffer", action="store_true", dest="double_buffer",
+                    help="two pinned host/GPU pools + copy stream; overlap next-block "
+                         "H2D with current-block compute (implies --buffers)")
     ap.add_argument("--save", default="")
     ap.add_argument("--tag", default="full_smoke")
     ap.add_argument("--verbose", action="store_true")
@@ -95,7 +98,8 @@ def main() -> int:
                              adaf_beta2=args.adaf_beta2, warmup=args.warmup,
                              master=args.master, verbose=args.verbose,
                              profile=args.profile, prefetch=args.prefetch,
-                             buffered=args.buffers, pinned=args.pinned)
+                             buffered=args.buffers, pinned=args.pinned,
+                             double_buffer=args.double_buffer)
     if args.decay != "none":
         tr.set_schedule(args.steps, args.decay, args.min_lr)
     print(f"[trainer] params={tr.n_params/1e9:.4f}B tied={tr.tied} "
@@ -200,8 +204,9 @@ def main() -> int:
         "prof_total": ({k: round(v, 3) for k, v in tr.prof.items()}
                        if args.profile else None),
         "prefetch": bool(args.prefetch),
-        "buffered": bool(args.buffers or args.pinned),
+        "buffered": bool(args.buffers or args.pinned or args.double_buffer),
         "pinned": bool(args.pinned),
+        "double_buffer": bool(args.double_buffer),
         "ts": now(),
     }
     if ce0 is not None and ce1 is not None:

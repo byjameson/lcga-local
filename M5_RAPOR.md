@@ -78,7 +78,8 @@ Eski checkpoint **silinmedi**; karşılaştırma için duruyor, temiz koşu ayr�
   makinede koşulamadı (§7d).
 - **Tek GPU, tek akış:** çok-GPU/dağıtık eğitim test edilmedi.
 - **Transfer sınırı:** 3B'de adım süresinin **%71'i PCIe kopyası** (4 geçiş, ~5,3GB/s); `--prefetch`
-  pageable bellekte kazanç sağlamadı (§7e). Pinned çift-tampon henüz uygulanmadı.
+  pageable bellekte kazanç sağlamadı (§7e). **Pinned çift-tampon uygulandı (§7g):** 3B SGD
+  1,20–1,33×, Adafactor 1,13×; loss paritesi birebir.
 - **Kısa koşu:** 100–150 adım mekanizma kanıtı; uzun eğri/bitiş kalitesi yok.
 - İlk 3B koşusunun güncelleme ölçeği kirliydi (§3b); **ana sonuç temiz koşudur** (150 adımda −0,0962;
   eski kirli koşu 100 adımda −0,0375). İki checkpoint de silinmedi.
@@ -87,8 +88,8 @@ Eski checkpoint **silinmedi**; karşılaştırma için duruyor, temiz koşu ayr�
 
 - ~~**Adafactor / 8-bit Adam CPU-offload**~~ → **Adafactor yapıldı (§7)**; 8-bit Adam hâlâ açık
   (3B state ~6,2GB, RAM sınırı).
-- **Pinned blok çift-tampon** → §7e ölçümü: 3B'de adımın **%71'i PCIe**; hedef **~4,0 s/adım**
-  (1,6×); pinned staging uygulanmadı.
+- ~~**Pinned blok çift-tampon**~~ → **uygulandı (§7g):** 3B SGD **5,28 → 4,40 s**, Adafactor
+  **6,69 → 5,91 s**; hedef ~4,0 s/adım büyük ölçüde yakalandı, loss paritesi birebir.
 - **7B sınıfı smoke** (bf16 ~14GB): peak sabit kalmalı, süre 2× beklenir.
 - **Eval-tabanlı checkpoint seçimi** (her N adımda doğrulama CE).
 - **SFT görevi:** talimat/stil verisiyle gerçek fine-tune; LoRA ile karşılaştırma (kalite/fiyat).
@@ -199,10 +200,10 @@ asenkron çekirdekler nedeniyle ilk sürümde D2H, compute beklemesini de içeri
   (kayıp ~2,48 s, yan akışta). **Dürüst sonuç: prefetch bu haliyle faydasız.**
 - **Adafactor'ün maliyeti net:** update 0,29 → **1,50 s** (+1,21 s, CPU Adafactor); transferler
   aynı. Yani 3B Adafactor'ün +1,1 s/adım yavaşlığı tamamen optimizer'dan.
-- **Sıradaki gerçek kaldıraç: pinned çift-tampon.** 168MB'lık iki pinned staging buffer ile
-  kopyalar ~12GB/s'ye çıkarsa transfer 4,70 → ~2,1 s, adım **~4,0 s (≈1,6×)**; Adafactor
-  ~5,4 s. Uygulanmadı (pinned bellek RAM'i kilitler; 6,17GB'ı pinlemek bu makinede riskli,
-  katman-başına 2×168MB ile sınırlı tutulmalı).
+- **Pinned çift-tampon uygulandı (§7g).** Katman-başına 2×168MB pinned staging ile
+  CPU→pinned + pinned→GPU kopyası compute arkasına saklandı; 3B SGD **5,28 → 4,40 s**,
+  Adafactor **6,69 → 5,91 s** (loss paritesi birebir). Tahmin edilen ~4,0 s hedefi SGD'de
+  büyük ölçüde yakalandı; kalan iş D2H writeback'ini de çift-tamponlamak.
 - **7B bf16 bu makinede RAM'e sığmaz:** model 15,2GB, koşu sırasında boş RAM ~8,8GB. 7B int4
   (~3,8GB) teoride mümkün ama eğitimde kuantizasyon etkisi ayrı ölçüm ister (M5 sınırı).
 
@@ -230,3 +231,24 @@ değişmiyor). Yalnızca güncelleme yapan backward'da write-back yapılır.
   saklanabilir). Bu, sıradaki adım.
 - Yeni bayraklar varsayılan **kapalı** (eski satırların tekrarlanabilirliği için); 3B için
   önerilen: `--buffers`. Eval yolu da aynı modda doğrulandı (3B, 2 chunk, 5,15 s/adım).
+
+### 7g. Pinned double-buffering — uygulandı (22.10)
+
+`--double-buffer`: iki pinned host + iki GPU tampon havuzu, ayrı bir kopya akışı
+(`torch.cuda.Stream`) ve olaylarla (`Event`) korunan yeniden kullanım. Bir sonraki bloğun
+CPU→pinned ve pinned→GPU kopyası, mevcut bloğun compute'u arkasında başlatılır;
+`_wait_load` yalnızca gerekli olduğunda bekler. `--buffers` ile **birebir aynı loss dizisi**
+(parite), VRAM'de +0,17GB (ikinci blok tamponu), host RSS'te ~+0,45GB (ikinci pinned staging).
+
+| 3B, seq 512 | mod | adım 2 | adım 3 | peak VRAM | host RSS |
+|---|---|---|---|---|---|
+| SGD | `--buffers` | 5,44 s | 5,28 s | 2,55GB | 6,99GB |
+| SGD | **`--double-buffer`** | **4,09 s** | **4,40 s** | 2,72GB | 7,44GB |
+| Adafactor | `--buffers` | 6,69 s | – | 5,05GB | 7,00GB |
+| Adafactor | **`--double-buffer`** | **5,91 s** | – | 5,22GB | 7,44GB |
+
+- SGD: **1,20–1,33×**, Adafactor: **1,13×** (adım 2). Loss dizileri birebir aynı
+  (SGD: 2,710462 / 2,540905 / 2,095238; Adafactor: 2,710462 / 2,493415).
+- 0.5B SGD: 1,16 → 1,11 s (küçük blokta host kopyası baskın; kazanç sınırlı).
+- Yeni bayrak varsayılan **kapalı**; 3B için önerilen: `--double-buffer`.
+- Kalan darboğaz: D2H writeback'i hâlâ senkron; onu da çift-tamponlamak bir sonraki adım olabilir.

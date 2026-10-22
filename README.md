@@ -92,7 +92,7 @@ answers is stated with its honest framing.
 | M2 | MoE expert paging (top-1 experts in host RAM, GPU slots) | CE identical (**1.37843**) in paged / LRU / resident modes; **15.4 MB/pass** streamed; hit rate 0.6%. Scale tests: E=16/E=64 demand **34.3/54.0 MB/pass**, prefetch cuts **4.07×/3.46×** (hit 75.5%/71.1%), VRAM saving 3.35×/10.7× | `M2_RAPOR.md` |
 | M3 | Transition-matrix prefetch (2 slots, predict the next expert) | Demand copies **12.4× lower** (15.37→1.24 MB/pass), hit **0.6%→92%**, prefetch precision 92.7%; CE and greedy outputs identical | `M3_RAPOR.md` |
 | M4 | Multi-unit scheduler: plan groups by declared VRAM, parallel CUDA streams, sequential fallback, merge policy, LRU model pool | 0.5B+1.5B in one group: generation **1.74× vs summed solo runs (1.53× vs the sequential group)**; seq fallback peak 2996 MB; `merge_outputs` supports an answer-selection policy (“best” by continuation logprob); **pool**: 3 requests 25.2s → **9.2s (2.74×)**, repeat-request loads 0.00s, evict+host-reload 0.35s | `M4_RAPOR.md` |
-| M5 | **Full-parameter 3B training in 6 GB** (block streaming; all 3.09B params updated, no LoRA) | SGD 150 steps: CE **2.5034→2.4072 (−0.096)**, 6.64 s/step, peak 2.43 GB. **Adafactor** (lr 1e-5): CE→**2.3242 (−0.179, 1.86× the SGD drop)**, 7.67 s/step, peak 4.93 GB. Both checkpoints served back through the paged engine (3.9 tok/s, coherent text). **bf16 quantization wall diagnosed**: streaming updates below 1 weight ULP freeze most weights (`scripts/step_diag.py`); an fp32 CPU master option fixes it (+~10% CE on 0.5B) but needs +4 B/param host RAM. Step profile (3B, 3 steps): **71% of a step is PCIe** (H2D 2.44 s + D2H 2.26 s, ~5.3 GB/s, 4 passes ≈24.7 GB); Adafactor update 0.29→1.50 s; **`--prefetch` gives no speedup** (6.56→6.57 s, pageable copies block the host); pinned double-buffering not implemented (§7e). **`--buffers`** (per-block GPU buffers, no forward copy-back): **6.56→5.20 s/step (1.26×)**, losses bit-identical; `--pinned` alone is slower (host staging 1.55 s) | `M5_RAPOR.md` §7 |
+| M5 | **Full-parameter 3B training in 6 GB** (block streaming; all 3.09B params updated, no LoRA) | SGD 150 steps: CE **2.5034→2.4072 (−0.096)**, 6.64 s/step, peak 2.43 GB. **Adafactor** (lr 1e-5): CE→**2.3242 (−0.179, 1.86× the SGD drop)**, 7.67 s/step, peak 4.93 GB. Both checkpoints served back through the paged engine (3.9 tok/s, coherent text). **bf16 quantization wall diagnosed**: streaming updates below 1 weight ULP freeze most weights (`scripts/step_diag.py`); an fp32 CPU master option fixes it (+~10% CE on 0.5B) but needs +4 B/param host RAM. Step profile (3B, 3 steps): **71% of a step is PCIe** (H2D 2.44 s + D2H 2.26 s, ~5.3 GB/s, 4 passes ≈24.7 GB); Adafactor update 0.29→1.50 s; **`--prefetch` gives no speedup** (6.56→6.57 s, pageable copies block the host); **`--double-buffer`** (two pinned pools + copy stream) overlaps next-block H2D with compute: **5.28→4.40 s/step (1.20×) SGD, 6.69→5.91 s (1.13×) Adafactor**, losses bit-identical, +0.17 GB peak (§7g). **`--buffers`** (per-block GPU buffers, no forward copy-back): **6.56→5.20 s/step (1.26×)**, losses bit-identical; `--pinned` alone is slower (host staging 1.55 s) | `M5_RAPOR.md` §7 |
 
 ## Service (optional developer shell)
 
@@ -390,6 +390,7 @@ python experiments/exp18_moe_paging.py --modes paged,pf2,resident               
 python experiments/exp20_scheduler.py --merge best                                      # M4
 python experiments/exp17_full_train.py --model models/Qwen2.5-3B --steps 150 --seq 512 --lr 1e-5 --opt adafactor --eval_chunks 16 --tag demo_m5   # M5
 python experiments/exp17_full_train.py --model models/Qwen2.5-3B --steps 3 --seq 512 --lr 5e-4 --profile --buffers --tag prof3b_buf   # M5: 5.20 s/step, 1.26x
+python experiments/exp17_full_train.py --model models/Qwen2.5-3B --steps 3 --seq 512 --lr 1e-5 --double-buffer --tag dbuf3b      # M5: 4.1-4.4 s/step, 1.20-1.33x
 
 # 7) product shell: M1/M4/M5 pieces wired into one service; demo UI at http://127.0.0.1:8000/
 python serve.py --port 8000                     # serves our 3B checkpoint + chat unit
@@ -455,7 +456,9 @@ python -m unittest discover -s tests -p "test_*service*.py" -v                  
   weights) and the fp32-master fix are quantified in `M5_RAPOR.md` §7; the 3B fp32
   master did not fit this machine's free host RAM. Step time is transfer-bound: 71% of a
   3B step is PCIe (H2D 2.44 s + D2H 2.26 s, ~5.3 GB/s); `--prefetch` does not help with
-  pageable memory (6.56 → 6.57 s/step), pinned double-buffering is not implemented (§7e).
+  pageable memory (6.56 → 6.57 s/step). Pinned double-buffering is implemented as
+  `--double-buffer` and measured at **5.28→4.40 s/step (SGD) / 6.69→5.91 s (Adafactor)**
+  on 3B with bit-identical losses (§7g); the D2H write-back is still synchronous.
 - M1–M3 speed numbers are for the 6 GB laptop GPU (WDDM). The llama.cpp comparison uses
   a bartowski Q4_K_M GGUF with the vendor CUDA build on the same machine.
 

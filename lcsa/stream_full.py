@@ -34,7 +34,7 @@ class StreamingSGDTrainer:
                  adaf_eps: float = 1e-8, warmup: int = 0, master: bool = False,
                  verbose: bool = False, profile: bool = False,
                  prefetch: bool = False, buffered: bool = False,
-                 pinned: bool = False):
+                 pinned: bool = False, double_buffer: bool = False):
         self.device = device
         self.loss_chunk = loss_chunk
         self.lr = lr
@@ -49,8 +49,11 @@ class StreamingSGDTrainer:
         self.prefetch = prefetch
         self._pf_stream = torch.cuda.Stream() if prefetch else None
         self._pf_pending = False
-        self.buffered = bool(buffered or pinned)
-        self.pinned = bool(pinned)
+        self.double_buffer = bool(double_buffer)
+        self.buffered = bool(buffered or pinned or double_buffer)
+        # --double-buffer uses its own two pinned pools and does not use the
+        # legacy single-buffer --pinned path.
+        self.pinned = bool(pinned) and not self.double_buffer
         if self.buffered and master:
             raise ValueError("buffered/pinned mode does not support --master")
         if self.buffered and prefetch:
@@ -58,6 +61,17 @@ class StreamingSGDTrainer:
         self._cpu_w: dict = {}
         self._gpu_pool: dict = {}
         self._pin_pool: dict = {}
+        # Double-buffered (pinned) mode: two GPU/pinned pools, a copy stream,
+        # and events that guard reuse of a pool while compute is still reading it.
+        if self.double_buffer:
+            self._gpu_pools: list[dict] = [{}, {}]
+            self._pin_pools: list[dict] = [{}, {}]
+            self._copy_stream = torch.cuda.Stream()
+            self._ready = [torch.cuda.Event(), torch.cuda.Event()]
+            self._free = [torch.cuda.Event(), torch.cuda.Event()]
+            self._free[0].record()
+            self._free[1].record()
+            self._pool_idx = 0
         self.opt_state: dict = {}
         self.opt_state_cpu: dict = {}
         self.use_master = master
@@ -193,6 +207,56 @@ class StreamingSGDTrainer:
             p.data = self._cpu_w[id(p)]
             p.grad = None
 
+    # ------------------------------------------------------- double buffering
+    def _dbuf_key(self, n, p):
+        return self._key(n, p)
+
+    def _load_async(self, mod, pool: int) -> None:
+        """Stage `mod` into pinned host memory and start an async H2D copy.
+
+        The host copy runs on the CPU while the GPU is still executing the
+        previous block; the H2D copy is queued on a side stream. The caller
+        must call `_wait_load` before using the module's weights.
+        """
+        t0 = time.perf_counter()
+        t_host = 0.0
+        with torch.cuda.stream(self._copy_stream):
+            self._copy_stream.wait_event(self._free[pool])
+            for n, p in mod.named_parameters():
+                key = self._dbuf_key(n, p)
+                src = self._cpu_w[id(p)]
+                pin = self._pin_pools[pool].get(key)
+                if pin is None:
+                    pin = torch.empty(p.shape, dtype=p.dtype, pin_memory=True)
+                    self._pin_pools[pool][key] = pin
+                gpu = self._gpu_pools[pool].get(key)
+                if gpu is None:
+                    gpu = torch.empty(p.shape, dtype=p.dtype, device=self.device)
+                    self._gpu_pools[pool][key] = gpu
+                t = time.perf_counter()
+                pin.copy_(src)
+                t_host += time.perf_counter() - t
+                gpu.copy_(pin, non_blocking=True)
+            self._ready[pool].record(self._copy_stream)
+        if self.profile:
+            self.prof["h2d_s"] = self.prof.get("h2d_s", 0.0) + (
+                time.perf_counter() - t0 - t_host)
+            self.prof["host_copy_s"] = self.prof.get("host_copy_s", 0.0) + t_host
+
+    def _wait_load(self, mod, pool: int) -> None:
+        """Wait for a pending async load and point the module at that pool."""
+        t0 = time.perf_counter()
+        torch.cuda.current_stream().wait_event(self._ready[pool])
+        for n, p in mod.named_parameters():
+            p.data = self._gpu_pools[pool][self._dbuf_key(n, p)]
+        if self.profile:
+            self.prof["wait_s"] = self.prof.get("wait_s", 0.0) + (
+                time.perf_counter() - t0)
+
+    def _release_pool(self, pool: int) -> None:
+        """Mark a pool free once the current stream has finished using it."""
+        self._free[pool].record(torch.cuda.current_stream())
+
     # ---------------------------------------------------------------- prefetch
     def _prefetch(self, mod) -> None:
         """Start an async host->device copy of `mod` on a side stream."""
@@ -215,6 +279,26 @@ class StreamingSGDTrainer:
         pos_ids = torch.arange(ids.shape[1], device=dev).unsqueeze(0)
         pos = self.rotary(h, pos_ids)
         cache = []
+        if self.double_buffer:
+            n_layers = len(self.layers)
+            pool = 0
+            self._load_async(self.layers[0], pool)
+            for i, layer in enumerate(self.layers):
+                self._wait_load(layer, pool)
+                cache.append(h)
+                t = time.perf_counter()
+                h = _layer_out(layer(h, position_embeddings=pos))
+                if self.profile:
+                    torch.cuda.synchronize()
+                    self.prof["fwd_s"] = self.prof.get("fwd_s", 0.0) + (time.perf_counter() - t)
+                if i + 1 < n_layers:
+                    self._load_async(self.layers[i + 1], 1 - pool)
+                self._release_pool(pool)
+                pool = 1 - pool
+                if self.verbose and (i + 1) % 8 == 0:
+                    print(f"    [fwd] {i + 1}/{n_layers} "
+                          f"reserved={torch.cuda.memory_reserved()/1e9:.2f}GB", flush=True)
+            return h, cache, pos
         for i, layer in enumerate(self.layers):
             self._wait_prefetch()
             self._load(layer)
@@ -379,58 +463,94 @@ class StreamingSGDTrainer:
         t_step = self.steps_done + 1
 
         # reverse block pass: recompute, backward, update this block in place
-        for i in range(len(self.layers) - 1, -1, -1):
-            layer = self.layers[i]
-            self._wait_prefetch()
-            self._load(layer)
-            if self.prefetch and i - 1 >= 0:
-                self._prefetch(self.layers[i - 1])
-            h_in = cache[i]
-            h_in.requires_grad_(True)
-            t = time.perf_counter()
-            out = _layer_out(layer(h_in, position_embeddings=pos))
-            out.backward(grad)
-            if self.profile:
-                torch.cuda.synchronize()
-                self.prof["bwd_s"] = self.prof.get("bwd_s", 0.0) + (time.perf_counter() - t)
-            grad = h_in.grad
-            h_in.grad = None
-            h_in.requires_grad_(False)
-            if update:
-                named = [(f"L{i}.{n}", p) for n, p in layer.named_parameters()]
-                if self.use_master:
-                    if self.clip and self.clip > 0:
-                        ps = [p for _, p in named if p.grad is not None]
-                        if ps:
-                            torch.nn.utils.clip_grad_norm_(ps, self.clip)
-                    grads = []
-                    tg = time.perf_counter()
-                    for n, p in named:
-                        g = p.grad
-                        grads.append((n, None if g is None else g.detach().to("cpu")))
-                        p.grad = None
-                    if self.profile:
-                        self.prof["grad_s"] = self.prof.get("grad_s", 0.0) + (time.perf_counter() - tg)
-                    self._to(layer, "cpu")
-                    t = time.perf_counter()
-                    self._master_step(grads, lr, t_step)
-                    for n, p in named:
-                        self._refresh(p, n)
-                    if self.profile:
-                        torch.cuda.synchronize()
-                        self.prof["upd_s"] = self.prof.get("upd_s", 0.0) + (time.perf_counter() - t)
-                else:
+        if self.double_buffer:
+            n_layers = len(self.layers)
+            pool = 0
+            self._load_async(self.layers[n_layers - 1], pool)
+            for i in range(n_layers - 1, -1, -1):
+                layer = self.layers[i]
+                self._wait_load(layer, pool)
+                h_in = cache[i]
+                h_in.requires_grad_(True)
+                t = time.perf_counter()
+                out = _layer_out(layer(h_in, position_embeddings=pos))
+                out.backward(grad)
+                if self.profile:
+                    torch.cuda.synchronize()
+                    self.prof["bwd_s"] = self.prof.get("bwd_s", 0.0) + (time.perf_counter() - t)
+                grad = h_in.grad
+                h_in.grad = None
+                h_in.requires_grad_(False)
+                if i - 1 >= 0:
+                    self._load_async(self.layers[i - 1], 1 - pool)
+                if update:
+                    named = [(f"L{i}.{n}", p) for n, p in layer.named_parameters()]
                     t = time.perf_counter()
                     self._update(named)
                     if self.profile:
                         torch.cuda.synchronize()
                         self.prof["upd_s"] = self.prof.get("upd_s", 0.0) + (time.perf_counter() - t)
                     self._unload(layer, writeback=True)
-            else:
-                self._unload(layer, writeback=False)
-            if self.verbose and (len(self.layers) - i) % 8 == 0:
-                print(f"    [bwd] {len(self.layers) - i}/{len(self.layers)} "
-                      f"reserved={torch.cuda.memory_reserved()/1e9:.2f}GB", flush=True)
+                else:
+                    self._unload(layer, writeback=False)
+                self._release_pool(pool)
+                pool = 1 - pool
+                if self.verbose and (n_layers - i) % 8 == 0:
+                    print(f"    [bwd] {n_layers - i}/{n_layers} "
+                          f"reserved={torch.cuda.memory_reserved()/1e9:.2f}GB", flush=True)
+        else:
+            for i in range(len(self.layers) - 1, -1, -1):
+                layer = self.layers[i]
+                self._wait_prefetch()
+                self._load(layer)
+                if self.prefetch and i - 1 >= 0:
+                    self._prefetch(self.layers[i - 1])
+                h_in = cache[i]
+                h_in.requires_grad_(True)
+                t = time.perf_counter()
+                out = _layer_out(layer(h_in, position_embeddings=pos))
+                out.backward(grad)
+                if self.profile:
+                    torch.cuda.synchronize()
+                    self.prof["bwd_s"] = self.prof.get("bwd_s", 0.0) + (time.perf_counter() - t)
+                grad = h_in.grad
+                h_in.grad = None
+                h_in.requires_grad_(False)
+                if update:
+                    named = [(f"L{i}.{n}", p) for n, p in layer.named_parameters()]
+                    if self.use_master:
+                        if self.clip and self.clip > 0:
+                            ps = [p for _, p in named if p.grad is not None]
+                            if ps:
+                                torch.nn.utils.clip_grad_norm_(ps, self.clip)
+                        grads = []
+                        tg = time.perf_counter()
+                        for n, p in named:
+                            g = p.grad
+                            grads.append((n, None if g is None else g.detach().to("cpu")))
+                            p.grad = None
+                        if self.profile:
+                            self.prof["grad_s"] = self.prof.get("grad_s", 0.0) + (time.perf_counter() - tg)
+                        self._to(layer, "cpu")
+                        t = time.perf_counter()
+                        self._master_step(grads, lr, t_step)
+                        for n, p in named:
+                            self._refresh(p, n)
+                        if self.profile:
+                            torch.cuda.synchronize()
+                            self.prof["upd_s"] = self.prof.get("upd_s", 0.0) + (time.perf_counter() - t)
+                    else:
+                        t = time.perf_counter()
+                        self._update(named)
+                        if self.profile:
+                            torch.cuda.synchronize()
+                            self.prof["upd_s"] = self.prof.get("upd_s", 0.0) + (time.perf_counter() - t)
+                        self._unload(layer, writeback=True)
+                else:
+                    self._unload(layer, writeback=False)
+                if self.verbose and (len(self.layers) - i) % 8 == 0:
+                    print(f"    [bwd] {len(self.layers) - i}/{len(self.layers)} "
+                          f"reserved={torch.cuda.memory_reserved()/1e9:.2f}GB", flush=True)
 
         # input-embedding gradient (forward was no_grad): recompute lookup
         if grad is not None:
