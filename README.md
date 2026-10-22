@@ -451,6 +451,24 @@ python -m unittest discover -s tests -p "test_*service*.py" -v                  
 - M1–M3 speed numbers are for the 6 GB laptop GPU (WDDM). The llama.cpp comparison uses
   a bartowski Q4_K_M GGUF with the vendor CUDA build on the same machine.
 
+## Support the work / Destek
+
+This project is developed on a 6 GB laptop GPU. Donations go toward a larger GPU
+and more compute so the experiments can scale; there is no paid support, token,
+or investment offer.
+
+- **EVM-compatible networks** (Ethereum, BNB Smart Chain, Polygon, Optimism,
+  Arbitrum One, Base, Avalanche C-Chain):
+  `0xaf33F66221C98AF02D00a2a694628B9071944f5F`
+- **Solana:**
+  `GBRT87EBorFGjL4zLPGQg1fc6dG9een1grHbF1HEMimu`
+- **Bitcoin:**
+  `bc1qmjvu0c7skkuph5pva6l5uuxpzu3z6fw8nyy0f2`
+
+Please double-check the network and the full address before sending; crypto
+transfers are irreversible. Donations are voluntary and do not buy influence
+over results or reviews.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
