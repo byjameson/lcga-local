@@ -392,3 +392,22 @@ eğitildi.
   aynen korunur. Asıl kanıtlanan şey şu: model hiçbir anda bütün olarak RAM'e
   yüklenmiyor, bloklar tek tek materialize ediliyor.
 
+### 14b. 32B talimat SFT (Dolly-15k) — asıl sonuç
+
+Aynı disk-akışlı hat, `--sft` modunda 100 adım (seq 128, 256 train / 8 eval):
+
+| Metrik | Değer |
+|---|---|
+| **Eval loss** | **3,2600 → 1,7849 (−1,4751)** |
+| **Peak VRAM** | **3,21 GB** |
+| Adım süresi (medyan) | **11,0 s** |
+| Duvar süresi | 1.194 s (~20 dk) |
+| Eğitilebilir LoRA | 16,78M |
+
+- Yani **32B, 6 GB VRAM'li bir laptop GPU'sunda talimat eğitimi görüyor** ve
+  20 dakikada eval loss'u **−1,48** düşürüyor. 14B'nin 200 adımlık SFT'si −1,28
+  idi; 32B daha az VRAM'de (3,21 vs 4,14 GB) daha büyük düşüş verdi.
+- Dürüst kıyas notu: eval setleri farklı (32B: 256 train/8 eval, 14B: 512/32),
+  bu yüzden mutlak seviyeler değil **kendi içindeki düşüş** kıyaslanmalı.
+- Adapter: `checkpoints/disk_qlora_32b_sft` (git dışı).
+
