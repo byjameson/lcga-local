@@ -184,9 +184,32 @@ seq 256, streaming QLoRA:
 - Yani 7B, 6 GB VRAM'in altında **talimat verisiyle** eğitilebiliyor; mlp LoRA
   hedefleriyle 200–300 adımda eval loss **−0,86…−0,91**.
 
-## 10) Sıradaki
+## 10) 14B denemesi — 6 GB'a sığmıyor (dürüst sonuç)
+
+Qwen2.5-14B-Instruct (Apache-2.0, ~28 GB bf16) indirildi ve aynı streaming
+QLoRA hattı denendi. **13B diye bir Qwen2.5 sürümü yok; en yakını 14B.**
+
+| Metrik | Değer |
+|---|---|
+| Model | Qwen2.5-14B-Instruct, NF4 4-bit CPU'da |
+| Katman | 48 |
+| Eğitilebilir LoRA (r=8, q/k/v/o) | 12,58M (%0,154) |
+| Peak VRAM | **7,01 GB** → 6 GB'ı aşıyor, shared memory'ye taşıyor |
+| Adım süresi | **70,2 s** (seq 128, 1 adım) |
+| Host RSS | 9,31 GB |
+| Load | 112,7 s |
+
+- 7B'nin aksine 14B'de **peak 6 GB'ı aşıyor**: 48 katman + daha büyük bf16
+  embedding/head + aktivasyonlar 6 GB'a sığmıyor; WDDM taşması adımı 70 s'ye
+  çıkarıyor. Yani 14B bu kartta pratik değil.
+- 14B için ya ~8 GB+ VRAM ya da embedding'i de 4-bit'e alan daha agresif bir
+  strateji gerekir (denenmedi).
+- **Sonuç:** Bu 6 GB kartta gerçek anlamda sığan üst sınır **7B** (peak 4,90–5,78 GB,
+  5–6 s/adım). 14B'de streaming QLoRA çalışıyor ama spill ile.
+
+## 11) Sıradaki
 
 - 7B streaming QLoRA'da daha uzun SFT + geniş LoRA hedefleri (mlp).
-- 13B için aynı hattı denemek (int4 CPU taban ~7 GB; host RAM sınırı).
+- 8 GB+ VRAM'li bir kartta 14B streaming QLoRA'yı temiz şekilde ölçmek.
 - Merge edilmiş modellerin `serve.py`/`llm.py` ürün yoluna bağlanması.
 
