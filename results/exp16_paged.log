@@ -53,3 +53,17 @@ The capital of Germany is Berlin.
 PROMPT: The capital of France is
 TEXT: The capital of France is Paris . Paris is the most visited city in the world , with 22 million tourists visiting in 2014 . The City of Light , "
 
+{"tag": "qlora_merged_paged", "model": "qwen3b_qlora_merged", "device": "cuda", "dtype": "bf16", "state_dict": null, "quant": "int8", "quant_err_max": 0.003937020207082988, "layers": 36, "resident_k": 26, "streamed_layers": 10, "layer_mb": 147.0, "embed_mb": 593.5, "prompt_tokens": 7, "new_tokens": 32, "prefill_s": 1.917, "decode_s": 11.659, "tok_s": 2.74, "wall_s": 13.71, "load_s": 13.36, "streamed_mb_per_pass": 736.0, "streamed_mb_total": 24277.0, "streamed_gb_per_token": 0.718, "pin": true, "temperature": 0.0, "seed": 1234, "peak_alloc_mb": 4731.0, "peak_reserved_mb": 4844.0, "free_mb_after": 289.0, "parity": null, "sample": "What is the capital of France? The capital of France is Paris.   Paris is a city located in the northern part of France, on the Seine River. It is the most populous city"}
+PROMPT: What is the capital of France?
+TEXT: What is the capital of France? The capital of France is Paris. 
+
+Paris is a city located in the northern part of France, on the Seine River. It is the most populous city
+
+{"tag": "qlora_base_paged", "model": "Qwen2.5-3B-Instruct", "device": "cuda", "dtype": "bf16", "state_dict": null, "quant": "int8", "quant_err_max": 0.003937020207082988, "layers": 36, "resident_k": 26, "streamed_layers": 10, "layer_mb": 147.0, "embed_mb": 593.5, "prompt_tokens": 7, "new_tokens": 32, "prefill_s": 1.494, "decode_s": 10.576, "tok_s": 3.03, "wall_s": 12.09, "load_s": 17.65, "streamed_mb_per_pass": 736.0, "streamed_mb_total": 24277.0, "streamed_gb_per_token": 0.718, "pin": true, "temperature": 0.0, "seed": 1234, "peak_alloc_mb": 4731.0, "peak_reserved_mb": 4844.0, "free_mb_after": 289.0, "parity": null, "sample": "What is the capital of France? The capital of France is Paris.   Some additional information about Paris:  1. It is the most populous city in France, with a population of over 2"}
+PROMPT: What is the capital of France?
+TEXT: What is the capital of France? The capital of France is Paris. 
+
+Some additional information about Paris:
+
+1. It is the most populous city in France, with a population of over 2
+

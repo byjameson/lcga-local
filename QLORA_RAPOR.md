@@ -64,8 +64,26 @@ python experiments/exp49_qlora_3b.py --steps 10 --seq 512 --eval_chunks 2 \
     --save checkpoints/qlora_qwen3b_r16_t10 --tag qlora3b_seq512_t10
 ```
 
-## 6) Sıradaki
+## 6) Merge + paged inference (exp50)
+
+`experiments/exp50_qlora_merge.py` adaptörü bf16 tabana merge edip
+`checkpoints/qwen3b_qlora_merged` (6,17 GB, 4 shard) olarak kaydetti; ardından
+`exp16_paged_infer.py` ile **int8 paged** olarak 6 GB'da servis edildi:
+
+| | değer |
+|---|---|
+| Merge (CPU, bf16) | yükle 14,1 s + merge 13,8 s + kaydet 19,1 s, host RSS 7,28 GB |
+| Paged inference | resident 26/36 katman, 10 streamed int8, peak **4731 MB**, **2,74 tok/s** |
+| Taban (aynı ayar) | peak 4731 MB, **3,03 tok/s** |
+| Örnek | "What is the capital of France? The capital of France is Paris. …" |
+
+Bu, tüm hattın çalıştığını gösterir: **NF4 QLoRA eğitimi → merge → int8 paged
+servis**. Aynı 32 token'lık örnekte taban ve merge'lı model benzer ve tutarlı
+cevap verdi; bu küçük bir duman testidir, kalite benchmark'ı değildir.
+
+## 7) Sıradaki
 
 - 7B için ön-kantize model (NF4/AWQ) veya RAM boşaltma planı.
 - Gerçek talimat verisiyle (SFT) kısa bir kalite kontrolü; M5/LoRA ile aynı sette kıyas.
-- LoRA adapter'ını birleştirip (`merge_and_unload`) paged inference ile servis etme denemesi.
+- Merge edilmiş modelin `serve.py`/`llm.py` ürün yoluna bağlanması (chat şablonu ile).
+
