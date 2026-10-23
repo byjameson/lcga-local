@@ -360,16 +360,29 @@ Karar mantığı:
 
 ### 13c) Ölçüme dayalı autotune (`--blocks-on-gpu adaptive`, varsayılan)
 
-Statik tahmin yeterli değil (allocator/fragmentasyon karttan karta değişiyor), bu
-yüzden varsayılan artık **ölçüm**:
+Statik tahmin yetmiyor (allocator/fragmentasyon karttan karta değişir), bu yüzden
+varsayılan **ölçüm** ve ölçüm **periyodik** (`--adapt-every N`, varsayılan 10):
 
 1. Her zaman **1 blokla** başlar (en güvenli).
-2. İlk gerçek adımın `max_memory_reserved` değerini okur.
-3. Yumuşak hedefe (`toplam VRAM × 0,80`) kadar pencereyi büyütür.
-4. İkinci adımda sert sınırı (`× 0,88`) aşarsa otomatik küçültür.
+2. Her N adımda o adımın `max_memory_reserved` değerini okur.
+3. Yumuşak hedefe (`toplam VRAM × 0,80`) kadar büyütür — ama **nominal blok
+   boyutuyla değil, ölçülen marjinal maliyetle**: son *farklı* pencerelerdeki iki
+   ölçümden `Δpeak / Δblok` hesaplanır. Böylece hedefe yaklaşırken adımlar küçülür.
+4. Sert sınırı (`× 0,88`) aşarsa küçültür ve `empty_cache()` ile allocator'ı boşaltır.
 
-32B üzerinde ölçüm: 1 blok → peak **3,18 GB** → otomatik **8 blok**; 8 blokla
-peak **4,63 GB** (sert sınır 5,63 GB'ın altında), adım **11,5 → 10,2–10,6 s**.
+32B üzerinde ölçülen yörünge (`--adapt-every 5`, 12 adım):
+
+| Adım | Pencere | Peak | Karar |
+|---|---:|---:|---|
+| 1 | 1 | 3,18 GB | marjinal nominal (258 MB) → 1→**8** |
+| 5 | 8 | 4,64 GB | **ölçülen marjinal 213 MB/blok** → 8→**10** |
+| 10+ | 10 | 5,10 GB | pay kalmadı → **sabit** |
+
+Sonuç: **10 blok**, peak **5,10 GB** (yumuşak 5,15 / sert 5,63 GB), adım
+**11,5 → 9,3 s**. Başka bir koşuda (26 adım, aynı ayarlar) 1→8→9'da durdu
+(peak 4,92 GB): yani sonuç kartın o anki durumuna göre değişiyor ama **salınım
+yok ve hedef aşılmıyor**.
+
 24 GB'lık bir kartta aynı döngü tüm 64 bloğu resident yapar ve streaming biter.
 
 ### 13d) Statik plan (`--blocks-on-gpu auto`)

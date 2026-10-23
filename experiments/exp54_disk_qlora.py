@@ -170,6 +170,9 @@ def main() -> int:
     ap.add_argument("--blocks-on-gpu", default="adaptive",
                     help="'adaptive' = start at 1 block and grow from the measured "
                          "peak; 'auto' = static plan from free VRAM; or an integer")
+    ap.add_argument("--adapt-every", type=int, default=10,
+                    help="re-measure and resize the block window every N steps "
+                         "(0 = only after the first step)")
     ap.add_argument("--eval_chunks", type=int, default=0)
     ap.add_argument("--sft", action="store_true",
                     help="train on instruction data (Dolly-15k) with prompt masking")
@@ -224,29 +227,51 @@ def main() -> int:
 
     # --- measured autotune -------------------------------------------------
     adapt = None
+    adapt_hist: list = []
     if mode_blocks == "adaptive" and plan is not None:
         dev_total_gb = torch.cuda.get_device_properties(0).total_memory / 1e9
         soft_gb = dev_total_gb * 0.80   # grow towards this
         hard_gb = dev_total_gb * 0.88   # never exceed this (WDDM spills beyond)
-        state = {"step": 0}
+        every = max(0, int(args.adapt_every))
+        state = {"step": 0, "hist": []}
+        adapt_hist = state["hist"]
+
+        def _marginal_gb() -> float:
+            """Measured VRAM cost of one extra resident block (fallback: nominal).
+
+            Scan back for the most recent pair of measurements taken at *different*
+            capacities; consecutive steps usually share the same window.
+            """
+            h = state["hist"]
+            for k in range(len(h) - 1, 0, -1):
+                c1, p1 = h[k]
+                c0, p0 = h[k - 1]
+                if c1 != c0:
+                    return max(1e-6, (p1 - p0) / (c1 - c0))
+            return block_gb or 0.25
 
         def adapt(peak_gb: float, i: int) -> None:
             state["step"] += 1
-            if state["step"] == 1:
-                head = soft_gb - peak_gb
-                if block_gb > 0 and head >= block_gb:
-                    extra = int(head // block_gb)
-                    cache.set_capacity(min(n_layers, cache.capacity + extra))
-                    print(f"[autotune] measured peak={peak_gb:.2f}GB on 1 block -> "
-                          f"{cache.capacity} blocks (soft {soft_gb:.2f}GB)", flush=True)
-                else:
-                    print(f"[autotune] measured peak={peak_gb:.2f}GB; keeping "
-                          f"{cache.capacity} block(s)", flush=True)
-            elif state["step"] == 2 and peak_gb > hard_gb:
-                shrink = int((peak_gb - hard_gb) // max(block_gb, 1e-9)) + 1
+            n = state["step"]
+            state["hist"].append((cache.capacity, round(peak_gb, 3)))
+            if not (n == 1 or (every > 0 and n % every == 0)):
+                return
+            margin = _marginal_gb()
+            if peak_gb > hard_gb:
+                shrink = int((peak_gb - hard_gb) // max(margin, 1e-9)) + 1
                 cache.set_capacity(max(1, cache.capacity - shrink))
-                print(f"[autotune] peak {peak_gb:.2f}GB over hard {hard_gb:.2f}GB -> "
-                      f"{cache.capacity} blocks", flush=True)
+                torch.cuda.empty_cache()  # release what the allocator still holds
+                print(f"[autotune] step {n}: peak {peak_gb:.2f}GB > hard "
+                      f"{hard_gb:.2f}GB -> {cache.capacity} blocks", flush=True)
+                return
+            head = soft_gb - peak_gb
+            extra = int((head * 0.9) // max(margin, 1e-9)) if head > 0 else 0
+            if extra >= 1 and cache.capacity < n_layers:
+                before = cache.capacity
+                cache.set_capacity(min(n_layers, before + extra))
+                print(f"[autotune] step {n}: peak {peak_gb:.2f}GB, marginal "
+                      f"{margin * 1024:.0f}MB/block -> {before}->{cache.capacity} blocks",
+                      flush=True)
 
     def stage(layer, i):
         cache.stage(layer, i)
@@ -361,6 +386,7 @@ def main() -> int:
         "blocks_mode": args.blocks_on_gpu,
         "blocks_on_gpu": cache.capacity,
         "blocks_on_gpu_initial": start_blocks,
+        "blocks_history": adapt_hist,
         "trainable_params": tr.n_lora,
         "steps": len(losses),
         "seq": args.seq,
