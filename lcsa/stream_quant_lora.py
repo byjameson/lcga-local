@@ -80,8 +80,9 @@ class StreamingQuantLoRATrainer:
         self.norm = base.model.norm
         self.lm_head = base.lm_head
 
-        # Small/shared modules stay resident on the GPU. Base layers stay on CPU.
-        self.embed.to(device)
+        # Small/shared modules stay resident on the GPU. The input embedding is
+        # kept on CPU (4-bit/bf16) and only the gathered activation is moved to
+        # the GPU; for 14B the embedding alone is ~1.5 GB bf16.
         self.rotary.to(device)
         self.norm.to(device)
         self.tied = self.lm_head.weight is self.embed.weight
@@ -99,7 +100,8 @@ class StreamingQuantLoRATrainer:
     @torch.no_grad()
     def _forward_cached(self, ids):
         dev = self.device
-        h = self.embed(ids.to(dev))
+        # Embedding stays on CPU; only the gathered activation goes to the GPU.
+        h = self.embed(ids.to("cpu")).to(dev)
         pos_ids = torch.arange(ids.shape[1], device=dev).unsqueeze(0)
         pos = self.rotary(h, pos_ids)
         cache = []
