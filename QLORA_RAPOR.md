@@ -340,16 +340,22 @@ eğitildi.
 | Adım süresi (medyan) | **10,95 s** (seq 128) |
 | Eval CE | **2,3942 → 2,3637 (−0,0305)** / 10 adım |
 | Eğitilebilir LoRA (r=8) | 16,78M |
-| İskelet yükleme | 9,7 s |
-| Host RSS | 19,4 GB — bunun çoğu **mmap page cache** (OS geri alabilir) |
+| İskelet yükleme | 9,7 s (**RSS 2,44 GB** — 17,9 GB'ın tamamı yüklenmiyor) |
+| Host RSS (adım sırasında) | 19,4 GB — ağırlıkların **dosya sayfası önbelleği** |
 
 - `--shared-dtype as-stored`: embedding bf16 olarak **CPU'da mmap view**, lm_head
   bf16 **GPU'da** (1,56 GB); norm/bias da bf16.
-- İlk adım soğuk page cache ile **24,8 s**; 10 adımda cache ısınınca **11 s**.
+- İlk adım soğuk cache ile **24,8 s**; 10 adımda cache ısınınca **11 s**.
   Adım başına disk trafiği ≈ 2 × 16 GB (forward + geri-recompute).
 - İlginç: 32B'nin peak'i **14B'den düşük** (3,11 vs 3,90 GB). Sebep: 14B'de
   `lm_head` 4-bit'ti ve bnb'nin 4-bit matmul'ü dequantize workspace'i ayırıyordu;
   32B'nin head'i doğal bf16 olduğu için o workspace yok.
-- Dürüst sınır: bu artık **disk + I/O** sınırı. RAM'i az olan bir makinede de
-  çalışır ama page cache küçülür, adım süresi uzar. 6 GB VRAM sınırı korunuyor.
+- **RAM hakkında dürüst not:** ağırlıklar başlangıçta RAM'e alınmıyor (RSS 2,44 GB)
+  ama adım sırasında OS okunan dosya sayfalarını önbellekte tuttuğu için RSS
+  19,4 GB'a çıkıyor. Windows'un commit sayacı da ~20 GB gösterdi; bu sayfaların
+  ne kadarının anında geri alınabilir olduğunu `EmptyWorkingSet` ile bu makinede
+  kanıtlayamadım (sayaç setleri kapalı). Yani: **16 GB RAM'li bir makinede de
+  çalışır ama sayfa değişimi artar ve adım süresi uzar**; 6 GB VRAM sınırı ise
+  aynen korunur. Asıl kanıtlanan şey şu: model hiçbir anda bütün olarak RAM'e
+  yüklenmiyor, bloklar tek tek materialize ediliyor.
 
