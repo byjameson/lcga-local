@@ -69,6 +69,9 @@ def main() -> int:
     ap.add_argument("--seq", type=int, default=1024)
     ap.add_argument("--depth", type=float, default=0.5)
     ap.add_argument("--style", default="exp60", choices=("exp60", "train"))
+    ap.add_argument("--gen", type=int, default=0,
+                    help="also greedily generate this many tokens with full-sequence "
+                         "re-prefill (dense vs sparse)")
     args = ap.parse_args()
 
     from transformers import AutoTokenizer
@@ -120,6 +123,23 @@ def main() -> int:
                 if fact_block in [int(v) for v in cap["idx"][0, rows[0]] if int(v) >= 0])
     print(f"[summary] layers selecting the fact block at the answer row: {n_hit}/{len(caps)}",
           flush=True)
+
+    if args.gen:
+        prompt = x[0, : args.seq - ans_len].tolist()   # drop the answer, keep question
+        for name, sparse in (("dense", False), ("sparse", True)):
+            set_sparse_enabled(sparse)
+            cur = list(prompt)
+            out_txt = []
+            for _ in range(args.gen):
+                pad = (-len(cur)) % 64          # the sparse kernel needs T % block == 0
+                xx = torch.tensor([cur + [0] * pad], dtype=torch.long, device=DEV)
+                with torch.no_grad():
+                    lg = model(input_ids=xx, logits_to_keep=pad + 1).logits[0, 0].float()
+                nxt = int(lg.argmax(-1))
+                out_txt.append(tok.decode([nxt]))
+                cur.append(nxt)
+            print(f"[gen {name}] {''.join(out_txt)!r}", flush=True)
+            set_sparse_enabled(False)
     return 0
 
 

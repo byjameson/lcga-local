@@ -99,6 +99,16 @@ sink+diagonal (2 blocks), so at ρ=0.25 it is *not* budget-matched (the router u
 the two coincide by construction — and there learned == local **exactly** (26.788),
 which is the clean degeneration result.
 
+> **UPDATE (25 Oct 2026).** The "vs local" margins above are budget artefacts. Against
+> a **budget-matched static window** the learned router is within +0.005…+0.133 PPL
+> (slightly *worse*), and it selects content blocks only **1.7 / 6.0 / 7.0%** of the
+> time at 1k/4k/8k. See `LCGA_FINDINGS.md` §0–2. Earlier `exp58/exp59/exp60` numbers
+> were invalid because the checkpoint was loaded before `patch_model` (so an
+> uninitialised router was measured); those scripts are fixed and everything was
+> re-measured. The follow-up that *does* work — a retrieval-trained router reaching
+> exact match 1.00 at a 25% budget, trained at 1k and evaluated at 8k — is in
+> `LCGA_FINDINGS.md` §5.
+
 Train four routers with identical data/steps/lr, differing only in the scoring
 head; evaluate all with `exp3_eval.py --max_chunks 128` at ρ=0.25:
 

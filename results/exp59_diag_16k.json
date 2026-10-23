@@ -1,0 +1,15 @@
+{
+ "exp": "exp59_selection_stats",
+ "tag": "diag_16k",
+ "ckpt": "checkpoints/abl_diag_best.pt",
+ "budget": 0.25,
+ "ts": "2026-10-24 02:55:53",
+ "by_T": {
+  "T16384": {
+   "sink": 0.031105710814094797,
+   "window": 0.9020225799918995,
+   "content": 0.06687170919400567,
+   "mean_m": 32.1484375
+  }
+ }
+}
