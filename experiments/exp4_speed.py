@@ -13,7 +13,8 @@ from lcsa.decode import prefill_and_record, decode_step
 from lcsa.harness import load_model
 from lcsa.lora import apply_lora, merge_lora
 from lcsa.metrics import append_jsonl, now, cuda_time_ms
-from lcsa.model import (patch_model, set_sparse_enabled, set_profiling, get_profile)
+from lcsa.model import (patch_model, set_sparse_enabled, set_profiling, get_profile,
+                        set_router_graph)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_DIR = os.path.join(ROOT, "models", "Qwen2.5-0.5B")
@@ -42,6 +43,9 @@ def main():
     ap.add_argument("--merge", action="store_true", help="merge LoRA into base weights")
     ap.add_argument("--pin_dense", action="store_true",
                     help="pin dense timing to FLASH/EFFICIENT sdpa backends (deterministic reference)")
+    ap.add_argument("--router-graph", action="store_true", default=True,
+                    help="replay the router pipeline as a CUDA graph (A2 path)")
+    ap.add_argument("--no-router-graph", action="store_false", dest="router_graph")
     args = ap.parse_args()
     Ts = [int(t) for t in args.Ts.split(",")]
 
