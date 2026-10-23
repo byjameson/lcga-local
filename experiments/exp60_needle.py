@@ -79,6 +79,8 @@ def main() -> int:
     ap.add_argument("--depths", default="0.1,0.5,0.9")
     ap.add_argument("--n_prompts", type=int, default=4)
     ap.add_argument("--tag", default="needle")
+    ap.add_argument("--policies", default="dense,topk,window,random,local,oracle",
+                    help="oracle = top-m by TRUE dense block mass (ceiling for any router)")
     ap.add_argument("--v2", action="store_true")
     ap.add_argument("--merge", action="store_true")
     args = ap.parse_args()
@@ -87,7 +89,7 @@ def main() -> int:
 
     model = load_model(MODEL_DIR, device=DEV)
     tok = AutoTokenizer.from_pretrained(MODEL_DIR)
-    meta = load_ckpt(model, args.ckpt)
+    meta = torch.load(args.ckpt, map_location="cpu", weights_only=False).get("meta", {})
     margs = meta.get("args", {})
     wrappers = patch_model(model, budget=margs.get("budget", 0.25),
                            n_concepts=margs.get("n_concepts", 64),
@@ -99,7 +101,7 @@ def main() -> int:
                            recall_gain=args.v2)
     if args.v2:
         apply_lora(model, r_attn=margs.get("lora_attn", 16), r_mlp=margs.get("lora_mlp", 0))
-        load_ckpt(model, args.ckpt)
+    load_ckpt(model, args.ckpt)   # AFTER patch_model, otherwise nothing is loaded
     for p in model.parameters():
         p.requires_grad_(False)
     for w in wrappers.values():
@@ -111,7 +113,7 @@ def main() -> int:
     filler = toks[: max(40000, 20000)].tolist()
     question = " Question: What is the secret code? Answer:"
 
-    policies = ["dense", "topk", "window", "random", "local"]
+    policies = [p.strip() for p in args.policies.split(",") if p.strip()]
     out = {"exp": "exp60_needle", "tag": args.tag, "ckpt": args.ckpt,
            "ts": now(), "results": {}}
     rng = random.Random(0)

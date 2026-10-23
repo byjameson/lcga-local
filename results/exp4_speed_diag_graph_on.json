@@ -1,0 +1,79 @@
+{
+ "exp": "exp4_speed",
+ "ts": "2026-10-24 00:41:14",
+ "ckpt": "checkpoints/abl_diag_best.pt",
+ "tag": "speed_diag_graph_on",
+ "meta": {
+  "args": {
+   "steps": 1500,
+   "batch": 4,
+   "seq": 1024,
+   "lr": 0.0015,
+   "lam_kl": 0.5,
+   "budget": 0.25,
+   "n_concepts": 64,
+   "graph_rank": 0,
+   "dynamic": false,
+   "no_rel_bias": false,
+   "content_rank": 0,
+   "tag": "abl_diag",
+   "eval_every": 250,
+   "log_every": 20,
+   "seed": 0,
+   "warmup": 100,
+   "init_ckpt": ""
+  },
+  "router_params": 2755128,
+  "step": 250,
+  "dev_ppl": 54.5941162109375
+ },
+ "prefill": {
+  "T8192": {
+   "dense_ms": 825.9939,
+   "sparse_ms": 754.3987,
+   "speedup": 1.095,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 49.107,
+    "kernel_ms": 97.925,
+    "coarse_ms": 24.098
+   },
+   "breakdown_ratio_of_sparse": {
+    "router_ms": 0.0651,
+    "kernel_ms": 0.1298,
+    "coarse_ms": 0.0319
+   }
+  },
+  "T16384": {
+   "dense_ms": 2225.1089,
+   "sparse_ms": 1642.1396,
+   "speedup": 1.355,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 83.404,
+    "kernel_ms": 374.581,
+    "coarse_ms": 47.574
+   },
+   "breakdown_ratio_of_sparse": {
+    "router_ms": 0.0508,
+    "kernel_ms": 0.2281,
+    "coarse_ms": 0.029
+   }
+  }
+ },
+ "decode": {
+  "ctx1024": {
+   "dense_ms_per_step": 36.394,
+   "sparse_ms_per_step": 61.441,
+   "speedup": 0.592
+  },
+  "ctx2048": {
+   "dense_ms_per_step": 36.755,
+   "sparse_ms_per_step": 61.982,
+   "speedup": 0.593
+  },
+  "ctx4096": {
+   "dense_ms_per_step": 37.405,
+   "sparse_ms_per_step": 60.418,
+   "speedup": 0.619
+  }
+ }
+}

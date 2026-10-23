@@ -84,7 +84,7 @@ def main() -> int:
     args = ap.parse_args()
 
     model = load_model(MODEL_DIR, device=DEV)
-    meta = load_ckpt(model, args.ckpt)
+    meta = torch.load(args.ckpt, map_location="cpu", weights_only=False).get("meta", {})
     margs = meta.get("args", {})
     wrappers = patch_model(model, budget=margs.get("budget", 0.25),
                            n_concepts=margs.get("n_concepts", 64),
@@ -96,7 +96,9 @@ def main() -> int:
                            recall_gain=args.v2)
     if args.v2:
         apply_lora(model, r_attn=margs.get("lora_attn", 16), r_mlp=margs.get("lora_mlp", 0))
-        load_ckpt(model, args.ckpt)
+    load_ckpt(model, args.ckpt)   # must be AFTER patch_model: the router modules
+                                  # do not exist before, so the first call would
+                                  # silently load nothing (bug fixed 24 Oct 2026)
     for p in model.parameters():
         p.requires_grad_(False)
     for w in wrappers.values():

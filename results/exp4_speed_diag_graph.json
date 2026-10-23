@@ -1,0 +1,124 @@
+{
+ "exp": "exp4_speed",
+ "ts": "2026-10-24 00:35:28",
+ "ckpt": "checkpoints/abl_diag_best.pt",
+ "tag": "speed_diag_graph",
+ "meta": {
+  "args": {
+   "steps": 1500,
+   "batch": 4,
+   "seq": 1024,
+   "lr": 0.0015,
+   "lam_kl": 0.5,
+   "budget": 0.25,
+   "n_concepts": 64,
+   "graph_rank": 0,
+   "dynamic": false,
+   "no_rel_bias": false,
+   "content_rank": 0,
+   "tag": "abl_diag",
+   "eval_every": 250,
+   "log_every": 20,
+   "seed": 0,
+   "warmup": 100,
+   "init_ckpt": ""
+  },
+  "router_params": 2755128,
+  "step": 250,
+  "dev_ppl": 54.5941162109375
+ },
+ "prefill": {
+  "T1024": {
+   "dense_ms": 89.9592,
+   "sparse_ms": 97.2466,
+   "speedup": 0.925,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 10.171,
+    "kernel_ms": 3.333,
+    "coarse_ms": 3.381
+   },
+   "breakdown_ratio_of_sparse": {
+    "router_ms": 0.1046,
+    "kernel_ms": 0.0343,
+    "coarse_ms": 0.0348
+   }
+  },
+  "T2048": {
+   "dense_ms": 178.7073,
+   "sparse_ms": 184.3583,
+   "speedup": 0.969,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 12.921,
+    "kernel_ms": 8.583,
+    "coarse_ms": 6.469
+   },
+   "breakdown_ratio_of_sparse": {
+    "router_ms": 0.0701,
+    "kernel_ms": 0.0466,
+    "coarse_ms": 0.0351
+   }
+  },
+  "T4096": {
+   "dense_ms": 363.037,
+   "sparse_ms": 356.4481,
+   "speedup": 1.018,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 22.971,
+    "kernel_ms": 27.268,
+    "coarse_ms": 12.744
+   },
+   "breakdown_ratio_of_sparse": {
+    "router_ms": 0.0644,
+    "kernel_ms": 0.0765,
+    "coarse_ms": 0.0358
+   }
+  },
+  "T8192": {
+   "dense_ms": 828.5843,
+   "sparse_ms": 752.7992,
+   "speedup": 1.101,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 46.24,
+    "kernel_ms": 97.975,
+    "coarse_ms": 24.092
+   },
+   "breakdown_ratio_of_sparse": {
+    "router_ms": 0.0614,
+    "kernel_ms": 0.1301,
+    "coarse_ms": 0.032
+   }
+  },
+  "T16384": {
+   "dense_ms": 2220.4713,
+   "sparse_ms": 1631.8304,
+   "speedup": 1.361,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 75.41,
+    "kernel_ms": 374.68,
+    "coarse_ms": 47.561
+   },
+   "breakdown_ratio_of_sparse": {
+    "router_ms": 0.0462,
+    "kernel_ms": 0.2296,
+    "coarse_ms": 0.0291
+   }
+  }
+ },
+ "decode": {
+  "ctx1024": {
+   "dense_ms_per_step": 52.363,
+   "sparse_ms_per_step": 95.544,
+   "speedup": 0.548
+  },
+  "ctx2048": {
+   "dense_ms_per_step": 56.98,
+   "sparse_ms_per_step": 97.764,
+   "speedup": 0.583
+  },
+  "ctx4096": {
+   "dense_ms_per_step": 61.255,
+   "sparse_ms_per_step": 101.289,
+   "speedup": 0.605
+  }
+ }
+}

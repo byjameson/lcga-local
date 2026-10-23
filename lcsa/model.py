@@ -14,12 +14,22 @@ from .concepts import ConceptGraphRouter
 _STATE = {"enabled": False, "capture": False, "captured": [], "selection_mode": "topk",
           "profile": False, "profile_acc": {}, "torch_exact": False,
           "stage2": False, "dense_only": False, "dense_targets": {}, "aux_losses": [],
-          "ckpt_gather": False, "router_graph": False}
+          "ckpt_gather": False, "router_graph": False, "capture_qk": False}
 
 
 def set_torch_exact(flag: bool):
     """Use the torch gather reference for the exact path (slower; for stats/parity)."""
     _STATE["torch_exact"] = bool(flag)
+
+
+def set_capture_qk(flag: bool):
+    """Also capture post-RoPE q/k in the capture entries.
+
+    Used by exp61 to build a token-level teacher: block-averaged dense mass dilutes
+    a 3-token answer across a 64-token block (~1/20), which destroys the retrieval
+    signal. With q/k the teacher can be the actual attention of the answer tokens.
+    """
+    _STATE["capture_qk"] = bool(flag)
 
 
 def set_router_graph(flag: bool):
@@ -326,6 +336,9 @@ class LCAGAttention(nn.Module):
         if _STATE["capture"]:
             entry = {"idx": idx.detach(), "probs": probs,
                      "scores": scores.detach(), "student": out_final}
+            if _STATE["capture_qk"]:
+                entry["q"] = q.detach()
+                entry["k"] = k.detach()
             if est is not None:
                 entry["exact_stats"] = est
             if self.capture_dense:
