@@ -66,12 +66,17 @@ class StreamingQuantLoRATrainer:
     def __init__(self, model, device: str = "cuda", loss_chunk: int = 128,
                  lr: float = 1e-4, betas=(0.9, 0.999), eps: float = 1e-8,
                  weight_decay: float = 0.0, clip: float = 0.0,
-                 verbose: bool = False):
+                 verbose: bool = False, stage=None, release=None):
         self.device = device
         self.loss_chunk = loss_chunk
         self.clip = clip
         self.verbose = verbose
         self.model = model
+        # How a decoder block is brought to the GPU and taken away again. The
+        # defaults assume the whole 4-bit base sits in host RAM; a disk-backed
+        # store can pass its own load/release callables instead.
+        self.stage = stage if stage is not None else (lambda layer, i: layer.to(device))
+        self.release = release if release is not None else (lambda layer, i: layer.to("cpu"))
         base = base_model_of(model)
         self.base = base
         self.layers = list(base.model.layers)
@@ -106,10 +111,10 @@ class StreamingQuantLoRATrainer:
         pos = self.rotary(h, pos_ids)
         cache = []
         for i, layer in enumerate(self.layers):
-            layer.to(dev)
+            self.stage(layer, i)
             cache.append(h)
             h = _layer_out(layer(h, position_embeddings=pos))
-            layer.to("cpu")
+            self.release(layer, i)
             if self.verbose and (i + 1) % 8 == 0:
                 print(f"    [fwd] {i + 1}/{len(self.layers)} blocks "
                       f"reserved={torch.cuda.memory_reserved()/1e9:.2f}GB", flush=True)
@@ -120,7 +125,7 @@ class StreamingQuantLoRATrainer:
         dev = self.device
         for i in range(len(self.layers) - 1, -1, -1):
             layer = self.layers[i]
-            layer.to(dev)
+            self.stage(layer, i)
             h_in = cache[i]
             h_in.requires_grad_(True)
             out = _layer_out(layer(h_in, position_embeddings=pos))
@@ -132,7 +137,7 @@ class StreamingQuantLoRATrainer:
                 if p.requires_grad and p.grad is not None:
                     self._acc[id(p)].add_(p.grad.detach().float().cpu())
                     p.grad = None
-            layer.to("cpu")
+            self.release(layer, i)
             if self.verbose and (len(self.layers) - i) % 8 == 0:
                 print(f"    [bwd] {len(self.layers) - i}/{len(self.layers)} blocks "
                       f"reserved={torch.cuda.memory_reserved()/1e9:.2f}GB", flush=True)
