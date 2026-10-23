@@ -135,13 +135,43 @@ NF4+LoRA hattı denendi:
   accelerate 1.15) meta-tensor hatasıyla düştü; düzeltmek için farklı sürüm,
   ön-kantize (AWQ/GPTQ) model veya daha fazla VRAM gerekir.
 
-**Sonuç:** Bu 6 GB kartta pratik QLoRA tavanı **3B** (peak 3,9–4,25 GB). 7B
-QLoRA için ~10 GB+ VRAM ya da düzgün çalışan bir CPU-offload yığını gerekir.
+**Sonuç (HF in-memory yolu):** HF'nin tüm-model 4-bit QLoRA'sı bu kartta 7B'de
+taşıyor. Ama kendi blok-streaming motorumuzla 7B **sığıyor** — §9.
 
-## 9) Sıradaki
+## 9) Kendi streaming QLoRA'mız — 7B, 6 GB'da sığıyor (exp52)
 
-- 7B/13B için ön-kantize (AWQ/GPTQ) model veya daha büyük VRAM; CPU-offload
-  yığınını sürüm uyumu araştırması.
-- Daha uzun SFT (binlerce adım) ve aynı sette M5/LoRA ile kıyas.
-- Merge edilmiş modelin `serve.py`/`llm.py` ürün yoluna bağlanması (chat şablonu ile).
+`lcsa/stream_quant_lora.py` + `experiments/exp52_stream_qlora_7b.py`: 7B tabanı
+**NF4 4-bit CPU'da** tutar, aynı anda **tek decoder bloğunu** GPU'ya alır, LoRA
+gradyanlarını CPU'da biriktirir. HF'nin tüm-model QLoRA'sının aksine GPU'da tüm
+model + compute geçici tamponları yok; bu yüzden 6 GB'a sığıyor.
+
+| Metrik | Değer |
+|---|---|
+| Model | Qwen2.5-7B-Instruct, NF4 4-bit CPU'da |
+| GPU'da aynı anda | 1 blok + embed/head + aktivasyonlar |
+| LoRA | r=8, q/k/v/o, **5,05M (%0,116)** eğitilebilir |
+| Peak VRAM | **4,90 GB** |
+| Adım süresi | **5,9 s** (medyan, seq 128) |
+| Host RSS | ~4,9 GB |
+| Eval CE (önce → sonra) | **2,2304 → 2,1907 (−0,0397)**, 10 adım |
+| Load | ~115 s (ilk 4-bit CPU quantization) |
+
+Karşılaştırma:
+
+| | HF in-memory QLoRA (exp49) | **Bizim streaming QLoRA (exp52)** |
+|---|---|---|
+| 7B peak VRAM | 8,4–8,7 GB (spill) | **4,90 GB** |
+| 6 GB'a sığar mı? | ✗ | ✓ |
+| Adım | 4,3–8,1 s | 5,9 s |
+| LoRA params | 40,4M (q/k/v/o+mlp) | 5,05M (q/k/v/o, r=8) |
+
+Bu, projeye eklenen **yeni bir yetenek**: HF QLoRA'nın başaramadığı 7B eğitimini
+kendi blok-streaming motorumuz 6 GB'da yapıyor. 10 adım kısa bir PoC; uzun SFT ve
+daha geniş LoRA hedefleri bir sonraki adım.
+
+## 10) Sıradaki
+
+- 7B streaming QLoRA'da daha uzun SFT + geniş LoRA hedefleri (mlp).
+- 13B için aynı hattı denemek (int4 CPU taban ~7 GB; host RAM sınırı).
+- Merge edilmiş modellerin `serve.py`/`llm.py` ürün yoluna bağlanması.
 
