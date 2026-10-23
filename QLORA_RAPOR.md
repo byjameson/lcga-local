@@ -81,9 +81,27 @@ Bu, tüm hattın çalıştığını gösterir: **NF4 QLoRA eğitimi → merge �
 servis**. Aynı 32 token'lık örnekte taban ve merge'lı model benzer ve tutarlı
 cevap verdi; bu küçük bir duman testidir, kalite benchmark'ı değildir.
 
-## 7) Sıradaki
+## 7) Kısa SFT — Dolly-15k (exp51)
+
+`experiments/exp51_qlora_sft_3b.py`: aynı NF4+LoRA hattı, bu kez **talimat
+verisiyle** (`databricks/databricks-dolly-15k`, Apache-2.0; 128 train / 8 eval
+satır, tek tohum). Qwen sohbet şablonu, kullanıcı öneki maskelenir.
+
+| Metrik | Değer |
+|---|---|
+| Adım | 20 (seq 384, batch 1, lr 1e-4) |
+| Peak VRAM | 3,90 GB |
+| Adım süresi | 1,95 s (medyan) |
+| Host RSS | 2,04 GB |
+| Eval loss (önce → sonra) | **1,9528 → 1,2480 (−0,7048)** |
+| Örnek | "What is the capital of France?" → "Paris"; 3 maddelik dil öğrenme tavsiyesi tutarlı |
+
+Bu, WikiText-2 next-token denemesinden (exp49) farklı olarak **talimat
+formatını** öğrettiğini gösteriyor; yine de 128 satır/20 adım, benchmark değil.
+
+## 8) Sıradaki
 
 - 7B için ön-kantize model (NF4/AWQ) veya RAM boşaltma planı.
-- Gerçek talimat verisiyle (SFT) kısa bir kalite kontrolü; M5/LoRA ile aynı sette kıyas.
+- Daha uzun SFT (binlerce adım) ve aynı sette M5/LoRA ile kıyas.
 - Merge edilmiş modelin `serve.py`/`llm.py` ürün yoluna bağlanması (chat şablonu ile).
 
