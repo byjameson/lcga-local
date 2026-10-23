@@ -328,3 +328,28 @@ yeniden takılır), işi bitince `meta`'ya döner. Böylece model boyutu sınır
 `--shared-dtype as-stored` ile embedding/head fp32'ye şişirilmeden checkpoint
 dtype'ında (bf16) kalabilir — büyük modeller için şart.
 
+## 14) 32B — disk'ten akışla 6 GB VRAM'de (ana sonuç)
+
+Qwen2.5-32B-Instruct (unsloth **bnb-4bit**, 64 katman, 17,9 GB safetensors;
+dört shard'ın SHA256'sı doğrulandı) hiç RAM'e yüklenmeden, mmap'ten akıtılarak
+eğitildi.
+
+| Metrik | Değer |
+|---|---|
+| **Peak VRAM** | **3,11 GB** (6 GB'ın altında) |
+| Adım süresi (medyan) | **10,95 s** (seq 128) |
+| Eval CE | **2,3942 → 2,3637 (−0,0305)** / 10 adım |
+| Eğitilebilir LoRA (r=8) | 16,78M |
+| İskelet yükleme | 9,7 s |
+| Host RSS | 19,4 GB — bunun çoğu **mmap page cache** (OS geri alabilir) |
+
+- `--shared-dtype as-stored`: embedding bf16 olarak **CPU'da mmap view**, lm_head
+  bf16 **GPU'da** (1,56 GB); norm/bias da bf16.
+- İlk adım soğuk page cache ile **24,8 s**; 10 adımda cache ısınınca **11 s**.
+  Adım başına disk trafiği ≈ 2 × 16 GB (forward + geri-recompute).
+- İlginç: 32B'nin peak'i **14B'den düşük** (3,11 vs 3,90 GB). Sebep: 14B'de
+  `lm_head` 4-bit'ti ve bnb'nin 4-bit matmul'ü dequantize workspace'i ayırıyordu;
+  32B'nin head'i doğal bf16 olduğu için o workspace yok.
+- Dürüst sınır: bu artık **disk + I/O** sınırı. RAM'i az olan bir makinede de
+  çalışır ama page cache küçülür, adım süresi uzar. 6 GB VRAM sınırı korunuyor.
+

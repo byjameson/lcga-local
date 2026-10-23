@@ -47,8 +47,19 @@ try:
 
     def host_rss_gb():
         return round(_proc.memory_info().rss / 1e9, 2)
+
+    def host_private_gb():
+        # private (non-shared) bytes: excludes the mmap'd weight pages, which the
+        # OS can evict -- that is the number that matters for "does it fit in RAM"
+        try:
+            return round(_proc.memory_info().private / 1e9, 2)
+        except Exception:
+            return None
 except Exception:
     def host_rss_gb():
+        return None
+
+    def host_private_gb():
         return None
 
 
@@ -190,6 +201,7 @@ def main() -> int:
         "step_s_med": sorted(times)[len(times) // 2] if times else None,
         "peak_gb_max": max(peaks) if peaks else None,
         "host_rss_gb": host_rss_gb(),
+        "host_private_gb": host_private_gb(),
         "ce_before": round(ce0, 5) if ce0 is not None else None,
         "ce_after": round(ce1, 5) if ce1 is not None else None,
         "ce_delta": round(ce1 - ce0, 6) if (ce0 is not None and ce1 is not None) else None,

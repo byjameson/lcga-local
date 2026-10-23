@@ -113,20 +113,18 @@ def build_skeleton(model_dir, lora_r: int = 8, lora_alpha: int = 16,
         p.requires_grad = False
 
     # 2) cast all non-4bit params to fp32 (the RAM path does this, so the forward
-    #    matches bit-for-bit). `low_precision_shared` keeps embed/head as stored.
-    for name, p in list(model.named_parameters()):
-        if p.__class__.__name__ == "Params4bit":
-            continue
-        if p.dtype not in (torch.float16, torch.bfloat16):
-            continue
-        if low_precision_shared and (
-            name.endswith("embed_tokens.weight") or name.endswith("lm_head.weight")
-        ):
-            continue
-        mod_name, _, attr = name.rpartition(".")
-        target = model.get_submodule(mod_name) if mod_name else model
-        target._parameters[attr] = torch.nn.Parameter(
-            target._parameters[attr].data.to(torch.float32), requires_grad=False)
+    #    matches bit-for-bit). `low_precision_shared` keeps *everything* in the
+    #    checkpoint dtype: mixing an fp32 norm with a bf16 head breaks F.linear.
+    if not low_precision_shared:
+        for name, p in list(model.named_parameters()):
+            if p.__class__.__name__ == "Params4bit":
+                continue
+            if p.dtype not in (torch.float16, torch.bfloat16):
+                continue
+            mod_name, _, attr = name.rpartition(".")
+            target = model.get_submodule(mod_name) if mod_name else model
+            target._parameters[attr] = torch.nn.Parameter(
+                target._parameters[attr].data.to(torch.float32), requires_grad=False)
 
     apply_lora(model, r_attn=r_attn, r_mlp=r_mlp, alpha_attn=lora_alpha,
                alpha_mlp=lora_alpha)
