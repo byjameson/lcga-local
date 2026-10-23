@@ -50,6 +50,36 @@ piling more runs on top.
 
 ### E1 — Router component ablation (the missing baseline)
 
+**RESULT (measured).** Same test set (128 chunks, T=1024, ρ=0.25), same recipe
+(seed 0, 1500 steps, lr 1.5e-3), only the scoring head differs:
+
+| | v1 (graph rank-16) | abl_diag (rank-0) | difference |
+|---|---:|---:|---:|
+| sparse PPL | 21.838 | **21.837** | −0.001 |
+| recall | 0.779 | **0.785** | diag better |
+| top-1 agreement | 0.7649 | **0.7674** | diag better |
+| TinyStories PPL | 7.963 | **7.941** | diag better |
+| ρ=0.125 | 26.788 | 26.788 | identical |
+
+**The concept graph adds nothing** (49k extra parameters/layer total, 0.001 PPL).
+The diagonal concept-space bilinear already carries all the signal.
+
+What *does* earn its keep — the learned scorer itself:
+
+| Selection @ρ=0.25 | PPL |
+|---|---:|
+| dense | 14.30 |
+| **learned (diag)** | **21.84** |
+| random-k | 23.91 |
+| static sink+local | 26.79 |
+
+So learned content selection is real (**−2.1 PPL vs random, −5.0 vs local**), but
+the elaborate low-rank routing is not. Revised claim: *a ~64-parameter-per-layer
+learned block scorer recovers the signal; the concept graph is dead weight.*
+
+Open follow-up: does the **recency prior** matter (`--no_rel_bias`, running), and
+does an extra content shortcut add anything (`--content_rank`)?
+
 Train four routers with identical data/steps/lr, differing only in the scoring
 head; evaluate all with `exp3_eval.py --max_chunks 128` at ρ=0.25:
 
@@ -84,18 +114,31 @@ position ~2k in an 8k context and ask for it). **Rule:** quality must be within
 ~10% at 8k, and the probe must not collapse, or the "long-context regime" claim
 dies.
 
-### E4 — Memory accounting (eval only)
+### E4 — Cost accounting (eval only) — *corrected after reading the kernel*
 
-Measure KV/working-set bytes for dense vs ρ=0.25 at T=4k/8k/16k, and peak VRAM on
-this 6 GB card. **This is the number that makes LCGA matter for small GPUs** — it
-has never been measured.
+`sparse_attention_triton(q, k, v, idx, …)` receives the **full** K/V tensors and
+gathers the selected blocks *inside* the kernel. So LCGA reduces **attention
+compute and bandwidth**, but it does **not** reduce KV memory: the full cache is
+still allocated.
+
+That has a direct consequence for the 6 GB story: LCGA does **not** let you fit a
+longer context. It makes a context that already fits *cheaper*. Memory savings
+would require not storing the unused KV at all (Quest/MInference-style), which is
+a different design and is out of scope here.
+
+Measure (attention-only, T=4k/8k/16k): latency dense vs sparse at fixed ρ, plus
+peak VRAM to show the KV bytes are unchanged. **Rule:** the speedup must be
+material (≥1.25×) at 8k+, and we state the memory limitation explicitly rather
+than implying a capacity win.
 
 ## 5. Kill criteria (decide before running, not after)
 
 - E1 shows no component beats diag-only → the "learned content routing" claim is
   out; publish the negative result and keep the budget/position story.
 - E3 shows the gap does not shrink by 8k → long context is not our regime; stop.
-- E4 shows no meaningful memory saving at 8k → the 6 GB angle is gone; stop.
+- E4 shows no meaningful speedup at 8k → the 6 GB angle is gone; stop. (Note: E4
+  already established that LCGA is a compute/bandwidth method, **not** a memory
+  method — no KV saving is claimed.)
 
 Negative results are publishable here: the ρ=0.125 degeneration to sink+local is
 already a clean, reproducible finding.
