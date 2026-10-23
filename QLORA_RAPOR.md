@@ -101,6 +101,19 @@ değil her koşunun kendi düşüşünü kıyaslamak gerekir. 200 adımlık koş
 **353 s (~5,9 dk)**, tek seed; hâlâ benchmark değil, ama talimat formatını
 öğrendiğini ve 6 GB'da kararlı çalıştığını gösteriyor.
 
+**SFT adapter'ını merge + paged servis:** `exp50` ile `qlora_qwen3b_sft_t200`
+bf16 tabana merge edildi (`checkpoints/qwen3b_sft_merged`, 6,17 GB; merge 19,9 s,
+host RSS 7,47 GB) ve `exp16` ile int8 paged servis edildi: **2,84 tok/s**, peak
+**4733 MB**. Aynı sohbet-şablonlu istemde örnek:
+
+- SFT-merged: "1. Practice speaking the language as much as possible. 2. Listen
+  to the language as much as possible. 3. Read the language as much as possible."
+- Taban 3B-Instruct: daha uzun bir giriş + madde listesi (64 token sınırında
+  kesildi).
+
+Aynı ayar/istem ile tek örnek; kalite benchmark'ı değil, hattın ürün yolunda
+çalıştığını gösteren bir duman testi.
+
 ## 8) 7B denemesi — 6 GB'a sığmıyor (dürüst sonuç)
 
 Qwen2.5-7B-Instruct indirildi (Apache-2.0, 14,2 GB bf16, 4 shard) ve aynı

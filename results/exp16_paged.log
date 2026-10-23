@@ -67,3 +67,27 @@ Some additional information about Paris:
 
 1. It is the most populous city in France, with a population of over 2
 
+{"tag": "qlora_sft_paged", "model": "qwen3b_sft_merged", "device": "cuda", "dtype": "bf16", "state_dict": null, "quant": "int8", "quant_err_max": 0.003937020207082988, "layers": 36, "resident_k": 26, "streamed_layers": 10, "layer_mb": 147.0, "embed_mb": 593.5, "prompt_tokens": 17, "new_tokens": 33, "prefill_s": 1.486, "decode_s": 11.623, "tok_s": 2.84, "wall_s": 13.14, "load_s": 13.07, "streamed_mb_per_pass": 736.0, "streamed_mb_total": 24277.0, "streamed_gb_per_token": 0.718, "pin": true, "temperature": 0.0, "seed": 1234, "peak_alloc_mb": 4733.0, "peak_reserved_mb": 4846.0, "free_mb_after": 287.0, "parity": null, "sample": "user Give three tips for learning a new language. assistant 1. Practice speaking the language as much as possible. 2. Listen to the language as much as possible. 3. Read the language as much as possible."}
+PROMPT: <|im_start|>user
+Give three tips for learning a new language.<|im_end|>
+<|im_start|>assistant
+
+TEXT: user
+Give three tips for learning a new language.
+assistant
+1. Practice speaking the language as much as possible.
+2. Listen to the language as much as possible.
+3. Read the language as much as possible.
+
+{"tag": "base_sft_prompt_paged", "model": "Qwen2.5-3B-Instruct", "device": "cuda", "dtype": "bf16", "state_dict": null, "quant": "int8", "quant_err_max": 0.003937020207082988, "layers": 36, "resident_k": 26, "streamed_layers": 10, "layer_mb": 147.0, "embed_mb": 593.5, "prompt_tokens": 17, "new_tokens": 64, "prefill_s": 1.305, "decode_s": 20.661, "tok_s": 3.1, "wall_s": 21.98, "load_s": 17.01, "streamed_mb_per_pass": 736.0, "streamed_mb_total": 47819.0, "streamed_gb_per_token": 0.718, "pin": true, "temperature": 0.0, "seed": 1234, "peak_alloc_mb": 4734.0, "peak_reserved_mb": 4846.0, "free_mb_after": 287.0, "parity": null, "sample": "user Give three tips for learning a new language. assistant Learning a new language can be both exciting and challenging, but with the right approach, it can be a rewarding experience. Here are three effective tips to help you learn a new language:  1. **Immerse Yourself in the Language**: One of the most effective ways to learn a new language is to immerse yourself"}
+PROMPT: <|im_start|>user
+Give three tips for learning a new language.<|im_end|>
+<|im_start|>assistant
+
+TEXT: user
+Give three tips for learning a new language.
+assistant
+Learning a new language can be both exciting and challenging, but with the right approach, it can be a rewarding experience. Here are three effective tips to help you learn a new language:
+
+1. **Immerse Yourself in the Language**: One of the most effective ways to learn a new language is to immerse yourself
+
