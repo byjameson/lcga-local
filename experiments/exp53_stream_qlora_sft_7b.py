@@ -106,6 +106,8 @@ def main() -> int:
     ap.add_argument("--eval_size", type=int, default=32)
     ap.add_argument("--lora_r", type=int, default=8)
     ap.add_argument("--lora_alpha", type=int, default=16)
+    ap.add_argument("--targets", choices=["attn", "all"], default="attn",
+                    help="attn: q/k/v/o only; all: attention + mlp projections")
     ap.add_argument("--save", default="checkpoints/stream_qlora_7b_sft")
     ap.add_argument("--seed", type=int, default=1234)
     ap.add_argument("--tag", default="stream_sft7b")
@@ -145,13 +147,17 @@ def main() -> int:
     )
     model.config.use_cache = False
     model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=False)
+    targets = (["q_proj", "k_proj", "v_proj", "o_proj"]
+               if args.targets == "attn"
+               else ["q_proj", "k_proj", "v_proj", "o_proj",
+                     "gate_proj", "up_proj", "down_proj"])
     lora = LoraConfig(
         r=args.lora_r,
         lora_alpha=args.lora_alpha,
         lora_dropout=0.0,
         bias="none",
         task_type="CAUSAL_LM",
-        target_modules=["q_proj", "k_proj", "v_proj", "o_proj"],
+        target_modules=targets,
     )
     model = get_peft_model(model, lora)
     print(f"[load] {time.time()-t0:.1f}s rss={host_rss_gb()}GB", flush=True)
@@ -204,6 +210,7 @@ def main() -> int:
         "streamed": "one block on GPU",
         "lora_r": args.lora_r,
         "lora_alpha": args.lora_alpha,
+        "targets": args.targets,
         "trainable_params": tr.n_lora,
         "steps": len(losses),
         "seq": args.seq,
