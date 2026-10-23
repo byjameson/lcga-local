@@ -41,15 +41,26 @@ def logits_fn(model, device="cuda"):
 
 
 @torch.no_grad()
-def quick_ppl(model, chunks, device="cuda", max_chunks=None, dtype=torch.float32):
-    """Mean NLL per token and PPL over chunks (1,T)."""
+def quick_ppl(model, chunks, device="cuda", max_chunks=None, dtype=torch.float32,
+              pos_chunk: int = 1024):
+    """Mean NLL per token and PPL over chunks (1,T).
+
+    The CE is accumulated in position chunks: a full T=8192 logits tensor is
+    T*vocab*2 bytes (2.5 GB for Qwen's 152k vocab), which OOMs a 6 GB card on its
+    own. Chunking keeps the result identical while bounding peak memory.
+    """
     n_chunks = len(chunks) if max_chunks is None else min(len(chunks), max_chunks)
     total, n = 0.0, 0
     for i in range(n_chunks):
         ids = chunks[i].to(device).unsqueeze(0)
         logits = model(input_ids=ids).logits
-        ce = F.cross_entropy(logits[0, :-1].float(), ids[0, 1:], reduction="sum").item()
-        total += ce
-        n += ids.shape[1] - 1
+        T = ids.shape[1]
+        for a in range(0, T - 1, pos_chunk):
+            b = min(a + pos_chunk, T - 1)
+            ce = F.cross_entropy(logits[0, a:b].float(), ids[0, a + 1:b + 1],
+                                 reduction="sum").item()
+            total += ce
+            n += b - a
+        del logits
     mean_ce = total / max(n, 1)
     return {"ce": mean_ce, "ppl": float(torch.exp(torch.tensor(mean_ce))), "ntok": n}
