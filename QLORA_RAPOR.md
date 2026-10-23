@@ -249,3 +249,27 @@ Aynı hat 20 adım çalıştırıldı (seq 128, eval 2 chunk):
 - 7B streaming QLoRA'da daha uzun SFT + geniş LoRA hedefleri (mlp).
 - Merge edilmiş modellerin `serve.py`/`llm.py` ürün yoluna bağlanması.
 
+## 12) Yeniden üretme
+
+```bash
+pip install -r requirements-qlora.txt          # bitsandbytes 0.50.2, peft 0.21.2
+
+# 3B: HF in-memory QLoRA PoC
+python experiments/exp49_qlora_3b.py --steps 10 --seq 512 --eval_chunks 2 --tag qlora3b_seq512_t10
+
+# 7B: kendi blok-streaming QLoRA'mız (base 4-bit CPU'da, tek blok GPU'da)
+python experiments/exp52_stream_qlora_7b.py --steps 10 --seq 128 --eval_chunks 1 --tag qlora7b_stream
+
+# 7B: Dolly-15k talimat SFT
+python experiments/exp53_stream_qlora_sft_7b.py --steps 100 --seq 256 --tag stream_sft7b
+
+# 14B: CPU-embedding düzeltmesiyle 6GB'da (taban + SFT)
+python experiments/exp52_stream_qlora_7b.py --model models/Qwen2.5-14B-Instruct \
+    --steps 20 --seq 128 --eval_chunks 2 --tag qlora14b_cpuembed_t20
+python experiments/exp53_stream_qlora_sft_7b.py --model models/Qwen2.5-14B-Instruct \
+    --steps 200 --seq 128 --targets attn --tag sft14b_attn_200
+```
+
+Not: `exp52`/`exp53` dosya adlarında "7b" geçse de `--model` ile herhangi bir
+Qwen2.5 tabanı verilebilir; hat model boyutundan bağımsızdır.
+
