@@ -169,7 +169,7 @@ def main() -> int:
           f"top1={rec['top1']:.4f} ({rec['sec']}s)", flush=True)
 
     if args.controls:
-        for mode in ("random", "local"):
+        for mode in ("random", "local", "window"):
             set_selection_mode(mode)
             ces = []
             for ch in chunks:
