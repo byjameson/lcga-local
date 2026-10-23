@@ -139,7 +139,12 @@ engine that trains a 32B at 11 s/step generates at seconds *per token*:
 | Model | Peak VRAM | s / token | tok/s |
 |---|---:|---:|---:|
 | Qwen2.5-3B (disk path) | 1.92 GB | 0.71 | 1.41 |
+| Qwen2.5-14B (disk path) | 1.93 GB | 1.68 | 0.60 |
 | Qwen2.5-32B (disk path) | 2.36 GB | **3.57** | **0.28** |
+
+The cost scales linearly with the number of weights (one block pass per token):
+3B → 14B → 32B is 0.71 → 1.68 → 3.57 s/token. Extrapolating, a dense 72B would
+land near ~8 s/token (not measured here).
 
 `exp56_disk_infer.py` is the inference counterpart of `exp54`: same mmap block
 loader, a KV cache, one token at a time, and `--verify` checks the cached path
