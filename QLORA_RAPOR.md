@@ -84,20 +84,22 @@ cevap verdi; bu küçük bir duman testidir, kalite benchmark'ı değildir.
 ## 7) Kısa SFT — Dolly-15k (exp51)
 
 `experiments/exp51_qlora_sft_3b.py`: aynı NF4+LoRA hattı, bu kez **talimat
-verisiyle** (`databricks/databricks-dolly-15k`, Apache-2.0; 128 train / 8 eval
-satır, tek tohum). Qwen sohbet şablonu, kullanıcı öneki maskelenir.
+verisiyle** (`databricks/databricks-dolly-15k`, Apache-2.0; tek tohum). Qwen
+sohbet şablonu, kullanıcı öneki maskelenir.
 
-| Metrik | Değer |
-|---|---|
-| Adım | 20 (seq 384, batch 1, lr 1e-4) |
-| Peak VRAM | 3,90 GB |
-| Adım süresi | 1,95 s (medyan) |
-| Host RSS | 2,04 GB |
-| Eval loss (önce → sonra) | **1,9528 → 1,2480 (−0,7048)** |
-| Örnek | "What is the capital of France?" → "Paris"; 3 maddelik dil öğrenme tavsiyesi tutarlı |
+| Metrik | 20 adım (smoke) | 200 adım (ana) |
+|---|---|---|
+| Train / eval satır | 128 / 8 | 512 / 32 |
+| Peak VRAM | 3,90 GB | 3,90 GB |
+| Adım süresi (medyan) | 1,95 s | **1,74 s** |
+| Host RSS | 2,04 GB | 2,04 GB |
+| Eval loss (önce → sonra) | 1,9528 → 1,2480 (−0,705) | **2,4405 → 1,9040 (−0,537)** |
+| Örnek | Paris; kısa tavsiye | Paris; üç somut dil öğrenme maddesi; tek cümlelik egzersiz özeti |
 
-Bu, WikiText-2 next-token denemesinden (exp49) farklı olarak **talimat
-formatını** öğrettiğini gösteriyor; yine de 128 satır/20 adım, benchmark değil.
+Not: iki koşunun eval seti farklı (8 vs 32 satır), bu yüzden mutlak seviyeleri
+değil her koşunun kendi düşüşünü kıyaslamak gerekir. 200 adımlık koşu
+**353 s (~5,9 dk)**, tek seed; hâlâ benchmark değil, ama talimat formatını
+öğrendiğini ve 6 GB'da kararlı çalıştığını gösteriyor.
 
 ## 8) 7B denemesi — 6 GB'a sığmıyor (dürüst sonuç)
 
