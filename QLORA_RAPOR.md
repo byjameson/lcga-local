@@ -169,19 +169,18 @@ Bu, projeye eklenen **yeni bir yetenek**: HF QLoRA'nın başaramadığı 7B eği
 kendi blok-streaming motorumuz 6 GB'da yapıyor.
 
 **Uzun SFT (exp53):** `experiments/exp53_stream_qlora_sft_7b.py`, Dolly-15k,
-512 train / 32 eval, 100 adım, seq 256, aynı streaming QLoRA hattı:
+seq 256, streaming QLoRA:
 
-| Metrik | Değer |
-|---|---|
-| Peak VRAM | **5,78 GB** |
-| Adım süresi (medyan) | **5,99 s** |
-| Duvar | 602 s (~10 dk) |
-| Host RSS | 5,14 GB |
-| Eval loss (önce → sonra) | **2,6850 → 1,8710 (−0,8139)** |
-| Eğitilebilir LoRA | 5,05M (%0,116) |
+| Koşu | Train/eval | LoRA | Peak | Adım | Eval loss (önce → sonra) |
+|---|---|---|---|---|---|
+| 100 adım, attn | 512/32 | 5,05M | 5,78 GB | 5,99 s | 2,6850 → 1,8710 (−0,814) |
+| **200 adım, all (attn+mlp)** | **768/32** | **20,19M** | **5,66 GB** | **5,25 s** | **2,4782 → 1,5670 (−0,911)** |
 
-Yani 7B, 6 GB VRAM'in altında **talimat verisiyle** eğitilebiliyor. 100 adım
-hâlâ kısa bir PoC; daha uzun koşu ve mlp hedefleri bir sonraki adım.
+- 200 adımlık koşu **1.052 s (~17,5 dk)**, host RSS 5,45 GB.
+- İki koşunun eval seti farklı (farklı train_size), bu yüzden mutlak seviyeler
+  değil her koşunun kendi düşüşü kıyaslanmalı; ikisi de hâlâ tek seed PoC.
+- Yani 7B, 6 GB VRAM'in altında **talimat verisiyle** eğitilebiliyor; mlp LoRA
+  hedefleriyle 200 adımda eval loss **−0,91**.
 
 ## 10) Sıradaki
 
