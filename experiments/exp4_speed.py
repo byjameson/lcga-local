@@ -71,6 +71,9 @@ def main():
     if args.merge:
         merge_lora(model)
         print("[lora] merged into base weights", flush=True)
+    if args.router_graph:
+        set_router_graph(True)
+        print("[router] CUDA-graph replay enabled", flush=True)
     print(f"[{now()}] loaded {args.ckpt}, budget={wrappers[0].budget}", flush=True)
 
     out = {"exp": "exp4_speed", "ts": now(), "ckpt": args.ckpt, "tag": args.tag,

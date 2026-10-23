@@ -80,20 +80,31 @@ budget, so content routing cannot express itself.
 
 ## 4. Speed (same checkpoint, eager path, budget 0.25)
 
-Prefill (single request):
+Prefill (single request, AC power):
 
 | T | dense | sparse | speedup | router | sparse kernel |
 |---|---:|---:|---:|---:|---:|
-| 1024 | 88.4 ms | 96.3 ms | 0.918× | 9.9 ms | 3.3 ms |
-| 2048 | 178.7 ms | 184.1 ms | 0.971× | 12.3 ms | 8.6 ms |
-| 4096 | 363.6 ms | 357.0 ms | 1.018× | 22.4 ms | 27.3 ms |
-| 8192 | 834.3 ms | 753.2 ms | **1.108×** | 45.7 ms | 98.5 ms |
+| 1024 | 90.0 ms | 97.2 ms | 0.925× | 10.2 ms | 3.3 ms |
+| 2048 | 178.7 ms | 184.4 ms | 0.969× | 12.9 ms | 8.6 ms |
+| 4096 | 363.0 ms | 356.4 ms | 1.018× | 23.0 ms | 27.3 ms |
+| 8192 | 826.0 ms | 754.4 ms | 1.095× | 49.1 ms | 97.9 ms |
+| 16384 | 2225.1 ms | 1642.1 ms | **1.355×** | 83.4 ms | 374.6 ms |
 
-Decode (eager, per token): 0.63× (1k), 0.61× (2k), 0.60× (4k) — **slower**, because
+Crossover is between 2k and 4k tokens; the win grows with context and reaches
+**1.36× at 16k**.
+
+Decode (eager, per token): 0.59× (1k), 0.59× (2k), 0.62× (4k) — **slower**, because
 the router runs on every layer for every token and the host-side launch overhead
-dominates at 0.5B. The earlier 1.12–1.27× decode numbers come from the CUDA-graph
-path compared against a CUDA-graph dense baseline; they are not comparable to this
-eager measurement.
+dominates at 0.5B. The 1.12–1.27× decode numbers quoted earlier come from the
+dedicated CUDA-graph decode implementation (`lcsa/decode_graph.py`) compared
+against a CUDA-graph dense baseline; they are a different measurement and are not
+reproduced by the eager harness here.
+
+**Negative result worth recording:** enabling the router's own CUDA-graph replay
+(`set_router_graph(True)`, confirmed by the log line) made no measurable
+difference — 8k: 49.1 vs 46.2 ms router; 16k: 83.4 vs 75.4 ms; end-to-end speedup
+1.095× vs 1.101× and 1.355× vs 1.361×, i.e. within noise. In this configuration
+the A2 graph-replay idea does not pay off.
 
 ## 5. What this is and is not
 
@@ -108,14 +119,15 @@ is only 1.11× at 8k; eager decode loses. The concept graph, which was the
 
 ## 6. If we want a real win, the next three things are
 
-1. **Cut router cost.** At 8k the router is 45.7 ms of the 753 ms prefill and it is
-   paid per layer per token in decode. A cheaper scorer (fewer concepts, fused
-   kernel, or CUDA-graph replay) directly converts into speedup.
-2. **Measure where dense is actually quadratic**: 16k/32k. The crossover at
-   ~4–5k means the current win is small; the regime where this should matter is
-   beyond what we measured.
-3. **Decode via the CUDA-graph path** (already implemented) and report it next to
-   a graph-dense baseline, not the eager one.
+1. **Cut router cost.** At 16k the router is ~83 ms of the 1642 ms prefill (5%) and
+   it is paid per layer per token in decode. A cheaper scorer (fewer concepts, a
+   fused kernel, or removing the separate block-score matmuls) is the direct route
+   to a decode win; note that the existing CUDA-graph replay did *not* help.
+2. **Measure where dense is actually quadratic**: 16k prefill is 1.36× and the
+   trend is still rising, so 32k is the next point worth measuring (prefill only;
+   quality at 16k is not measured yet).
+3. **Decode needs the dedicated graph path** (`lcsa/decode_graph.py`), reported next
+   to a graph-dense baseline — the eager decode loses 1.6–1.7×.
 
 Optional but bigger: **stop storing the unselected KV** (Quest/MInference-style).
 That is the only route to a *memory* win, and it is a different design.
