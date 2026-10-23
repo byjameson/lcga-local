@@ -31,11 +31,13 @@ sys.path.insert(0, str(ROOT))
 from lcsa.data import TrainSampler, chunks_from_tokens, load_tokens  # noqa: E402
 from lcsa.disk_quant_store import (  # noqa: E402
     DiskQuantStore,
+    LayerCache,
     build_skeleton,
     load_layer,
     materialize_shared,
     release_layer,
 )
+from lcsa.autotune import plan_for  # noqa: E402
 from lcsa.lora import count_lora_params, lora_state_dict  # noqa: E402
 from lcsa.metrics import append_jsonl, now  # noqa: E402
 from lcsa.stream_quant_lora import StreamingQuantLoRATrainer  # noqa: E402
@@ -165,6 +167,8 @@ def main() -> int:
     ap.add_argument("--shared-dtype", choices=["fp32", "as-stored"], default="fp32",
                     help="fp32 matches prepare_model_for_kbit_training; 'as-stored' "
                          "keeps embed/head in the checkpoint dtype (big models)")
+    ap.add_argument("--blocks-on-gpu", default="auto",
+                    help="'auto' = derive from free VRAM; or an integer capacity")
     ap.add_argument("--eval_chunks", type=int, default=0)
     ap.add_argument("--sft", action="store_true",
                     help="train on instruction data (Dolly-15k) with prompt masking")
@@ -194,11 +198,24 @@ def main() -> int:
     print(f"[load] skeleton+shared {time.time()-t0:.1f}s keys={len(store.weight_map)} "
           f"rss={host_rss_gb()}GB", flush=True)
 
+    layers = list(base.model.layers)
+    if str(args.blocks_on_gpu).lower() == "auto":
+        plan = plan_for(model_dir, seq=args.seq, lora_r=args.lora_r,
+                        head=args.head, loss_chunk=args.chunk)
+        print(plan.summary(), flush=True)
+        n_blocks = plan.blocks_on_gpu
+    else:
+        n_blocks = int(args.blocks_on_gpu)
+    cache = LayerCache(store, layers, device="cuda", capacity=n_blocks)
+
     def stage(layer, i):
-        load_layer(layer, i, store, device="cuda")
+        cache.stage(layer, i)
 
     def release(layer, i):
-        release_layer(layer, i, store)
+        cache.release(layer, i)
+
+    print(f"[cache] keeping up to {cache.capacity} block(s) resident on the GPU",
+          flush=True)
 
     tr = StreamingQuantLoRATrainer(
         model, device="cuda", loss_chunk=args.chunk, lr=args.lr, clip=1.0,
@@ -297,6 +314,7 @@ def main() -> int:
         "targets": args.targets,
         "head": args.head,
         "shared_dtype": args.shared_dtype,
+        "blocks_on_gpu": cache.capacity,
         "trainable_params": tr.n_lora,
         "steps": len(losses),
         "seq": args.seq,

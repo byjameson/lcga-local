@@ -305,3 +305,39 @@ def _move_lora(layer, device) -> None:
         if isinstance(mod, LoRALinear):
             mod.A.data = mod.A.data.to(device)
             mod.B.data = mod.B.data.to(device)
+
+
+class LayerCache:
+    """Keep up to `capacity` decoder blocks resident on the GPU (LRU eviction).
+
+    capacity=1 reproduces the plain "one block at a time" streaming. A larger
+    capacity is what makes a bigger GPU fast: blocks stay resident between the
+    forward and the backward pass, and if capacity >= the number of layers the
+    weights are loaded once and never streamed again.
+    """
+
+    def __init__(self, store: "DiskQuantStore", layers, device: str = "cuda",
+                 capacity: int = 1):
+        self.store = store
+        self.layers = layers
+        self.device = device
+        self.capacity = max(1, int(capacity))
+        self.order: list[int] = []
+
+    def stage(self, layer, i: int) -> None:
+        if i in self.order:  # already resident: refresh its LRU position
+            self.order.remove(i)
+            self.order.append(i)
+            return
+        while len(self.order) >= self.capacity:
+            j = self.order.pop(0)
+            release_layer(self.layers[j], j, self.store)
+        load_layer(layer, i, self.store, self.device)
+        self.order.append(i)
+
+    def release(self, layer, i: int) -> None:
+        # blocks stay resident until the LRU evicts them
+        return
+
+    def stats(self) -> dict:
+        return {"resident": len(self.order), "capacity": self.capacity}

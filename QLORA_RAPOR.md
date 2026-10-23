@@ -328,6 +328,39 @@ yeniden takılır), işi bitince `meta`'ya döner. Böylece model boyutu sınır
 `--shared-dtype as-stored` ile embedding/head fp32'ye şişirilmeden checkpoint
 dtype'ında (bf16) kalabilir — büyük modeller için şart.
 
+## 13b) Autotune — her GPU'ya uyum (`lcsa/autotune.py`)
+
+Açık kaynakta herkesin VRAM'i farklı olacağı için motor sabit bir varsayım
+yapmıyor; plan **checkpoint metadata'sından** (ağırlık okumadan, ms cinsinden)
+ve makinenin boş VRAM/RAM'inden çıkarılıyor:
+
+```bash
+python -m lcsa.autotune --model-dir models/Qwen2.5-32B-Instruct-bnb-4bit --seq 128
+```
+
+Bu makinede (RTX 3050 6 GB, 32B checkpoint) çıktı:
+
+```
+strategy=disk-stream  gpu=NVIDIA GeForce RTX 3050 6GB Laptop GPU
+VRAM total=6.4GB free=5.4GB budget=4.2GB
+model=19.2GB  block=258MB  layers=64
+blocks_on_gpu=6 (1.51GB)  head_on_gpu=True (1.56GB)  loss_chunk=64
+note: 4-bit base (19.2GB) does not fit comfortably in RAM: stream from disk
+```
+
+Karar mantığı:
+- Blok boyutu **gerçek** (4-bit saklanan hâli), tahmin değil.
+- Bütçe = boş VRAM × 0,78; ayrıca **0,6 GB rezerv** (CUDA allocator/fragmentasyon;
+  WDDM taşması yavaşlamadan çok daha kötü).
+- 4-bit head kullanılırsa **dequant workspace**'i (`hidden × vocab × 2`) hesaba katılır.
+- Strateji: tüm model sığıyorsa `gpu-full`; 4-bit taban RAM'e sığıyorsa
+  `ram-stream` (exp52 yolu); sığmıyorsa `disk-stream` (exp54).
+- `exp54 --blocks-on-gpu auto` (varsayılan) bu planı uygular: **büyük kartta tüm
+  bloklar resident kalır ve hiç streaming olmaz**; küçük kartta pencere daralır.
+
+Henüz yapılmayan: planın ilk adımda *ölçümle* doğrulanıp pencereyi otomatik
+büyütmesi/küçültmesi (şu an statik ve muhafazakâr).
+
 ## 14) 32B — disk'ten akışla 6 GB VRAM'de (ana sonuç)
 
 Qwen2.5-32B-Instruct (unsloth **bnb-4bit**, 64 katman, 17,9 GB safetensors;
