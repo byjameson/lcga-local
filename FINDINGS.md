@@ -130,6 +130,36 @@ as well.
 
 ---
 
+## Insight E — inference does not scale the same way
+
+Training amortises one weight pass over `seq` tokens (and pays for it once in the
+backward). Generation needs a **full pass over all weights per token**, so the same
+engine that trains a 32B at 11 s/step generates at seconds *per token*:
+
+| Model | Peak VRAM | s / token | tok/s |
+|---|---:|---:|---:|
+| Qwen2.5-3B (disk path) | 1.92 GB | 0.71 | 1.41 |
+| Qwen2.5-32B (disk path) | 2.36 GB | **3.57** | **0.28** |
+
+`exp56_disk_infer.py` is the inference counterpart of `exp54`: same mmap block
+loader, a KV cache, one token at a time, and `--verify` checks the cached path
+against a single full-sequence forward over the same streamed blocks (identical
+next token for both 3B and 32B: 576).
+
+Two things worth knowing:
+
+* Peak VRAM for inference is *lower* than for training (2.36 vs 3.11 GB) because
+  there is no backward pass, no gradients, and a smaller loss chunk.
+* The LRU block window is useless here unless it can hold **all** layers: the
+  access pattern is cyclic (0..L-1, 0..L-1, …), so an LRU of size K<L evicts
+  exactly the blocks needed next. Inference therefore defaults to one block.
+
+Practical reading: on this card, 32B is *trainable* (20 min for 100 SFT steps) but
+only *demo-able* for generation (~6 min for a 100-token answer). For interactive
+use, 7B/14B on the same engine lands around 1–2 s/token, which is slow but usable.
+
+---
+
 ## Negative results and limits
 
 * **WDDM spills silently.** 14B at 7.01 GB peak ran at 70 s/step instead of 8.5 s.

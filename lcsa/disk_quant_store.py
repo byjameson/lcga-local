@@ -67,7 +67,7 @@ class DiskQuantStore:
 
 def build_skeleton(model_dir, lora_r: int = 8, lora_alpha: int = 16,
                    targets: str = "attn", head: str = "bf16",
-                   low_precision_shared: bool = False):
+                   low_precision_shared: bool = False, with_lora: bool = True):
     """Instantiate the model on the `meta` device with bnb Linear4bit + LoRA.
 
     No weight memory is allocated here; only the (tiny) LoRA adapters are real.
@@ -107,6 +107,8 @@ def build_skeleton(model_dir, lora_r: int = 8, lora_alpha: int = 16,
     )
 
     r_attn, r_mlp = (lora_r, 0) if targets == "attn" else (lora_r, lora_r)
+    if not with_lora:
+        r_attn = r_mlp = 0
 
     # 1) freeze everything, like prepare_model_for_kbit_training
     for p in model.parameters():
@@ -126,19 +128,19 @@ def build_skeleton(model_dir, lora_r: int = 8, lora_alpha: int = 16,
             target._parameters[attr] = torch.nn.Parameter(
                 target._parameters[attr].data.to(torch.float32), requires_grad=False)
 
-    apply_lora(model, r_attn=r_attn, r_mlp=r_mlp, alpha_attn=lora_alpha,
-               alpha_mlp=lora_alpha)
+    if with_lora:
+        apply_lora(model, r_attn=r_attn, r_mlp=r_mlp, alpha_attn=lora_alpha,
+                   alpha_mlp=lora_alpha)
+        # LoRA adapters were created on `meta` (that is where the base lives); give
+        # them real CPU storage so the optimizer can train them.
+        import math
 
-    # LoRA adapters were created on `meta` (that is where the base lives); give
-    # them real CPU storage so the optimizer can train them.
-    import math
-
-    for mod in model.modules():
-        if isinstance(mod, LoRALinear):
-            out_f, in_f = mod.base.weight.shape
-            mod.A = torch.nn.Parameter(
-                torch.randn(mod.r, in_f, dtype=torch.float32) / math.sqrt(in_f))
-            mod.B = torch.nn.Parameter(torch.zeros(out_f, mod.r, dtype=torch.float32))
+        for mod in model.modules():
+            if isinstance(mod, LoRALinear):
+                out_f, in_f = mod.base.weight.shape
+                mod.A = torch.nn.Parameter(
+                    torch.randn(mod.r, in_f, dtype=torch.float32) / math.sqrt(in_f))
+                mod.B = torch.nn.Parameter(torch.zeros(out_f, mod.r, dtype=torch.float32))
 
     # Tie the LM head to the input embedding when the config asks for it (the
     # checkpoint then has no separate `lm_head.weight`).
