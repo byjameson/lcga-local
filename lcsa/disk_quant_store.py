@@ -340,5 +340,12 @@ class LayerCache:
         # blocks stay resident until the LRU evicts them
         return
 
+    def set_capacity(self, capacity: int) -> None:
+        """Change the window at runtime (used by the measured autotuner)."""
+        self.capacity = max(1, int(capacity))
+        while len(self.order) > self.capacity:
+            j = self.order.pop(0)
+            release_layer(self.layers[j], j, self.store)
+
     def stats(self) -> dict:
         return {"resident": len(self.order), "capacity": self.capacity}

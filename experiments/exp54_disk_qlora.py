@@ -167,8 +167,9 @@ def main() -> int:
     ap.add_argument("--shared-dtype", choices=["fp32", "as-stored"], default="fp32",
                     help="fp32 matches prepare_model_for_kbit_training; 'as-stored' "
                          "keeps embed/head in the checkpoint dtype (big models)")
-    ap.add_argument("--blocks-on-gpu", default="auto",
-                    help="'auto' = derive from free VRAM; or an integer capacity")
+    ap.add_argument("--blocks-on-gpu", default="adaptive",
+                    help="'adaptive' = start at 1 block and grow from the measured "
+                         "peak; 'auto' = static plan from free VRAM; or an integer")
     ap.add_argument("--eval_chunks", type=int, default=0)
     ap.add_argument("--sft", action="store_true",
                     help="train on instruction data (Dolly-15k) with prompt masking")
@@ -198,20 +199,54 @@ def main() -> int:
     # Plan before anything is materialized: torch.cuda.mem_get_info() then sees
     # the real free VRAM (the LM head is loaded *after* this, and plan_for
     # accounts for its size itself).
-    if str(args.blocks_on_gpu).lower() == "auto":
+    mode_blocks = str(args.blocks_on_gpu).lower()
+    if mode_blocks in ("auto", "adaptive"):
         plan = plan_for(model_dir, seq=args.seq, lora_r=args.lora_r,
                         head=args.head, loss_chunk=args.chunk)
         print(plan.summary(), flush=True)
         n_blocks = plan.blocks_on_gpu
+        block_gb, n_layers = plan.block_gb, plan.n_layers
     else:
+        plan = None
         n_blocks = int(args.blocks_on_gpu)
+        block_gb, n_layers = 0.0, 0
+
+    # measured autotune: always start from the safest window (1 block) and let
+    # the first real step tell us how much room is actually left
+    start_blocks = 1 if mode_blocks == "adaptive" else n_blocks
 
     base = materialize_shared(model, store, cfg, device="cuda")
     print(f"[load] skeleton+shared {time.time()-t0:.1f}s keys={len(store.weight_map)} "
           f"rss={host_rss_gb()}GB", flush=True)
 
     layers = list(base.model.layers)
-    cache = LayerCache(store, layers, device="cuda", capacity=n_blocks)
+    cache = LayerCache(store, layers, device="cuda", capacity=start_blocks)
+
+    # --- measured autotune -------------------------------------------------
+    adapt = None
+    if mode_blocks == "adaptive" and plan is not None:
+        dev_total_gb = torch.cuda.get_device_properties(0).total_memory / 1e9
+        soft_gb = dev_total_gb * 0.80   # grow towards this
+        hard_gb = dev_total_gb * 0.88   # never exceed this (WDDM spills beyond)
+        state = {"step": 0}
+
+        def adapt(peak_gb: float, i: int) -> None:
+            state["step"] += 1
+            if state["step"] == 1:
+                head = soft_gb - peak_gb
+                if block_gb > 0 and head >= block_gb:
+                    extra = int(head // block_gb)
+                    cache.set_capacity(min(n_layers, cache.capacity + extra))
+                    print(f"[autotune] measured peak={peak_gb:.2f}GB on 1 block -> "
+                          f"{cache.capacity} blocks (soft {soft_gb:.2f}GB)", flush=True)
+                else:
+                    print(f"[autotune] measured peak={peak_gb:.2f}GB; keeping "
+                          f"{cache.capacity} block(s)", flush=True)
+            elif state["step"] == 2 and peak_gb > hard_gb:
+                shrink = int((peak_gb - hard_gb) // max(block_gb, 1e-9)) + 1
+                cache.set_capacity(max(1, cache.capacity - shrink))
+                print(f"[autotune] peak {peak_gb:.2f}GB over hard {hard_gb:.2f}GB -> "
+                      f"{cache.capacity} blocks", flush=True)
 
     def stage(layer, i):
         cache.stage(layer, i)
@@ -261,6 +296,8 @@ def main() -> int:
             losses.append(round(loss, 6))
             times.append(round(dt, 3))
             peaks.append(round(peak, 3))
+            if adapt is not None:
+                adapt(peak, i)
             if (i + 1) % 10 == 0:
                 print(f"[step] {i+1}/{args.steps} loss={loss:.4f} {dt:.2f}s "
                       f"peak={peak:.2f}GB rss={host_rss_gb()}GB", flush=True)
@@ -284,6 +321,8 @@ def main() -> int:
             losses.append(round(loss, 6))
             times.append(round(dt, 3))
             peaks.append(round(peak, 3))
+            if adapt is not None:
+                adapt(peak, i)
             print(f"[step] {i+1}/{len(batches)} loss={loss:.4f} {dt:.2f}s peak={peak:.2f}GB "
                   f"rss={host_rss_gb()}GB", flush=True)
 
@@ -319,7 +358,9 @@ def main() -> int:
         "targets": args.targets,
         "head": args.head,
         "shared_dtype": args.shared_dtype,
+        "blocks_mode": args.blocks_on_gpu,
         "blocks_on_gpu": cache.capacity,
+        "blocks_on_gpu_initial": start_blocks,
         "trainable_params": tr.n_lora,
         "steps": len(losses),
         "seq": args.seq,

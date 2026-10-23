@@ -358,15 +358,26 @@ Karar mantığı:
 - `exp54 --blocks-on-gpu auto` (varsayılan) bu planı uygular: **büyük kartta tüm
   bloklar resident kalır ve hiç streaming olmaz**; küçük kartta pencere daralır.
 
-Henüz yapılmayan: planın ilk adımda *ölçümle* doğrulanıp pencereyi otomatik
-büyütmesi/küçültmesi (şu an statik ve muhafazakâr).
+### 13c) Ölçüme dayalı autotune (`--blocks-on-gpu adaptive`, varsayılan)
 
-**Ölçülen etki (32B, bu makine):** 1 blok ile peak 3,18 GB / 11,5 s; autotune'un
-seçtiği **6 blok** ile peak **4,14 GB** / **10,5–11,2 s**. Kazanç küçük çünkü 64
-bloğun yalnızca 6'sı geri-geçişte tekrar kullanılıyor; kazanç pencere/layer oranı
-büyüdükçe (yani büyük kartlarda) hızlanıyor — tüm bloklar sığdığında streaming
-tamamen biter. Not: aynı koşuda 1. adım loss'u birebir aynı (2,903609) çıkıyor,
-sonraki adımlar LoRA'nın rastgele başlangıcı yüzünden farklı.
+Statik tahmin yeterli değil (allocator/fragmentasyon karttan karta değişiyor), bu
+yüzden varsayılan artık **ölçüm**:
+
+1. Her zaman **1 blokla** başlar (en güvenli).
+2. İlk gerçek adımın `max_memory_reserved` değerini okur.
+3. Yumuşak hedefe (`toplam VRAM × 0,80`) kadar pencereyi büyütür.
+4. İkinci adımda sert sınırı (`× 0,88`) aşarsa otomatik küçültür.
+
+32B üzerinde ölçüm: 1 blok → peak **3,18 GB** → otomatik **8 blok**; 8 blokla
+peak **4,63 GB** (sert sınır 5,63 GB'ın altında), adım **11,5 → 10,2–10,6 s**.
+24 GB'lık bir kartta aynı döngü tüm 64 bloğu resident yapar ve streaming biter.
+
+### 13d) Statik plan (`--blocks-on-gpu auto`)
+
+Tahminî plan (yukarıdaki `plan_for`) hâlâ mevcut ve hızlı: bu makinede 32B için
+6 blok / peak 4,14 GB / 10,5–11,2 s ölçüldü. Fark: statik plan VRAM'i tahmin
+eder, `adaptive` **ölçer**. Not: aynı koşuda 1. adım loss'u birebir aynı
+(2,903609) çıkıyor, sonraki adımlar LoRA'nın rastgele başlangıcı yüzünden farklı.
 
 ## 14) 32B — disk'ten akışla 6 GB VRAM'de (ana sonuç)
 
