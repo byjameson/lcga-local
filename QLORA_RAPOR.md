@@ -99,9 +99,34 @@ satır, tek tohum). Qwen sohbet şablonu, kullanıcı öneki maskelenir.
 Bu, WikiText-2 next-token denemesinden (exp49) farklı olarak **talimat
 formatını** öğrettiğini gösteriyor; yine de 128 satır/20 adım, benchmark değil.
 
-## 8) Sıradaki
+## 8) 7B denemesi — 6 GB'a sığmıyor (dürüst sonuç)
 
-- 7B için ön-kantize model (NF4/AWQ) veya RAM boşaltma planı.
+Qwen2.5-7B-Instruct indirildi (Apache-2.0, 14,2 GB bf16, 4 shard) ve aynı
+NF4+LoRA hattı denendi:
+
+| Ayar | Load | Peak alloc | Adım | Not |
+|---|---|---|---|---|
+| 7B, seq 256, 2 adım | 37,4 s | **8,69 GB** | 4,3–5,2 s | 6 GB'ı aşıyor → WDDM shared memory'ye taşıyor |
+| 7B, seq 128, 2 adım | 41,3 s | **8,42 GB** | 4,7–8,1 s | Kısa bağlamda bile 6 GB'a sığmıyor |
+| 7B, `device_map=auto` + CPU offload | — | — | — | `accelerate`/`bitsandbytes` meta-tensor hatası (`Tensor.item() cannot be called on meta tensors`) |
+
+- 7B 4-bit taban + bf16 compute + aktivasyonlar bu kartta **~8,4–8,7 GB** tepe
+  yapıyor; yani çalışıyor gibi görünse de gerçekte **6 GB VRAM'e sığmıyor**,
+  paylaşımlı belleğe taşıyor. Bu yüzden 7B QLoRA'yı "6 GB'da çalıştı" diye
+  raporlamıyoruz.
+- Eğitilebilir parametre 40,37M (%0,92); eval CE 2 adımda −0,04…−0,06 oynadı
+  (anlamlı bir eğri için çok kısa, üstelik spill).
+- CPU offload denemesi bu sürümlerde (transformers 5.19 / bitsandbytes 0.50.2 /
+  accelerate 1.15) meta-tensor hatasıyla düştü; düzeltmek için farklı sürüm,
+  ön-kantize (AWQ/GPTQ) model veya daha fazla VRAM gerekir.
+
+**Sonuç:** Bu 6 GB kartta pratik QLoRA tavanı **3B** (peak 3,9–4,25 GB). 7B
+QLoRA için ~10 GB+ VRAM ya da düzgün çalışan bir CPU-offload yığını gerekir.
+
+## 9) Sıradaki
+
+- 7B/13B için ön-kantize (AWQ/GPTQ) model veya daha büyük VRAM; CPU-offload
+  yığınını sürüm uyumu araştırması.
 - Daha uzun SFT (binlerce adım) ve aynı sette M5/LoRA ile kıyas.
 - Merge edilmiş modelin `serve.py`/`llm.py` ürün yoluna bağlanması (chat şablonu ile).
 

@@ -57,6 +57,10 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--eval_chunks", type=int, default=4)
     ap.add_argument("--save", default="checkpoints/qlora_qwen3b_r16")
     ap.add_argument("--tag", default="qlora3b")
+    ap.add_argument("--device-map", choices=["single", "auto"], default="single",
+                    help="single: all on GPU 0; auto: allow CPU offload with --max-gpu-gb")
+    ap.add_argument("--max-gpu-gb", type=float, default=5.0,
+                    help="GPU budget for --device-map auto")
     return ap.parse_args()
 
 
@@ -93,12 +97,24 @@ def main() -> int:
         bnb_4bit_compute_dtype=torch.bfloat16,
         bnb_4bit_use_double_quant=True,
     )
+    if args.device_map == "auto":
+        bnb_config.llm_int8_enable_fp32_cpu_offload = True
     tokenizer = AutoTokenizer.from_pretrained(model_path)
-    model = AutoModelForCausalLM.from_pretrained(
-        model_path,
-        quantization_config=bnb_config,
-        device_map={"": 0},
-    )
+    if args.device_map == "auto":
+        max_memory = {0: f"{args.max_gpu_gb}GiB", "cpu": "30GiB"}
+        model = AutoModelForCausalLM.from_pretrained(
+            model_path,
+            quantization_config=bnb_config,
+            device_map="auto",
+            max_memory=max_memory,
+            low_cpu_mem_usage=True,
+        )
+    else:
+        model = AutoModelForCausalLM.from_pretrained(
+            model_path,
+            quantization_config=bnb_config,
+            device_map={"": 0},
+        )
     model.config.use_cache = False
     model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
     load_s = time.time() - t0
