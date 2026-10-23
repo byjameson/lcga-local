@@ -221,13 +221,30 @@ toplanan aktivasyon (seq 128 × 5120 bf16 ≈ 1,3 MB) GPU'ya gider. Bu, GPU'dan
   eğitilebiliyor**: bloklar CPU'dan akar, embedding CPU'da kalır, sadece LoRA
   gradyanları birikir.
 - 3 adımlık kısa koşuda WikiText eval CE 2,0143 → 2,0145 (fiilî düz); bu bir
-  **sığdırma/yetenek** sonucu, yakınsama iddiası değil. Daha uzun koşu gerekir.
+  **sığdırma/yetenek** sonucu, yakınsama iddiası değil.
+
+### 10c. 20 adım — öğrenme başlıyor
+
+Aynı hat 20 adım çalıştırıldı (seq 128, eval 2 chunk):
+
+| Metrik | Değer |
+|---|---|
+| **Eval CE** | **2,3270 → 2,2215 (−0,1055)** ✅ |
+| Peak VRAM | **3,90 GB** (sabit; adım başına değişmiyor) |
+| Adım süresi (medyan) | **8,63 s** |
+| Host RSS | 11,63 GB (kararlı) |
+| Load | 91,5 s |
+
+- 20 adımda eval CE **−0,105** düştü: 14B gerçekten öğreniyor, sadece "sığıyor"
+  değil. Eğitim loss'u 2,92 → 1,63 aralığında dalgalı (küçük r, kısa koşu).
+- Ayrıntı: `results/results.jsonl` (`qlora14b_cpuembed_t20`), checkpoint
+  `checkpoints/stream_qlora_14b_cpuembed_t20`.
 - Dürüst sınır: host RSS ~11,6 GB; bu makinede boş RAM sınırında. Ayrıca `lm_head`
   hâlâ GPU'da; onu da CPU'ya/chunk'lı hesaba almak VRAM'i daha da düşürebilir.
 
 ## 11) Sıradaki
 
-- 14B için daha uzun SFT + eval; bellek daha da düşsün diye `lm_head`'i de
+- 14B için SFT (Dolly-15k) + eval; bellek daha da düşsün diye `lm_head`'i de
   CPU/chunk'lı hesaba almak.
 - 7B streaming QLoRA'da daha uzun SFT + geniş LoRA hedefleri (mlp).
 - Merge edilmiş modellerin `serve.py`/`llm.py` ürün yoluna bağlanması.
