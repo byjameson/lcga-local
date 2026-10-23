@@ -134,3 +134,17 @@ python experiments/exp3_eval.py --ckpt checkpoints/abl_diag_best.pt --seq 8192 -
 # prefill/decode speed
 python experiments/exp4_speed.py --ckpt checkpoints/abl_diag_best.pt --Ts 1024,2048,4096,8192
 ```
+
+### Measurement discipline (power source matters)
+
+Every *speed* number above was taken with the laptop **on AC power**. Running the
+same measurement on battery costs **~30% absolute wall-clock**:
+
+| T | AC dense | battery dense | penalty |
+|---|---:|---:|---:|
+| 4096 | 363.6 ms | 467.8 ms | +28.7% |
+| 8192 | 834.3 ms | 1130.9 ms | +35.6% |
+
+The **ratio** between sparse and dense is much more robust (4k: 1.02× → 1.03×;
+8k: 1.11× → 1.17×), because both sides slow down together. Quality/PPL numbers
+are unaffected by the power source — only wall-clock is.
