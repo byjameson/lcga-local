@@ -97,9 +97,11 @@ Prefill (single request, AC power, eager router):
 | 2048 | 178.7 ms | 184.4 ms | 0.969× | 12.9 ms | 8.6 ms |
 | 4096 | 363.0 ms | 356.4 ms | 1.018× | 23.0 ms | 27.3 ms |
 | 8192 | 826.0 ms | 754.4 ms | 1.095× | 49.1 ms | 97.9 ms |
-| 16384 | 2225.1 ms | 1642.1 ms | **1.355×** | 83.4 ms | 374.6 ms |
+| 16384 | 2225.1 ms | 1642.1 ms | 1.355× | 83.4 ms | 374.6 ms |
+| 32768 | 6793.1 ms | 3980.5 ms | **1.707×** | 166.9 ms | 1459.4 ms |
 
-Crossover is between 2k and 4k tokens.
+Crossover is between 2k and 4k tokens; the speedup grows monotonically with context
+and reaches **1.71× at 32k** (dense 6.79 s vs sparse 3.98 s).
 
 Decode with the dedicated whole-step CUDA graph (`lcsa/decode_graph.py`,
 `scripts/decode_ref.py --graph`), graph-dense vs graph-sparse, top-1 parity 1.0 at
