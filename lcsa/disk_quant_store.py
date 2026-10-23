@@ -299,12 +299,13 @@ def release_layer(layer, i: int, store: DiskQuantStore) -> None:
 
 
 def _move_lora(layer, device) -> None:
-    from .lora import LoRALinear
+    """LoRA adapters deliberately stay on CPU.
 
-    for mod in layer.modules():
-        if isinstance(mod, LoRALinear):
-            mod.A.data = mod.A.data.to(device)
-            mod.B.data = mod.B.data.to(device)
+    Gradients are accumulated in CPU buffers and the optimizer steps on CPU, so
+    moving the adapters with the block would put param and grad on different
+    devices. `LoRALinear.forward` hops them to the activation's device instead.
+    """
+    return
 
 
 class LayerCache:

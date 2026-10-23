@@ -194,11 +194,10 @@ def main() -> int:
         low_precision_shared=(args.shared_dtype == "as-stored"),
     )
     store = DiskQuantStore(model_dir, device="cuda")
-    base = materialize_shared(model, store, cfg, device="cuda")
-    print(f"[load] skeleton+shared {time.time()-t0:.1f}s keys={len(store.weight_map)} "
-          f"rss={host_rss_gb()}GB", flush=True)
 
-    layers = list(base.model.layers)
+    # Plan before anything is materialized: torch.cuda.mem_get_info() then sees
+    # the real free VRAM (the LM head is loaded *after* this, and plan_for
+    # accounts for its size itself).
     if str(args.blocks_on_gpu).lower() == "auto":
         plan = plan_for(model_dir, seq=args.seq, lora_r=args.lora_r,
                         head=args.head, loss_chunk=args.chunk)
@@ -206,6 +205,12 @@ def main() -> int:
         n_blocks = plan.blocks_on_gpu
     else:
         n_blocks = int(args.blocks_on_gpu)
+
+    base = materialize_shared(model, store, cfg, device="cuda")
+    print(f"[load] skeleton+shared {time.time()-t0:.1f}s keys={len(store.weight_map)} "
+          f"rss={host_rss_gb()}GB", flush=True)
+
+    layers = list(base.model.layers)
     cache = LayerCache(store, layers, device="cuda", capacity=n_blocks)
 
     def stage(layer, i):

@@ -34,7 +34,12 @@ class LoRALinear(nn.Module):
     def forward(self, x):
         y = self.base(x)
         h = self.dropout(x).float()
-        return y + (self.scale * (h @ self.A.t() @ self.B.t())).to(y.dtype)
+        # A/B live on CPU (grads are accumulated there and the optimizer steps
+        # there); hop them to the activation's device for the matmul. The low-rank
+        # path is tiny, so this costs a negligible amount of PCIe traffic.
+        A = self.A if self.A.device == h.device else self.A.to(h.device)
+        B = self.B if self.B.device == h.device else self.B.to(h.device)
+        return y + (self.scale * (h @ A.t() @ B.t())).to(y.dtype)
 
     @torch.no_grad()
     def merge(self):
