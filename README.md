@@ -18,6 +18,8 @@ what was tried, including the bugs).
 
 **Research checkpoints (Hugging Face):** [LCGA v3 0.5B](https://huggingface.co/byjameson/lcga-v3-0.5b) · [LCGA P3 17M](https://huggingface.co/byjameson/lcga-p3-17m) — model cards there link back to the full reports and raw evidence in this repository.
 
+**ModelScope mirror:** [LCGA v3 0.5B](https://modelscope.cn/models/byjameson/lcga-v3-0.5b) · [LCGA P3 17M](https://modelscope.cn/models/byjameson/lcga-p3-17m) — same cards, same weights (donation section included).
+
 ## Product: LCGA Local — one-command local chat
 
 The product surface is not an API. It is a local chat assistant:
