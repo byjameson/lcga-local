@@ -361,6 +361,13 @@ Karar mantığı:
 Henüz yapılmayan: planın ilk adımda *ölçümle* doğrulanıp pencereyi otomatik
 büyütmesi/küçültmesi (şu an statik ve muhafazakâr).
 
+**Ölçülen etki (32B, bu makine):** 1 blok ile peak 3,18 GB / 11,5 s; autotune'un
+seçtiği **6 blok** ile peak **4,14 GB** / **10,5–11,2 s**. Kazanç küçük çünkü 64
+bloğun yalnızca 6'sı geri-geçişte tekrar kullanılıyor; kazanç pencere/layer oranı
+büyüdükçe (yani büyük kartlarda) hızlanıyor — tüm bloklar sığdığında streaming
+tamamen biter. Not: aynı koşuda 1. adım loss'u birebir aynı (2,903609) çıkıyor,
+sonraki adımlar LoRA'nın rastgele başlangıcı yüzünden farklı.
+
 ## 14) 32B — disk'ten akışla 6 GB VRAM'de (ana sonuç)
 
 Qwen2.5-32B-Instruct (unsloth **bnb-4bit**, 64 katman, 17,9 GB safetensors;
