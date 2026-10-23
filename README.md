@@ -71,6 +71,8 @@ int8 GPU-resident engine.
 
 ## Headline results
 
+> **Write-up:** [`FINDINGS.md`](FINDINGS.md) — *Fine-tuning 32B on a 6 GB laptop GPU*, with the measured tables, four engineering insights and the negative results.
+
 | Axis | Result | Where |
 |---|---|---|
 | Quality (`wt2_test`, T=1024, ρ=0.25, 128 chunks) | dense 12.46 / sparse **16.56** PPL — **v3** is best of 4 trained models (v1: 14.30/21.84; v2: 12.88/16.73; v2ctl: 12.80/17.26) | RAPOR §3.1, §3.7 |
