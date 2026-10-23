@@ -385,6 +385,17 @@ yok ve hedef aşılmıyor**.
 
 24 GB'lık bir kartta aynı döngü tüm 64 bloğu resident yapar ve streaming biter.
 
+Hedefler elle de verilebilir: `--vram-soft-gb` / `--vram-hard-gb` (ör. VRAM'in bir
+kısmını ekrana/başka uygulamaya bırakmak için).
+
+**Bulunan ve düzeltilen kusur (salınım).** Büyütme yalnızca yumuşak hedefe bakıyordu;
+`sert < yumuşak` verildiğinde döngü salınıyordu — ölçüldü: `1→8→5→9→6→5→…`
+(her büyütme sert sınırı aşıyor, her aşım küçültüyor). Düzeltme: **büyütme de sert
+sınırla kapatılıyor** (tahmini peak ≤ hard). Aynı ayarla (`--vram-hard-gb 4.2`)
+düzeltmeden sonra yörünge tek yönlü: **1→5→6**, peak **4,19 GB** (sınır 4,20),
+adım 9,6–9,8 s, sabit. Küçültme kodu yine güvenlik ağı olarak duruyor ve ilk koşuda
+gerçekten çalıştı (4,63 GB → 5 blok).
+
 ### 13d) Statik plan (`--blocks-on-gpu auto`)
 
 Tahminî plan (yukarıdaki `plan_for`) hâlâ mevcut ve hızlı: bu makinede 32B için

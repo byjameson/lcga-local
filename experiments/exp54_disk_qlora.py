@@ -173,6 +173,11 @@ def main() -> int:
     ap.add_argument("--adapt-every", type=int, default=10,
                     help="re-measure and resize the block window every N steps "
                          "(0 = only after the first step)")
+    ap.add_argument("--vram-soft-gb", type=float, default=0.0,
+                    help="grow towards this VRAM budget (0 = 80%% of the device)")
+    ap.add_argument("--vram-hard-gb", type=float, default=0.0,
+                    help="never exceed this VRAM budget (0 = 88%% of the device); "
+                         "useful to leave room for the display/other apps")
     ap.add_argument("--eval_chunks", type=int, default=0)
     ap.add_argument("--sft", action="store_true",
                     help="train on instruction data (Dolly-15k) with prompt masking")
@@ -230,8 +235,8 @@ def main() -> int:
     adapt_hist: list = []
     if mode_blocks == "adaptive" and plan is not None:
         dev_total_gb = torch.cuda.get_device_properties(0).total_memory / 1e9
-        soft_gb = dev_total_gb * 0.80   # grow towards this
-        hard_gb = dev_total_gb * 0.88   # never exceed this (WDDM spills beyond)
+        soft_gb = args.vram_soft_gb or dev_total_gb * 0.80   # grow towards this
+        hard_gb = args.vram_hard_gb or dev_total_gb * 0.88   # never exceed this
         every = max(0, int(args.adapt_every))
         state = {"step": 0, "hist": []}
         adapt_hist = state["hist"]
@@ -266,6 +271,10 @@ def main() -> int:
                 return
             head = soft_gb - peak_gb
             extra = int((head * 0.9) // max(margin, 1e-9)) if head > 0 else 0
+            # never *grow* past the hard limit either: otherwise soft > hard
+            # configurations oscillate between grow and shrink
+            if extra > 0 and peak_gb + extra * margin > hard_gb:
+                extra = max(0, int((hard_gb - peak_gb) // max(margin, 1e-9)))
             if extra >= 1 and cache.capacity < n_layers:
                 before = cache.capacity
                 cache.set_capacity(min(n_layers, before + extra))
