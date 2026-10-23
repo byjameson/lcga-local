@@ -242,6 +242,25 @@ Aynı hat 20 adım çalıştırıldı (seq 128, eval 2 chunk):
 - Dürüst sınır: host RSS ~11,6 GB; bu makinede boş RAM sınırında. Ayrıca `lm_head`
   hâlâ GPU'da; onu da CPU'ya/chunk'lı hesaba almak VRAM'i daha da düşürebilir.
 
+### 10d. 14B talimat SFT (Dolly-15k) — çalışıyor
+
+Aynı streaming QLoRA hattı (`exp53`, `--targets attn`) 14B üzerinde 200 adım
+talimat eğitimi (seq 128, 512 train / 32 eval satır):
+
+| Metrik | Değer |
+|---|---|
+| **Eval loss** | **2,7531 → 1,4771 (−1,2760)** ✅ |
+| Peak VRAM | **4,14 GB** (kararlı) |
+| Adım süresi (medyan) | **8,77 s** |
+| Duvar süresi | 1.778 s (~30 dk) |
+| Host RSS | 10,19 GB |
+| Eğitilebilir LoRA | 12,58M (%0,154) |
+
+- Eğitim loss'u 8,88 → 0,49 aralığında düştü; eval loss **−1,28** ile 14B'nin
+  Dolly talimat verisiyle gerçekten öğrendiğini gösteriyor.
+- Yani **6 GB VRAM'li bir laptop GPU'sunda 14B talimat eğitimi** yapılabiliyor.
+- Checkpoint: `checkpoints/stream_qlora_14b_sft` (adapter, git dışı).
+
 ## 11) Sıradaki
 
 - 14B için SFT (Dolly-15k) + eval; bellek daha da düşsün diye `lm_head`'i de

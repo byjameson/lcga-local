@@ -512,3 +512,19 @@ python experiments\exp7_stage2.py --dense_control --steps 1250 --eval_every 250 
 - **2026-10-23 - 14B CPU-embedding duzeltmesi: 6GB'a sigiyor (exp52).** Ilk 14B denemesinde embed_tokens + lm_head GPU'da bf16 oldugu icin peak **7,01GB** ile WDDM tasmasi ve **70,2 s/adim** vardi. `StreamingQuantLoRATrainer` artik `embed_tokens`'i **CPU'da** tutuyor; sadece toplanan aktivasyon (seq128x5120 bf16 ~1,3MB) GPU'ya gidiyor. Sonuc: 14B (48 katman, LoRA r=8 q/k/v/o **12,58M, %0,154**) **peak 3,90GB**, **8,5 s/adim**, host RSS ~11,6GB, load ~94s; 3 adimda WikiText eval CE 2,0143 -> 2,0145 (kisa, sigdirma sonucu; yakinsama iddiasi degil). Yani dogru kurgulanmis parca-parca egitimle 14B de 6GB'da egitilebiliyor. Ayrinti: `QLORA_RAPOR.md` 10; ROADMAP M8.
 
 - **2026-10-23 - 14B streaming QLoRA 20 adim: ogreniyor (exp52).** CPU-embedding duzeltmesinden sonra Qwen2.5-14B-Instruct (48 katman, LoRA r=8 q/k/v/o **12,58M, %0,154**) 20 adim/seq128: eval CE **2,3270 -> 2,2215 (-0,1055)**; **peak sabit 3,90GB** (6GB'in altinda), adim **8,63 s** (medyan), host RSS 11,63GB, load 91,5s. Yani 14B yalnizca 'sigmiyor' degil, gercekten ogreniyor. Egitim loss'u 2,92 -> 1,63 araliginda dalgali (kucuk r, kisa kosu). Adaptor `checkpoints/stream_qlora_14b_cpuembed_t20` (git disi). Ayrinti: `QLORA_RAPOR.md` 10c; ROADMAP M8.
+
+- **2026-10-23 - 14B talimat SFT (Dolly-15k) 6GB'da (exp53).** Ayni streaming QLoRA hatti
+  Qwen2.5-14B-Instruct uzerinde `--targets attn` ile 200 adim talimat egitimi (seq 128, 512
+  train / 32 eval, Dolly-15k): eval loss **2,7531 -> 1,4771 (-1,2760)**; **peak 4,14GB**,
+  adim **8,77 s** (medyan), duvar 1778 s (~30 dk), host RSS 10,19GB; LoRA r=8 q/k/v/o
+  **12,58M (%0,154)**. Egitim loss'u 8,88 -> 0,49. Yani 6GB VRAM'li bir laptop GPU'sunda 14B
+  talimat egitimi yapilabiliyor (CPU-embedding + blok streaming). Adaptor
+  `checkpoints/stream_qlora_14b_sft` (git disi). Ayrinti: `QLORA_RAPOR.md` 10d; ROADMAP M8.
+
+- **2026-10-23 - Disk temizligi: 68GB -> ~160GB bos.** Unity Editor kalintisi
+  (`~/Unity/6000.3.22f1`, 13,8GB) + UnityHub onbellegi + `AppData/Local/Unity`, clawdbot
+  (zamanlanmis gorev + `~/.clawdbot` + `~/clawd`), Unreal `Intermediate` (4,6GB), proje copu
+  (`results/chat3b_file2.out.log` + `.safetensors.part`, 4,1GB), eski tam-model 3B
+  checkpoint'leri (t100 + adaf_t150, 11,5GB), `_smoke_best.pt`, pip onbellegi (9,6GB), npm
+  onbellegi (3GB), Chrome Gemini-Nano modeli (4GB), hiberfil.sys (12,7GB, hibernation kapali),
+  `$WinREAgent` + Dism WinSxS temizligi (~4GB) silindi. Android emulator/AVD'ler KORUNDU.
