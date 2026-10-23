@@ -166,8 +166,22 @@ Karşılaştırma:
 | LoRA params | 40,4M (q/k/v/o+mlp) | 5,05M (q/k/v/o, r=8) |
 
 Bu, projeye eklenen **yeni bir yetenek**: HF QLoRA'nın başaramadığı 7B eğitimini
-kendi blok-streaming motorumuz 6 GB'da yapıyor. 10 adım kısa bir PoC; uzun SFT ve
-daha geniş LoRA hedefleri bir sonraki adım.
+kendi blok-streaming motorumuz 6 GB'da yapıyor.
+
+**Uzun SFT (exp53):** `experiments/exp53_stream_qlora_sft_7b.py`, Dolly-15k,
+512 train / 32 eval, 100 adım, seq 256, aynı streaming QLoRA hattı:
+
+| Metrik | Değer |
+|---|---|
+| Peak VRAM | **5,78 GB** |
+| Adım süresi (medyan) | **5,99 s** |
+| Duvar | 602 s (~10 dk) |
+| Host RSS | 5,14 GB |
+| Eval loss (önce → sonra) | **2,6850 → 1,8710 (−0,8139)** |
+| Eğitilebilir LoRA | 5,05M (%0,116) |
+
+Yani 7B, 6 GB VRAM'in altında **talimat verisiyle** eğitilebiliyor. 100 adım
+hâlâ kısa bir PoC; daha uzun koşu ve mlp hedefleri bir sonraki adım.
 
 ## 10) Sıradaki
 
