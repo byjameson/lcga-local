@@ -66,10 +66,15 @@ class DiskQuantStore:
 
 
 def build_skeleton(model_dir, lora_r: int = 8, lora_alpha: int = 16,
-                   targets: str = "attn", head: str = "bf16"):
+                   targets: str = "attn", head: str = "bf16",
+                   low_precision_shared: bool = False):
     """Instantiate the model on the `meta` device with bnb Linear4bit + LoRA.
 
     No weight memory is allocated here; only the (tiny) LoRA adapters are real.
+    Mirrors peft's `prepare_model_for_kbit_training`: every parameter is frozen
+    and all non-4bit weights (norms, biases, embedding/head) are cast to fp32 --
+    except the embedding/head when `low_precision_shared=True`, which keeps them
+    in the checkpoint dtype (needed for very large models).
     Returns (model, config).
     """
     from transformers import AutoConfig, AutoModelForCausalLM, BitsAndBytesConfig
@@ -92,12 +97,37 @@ def build_skeleton(model_dir, lora_r: int = 8, lora_alpha: int = 16,
     )
     replace_with_bnb_linear(
         model,
-        modules_to_not_convert=None if head == "nf4" else ["lm_head"],
+        # `lm_head` stays a plain Linear (bf16) unless we explicitly quantize it;
+        # tied models must keep it plain because it *is* the embedding tensor.
+        modules_to_not_convert=(
+            None if (head == "nf4" and not cfg.tie_word_embeddings) else ["lm_head"]
+        ),
         quantization_config=qcfg,
         pre_quantized=True,
     )
 
     r_attn, r_mlp = (lora_r, 0) if targets == "attn" else (lora_r, lora_r)
+
+    # 1) freeze everything, like prepare_model_for_kbit_training
+    for p in model.parameters():
+        p.requires_grad = False
+
+    # 2) cast all non-4bit params to fp32 (the RAM path does this, so the forward
+    #    matches bit-for-bit). `low_precision_shared` keeps embed/head as stored.
+    for name, p in list(model.named_parameters()):
+        if p.__class__.__name__ == "Params4bit":
+            continue
+        if p.dtype not in (torch.float16, torch.bfloat16):
+            continue
+        if low_precision_shared and (
+            name.endswith("embed_tokens.weight") or name.endswith("lm_head.weight")
+        ):
+            continue
+        mod_name, _, attr = name.rpartition(".")
+        target = model.get_submodule(mod_name) if mod_name else model
+        target._parameters[attr] = torch.nn.Parameter(
+            target._parameters[attr].data.to(torch.float32), requires_grad=False)
+
     apply_lora(model, r_attn=r_attn, r_mlp=r_mlp, alpha_attn=lora_alpha,
                alpha_mlp=lora_alpha)
 
@@ -111,37 +141,99 @@ def build_skeleton(model_dir, lora_r: int = 8, lora_alpha: int = 16,
             mod.A = torch.nn.Parameter(
                 torch.randn(mod.r, in_f, dtype=torch.float32) / math.sqrt(in_f))
             mod.B = torch.nn.Parameter(torch.zeros(out_f, mod.r, dtype=torch.float32))
+
+    # Tie the LM head to the input embedding when the config asks for it (the
+    # checkpoint then has no separate `lm_head.weight`).
+    if getattr(cfg, "tie_word_embeddings", False):
+        from .stream_quant_lora import base_model_of
+
+        lm = base_model_of(model)
+        lm.lm_head._parameters["weight"] = lm.model.embed_tokens._parameters["weight"]
     return model, cfg
 
 
-def fix_rotary(base, cfg):
-    """`rotary_emb.inv_freq` is computed at init, so it is `meta` here; rebuild it."""
-    rot = base.model.rotary_emb
+def _rope_theta(cfg) -> float:
+    """Theta location moved between transformers versions; look in all of them."""
+    rp = getattr(cfg, "rope_parameters", None)
+    if isinstance(rp, dict) and "rope_theta" in rp:
+        return float(rp["rope_theta"])
+    rs = getattr(cfg, "rope_scaling", None)
+    if isinstance(rs, dict) and "rope_theta" in rs:
+        return float(rs["rope_theta"])
+    return float(getattr(cfg, "rope_theta", 1_000_000.0))
+
+
+def fix_rotary(inner, cfg):
+    """`rotary_emb` buffers are computed at init, so they are `meta` here.
+
+    Rebuild the module for real (the constructor knows how to read rope config);
+    fall back to filling `inv_freq` by hand.
+    """
+    rot = inner.rotary_emb
+    try:
+        fresh = type(rot)(cfg)
+        if not fresh.inv_freq.is_meta:
+            inner.rotary_emb = fresh
+            return
+    except Exception:
+        pass
+
     dim = cfg.hidden_size // cfg.num_attention_heads
-    inv = 1.0 / (float(cfg.rope_theta) ** (torch.arange(0, dim, 2, dtype=torch.float32) / dim))
+    theta = _rope_theta(cfg)
+    inv = 1.0 / (theta ** (torch.arange(0, dim, 2, dtype=torch.float32) / dim))
     rot.inv_freq = inv
     rot.original_inv_freq = inv.clone()
     if getattr(rot, "attention_scaling", None) is None:
         rot.attention_scaling = 1.0
 
 
+def _set_param(module, name: str, tensor, requires_grad: bool = False) -> None:
+    """Replace a parameter's storage.
+
+    Works even when the current parameter lives on `meta`: PyTorch forbids
+    `meta_param.data = cuda_tensor` ("incompatible tensor type"), so we swap the
+    `Parameter` object instead. Base weights are never in an optimizer, so losing
+    object identity is fine.
+    """
+    module._parameters[name] = torch.nn.Parameter(tensor, requires_grad=requires_grad)
+
+
+def _set_param_cast(module, name: str, tensor) -> None:
+    """`_set_param` that keeps the destination dtype (e.g. fp32 norms)."""
+    old = module._parameters.get(name)
+    if old is not None and old.dtype != tensor.dtype:
+        tensor = tensor.to(old.dtype)
+    _set_param(module, name, tensor)
+
+
 def materialize_shared(model, store: DiskQuantStore, cfg, device: str = "cuda"):
-    """Load embed (CPU, mmap), final norm and lm_head (GPU) once."""
+    """Load embed, final norm and lm_head once (they are not streamed)."""
     from .stream_quant_lora import base_model_of
 
-    base = base_model_of(model)
-    emb = base.model.embed_tokens
-    # Keep the (bf16) embedding as a zero-copy mmap view on CPU: gathering rows
-    # only touches the pages for the tokens actually used.
-    emb.weight.data = store.get("model.embed_tokens.weight")
+    lm = base_model_of(model)
+    inner = lm.model
+    emb = inner.embed_tokens
+    tied = lm.lm_head.weight is emb.weight
+
+    weight = store.get("model.embed_tokens.weight")
+    if tied:
+        # the same tensor feeds the LM head, so it must sit on the GPU
+        _set_param_cast(emb, "weight", weight.to(device))
+    else:
+        # zero-copy mmap view on CPU: gathering rows only touches the pages for
+        # the tokens actually used
+        _set_param_cast(emb, "weight", weight)
+
     if store.has("model.norm.weight"):
-        base.model.norm.weight.data = store.get("model.norm.weight").to(device)
-    if store.has("lm_head.weight"):
-        # bf16 head stays resident on the GPU (compute needs it every step).
-        base.lm_head.weight.data = store.get("lm_head.weight").to(device)
-    fix_rotary(base, cfg)
-    base.model.rotary_emb.to(device)
-    return base
+        _set_param_cast(inner.norm, "weight", store.get("model.norm.weight").to(device))
+    if tied:
+        lm.lm_head._parameters["weight"] = emb._parameters["weight"]
+    elif store.has("lm_head.weight"):
+        _set_param_cast(lm.lm_head, "weight", store.get("lm_head.weight").to(device))
+
+    fix_rotary(inner, cfg)
+    inner.rotary_emb.to(device)
+    return lm
 
 
 def _layer_prefix(i: int) -> str:
@@ -174,26 +266,37 @@ def load_layer(layer, i: int, store: DiskQuantStore, device: str = "cuda") -> No
                 )
                 child._is_hf_initialized = True
             if child.bias is not None and store.has(f"{sub}.bias"):
-                child.bias.data = store.get(f"{sub}.bias").to(device)
+                _set_param_cast(child, "bias", store.get(f"{sub}.bias").to(device))
         else:
-            for pname, p in child.named_parameters(recurse=False):
+            for pname, _p in list(child.named_parameters(recurse=False)):
                 key = f"{sub}.{pname}"
                 if store.has(key):
-                    p.data = store.get(key).to(device)
-            for bname, b in child.named_buffers(recurse=False):
+                    _set_param_cast(child, pname, store.get(key).to(device))
+            for bname, b in list(child.named_buffers(recurse=False)):
                 key = f"{sub}.{bname}"
                 if store.has(key):
-                    b.data = store.get(key).to(device)
+                    t = store.get(key).to(device)
+                    if b is not None and b.dtype != t.dtype:
+                        t = t.to(b.dtype)
+                    child._buffers[bname] = t
 
     _move_lora(layer, device)
 
 
 def release_layer(layer, i: int, store: DiskQuantStore) -> None:
     """Drop block `i`'s weights (back to `meta`) so VRAM/RAM are freed."""
-    for p in layer.parameters():
-        if p.requires_grad:  # LoRA adapters are kept (moved to CPU)
-            continue
-        p.data = torch.empty(tuple(p.shape), dtype=p.dtype, device="meta")
+    for child in layer.modules():
+        for pname, p in list(child.named_parameters(recurse=False)):
+            if p.requires_grad:  # LoRA adapters are kept (moved to CPU)
+                continue
+            child._parameters[pname] = torch.nn.Parameter(
+                torch.empty(tuple(p.shape), dtype=p.dtype, device="meta"),
+                requires_grad=False,
+            )
+        for bname, b in list(child.named_buffers(recurse=False)):
+            if b is not None:
+                child._buffers[bname] = torch.empty(
+                    tuple(b.shape), dtype=b.dtype, device="meta")
     _move_lora(layer, "cpu")
 
 

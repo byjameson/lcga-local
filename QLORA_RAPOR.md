@@ -292,3 +292,39 @@ python experiments/exp53_stream_qlora_sft_7b.py --model models/Qwen2.5-14B-Instr
 Not: `exp52`/`exp53` dosya adlarında "7b" geçse de `--model` ile herhangi bir
 Qwen2.5 tabanı verilebilir; hat model boyutundan bağımsızdır.
 
+## 13) Disk'ten akış (mmap) — RAM sınırını kaldırmak
+
+`lcsa/disk_quant_store.py` + `experiments/exp54_disk_qlora.py`: 4-bit taban artık
+host RAM'de tutulmuyor. bnb-4bit safetensors dosyaları **mmap** ile okunuyor —
+`safetensors` CPU'da sıfır kopya görünüm verir, sayfalar OS tarafından gerektikçe
+SSD'den gelir ve baskı altında boşaltılır. Her decoder bloğu istendiğinde
+doğrudan GPU'ya kurulur (`Params4bit.from_prequantized` ile NF4 quant state
+yeniden takılır), işi bitince `meta`'ya döner. Böylece model boyutu sınırı
+"RAM'e sığan 4-bit" değil, **disk + adım süresi** olur.
+
+### Doğrulama — RAM yolu ile birebir parite (3B)
+
+| | RAM (exp52) | Disk (exp54) |
+|---|---|---|
+| eval CE (önce) | 2,73626 | **2,73626** |
+| 1. adım loss | 3,347981 | **3,347981** |
+| Eğitilebilir LoRA | 3.686.400 | 3.686.400 |
+| Peak VRAM | 1,60 GB | 1,98 GB |
+| Host RSS | 2,96 GB | 3,57 GB |
+
+Özdeş sonuç → mmap + quant_state loader **doğru**.
+
+### Yol boyunca çıkan ve düzeltilen gerçek hatalar
+1. `base_model_of` peft'siz modellerde iç `Qwen2Model`'i döndürüyordu.
+2. CPU-embedding optimizasyonu **tied** modelleri kırıyordu (3B/0.5B) → tied'de
+   embedding ve head GPU'da kalır.
+3. PyTorch `meta` parametreye `.data =` atamayı reddeder → `Parameter` nesnesi
+   değiştirilir.
+4. transformers 5.x'te `config.rope_theta` taşındı → `rotary_emb` kendi
+   constructor'ıyla yeniden kurulur.
+5. İskelette dondurma + fp32 cast eksikti (peft `prepare_model_for_kbit_training`
+   yapar) → parite 0,0008 sapıyordu; hizalandı.
+
+`--shared-dtype as-stored` ile embedding/head fp32'ye şişirilmeden checkpoint
+dtype'ında (bf16) kalabilir — büyük modeller için şart.
+

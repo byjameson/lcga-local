@@ -93,6 +93,9 @@ def main() -> int:
     ap.add_argument("--lora_alpha", type=int, default=16)
     ap.add_argument("--targets", choices=["attn", "all"], default="attn")
     ap.add_argument("--head", choices=["bf16", "nf4"], default="bf16")
+    ap.add_argument("--shared-dtype", choices=["fp32", "as-stored"], default="fp32",
+                    help="fp32 matches prepare_model_for_kbit_training; 'as-stored' "
+                         "keeps embed/head in the checkpoint dtype (big models)")
     ap.add_argument("--eval_chunks", type=int, default=0)
     ap.add_argument("--save", default="")
     ap.add_argument("--tag", default="disk_qlora")
@@ -110,6 +113,7 @@ def main() -> int:
     model, cfg = build_skeleton(
         model_dir, lora_r=args.lora_r, lora_alpha=args.lora_alpha,
         targets=args.targets, head=args.head,
+        low_precision_shared=(args.shared_dtype == "as-stored"),
     )
     store = DiskQuantStore(model_dir, device="cuda")
     base = materialize_shared(model, store, cfg, device="cuda")
@@ -177,6 +181,7 @@ def main() -> int:
         "lora_alpha": args.lora_alpha,
         "targets": args.targets,
         "head": args.head,
+        "shared_dtype": args.shared_dtype,
         "trainable_params": tr.n_lora,
         "steps": len(losses),
         "seq": args.seq,

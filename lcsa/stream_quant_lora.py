@@ -46,18 +46,24 @@ def chunked_lm_loss_and_backward_masked(head, h, ys, chunk=128, ignore_index=-10
 
 
 def base_model_of(model):
-    """Return the underlying HF causal-LM from a (possibly PEFT-wrapped) model."""
-    if hasattr(model, "get_base_model"):
-        return model.get_base_model()
-    m = model
-    for _ in range(4):
-        if hasattr(m, "base_model") and getattr(m, "base_model") is not m:
-            m = m.base_model
-        else:
-            break
-    if hasattr(m, "model") and hasattr(m.model, "model") and hasattr(m.model.model, "layers"):
-        return m.model
-    return m
+    """Return the underlying HF causal-LM (the module owning `.model.layers` + `.lm_head`).
+
+    Works for plain HF models and for peft/wrapper models alike: wrappers delegate
+    attributes, so we take the *deepest* module that owns both the decoder stack
+    and the LM head.
+    """
+    found = None
+    stack = [model]
+    seen = set()
+    while stack:
+        m = stack.pop()
+        if id(m) in seen:
+            continue
+        seen.add(id(m))
+        if hasattr(m, "lm_head") and hasattr(getattr(m, "model", None), "layers"):
+            found = m
+        stack.extend(m.children())
+    return found if found is not None else model
 
 
 class StreamingQuantLoRATrainer:
@@ -87,11 +93,15 @@ class StreamingQuantLoRATrainer:
 
         # Small/shared modules stay resident on the GPU. The input embedding is
         # kept on CPU (4-bit/bf16) and only the gathered activation is moved to
-        # the GPU; for 14B the embedding alone is ~1.5 GB bf16.
+        # the GPU; for 14B the embedding alone is ~1.5 GB bf16. Exception: when
+        # the LM head is *tied* to the embedding (e.g. Qwen2.5-3B/0.5B) the same
+        # tensor feeds the head, so it has to live where the head runs.
         self.rotary.to(device)
         self.norm.to(device)
         self.tied = self.lm_head.weight is self.embed.weight
-        if not self.tied:
+        if self.tied:
+            self.embed.to(device)
+        else:
             self.lm_head.to(device)
 
         self.trainables = [p for p in model.parameters() if p.requires_grad]
@@ -105,8 +115,12 @@ class StreamingQuantLoRATrainer:
     @torch.no_grad()
     def _forward_cached(self, ids):
         dev = self.device
-        # Embedding stays on CPU; only the gathered activation goes to the GPU.
-        h = self.embed(ids.to("cpu")).to(dev)
+        # Embedding usually lives on CPU (only the gathered activation moves to
+        # the GPU); for tied models it lives on the GPU together with the head.
+        emb_dev = self.embed.weight.device
+        h = self.embed(ids.to(emb_dev))
+        if h.device != torch.device(dev):
+            h = h.to(dev)
         pos_ids = torch.arange(ids.shape[1], device=dev).unsqueeze(0)
         pos = self.rotary(h, pos_ids)
         cache = []
