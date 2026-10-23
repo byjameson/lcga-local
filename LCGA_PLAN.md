@@ -80,6 +80,25 @@ learned block scorer recovers the signal; the concept graph is dead weight.*
 Open follow-up: does the **recency prior** matter (`--no_rel_bias`, running), and
 does an extra content shortcut add anything (`--content_rank`)?
 
+**RESULT (recency prior).** Same recipe, diag-only, `--no_rel_bias`:
+
+| Selection @ρ=0.25 (128 chunks) | PPL |
+|---|---:|
+| dense | 14.30 |
+| **learned + recency prior** | **21.84** |
+| learned, no prior | 22.81 |
+| random-k (budget-matched) | 23.95 |
+| static local (sink+diag, 2 blocks) | 26.79 |
+
+Decomposition of the 2.1 PPL gained over random: roughly **half from learned
+content (~1.1), half from the recency prior (~1.0)**.
+
+**Methodological caveat (important).** The `local` control always selects only
+sink+diagonal (2 blocks), so at ρ=0.25 it is *not* budget-matched (the router uses
+~4–8). The fair content baseline is `random-k`, which fills the budget. At ρ=0.125
+the two coincide by construction — and there learned == local **exactly** (26.788),
+which is the clean degeneration result.
+
 Train four routers with identical data/steps/lr, differing only in the scoring
 head; evaluate all with `exp3_eval.py --max_chunks 128` at ρ=0.25:
 

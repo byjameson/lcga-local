@@ -57,7 +57,7 @@ def main():
     ap.add_argument("--ckpt", type=str, required=True)
     ap.add_argument("--tag", type=str, default="eval")
     ap.add_argument("--max_chunks", type=int, default=128)
-    ap.add_argument("--quick", action="store_true")
+    ap.add_argument("--seq", type=int, default=1024)    ap.add_argument("--quick", action="store_true")
     ap.add_argument("--v2", action="store_true", help="stage-2 LoRA checkpoint (clean config)")
     ap.add_argument("--merge", action="store_true", help="merge LoRA into base weights")
     args = ap.parse_args()
@@ -85,10 +85,11 @@ def main():
     tokens = {k: load_tokens(os.path.join(DATA_DIR, f"{k}.pt")) for k in
               ["wt2_train", "wt2_test", "wt103_test", "tinystories_valid"]}
     maxc = 32 if args.quick else args.max_chunks
+    T = args.seq
     sets = {
-        "dev_wt2_test_1024": (tokens["wt2_test"], 1024, maxc),
-        "test_wt103_1024": (tokens["wt103_test"], 1024, maxc),
-        "test_tinystories_1024": (tokens["tinystories_valid"], 1024, maxc),
+        f"dev_wt2_test_{T}": (tokens["wt2_test"], T, maxc),
+        f"test_wt103_{T}": (tokens["wt103_test"], T, maxc),
+        f"test_tinystories_{T}": (tokens["tinystories_valid"], T, maxc),
     }
 
     def dense_fn(ids):
@@ -117,7 +118,7 @@ def main():
               f"recall={rec['mean']:.3f} ({res['sec']}s)", flush=True)
 
     # ---- budget sweep on dev (sparse PPL only, dense computed once) -----------
-    dev_chunks = chunks_from_tokens(tokens["wt2_test"], 1024, max_chunks=maxc)
+    dev_chunks = chunks_from_tokens(tokens["wt2_test"], T, max_chunks=maxc)
     set_sparse_enabled(False)
     dense_dev = quick_ppl(model, dev_chunks, device=DEV)
     sweep = {"dense_ppl": dense_dev["ppl"]}
