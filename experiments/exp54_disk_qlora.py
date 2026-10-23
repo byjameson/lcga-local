@@ -88,6 +88,64 @@ def prepare(model: str, save_quant: str) -> int:
     return 0
 
 
+def _format_messages(row: dict) -> list[dict]:
+    user = row["instruction"]
+    if row.get("context"):
+        user = f"{user}\n\nContext:\n{row['context']}"
+    return [
+        {"role": "user", "content": user},
+        {"role": "assistant", "content": row["response"]},
+    ]
+
+
+def _encode_chat(tokenizer, row: dict, seq: int):
+    """Chat-template encode with the prompt tokens masked out of the loss."""
+    messages = _format_messages(row)
+    full_text = tokenizer.apply_chat_template(messages, tokenize=False,
+                                              add_generation_prompt=False)
+    full = tokenizer(full_text, add_special_tokens=False).input_ids
+    prompt_text = tokenizer.apply_chat_template(messages[:-1], tokenize=False,
+                                                add_generation_prompt=True)
+    prompt = tokenizer(prompt_text, add_special_tokens=False).input_ids
+    full = full[:seq]
+    labels = list(full)
+    if 0 < len(prompt) < len(full) and full[:len(prompt)] == prompt[:len(full)]:
+        k = min(len(prompt), len(full))
+        labels = [-100] * k + labels[k:]
+    if len(labels) < 2:
+        return None
+    return (torch.tensor([full], dtype=torch.long),
+            torch.tensor([labels], dtype=torch.long))
+
+
+@torch.no_grad()
+def _masked_eval(trainer, rows, tokenizer, seq: int) -> float:
+    """Masked SFT loss through the streaming (disk-backed) forward."""
+    trainer.model.eval()
+    total, n = 0.0, 0
+    for row in rows:
+        enc = _encode_chat(tokenizer, row, seq)
+        if enc is None:
+            continue
+        ids, labels = enc
+        ys = torch.full_like(ids, -100)
+        ys[:, :-1] = labels[:, 1:]
+        h, _cache, _pos = trainer._forward_cached(ids)
+        z = trainer.norm(h)
+        logits = trainer.lm_head(z).float()
+        tgt = ys.reshape(-1)
+        valid = tgt != -100
+        v = int(valid.sum())
+        if v == 0:
+            continue
+        total += float(torch.nn.functional.cross_entropy(
+            logits.reshape(-1, logits.shape[-1])[valid],
+            tgt[valid].to(logits.device), reduction="sum"))
+        n += v
+    trainer.model.train()
+    return total / max(n, 1)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--prepare", action="store_true")
@@ -108,6 +166,11 @@ def main() -> int:
                     help="fp32 matches prepare_model_for_kbit_training; 'as-stored' "
                          "keeps embed/head in the checkpoint dtype (big models)")
     ap.add_argument("--eval_chunks", type=int, default=0)
+    ap.add_argument("--sft", action="store_true",
+                    help="train on instruction data (Dolly-15k) with prompt masking")
+    ap.add_argument("--dataset", default="databricks/databricks-dolly-15k")
+    ap.add_argument("--train_size", type=int, default=256)
+    ap.add_argument("--eval_size", type=int, default=8)
     ap.add_argument("--save", default="")
     ap.add_argument("--tag", default="disk_qlora")
     ap.add_argument("--verbose", action="store_true")
@@ -145,30 +208,69 @@ def main() -> int:
           f"tied={tr.tied} rss={host_rss_gb()}GB params={count_lora_params(model)/1e6:.2f}M",
           flush=True)
 
-    tokens = load_tokens(str(ROOT / args.data))
-    sampler = TrainSampler(tokens, args.seq, generator=torch.Generator().manual_seed(1234))
-    batches = [sampler.batch(1) for _ in range(args.steps)]
-
-    ce0 = ce1 = None
-    if args.eval_chunks > 0:
-        ev = chunks_from_tokens(load_tokens(str(ROOT / args.eval_data)), args.seq, args.eval_chunks)
-        ce0 = sum(stream_eval_ce(tr, ev[i].unsqueeze(0), args.chunk)
-                  for i in range(len(ev))) / len(ev)
-        print(f"[eval] before CE={ce0:.4f}", flush=True)
-
     losses, times, peaks = [], [], []
-    for i, (xs, ys) in enumerate(batches):
-        loss, dt, peak = tr.step(xs, ys)
-        losses.append(round(loss, 6))
-        times.append(round(dt, 3))
-        peaks.append(round(peak, 3))
-        print(f"[step] {i+1}/{len(batches)} loss={loss:.4f} {dt:.2f}s peak={peak:.2f}GB "
-              f"rss={host_rss_gb()}GB", flush=True)
+    ce0 = ce1 = None
+    wall = 0.0
+    t_all = time.time()
 
-    if args.eval_chunks > 0:
-        ce1 = sum(stream_eval_ce(tr, ev[i].unsqueeze(0), args.chunk)
-                  for i in range(len(ev))) / len(ev)
-        print(f"[eval] after CE={ce1:.4f} (delta {ce1-ce0:+.4f})", flush=True)
+    if args.sft:
+        from datasets import load_dataset
+        from transformers import AutoTokenizer
+
+        tok = AutoTokenizer.from_pretrained(model_dir)
+        if tok.pad_token is None:
+            tok.pad_token = tok.eos_token
+        ds = load_dataset(args.dataset, split="train").shuffle(seed=1234)
+        train_rows = [ds[i] for i in range(min(args.train_size, len(ds)))]
+        eval_rows = [ds[len(train_rows) + i]
+                     for i in range(min(args.eval_size, len(ds) - len(train_rows)))]
+        print(f"[sft] {Path(args.dataset).name} train={len(train_rows)} "
+              f"eval={len(eval_rows)}", flush=True)
+        ce0 = _masked_eval(tr, eval_rows, tok, args.seq)
+        print(f"[eval] before loss={ce0:.4f}", flush=True)
+        for i in range(args.steps):
+            enc = _encode_chat(tok, train_rows[i % len(train_rows)], args.seq)
+            if enc is None:
+                continue
+            ids, labels = enc
+            ys = torch.full_like(ids, -100)
+            ys[:, :-1] = labels[:, 1:]
+            loss, dt, peak = tr.step(ids, ys, ignore_index=-100)
+            losses.append(round(loss, 6))
+            times.append(round(dt, 3))
+            peaks.append(round(peak, 3))
+            if (i + 1) % 10 == 0:
+                print(f"[step] {i+1}/{args.steps} loss={loss:.4f} {dt:.2f}s "
+                      f"peak={peak:.2f}GB rss={host_rss_gb()}GB", flush=True)
+        ce1 = _masked_eval(tr, eval_rows, tok, args.seq)
+        print(f"[eval] after loss={ce1:.4f} (delta {ce1-ce0:+.4f})", flush=True)
+        wall = time.time() - t_all
+    else:
+        tokens = load_tokens(str(ROOT / args.data))
+        sampler = TrainSampler(tokens, args.seq, generator=torch.Generator().manual_seed(1234))
+        batches = [sampler.batch(1) for _ in range(args.steps)]
+
+        if args.eval_chunks > 0:
+            ev = chunks_from_tokens(load_tokens(str(ROOT / args.eval_data)), args.seq,
+                                    args.eval_chunks)
+            ce0 = sum(stream_eval_ce(tr, ev[i].unsqueeze(0), args.chunk)
+                      for i in range(len(ev))) / len(ev)
+            print(f"[eval] before CE={ce0:.4f}", flush=True)
+
+        for i, (xs, ys) in enumerate(batches):
+            loss, dt, peak = tr.step(xs, ys)
+            losses.append(round(loss, 6))
+            times.append(round(dt, 3))
+            peaks.append(round(peak, 3))
+            print(f"[step] {i+1}/{len(batches)} loss={loss:.4f} {dt:.2f}s peak={peak:.2f}GB "
+                  f"rss={host_rss_gb()}GB", flush=True)
+
+        if args.eval_chunks > 0:
+            ce1 = sum(stream_eval_ce(tr, ev[i].unsqueeze(0), args.chunk)
+                      for i in range(len(ev))) / len(ev)
+            print(f"[eval] after CE={ce1:.4f} (delta {ce1-ce0:+.4f})", flush=True)
+
+        wall = time.time() - t_all
 
     saved = None
     if args.save:
@@ -185,6 +287,8 @@ def main() -> int:
     row = {
         "exp": "exp54_disk_qlora",
         "tag": args.tag,
+        "mode": "sft" if args.sft else "lm",
+        "dataset": args.dataset if args.sft else None,
         "model": Path(model_dir).name,
         "weights": "mmap from disk (no RAM-resident base)",
         "base_quant": "nf4",
@@ -199,6 +303,7 @@ def main() -> int:
         "lr": args.lr,
         "losses": losses,
         "step_s_med": sorted(times)[len(times) // 2] if times else None,
+        "wall_s": round(wall, 1),
         "peak_gb_max": max(peaks) if peaks else None,
         "host_rss_gb": host_rss_gb(),
         "host_private_gb": host_private_gb(),
