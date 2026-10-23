@@ -21,6 +21,30 @@ import torch
 from .stream_train import _layer_out, chunked_lm_loss_and_backward
 
 
+def chunked_lm_loss_and_backward_masked(head, h, ys, chunk=128, ignore_index=-100):
+    """Chunked CE with an ignore_index (for SFT prompt masking)."""
+    B, T, _ = h.shape
+    total = torch.zeros((), device=h.device, dtype=torch.float32)
+    valid_total = 0
+    for a in range(0, T, chunk):
+        b = min(a + chunk, T)
+        logits = head(h[:, a:b])
+        tgt = ys[:, a:b].reshape(-1).to(h.device)
+        valid = int((tgt != ignore_index).sum())
+        if valid == 0:
+            continue
+        loss_sum = torch.nn.functional.cross_entropy(
+            logits.reshape(-1, logits.shape[-1]).float(), tgt,
+            reduction="sum", ignore_index=ignore_index,
+        )
+        (loss_sum / valid).backward()
+        with torch.no_grad():
+            total = total + loss_sum.detach()
+        valid_total += valid
+    denom = max(valid_total, 1)
+    return total / denom, total / denom
+
+
 def base_model_of(model):
     """Return the underlying HF causal-LM from a (possibly PEFT-wrapped) model."""
     if hasattr(model, "get_base_model"):
@@ -112,7 +136,7 @@ class StreamingQuantLoRATrainer:
                       f"reserved={torch.cuda.memory_reserved()/1e9:.2f}GB", flush=True)
 
     # --------------------------------------------------------------------- step
-    def step(self, xs, ys):
+    def step(self, xs, ys, ignore_index=None):
         torch.cuda.synchronize()
         t0 = time.time()
         torch.cuda.reset_peak_memory_stats()
@@ -121,7 +145,12 @@ class StreamingQuantLoRATrainer:
         h_b = h_blocks.detach().requires_grad_(True)
         z_g = self.norm(h_b)
         z = z_g.detach().requires_grad_(True)
-        _, loss = chunked_lm_loss_and_backward(self.lm_head, z, ys, self.loss_chunk)
+        if ignore_index is None:
+            _, loss = chunked_lm_loss_and_backward(self.lm_head, z, ys, self.loss_chunk)
+        else:
+            _, loss = chunked_lm_loss_and_backward_masked(
+                self.lm_head, z, ys, self.loss_chunk, ignore_index=ignore_index
+            )
         z_g.backward(z.grad)
         grad = h_b.grad
         self._backward_blocks(cache, pos, grad)
