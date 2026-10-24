@@ -16,6 +16,10 @@ Affected (all from 24 Oct 2026, morning):
 - `exp60_diag.json`, `exp60_ret_c64.json` — "learned" needle rows
 - `exp58_T1024.json`, `exp58_T4096.json`, `exp58_T8192.json`, `exp58_T16384.json`
 - `exp59_diag.json`, `exp59_norel.json`, `exp59_v3.json`
+- `longctx_32B_battery_sleep.json` — the long-context sweep ran while the machine was
+  on battery and asleep (the 32B 512/1024 points read 17.4 s / 27.4 s). Speed numbers
+  in this repository are AC-only, so it was re-measured into
+  `longctx_32B_ac.json`.
 
 Rows in `results.jsonl` with `"ts"` before ~2026-10-24 02:20 and `"exp"` in
 {`exp58_eval_long`, `exp59_selection`, `exp60_needle`} are affected the same way.
