@@ -50,9 +50,17 @@ So the experiment is bounded and cheap to explore.
 
 ## Experiments (each a few minutes, no training needed for E1)
 
-**E1 — sequence sweep, no training.** 32B and 14B, one step each at
-`seq ∈ {512, 1024, 2048, 3072}`, measure peak VRAM, step time, tokens/s.
-`python experiments/exp54_disk_qlora.py --model-dir models/Qwen2.5-32B-Instruct-bnb-4bit --steps 1 --seq <T> --eval_chunks 0 --shared-dtype as-stored`
+**E1 — sequence sweep, no training.** 32B and 14B, measure peak VRAM, step time,
+tokens/s at `seq ∈ {512, 1024, 2048, 3072}`.
+
+> **Measurement note (25 Oct 2026).** A single-step run is dominated by the **cold read
+> of the whole quantized base** (19.2 GB at ~300 MB/s ≈ 60–75 s for 32B), so `--steps 1`
+> measures I/O, not the step: the first probe gave 67.6 s at seq 512 and 75.0 s at 1024
+> with peak 3.82/4.60 GB, which says nothing about throughput. Use
+> `scripts/longctx_sweep.py` (runs `--steps 3`, reports the median of the JSON summary,
+> and computes tokens/s) and compare like with like.
+
+`python scripts/longctx_sweep.py --models 32B,14B --seqs 512,1024,2048,3072`
 **Decision:** find the largest `seq` with peak ≤ ~5.3 GB (WDDM headroom).
 
 **E2 — long-context SFT.** At the best `seq`, run a short Dolly SFT (e.g. 50 steps,

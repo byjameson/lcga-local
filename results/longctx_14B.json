@@ -1,0 +1,23 @@
+[
+ {
+  "error": "no json",
+  "tail": "  File \"C:\\Users\\biris\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\bitsandbytes\\nn\\modules.py\", line 367, in from_prequantized\n    self.quant_state = QuantState.from_dict(qs_dict=quantized_stats, device=device)\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\biris\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\bitsandbytes\\functional.py\", line 508, in from_dict\n    raise ValueError(\"Expected packed or unpacked quant_state items, found neither\")\nValueError: Expected packed or unpacked quant_state items, found neither",
+  "wall_s": 57.14344310760498,
+  "model": "14B",
+  "seq": 1024
+ },
+ {
+  "error": "no json",
+  "tail": "  File \"C:\\Users\\biris\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\bitsandbytes\\nn\\modules.py\", line 367, in from_prequantized\n    self.quant_state = QuantState.from_dict(qs_dict=quantized_stats, device=device)\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\biris\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\bitsandbytes\\functional.py\", line 508, in from_dict\n    raise ValueError(\"Expected packed or unpacked quant_state items, found neither\")\nValueError: Expected packed or unpacked quant_state items, found neither",
+  "wall_s": 14.03102707862854,
+  "model": "14B",
+  "seq": 2048
+ },
+ {
+  "error": "no json",
+  "tail": "  File \"C:\\Users\\biris\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\bitsandbytes\\nn\\modules.py\", line 367, in from_prequantized\n    self.quant_state = QuantState.from_dict(qs_dict=quantized_stats, device=device)\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\biris\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\bitsandbytes\\functional.py\", line 508, in from_dict\n    raise ValueError(\"Expected packed or unpacked quant_state items, found neither\")\nValueError: Expected packed or unpacked quant_state items, found neither",
+  "wall_s": 12.820581912994385,
+  "model": "14B",
+  "seq": 3072
+ }
+]

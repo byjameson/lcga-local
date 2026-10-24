@@ -378,6 +378,13 @@ keeps 5/5 cells at 1.00 and PPL 25.648, and reaches **1.00** on the held-out phr
 and two facts at 2k depth 0.1 (three facts 0.70) — it is the better general-purpose
 configuration, mix7 the cleaner single-task one.
 
+**Forcing the budget to bind does not make it query-selective.** Training with three
+facts at 1k (two free slots, `mix7_nf3`) still shows question-independent hits and
+*degrades* the single-fact 1k cell (0.00 vs 1.00), while the 2k multi-fact cells stay
+at 1.00. With several facts in context the dense teacher's content argmax is not
+consistently the queried one, so the distillation target itself is ambiguous —
+query-selective routing is a *target-definition* problem, not only a training one.
+
 Cells where dense itself is not exact (T=2048 depths 0.5/0.9, 6 prompts) are noisy and
 should not be over-read.
 

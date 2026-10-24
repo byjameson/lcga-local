@@ -22,6 +22,8 @@ what was tried, including the bugs).
 
 **Latest LCGA research (25 Oct 2026):** the learned router equals a budget-matched static window on plain language modelling (content blocks 1.7–7.0%, PPL +0.005…+0.133), but on retrieval-style data, training at the answer positions with a *content-focused* target — including a label-free one — reaches dense exact match at a 25% block budget (1k→8k transfer), where the window scores 0.00. Mixing 1 retrieval step per 7 language-modelling steps keeps plain-LM PPL within **+0.6** of the window while retaining that retrieval, so one router can serve both. Corrected numbers, controls, limits and repro commands: [`LCGA_FINDINGS.md`](LCGA_FINDINGS.md).
 
+**Long-context training, first pass (25 Oct 2026):** a 32B nf4 base streamed from disk fits at **1k context** on the 6 GB card (4.61 GB peak, 28.6 s/step, **35.8 tok/s** vs 11.6 tok/s at seq 128) but **not at 2k** — the recompute activation cache plus the head spill into shared memory and a step did not finish in an hour. Protocol (3 warm steps, AC only) and the discarded battery/sleep rows: [`LONGCTX_FINDINGS.md`](LONGCTX_FINDINGS.md).
+
 ## Product: LCGA Local — one-command local chat
 
 The product surface is not an API. It is a local chat assistant:
