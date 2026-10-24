@@ -122,5 +122,5 @@ and the practical write-up with the traps and one-command presets:
 [`GUIDE_6GB_32B.md`](https://github.com/byjameson/stream-finetune/blob/main/GUIDE_6GB_32B.md).
 
 Full tables, ablations, controls, limits and reproduction commands:
-[`LCGA_FINDINGS.md`](https://github.com/byjameson/stream-finetune/blob/main/LCGA_FINDINGS.md).
+[`LCGA_FINDINGS.md`](https://github.com/byjameson/lcga-local/blob/main/LCGA_FINDINGS.md).
 The licence, weights and donation section above are unchanged.

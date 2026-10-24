@@ -3,7 +3,7 @@
 **What worked, what didn’t, and what the numbers actually mean.**
 
 I’m Gökhan Çava, an independent developer. I published
-[LCGA Local](https://github.com/byjameson/stream-finetune), a source-only research
+[LCGA Local](https://github.com/byjameson/lcga-local), a source-only research
 package for local AI on small GPUs. This is the short technical story behind
 the release, including the parts that did not work.
 
@@ -97,9 +97,9 @@ corpus is CC BY-SA 4.0 with attribution in `data/rag/README.md`.
 
 ## Links
 
-- Repository: https://github.com/byjameson/stream-finetune
-- Release: https://github.com/byjameson/stream-finetune/releases/tag/v0.1.0
-- Press kit: https://github.com/byjameson/stream-finetune/blob/main/PRESS.md
+- Repository: https://github.com/byjameson/lcga-local
+- Release: https://github.com/byjameson/lcga-local/releases/tag/v0.1.0
+- Press kit: https://github.com/byjameson/lcga-local/blob/main/PRESS.md
 
 If you run this on a smaller GPU, or if you find a mistake in the evaluation,
 open an issue. Negative results and corrections are welcome.

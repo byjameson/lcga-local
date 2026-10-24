@@ -43,8 +43,8 @@ runtimes.
 
 ## Links
 
-- Repository: https://github.com/byjameson/stream-finetune
-- Release: https://github.com/byjameson/stream-finetune/releases/tag/v0.1.0
+- Repository: https://github.com/byjameson/lcga-local
+- Release: https://github.com/byjameson/lcga-local/releases/tag/v0.1.0
 - Main results: `README.md`, `RAPOR.md`, `M5_RAPOR.md`, `SERVICE_RAPOR.md`
 - RAG evidence: `results/exp48_rag_eval.json`,
   `results/exp48_retrieval_check.txt`, `results/exp48_manual_review.md`
