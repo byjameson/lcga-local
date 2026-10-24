@@ -1,0 +1,73 @@
+{
+ "exp": "exp1b_fast_dense",
+ "ts": "2026-10-15 16:28:15",
+ "parity": {
+  "slow_ce": 2.8518559520195654,
+  "fast_ce": 2.8520155503020375,
+  "abs_diff": 0.00015959828247202879
+ },
+ "speed_ms": {
+  "fast_dense_core_T1024": {
+   "median": 90.0602,
+   "min": 89.2109,
+   "mean": 90.0991
+  },
+  "fast_dense_core_T2048": {
+   "median": 179.1421,
+   "min": 178.7237,
+   "mean": 179.194
+  },
+  "fast_dense_core_T4096": {
+   "median": 363.3695,
+   "min": 362.9309,
+   "mean": 363.4169
+  },
+  "fast_dense_core_T8192": {
+   "median": 831.3977,
+   "min": 830.4476,
+   "mean": 831.5693
+  }
+ },
+ "profile_T4096": [
+  [
+   "_ZN7cutlass7Kernel2I66cutlass_80_tensorop_f16_s16816gem",
+   158.13
+  ],
+  [
+   "_Z39fmha_cutlassF_f16_aligned_64x64_rf_sm80N22PyTorchMe",
+   55.01
+  ],
+  [
+   "_ZN2at6native29vectorized_elementwise_kernelILi4ENS0_13",
+   23.52
+  ],
+  [
+   "_ZN2at6native29vectorized_elementwise_kernelILi4EZZZNS0",
+   15.84
+  ],
+  [
+   "_ZN2at6native18elementwise_kernelILi128ELi4EZNS0_22gpu_",
+   14.56
+  ],
+  [
+   "_ZN2at6native29vectorized_elementwise_kernelILi4EZNS0_5",
+   11.89
+  ],
+  [
+   "_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_22gpu_",
+   11.63
+  ],
+  [
+   "ampere_fp16_s1688gemm_fp16_128x128_ldg8_f2f_stages_32x1",
+   9.71
+  ],
+  [
+   "ampere_fp16_s1688gemm_fp16_128x128_ldg8_relu_f2f_tn",
+   9.66
+  ],
+  [
+   "_ZN2at6native27unrolled_elementwise_kernelIZZZNS0_23dir",
+   8.95
+  ]
+ ]
+}

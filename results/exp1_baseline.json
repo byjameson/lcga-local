@@ -1,0 +1,187 @@
+{
+ "exp": "exp1_baseline",
+ "ts": "2026-10-15 15:52:39",
+ "model": "Qwen2.5-0.5B",
+ "dense": {
+  "dev_wt2_test_1024": {
+   "ce": 2.6605072049451364,
+   "ppl": 14.303542137145996,
+   "ntok": 130944,
+   "chunks": 128,
+   "seq_len": 1024,
+   "sec": 36.7
+  },
+  "test_wt103_1024": {
+   "ce": 2.6605072049451364,
+   "ppl": 14.303542137145996,
+   "ntok": 130944,
+   "chunks": 128,
+   "seq_len": 1024,
+   "sec": 36.5
+  },
+  "test_tinystories_1024": {
+   "ce": 1.715031242557052,
+   "ppl": 5.556849479675293,
+   "ntok": 130944,
+   "chunks": 128,
+   "seq_len": 1024,
+   "sec": 36.5
+  },
+  "dev_wt2_test_2048": {
+   "ce": 2.5353872208811916,
+   "ppl": 12.621317863464355,
+   "ntok": 131008,
+   "chunks": 64,
+   "seq_len": 2048,
+   "sec": 55.3
+  }
+ },
+ "dense_speed": {
+  "dense_core_T1024": {
+   "median": 242.9471,
+   "min": 241.3629,
+   "mean": 243.0375
+  },
+  "dense_core_T2048": {
+   "median": 777.7375,
+   "min": 776.9252,
+   "mean": 777.7177
+  },
+  "dense_core_T4096": {
+   "median": 2768.0532,
+   "min": 2765.5176,
+   "mean": 2768.3517
+  },
+  "dense_core_T8192": {
+   "median": 106648.0312,
+   "min": 106435.9688,
+   "mean": 106659.543
+  }
+ },
+ "dense_profile_ms": {
+  "T1024": [
+   [
+    "_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_22gpu_kerne",
+    34.5
+   ],
+   [
+    "_ZN7cutlass7Kernel2I66cutlass_80_tensorop_f16_s16816gemm_rel",
+    27.6
+   ],
+   [
+    "_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_22gpu_kerne",
+    24.15
+   ],
+   [
+    "_ZN43_GLOBAL__N__bcfaaeff_10_SoftMax_cu_0af7be2120softmax_wa",
+    23.16
+   ],
+   [
+    "_ZN2at6native29vectorized_elementwise_kernelILi4EZNS0_24floa",
+    20.63
+   ],
+   [
+    "ampere_sgemm_128x128_nn",
+    17.14
+   ],
+   [
+    "ampere_fp16_s1688gemm_fp16_128x128_ldg8_f2f_stages_32x1_tn",
+    15.73
+   ],
+   [
+    "ampere_sgemm_128x128_tn",
+    15.31
+   ],
+   [
+    "_ZN2at6native29vectorized_elementwise_kernelILi4EZZZNS0_49_G",
+    14.2
+   ],
+   [
+    "_ZN2at6native29vectorized_elementwise_kernelILi4ENS0_13Binar",
+    5.84
+   ],
+   [
+    "_ZN2at6native29vectorized_elementwise_kernelILi4EZZZNS0_61_G",
+    3.92
+   ],
+   [
+    "_ZN2at6native27unrolled_elementwise_kernelIZZZNS0_23direct_c",
+    3.82
+   ],
+   [
+    "_ZN2at6native18elementwise_kernelILi128ELi4EZNS0_22gpu_kerne",
+    3.41
+   ],
+   [
+    "ampere_fp16_s1688gemm_fp16_128x128_ldg8_relu_f2f_stages_32x1",
+    3.07
+   ],
+   [
+    "_ZN2at6native13reduce_kernelILi512ELi1ENS0_8ReduceOpIbNS0_14",
+    3.05
+   ]
+  ],
+  "T4096": [
+   [
+    "_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_22gpu_kerne",
+    549.51
+   ],
+   [
+    "_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_22gpu_kerne",
+    385.73
+   ],
+   [
+    "_ZN2at6native43_GLOBAL__N__bcfaaeff_10_SoftMax_cu_0af7be2122",
+    379.55
+   ],
+   [
+    "ampere_sgemm_128x128_tn",
+    300.89
+   ],
+   [
+    "_ZN2at6native29vectorized_elementwise_kernelILi4EZNS0_24floa",
+    289.76
+   ],
+   [
+    "ampere_sgemm_128x128_nn",
+    247.86
+   ],
+   [
+    "_ZN2at6native29vectorized_elementwise_kernelILi4EZZZNS0_49_G",
+    225.92
+   ],
+   [
+    "_ZN7cutlass7Kernel2I66cutlass_80_tensorop_f16_s16816gemm_rel",
+    157.99
+   ],
+   [
+    "_ZN2at6native13reduce_kernelILi512ELi1ENS0_8ReduceOpIbNS0_14",
+    44.96
+   ],
+   [
+    "_ZN2at6native29vectorized_elementwise_kernelILi4ENS0_13Binar",
+    23.53
+   ],
+   [
+    "_ZN2at6native29vectorized_elementwise_kernelILi4EZZZNS0_61_G",
+    15.81
+   ],
+   [
+    "_ZN2at6native27unrolled_elementwise_kernelIZZZNS0_23direct_c",
+    14.67
+   ],
+   [
+    "_ZN2at6native18elementwise_kernelILi128ELi4EZNS0_22gpu_kerne",
+    14.55
+   ],
+   [
+    "_ZN2at6native29vectorized_elementwise_kernelILi4EZNS0_50_GLO",
+    11.9
+   ],
+   [
+    "_ZN2at6native29vectorized_elementwise_kernelILi4ENS0_13AUnar",
+    11.7
+   ]
+  ]
+ }
+}

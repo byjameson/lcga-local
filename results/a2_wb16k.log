@@ -1,0 +1,82 @@
+[data] train=219375754 tok (tok2_wb16k_train.pt) | valid=597635 tok (tok2_wb16k_valid.pt) | valid_bytes=2493514
+[plan] 6000 adim x 32x512 = 98M token (~0.45 epoch)
+[model] params=20.45M cfg={'arch': 'minilm', 'vocab': 16384, 'dim': 384, 'layers': 8, 'heads': 6, 'ctx': 512, 'mlp_hidden': 1024}
+[resume] step=1001 best_val=2.1672
+  [step 1100] loss=2.0092 lr=9.57e-04 568ms emb_norm=201.65 vram=5.89G
+  [step 1200] loss=2.0510 lr=9.46e-04 567ms emb_norm=204.77 vram=5.89G
+  [step 1300] loss=1.9994 lr=9.33e-04 572ms emb_norm=208.20 vram=5.89G
+  [step 1400] loss=1.9449 lr=9.20e-04 567ms emb_norm=210.28 vram=5.89G
+  [eval @1500] val_loss=2.0454 ppl=7.73 bpb=0.7073
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_wb16k_best.pt
+  [step 1500] loss=2.1475 lr=9.05e-04 568ms emb_norm=211.84 vram=5.90G
+  [step 1600] loss=1.9952 lr=8.89e-04 565ms emb_norm=211.95 vram=5.90G
+  [step 1700] loss=1.9168 lr=8.73e-04 565ms emb_norm=212.76 vram=5.90G
+  [step 1800] loss=1.9082 lr=8.55e-04 564ms emb_norm=213.62 vram=5.90G
+  [step 1900] loss=1.8251 lr=8.36e-04 567ms emb_norm=214.67 vram=5.90G
+  [eval @2000] val_loss=1.9553 ppl=7.07 bpb=0.6761
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_wb16k_best.pt
+  [sample @2000 1.8s] Once upon a time, there was a little boy named Timmy. Timmy loved to play outside in the backyard. One day, he found a big sack inside. He was so excited and wanted to open them.   As he was moving the sack, he saw a group of kids playing outside. They were running around and having a lot of fun. Ti
+  [step 2000] loss=1.7524 lr=8.17e-04 571ms emb_norm=215.28 vram=5.90G
+  [ckpt] step 2000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_wb16k_ckpt.pt
+  [step 2100] loss=2.0154 lr=7.96e-04 567ms emb_norm=215.18 vram=5.90G
+  [step 2200] loss=1.8680 lr=7.75e-04 568ms emb_norm=213.59 vram=5.90G
+  [step 2300] loss=1.7559 lr=7.53e-04 565ms emb_norm=212.63 vram=5.90G
+  [step 2400] loss=1.9040 lr=7.31e-04 567ms emb_norm=211.28 vram=5.90G
+  [eval @2500] val_loss=1.8941 ppl=6.65 bpb=0.6549
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_wb16k_best.pt
+  [step 2500] loss=1.8549 lr=7.08e-04 566ms emb_norm=210.39 vram=5.90G
+  [step 2600] loss=1.7587 lr=6.84e-04 568ms emb_norm=208.93 vram=5.90G
+  [step 2700] loss=1.8278 lr=6.60e-04 566ms emb_norm=207.79 vram=5.90G
+  [step 2800] loss=1.7850 lr=6.36e-04 567ms emb_norm=206.75 vram=5.90G
+  [step 2900] loss=1.8883 lr=6.12e-04 568ms emb_norm=205.04 vram=5.90G
+  [eval @3000] val_loss=1.8421 ppl=6.31 bpb=0.6370
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_wb16k_best.pt
+  [step 3000] loss=1.8367 lr=5.87e-04 570ms emb_norm=203.73 vram=5.90G
+  [ckpt] step 3000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_wb16k_ckpt.pt
+  [step 3100] loss=1.6293 lr=5.62e-04 570ms emb_norm=202.51 vram=5.90G
+  [step 3200] loss=1.6839 lr=5.38e-04 570ms emb_norm=201.18 vram=5.90G
+  [step 3300] loss=1.7159 lr=5.13e-04 573ms emb_norm=200.11 vram=5.90G
+  [step 3400] loss=1.7871 lr=4.88e-04 573ms emb_norm=198.86 vram=5.90G
+  [eval @3500] val_loss=1.7984 ppl=6.04 bpb=0.6218
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_wb16k_best.pt
+  [step 3500] loss=1.7664 lr=4.64e-04 573ms emb_norm=197.52 vram=5.90G
+  [step 3600] loss=1.7031 lr=4.40e-04 569ms emb_norm=196.45 vram=5.90G
+  [step 3700] loss=1.8177 lr=4.16e-04 572ms emb_norm=195.38 vram=5.90G
+  [step 3800] loss=1.8488 lr=3.92e-04 571ms emb_norm=194.14 vram=5.90G
+  [step 3900] loss=1.7863 lr=3.69e-04 569ms emb_norm=193.08 vram=5.90G
+  [eval @4000] val_loss=1.7583 ppl=5.80 bpb=0.6080
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_wb16k_best.pt
+  [sample @4000 5.4s] Once upon a time, there was a little girl named Lily. One day, she went to the store with her mommy to buy some toys. They found a big bag of clothes and hats that were very cheap. Lily's mommy said they were for rich, but they needed something else.  Lily looked around and saw something that made h
+  [step 4000] loss=1.6976 lr=3.47e-04 660ms emb_norm=192.34 vram=5.90G
+  [ckpt] step 4000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_wb16k_ckpt.pt
+  [step 4100] loss=1.7580 lr=3.25e-04 570ms emb_norm=191.04 vram=5.90G
+  [step 4200] loss=1.7409 lr=3.04e-04 570ms emb_norm=190.11 vram=5.90G
+  [step 4300] loss=1.6601 lr=2.83e-04 571ms emb_norm=189.19 vram=5.90G
+  [step 4400] loss=1.5843 lr=2.64e-04 568ms emb_norm=188.64 vram=5.90G
+  [eval @4500] val_loss=1.7267 ppl=5.62 bpb=0.5971
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_wb16k_best.pt
+  [step 4500] loss=1.6319 lr=2.45e-04 569ms emb_norm=187.91 vram=5.90G
+  [step 4600] loss=1.6449 lr=2.27e-04 568ms emb_norm=187.34 vram=5.90G
+  [step 4700] loss=1.7123 lr=2.11e-04 571ms emb_norm=186.82 vram=5.90G
+  [step 4800] loss=1.6753 lr=1.95e-04 571ms emb_norm=186.13 vram=5.90G
+  [step 4900] loss=1.6519 lr=1.80e-04 569ms emb_norm=185.64 vram=5.90G
+  [eval @5000] val_loss=1.7015 ppl=5.48 bpb=0.5883
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_wb16k_best.pt
+  [step 5000] loss=1.6503 lr=1.67e-04 571ms emb_norm=185.33 vram=5.90G
+  [ckpt] step 5000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_wb16k_ckpt.pt
+  [step 5100] loss=1.5144 lr=1.54e-04 568ms emb_norm=184.88 vram=5.90G
+  [step 5200] loss=1.5452 lr=1.43e-04 568ms emb_norm=184.48 vram=5.90G
+  [step 5300] loss=1.6550 lr=1.33e-04 570ms emb_norm=184.03 vram=5.90G
+  [step 5400] loss=1.7259 lr=1.24e-04 569ms emb_norm=183.77 vram=5.90G
+  [eval @5500] val_loss=1.6827 ppl=5.38 bpb=0.5818
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_wb16k_best.pt
+  [step 5500] loss=1.6142 lr=1.17e-04 572ms emb_norm=183.44 vram=5.90G
+  [step 5600] loss=1.6155 lr=1.11e-04 570ms emb_norm=183.02 vram=5.90G
+  [step 5700] loss=1.5593 lr=1.06e-04 571ms emb_norm=182.78 vram=5.90G
+  [step 5800] loss=1.6686 lr=1.03e-04 573ms emb_norm=182.62 vram=5.90G
+  [step 5900] loss=1.5085 lr=1.01e-04 570ms emb_norm=182.32 vram=5.90G
+  [eval @6000] val_loss=1.6706 ppl=5.32 bpb=0.5776
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_wb16k_best.pt
+  [sample @6000 5.2s] Once upon a time, there was a little girl named Lily. She loved to play with her toys and her favorite toy was a teddy bear named Teddy. One day, Lily's mom said they had to go to the store to buy some food. Lily asked, "Can I go to the store, please?" Her mom said, "Yes, but we have to leave until 
+  [sample @6001 5.1s] Once upon a time, there was a little girl named Lily. She loved to play with her toys and run around outside. One day, she went to the park with her mom. She saw a boy playing with a ball and asked him if she could play too. The boy said yes and they played together.  After playing for a while, Lily
+[done] best_val=1.6706 ppl=5.32 bpb=0.5776 wall=47.8min tokens/s=28568

@@ -1,0 +1,48 @@
+[p8] data train=466759153 valid=4691305 device=cuda
+[p8] resume step=3000 schedule=random
+[p8] C0 = ['L0.mlp', 'L1.attn', 'L1.mlp', 'L2.mlp', 'L3.attn', 'L4.attn', 'L4.mlp', 'L5.attn', 'L6.attn', 'L6.mlp', 'L7.attn', 'norm']
+[p8] C1 = ['tok', 'L0.attn', 'L2.attn', 'L3.mlp', 'L5.mlp', 'L7.mlp']
+[p8] start_val @3000 = 1.7141 (ppl=5.55)
+  [p8 step 3100] loss=1.5985 lr=9.52e-04 587ms vram=5.50G
+  [p8 step 3200] loss=1.5908 lr=9.48e-04 588ms vram=5.50G
+  [p8 step 3300] loss=1.5857 lr=9.44e-04 630ms vram=5.64G
+  [p8 step 3400] loss=1.5963 lr=9.40e-04 603ms vram=5.64G
+  [p8 eval @3500] val_loss=1.6505 ppl=5.21
+  [p8 best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p8_rnd_best.pt
+  [p8 step 3500] loss=1.5993 lr=9.36e-04 603ms vram=5.64G
+  [p8 step 3600] loss=1.6598 lr=9.32e-04 586ms vram=5.64G
+  [p8 step 3700] loss=1.6371 lr=9.28e-04 586ms vram=5.64G
+  [p8 step 3800] loss=1.5832 lr=9.23e-04 587ms vram=5.64G
+  [p8 step 3900] loss=1.5441 lr=9.19e-04 605ms vram=5.64G
+  [p8 eval @4000] val_loss=1.6577 ppl=5.25
+  [p8 step 4000] loss=1.6033 lr=9.14e-04 603ms vram=5.64G
+  [p8 ckpt] step 4000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p8_rnd_ckpt.pt
+  [p8 step 4100] loss=1.6056 lr=9.09e-04 603ms vram=5.64G
+  [p8 step 4200] loss=1.6865 lr=9.04e-04 587ms vram=5.64G
+  [p8 step 4300] loss=1.5515 lr=8.99e-04 586ms vram=5.64G
+  [p8 step 4400] loss=1.5970 lr=8.94e-04 586ms vram=5.64G
+  [p8 eval @4500] val_loss=1.6280 ppl=5.09
+  [p8 best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p8_rnd_best.pt
+  [p8 step 4500] loss=1.7133 lr=8.89e-04 603ms vram=5.64G
+  [p8 step 4600] loss=1.5987 lr=8.84e-04 602ms vram=5.64G
+  [p8 step 4700] loss=1.6293 lr=8.78e-04 603ms vram=5.64G
+  [p8 step 4800] loss=1.5962 lr=8.72e-04 587ms vram=5.64G
+  [p8 step 4900] loss=1.6190 lr=8.67e-04 587ms vram=5.64G
+  [p8 eval @5000] val_loss=1.6165 ppl=5.04
+  [p8 best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p8_rnd_best.pt
+  [p8 step 5000] loss=1.6419 lr=8.61e-04 587ms vram=5.64G
+  [p8 ckpt] step 5000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p8_rnd_ckpt.pt
+  [p8 step 5100] loss=1.6030 lr=8.55e-04 603ms vram=5.64G
+  [p8 step 5200] loss=1.5816 lr=8.49e-04 603ms vram=5.64G
+  [p8 step 5300] loss=1.6012 lr=8.43e-04 602ms vram=5.64G
+  [p8 step 5400] loss=1.6359 lr=8.37e-04 586ms vram=5.64G
+  [p8 eval @5500] val_loss=1.6087 ppl=5.00
+  [p8 best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p8_rnd_best.pt
+  [p8 step 5500] loss=1.6256 lr=8.31e-04 588ms vram=5.64G
+  [p8 step 5600] loss=1.6351 lr=8.24e-04 588ms vram=5.64G
+  [p8 step 5700] loss=1.5695 lr=8.18e-04 602ms vram=5.64G
+  [p8 step 5800] loss=1.6022 lr=8.11e-04 603ms vram=5.64G
+  [p8 step 5900] loss=1.5800 lr=8.05e-04 603ms vram=5.64G
+  [p8 eval @6000] val_loss=1.5920 ppl=4.91
+  [p8 best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p8_rnd_best.pt
+[p8 done] p8_rnd final=1.592 best=1.592 wall=29.8min med=602ms

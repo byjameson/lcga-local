@@ -1,0 +1,109 @@
+{
+ "exp": "exp4_speed",
+ "ts": "2026-10-24 00:00:47",
+ "ckpt": "checkpoints/abl_diag_best.pt",
+ "tag": "speed_diag",
+ "meta": {
+  "args": {
+   "steps": 1500,
+   "batch": 4,
+   "seq": 1024,
+   "lr": 0.0015,
+   "lam_kl": 0.5,
+   "budget": 0.25,
+   "n_concepts": 64,
+   "graph_rank": 0,
+   "dynamic": false,
+   "no_rel_bias": false,
+   "content_rank": 0,
+   "tag": "abl_diag",
+   "eval_every": 250,
+   "log_every": 20,
+   "seed": 0,
+   "warmup": 100,
+   "init_ckpt": ""
+  },
+  "router_params": 2755128,
+  "step": 250,
+  "dev_ppl": 54.5941162109375
+ },
+ "prefill": {
+  "T1024": {
+   "dense_ms": 88.383,
+   "sparse_ms": 96.286,
+   "speedup": 0.918,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 9.872,
+    "kernel_ms": 3.329,
+    "coarse_ms": 3.49
+   },
+   "breakdown_ratio_of_sparse": {
+    "router_ms": 0.1025,
+    "kernel_ms": 0.0346,
+    "coarse_ms": 0.0362
+   }
+  },
+  "T2048": {
+   "dense_ms": 178.6959,
+   "sparse_ms": 184.0894,
+   "speedup": 0.971,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 12.325,
+    "kernel_ms": 8.551,
+    "coarse_ms": 6.495
+   },
+   "breakdown_ratio_of_sparse": {
+    "router_ms": 0.067,
+    "kernel_ms": 0.0465,
+    "coarse_ms": 0.0353
+   }
+  },
+  "T4096": {
+   "dense_ms": 363.5915,
+   "sparse_ms": 356.9939,
+   "speedup": 1.018,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 22.413,
+    "kernel_ms": 27.256,
+    "coarse_ms": 12.785
+   },
+   "breakdown_ratio_of_sparse": {
+    "router_ms": 0.0628,
+    "kernel_ms": 0.0763,
+    "coarse_ms": 0.0358
+   }
+  },
+  "T8192": {
+   "dense_ms": 834.2687,
+   "sparse_ms": 753.1713,
+   "speedup": 1.108,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 45.711,
+    "kernel_ms": 98.466,
+    "coarse_ms": 24.188
+   },
+   "breakdown_ratio_of_sparse": {
+    "router_ms": 0.0607,
+    "kernel_ms": 0.1307,
+    "coarse_ms": 0.0321
+   }
+  }
+ },
+ "decode": {
+  "ctx1024": {
+   "dense_ms_per_step": 34.439,
+   "sparse_ms_per_step": 54.647,
+   "speedup": 0.63
+  },
+  "ctx2048": {
+   "dense_ms_per_step": 34.294,
+   "sparse_ms_per_step": 55.975,
+   "speedup": 0.613
+  },
+  "ctx4096": {
+   "dense_ms_per_step": 33.267,
+   "sparse_ms_per_step": 55.921,
+   "speedup": 0.595
+  }
+ }
+}

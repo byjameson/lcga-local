@@ -1,0 +1,10 @@
+{
+  "exp": "exp29c_ui_memory",
+  "tag": "exp29c_ui_memory",
+  "scenario": "isim",
+  "recall_turns": 2,
+  "hits": 2,
+  "answers_contain_alias": true,
+  "note": "browser UI 3-turn; deterministic 5-template memory layer; n=2 recall turns; not general memory",
+  "ts": "2026-10-20 17:23:52"
+}

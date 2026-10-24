@@ -1,0 +1,155 @@
+﻿test1 full-causal kernel vs dense-ref: max|diff| = 1.95e-03
+test2 partial kernel vs gather-ref  : max|diff| = 1.95e-03
+test3 null-logit kernel vs gather   : max|diff| = 9.77e-04
+
+--- speed (B=1, H=14, G=2, D=64, fp16) ---
+T= 1024 budget=0.125 kernel=  0.135 ms   (sdpa dense=  0.268 ms, ratio=1.99x)
+T= 1024 budget=0.25  kernel=  0.196 ms   (sdpa dense=  0.268 ms, ratio=1.37x)
+T= 1024 budget=0.5   kernel=  0.251 ms   (sdpa dense=  0.268 ms, ratio=1.07x)
+
+T= 2048 budget=0.125 kernel=  0.240 ms   (sdpa dense=  0.865 ms, ratio=3.61x)
+T= 2048 budget=0.25  kernel=  0.405 ms   (sdpa dense=  0.865 ms, ratio=2.13x)
+T= 2048 budget=0.5   kernel=  0.797 ms   (sdpa dense=  0.865 ms, ratio=1.08x)
+
+T= 4096 budget=0.125 kernel=  0.603 ms   (sdpa dense=  2.930 ms, ratio=4.86x)
+T= 4096 budget=0.25  kernel=  1.071 ms   (sdpa dense=  2.930 ms, ratio=2.74x)
+T= 4096 budget=0.5   kernel=  1.965 ms   (sdpa dense=  2.930 ms, ratio=1.49x)
+
+ALL TESTS PASSED
+python : 
+At line:1 char:1
++ python -m unittest discover -s tests -v *> results/test_run_full.txt; ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]
+Loading weights:  18%|#7        | 52/290 [00:00<00:00, 504.85it/s]
+Loading weights:  36%|###5      | 103/290 [00:00<00:00, 440.05it/s]
+Loading weights:  51%|#####1    | 148/290 [00:00<00:00, 402.15it/s]
+Loading weights:  66%|######5   | 191/290 [00:00<00:00, 400.67it/s]
+Loading weights:  80%|########  | 232/290 [00:00<00:00, 372.55it/s]
+Loading weights:  93%|#########3| 270/290 [00:00<00:00, 370.33it/s]
+Loading weights: 100%|##########| 290/290 [00:00<00:00, 398.77it/s]
+dense prefill last logits vs full forward: max|diff| = 0.0039
+dense decode step vs full forward: max|diff| = 0.0391
+sparse decode step: finite=True cosine_sim_to_dense=0.9243
+DECODE TESTS PASSED
+
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]
+Loading weights:  14%|#3        | 40/290 [00:00<00:01, 229.88it/s]
+Loading weights:  41%|####      | 118/290 [00:00<00:00, 442.94it/s]
+Loading weights:  58%|#####7    | 167/290 [00:00<00:00, 427.73it/s]
+Loading weights:  74%|#######4  | 215/290 [00:00<00:00, 416.09it/s]
+Loading weights:  91%|######### | 263/290 [00:00<00:00, 410.51it/s]
+Loading weights: 100%|##########| 290/290 [00:00<00:00, 418.96it/s]
+test_answer_messages (test_http_service.TestHTTPService.test_answer_messages) ... ok
+test_answer_query (test_http_service.TestHTTPService.test_answer_query) ... ok
+test_health_and_units (test_http_service.TestHTTPService.test_health_and_units) ... ok
+test_metrics_text (test_http_service.TestHTTPService.test_metrics_text) ... ok
+test_missing_query_or_messages (test_http_service.TestHTTPService.test_missing_query_or_messages) ... ok
+test_openai_alt_model (test_http_service.TestHTTPService.test_openai_alt_model) ... ok
+test_openai_chat (test_http_service.TestHTTPService.test_openai_chat) ... ok
+test_openai_chat3b_model (test_http_service.TestHTTPService.test_openai_chat3b_model) ... ok
+test_openai_chat4b_model (test_http_service.TestHTTPService.test_openai_chat4b_model) ... ok
+test_openai_chat_stream (test_http_service.TestHTTPService.test_openai_chat_stream) ... ok
+test_openai_chat_system_message (test_http_service.TestHTTPService.test_openai_chat_system_message) ... ok
+test_openai_models (test_http_service.TestHTTPService.test_openai_models) ... ok
+test_openai_quality_model (test_http_service.TestHTTPService.test_openai_quality_model) ... ok
+test_openai_validation (test_http_service.TestHTTPService.test_openai_validation) ... ok
+test_preload (test_http_service.TestHTTPService.test_preload) ... ok
+test_quality_answer_mode (test_http_service.TestHTTPService.test_quality_answer_mode) ... ok
+test_stream_bad_messages_is_400 (test_http_service.TestHTTPService.test_stream_bad_messages_is_400) ... ok
+test_stream_events (test_http_service.TestHTTPService.test_stream_events) ... ok
+test_stream_unknown_mode_is_400 (test_http_service.TestHTTPService.test_stream_unknown_mode_is_400) ... ok
+model loaded. params: 494032768
+patched layers: 24 | router params total: 2804280
+1. patched-but-disabled vs unpatched: max|logit diff| = 0.00e+00
+2. sparse forward finite: True | max|diff| vs dense: 26.1123046875
+3. captured layers: 24 | keys: ['dense', 'idx', 'mass', 'probs', 'scores', 'student']
+4. loss=0.1194 (mse=0.01391, kl=0.5275)
+   sample grads: [('gate', 0.0, True), ('coarse_null', 0.0, True), ('lambda_router', 0.0, True), ('router.graph_diag', 5.154649151961621e-09, True), ('router.graph_u', 8.176995747177784e-10, True), ('router.graph_v', 1.170213259626962e-09, True)]
+5. mode=topk    finite=True ppl_diff_max=0
+5. mode=random  finite=True ppl_diff_max=0
+5. mode=local   finite=True ppl_diff_max=0
+6. forward T=1024: dense=119.8 ms, sparse(untrained router)=119.4 ms
+ALL MODEL TESTS PASSED
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|##########| 1/1 [00:00<00:00, 249.84it/s]
+test_cache_roundtrip_is_exact (test_paged_quant_cache.TestResidentQuantCache.test_cache_roundtrip_is_exact) ... ok
+test_corrupt_cache_is_rebuilt (test_paged_quant_cache.TestResidentQuantCache.test_corrupt_cache_is_rebuilt) ... ok
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|##########| 1/1 [00:00<00:00, 471.75it/s]
+test_head_dim_is_read_from_config (test_paged_qwen.TestQwen3Parity.test_head_dim_is_read_from_config) ... ok
+test_incremental_decode_matches_full_forward (test_paged_qwen.TestQwen3Parity.test_incremental_decode_matches_full_forw
+ard) ... ok
+test_logits_match_huggingface (test_paged_qwen.TestQwen3Parity.test_logits_match_huggingface) ... ok
+test_context_has_numbered_source_and_passage (test_rag.TestRagStore.test_context_has_numbered_source_and_passage) ... o
+k
+test_empty_corpus_is_available_false (test_rag.TestRagStore.test_empty_corpus_is_available_false) ... ok
+test_english_query_hits_english_doc (test_rag.TestRagStore.test_english_query_hits_english_doc) ... ok
+test_light_stemmer_keeps_roots (test_rag.TestRagStore.test_light_stemmer_keeps_roots) ... ok
+test_missing_corpus_is_unavailable (test_rag.TestRagStore.test_missing_corpus_is_unavailable) ... ok
+test_search_ranks_relevant_doc (test_rag.TestRagStore.test_search_ranks_relevant_doc) ... ok
+test_search_rejects_single_term_overlap (test_rag.TestRagStore.test_search_rejects_single_term_overlap) ... ok
+test_search_rejects_unrelated_query (test_rag.TestRagStore.test_search_rejects_unrelated_query) ... ok
+test_tokenize_is_turkish_aware (test_rag.TestRagStore.test_tokenize_is_turkish_aware) ... ok
+test_code_query_does_not_retrieve (test_rag.TestServiceRagGate.test_code_query_does_not_retrieve) ... ok
+test_exact_output_and_creative_do_not_retrieve (test_rag.TestServiceRagGate.test_exact_output_and_creative_do_not_retri
+eve) ... ok
+test_explicit_off_disables (test_rag.TestServiceRagGate.test_explicit_off_disables) ... ok
+test_factual_question_retrieves (test_rag.TestServiceRagGate.test_factual_question_retrieves) ... ok
+test_greeting_and_list_do_not_retrieve (test_rag.TestServiceRagGate.test_greeting_and_list_do_not_retrieve) ... ok
+test_math_query_does_not_retrieve (test_rag.TestServiceRagGate.test_math_query_does_not_retrieve) ... ok
+test_message_writing_does_not_retrieve (test_rag.TestServiceRagGate.test_message_writing_does_not_retrieve) ... ok
+test_best_falls_back_to_concat_without_scores (test_service_unit.TestMerge.test_best_falls_back_to_concat_without_score
+s) ... ok
+test_best_picks_highest_score (test_service_unit.TestMerge.test_best_picks_highest_score) ... ok
+test_concat_labels_every_unit (test_service_unit.TestMerge.test_concat_labels_every_unit) ... ok
+test_single_unit_has_no_label (test_service_unit.TestMerge.test_single_unit_has_no_label) ... ok
+test_empty (test_service_unit.TestPlan.test_empty) ... ok
+test_oversized_unit_runs_alone (test_service_unit.TestPlan.test_oversized_unit_runs_alone) ... ok
+test_parallel_when_fits (test_service_unit.TestPlan.test_parallel_when_fits) ... ok
+test_sequential_when_overflow (test_service_unit.TestPlan.test_sequential_when_overflow) ... ok
+test_alt_mode_requires_unit (test_service_unit.TestRoute.test_alt_mode_requires_unit) ... ok
+test_chat3b_mode_requires_unit (test_service_unit.TestRoute.test_chat3b_mode_requires_unit) ... ok
+test_chat4b_mode_requires_unit (test_service_unit.TestRoute.test_chat4b_mode_requires_unit) ... ok
+test_chat_mode_requires_unit (test_service_unit.TestRoute.test_chat_mode_requires_unit) ... ok
+test_chat_route_when_available (test_service_unit.TestRoute.test_chat_route_when_available) ... ok
+test_code_cue_goes_deep (test_service_unit.TestRoute.test_code_cue_goes_deep) ... ok
+test_explicit_modes (test_service_unit.TestRoute.test_explicit_modes) ... ok
+test_greeting_goes_fast (test_service_unit.TestRoute.test_greeting_goes_fast) ... ok
+test_long_generic_is_parallel_pair (test_service_unit.TestRoute.test_long_generic_is_parallel_pair) ... ok
+test_quality_prefers_chat4b_when_available (test_service_unit.TestRoute.test_quality_prefers_chat4b_when_available) ...
+ ok
+test_quality_route_ignores_alt_in_quality_mode (test_service_unit.TestRoute.test_quality_route_ignores_alt_in_quality_m
+ode) ... ok
+test_quality_route_uses_language_aware_list_units (test_service_unit.TestRoute.test_quality_route_uses_language_aware_l
+ist_units) ... ok
+test_repair_list_text_preserves_content (test_service_unit.TestRoute.test_repair_list_text_preserves_content) ... ok
+test_route_keys_exist (test_service_unit.TestRoute.test_route_keys_exist) ... ok
+test_short_query_goes_fast (test_service_unit.TestRoute.test_short_query_goes_fast) ... ok
+test_unknown_mode_raises (test_service_unit.TestRoute.test_unknown_mode_raises) ... ok
+test_cache_key_distinguishes_history (test_service_unit.TestServiceValidation.test_cache_key_distinguishes_history) ...
+ ok
+test_cache_key_distinguishes_units_and_tokens (test_service_unit.TestServiceValidation.test_cache_key_distinguishes_uni
+ts_and_tokens) ... ok
+test_cache_key_normalizes_whitespace (test_service_unit.TestServiceValidation.test_cache_key_normalizes_whitespace) ...
+ ok
+test_clean_messages_rejects_bad_input (test_service_unit.TestServiceValidation.test_clean_messages_rejects_bad_input) .
+.. ok
+test_clean_messages_trims_history (test_service_unit.TestServiceValidation.test_clean_messages_trims_history) ... ok
+test_fit_prompt_keeps_recent_tokens (test_service_unit.TestServiceValidation.test_fit_prompt_keeps_recent_tokens) ... o
+k
+test_messages_reject_units_and_non_chat_mode (test_service_unit.TestServiceValidation.test_messages_reject_units_and_no
+n_chat_mode) ... ok
+test_messages_require_chat_unit (test_service_unit.TestServiceValidation.test_messages_require_chat_unit) ... ok
+test_units_info_has_core_units (test_service_unit.TestServiceValidation.test_units_info_has_core_units) ... ok
+test_unknown_unit_rejected (test_service_unit.TestServiceValidation.test_unknown_unit_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 74 tests in 1.523s
+
+OK

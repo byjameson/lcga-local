@@ -1,0 +1,90 @@
+{
+ "stage": "tokenizers_v1",
+ "sample_stories": 300000,
+ "valid_stories": 3000,
+ "ts": "2026-10-16 18:35:14",
+ "rows": [
+  {
+   "desc": "p3_bpe8k_kontrol",
+   "vocab": 8192,
+   "n_bytes": 2493514,
+   "n_tok": 599715,
+   "bytes_per_tok": 4.157831636694096,
+   "tok_per_byte": 0.24050997908975044,
+   "enc_mbps": 14.728140610155933,
+   "roundtrip_ok": true
+  },
+  {
+   "desc": "bpe_wb_4k",
+   "vocab": 4096,
+   "n_bytes": 2493514,
+   "n_tok": 625215,
+   "bytes_per_tok": 3.9882504418480043,
+   "tok_per_byte": 0.2507365108036289,
+   "enc_mbps": 16.329909320975432,
+   "roundtrip_ok": true,
+   "train_sec": 30.2,
+   "path": "data\\tok2\\bpe_wb_4k.json"
+  },
+  {
+   "desc": "bpe_wb_8k",
+   "vocab": 8192,
+   "n_bytes": 2493514,
+   "n_tok": 599715,
+   "bytes_per_tok": 4.157831636694096,
+   "tok_per_byte": 0.24050997908975044,
+   "enc_mbps": 16.500725350027768,
+   "roundtrip_ok": true,
+   "train_sec": 28.7,
+   "path": "data\\tok2\\bpe_wb_8k.json"
+  },
+  {
+   "desc": "bpe_wb_16k",
+   "vocab": 16384,
+   "n_bytes": 2493514,
+   "n_tok": 594635,
+   "bytes_per_tok": 4.193352224473837,
+   "tok_per_byte": 0.2384726935561621,
+   "enc_mbps": 15.903162435764246,
+   "roundtrip_ok": true,
+   "train_sec": 29.2,
+   "path": "data\\tok2\\bpe_wb_16k.json"
+  },
+  {
+   "desc": "bpe_sw_4k",
+   "vocab": 4096,
+   "n_bytes": 2493514,
+   "n_tok": 474252,
+   "bytes_per_tok": 5.257782782149574,
+   "tok_per_byte": 0.1901942399360902,
+   "enc_mbps": 6.323346433772541,
+   "roundtrip_ok": true,
+   "train_sec": 798.4,
+   "path": "data\\tok2\\bpe_sw_4k.json"
+  },
+  {
+   "desc": "bpe_sw_8k",
+   "vocab": 8192,
+   "n_bytes": 2493514,
+   "n_tok": 393690,
+   "bytes_per_tok": 6.333699103355432,
+   "tok_per_byte": 0.1578856184485028,
+   "enc_mbps": 5.252554567694739,
+   "roundtrip_ok": true,
+   "train_sec": 1159.0,
+   "path": "data\\tok2\\bpe_sw_8k.json"
+  },
+  {
+   "desc": "bpe_sw_16k",
+   "vocab": 16384,
+   "n_bytes": 2493514,
+   "n_tok": 333613,
+   "bytes_per_tok": 7.474271086558377,
+   "tok_per_byte": 0.13379231077106446,
+   "enc_mbps": 4.79299765690688,
+   "roundtrip_ok": true,
+   "train_sec": 1456.9,
+   "path": "data\\tok2\\bpe_sw_16k.json"
+  }
+ ]
+}

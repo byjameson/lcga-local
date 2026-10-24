@@ -1,0 +1,56 @@
+{
+ "stage": "tok2_data_v1",
+ "stories": 1000000,
+ "valid_n": 3000,
+ "ts": "2026-10-16 18:43:45",
+ "arms": [
+  {
+   "name": "ctrl8k",
+   "tok": "ts_bpe8k.json",
+   "vocab": 8192,
+   "train_tok": 221093014,
+   "train_bytes": 900882631,
+   "train_bpt": 4.075,
+   "valid_tok": 602715,
+   "valid_bytes": 2493514,
+   "valid_bpt": 4.137,
+   "step_capacity": 8996
+  },
+  {
+   "name": "wb16k",
+   "tok": "tok2\\bpe_wb_16k.json",
+   "vocab": 16384,
+   "train_tok": 219375754,
+   "train_bytes": 900882631,
+   "train_bpt": 4.107,
+   "valid_tok": 597635,
+   "valid_bytes": 2493514,
+   "valid_bpt": 4.172,
+   "step_capacity": 8926
+  },
+  {
+   "name": "sw8k",
+   "tok": "tok2\\bpe_sw_8k.json",
+   "vocab": 8192,
+   "train_tok": 144520003,
+   "train_bytes": 900882631,
+   "train_bpt": 6.234,
+   "valid_tok": 396690,
+   "valid_bytes": 2493514,
+   "valid_bpt": 6.286,
+   "step_capacity": 5880
+  },
+  {
+   "name": "sw16k",
+   "tok": "tok2\\bpe_sw_16k.json",
+   "vocab": 16384,
+   "train_tok": 122729085,
+   "train_bytes": 900882631,
+   "train_bpt": 7.34,
+   "valid_tok": 336613,
+   "valid_bytes": 2493514,
+   "valid_bpt": 7.408,
+   "step_capacity": 4993
+  }
+ ]
+}

@@ -1,0 +1,260 @@
+{
+  "rows": [
+    {
+      "exp": "exp22_service",
+      "tag": "exp22d_parallel_r1",
+      "query": "The capital of Germany is",
+      "mode": "ensemble",
+      "n_new": 12,
+      "rep": 1,
+      "budget_gb": 5.0,
+      "n_groups": 1,
+      "parallel": true,
+      "wall_s": 0.754,
+      "load_s": 0.0,
+      "gen_s": 0.749,
+      "peak_vram_mb": 3944.8,
+      "warnings": [],
+      "plan": [
+        {
+          "units": [
+            "fast",
+            "balanced"
+          ],
+          "kind": "dense",
+          "wall_s": 0.754
+        }
+      ],
+      "per_unit": {
+        "fast": 0.745,
+        "balanced": 0.749
+      },
+      "answer": "Berlin. The capital of France is Paris. The capital of"
+    },
+    {
+      "exp": "exp22_service",
+      "tag": "exp22d_sequential_r1",
+      "query": "The capital of Germany is",
+      "mode": "ensemble",
+      "n_new": 12,
+      "rep": 1,
+      "budget_gb": 2.0,
+      "n_groups": 2,
+      "parallel": false,
+      "wall_s": 0.989,
+      "load_s": 0.0,
+      "gen_s": 0.984,
+      "peak_vram_mb": 3969.0,
+      "warnings": [
+        "unit balanced needs 3.3GB > budget 2.0GB; it runs alone and exceeds the declared budget"
+      ],
+      "plan": [
+        {
+          "units": [
+            "fast"
+          ],
+          "kind": "dense",
+          "wall_s": 0.473
+        },
+        {
+          "units": [
+            "balanced"
+          ],
+          "kind": "dense",
+          "wall_s": 0.515
+        }
+      ],
+      "per_unit": {
+        "fast": 0.471,
+        "balanced": 0.513
+      },
+      "answer": "Berlin. The capital of France is Paris. The capital of"
+    },
+    {
+      "exp": "exp22_service",
+      "tag": "exp22d_parallel_r2",
+      "query": "The capital of Germany is",
+      "mode": "ensemble",
+      "n_new": 12,
+      "rep": 2,
+      "budget_gb": 5.0,
+      "n_groups": 1,
+      "parallel": true,
+      "wall_s": 0.806,
+      "load_s": 0.0,
+      "gen_s": 0.803,
+      "peak_vram_mb": 4008.1,
+      "warnings": [],
+      "plan": [
+        {
+          "units": [
+            "fast",
+            "balanced"
+          ],
+          "kind": "dense",
+          "wall_s": 0.805
+        }
+      ],
+      "per_unit": {
+        "fast": 0.803,
+        "balanced": 0.79
+      },
+      "answer": "Berlin. The capital of France is Paris. The capital of"
+    },
+    {
+      "exp": "exp22_service",
+      "tag": "exp22d_sequential_r2",
+      "query": "The capital of Germany is",
+      "mode": "ensemble",
+      "n_new": 12,
+      "rep": 2,
+      "budget_gb": 2.0,
+      "n_groups": 2,
+      "parallel": false,
+      "wall_s": 0.98,
+      "load_s": 0.0,
+      "gen_s": 0.976,
+      "peak_vram_mb": 4034.0,
+      "warnings": [
+        "unit balanced needs 3.3GB > budget 2.0GB; it runs alone and exceeds the declared budget"
+      ],
+      "plan": [
+        {
+          "units": [
+            "fast"
+          ],
+          "kind": "dense",
+          "wall_s": 0.455
+        },
+        {
+          "units": [
+            "balanced"
+          ],
+          "kind": "dense",
+          "wall_s": 0.525
+        }
+      ],
+      "per_unit": {
+        "fast": 0.453,
+        "balanced": 0.523
+      },
+      "answer": "Berlin. The capital of France is Paris. The capital of"
+    },
+    {
+      "exp": "exp22_service",
+      "tag": "exp22d_parallel_r3",
+      "query": "The capital of Germany is",
+      "mode": "ensemble",
+      "n_new": 12,
+      "rep": 3,
+      "budget_gb": 5.0,
+      "n_groups": 1,
+      "parallel": true,
+      "wall_s": 0.731,
+      "load_s": 0.0,
+      "gen_s": 0.728,
+      "peak_vram_mb": 4073.1,
+      "warnings": [],
+      "plan": [
+        {
+          "units": [
+            "fast",
+            "balanced"
+          ],
+          "kind": "dense",
+          "wall_s": 0.731
+        }
+      ],
+      "per_unit": {
+        "fast": 0.728,
+        "balanced": 0.721
+      },
+      "answer": "Berlin. The capital of France is Paris. The capital of"
+    },
+    {
+      "exp": "exp22_service",
+      "tag": "exp22d_sequential_r3",
+      "query": "The capital of Germany is",
+      "mode": "ensemble",
+      "n_new": 12,
+      "rep": 3,
+      "budget_gb": 2.0,
+      "n_groups": 2,
+      "parallel": false,
+      "wall_s": 0.967,
+      "load_s": 0.0,
+      "gen_s": 0.962,
+      "peak_vram_mb": 4099.0,
+      "warnings": [
+        "unit balanced needs 3.3GB > budget 2.0GB; it runs alone and exceeds the declared budget"
+      ],
+      "plan": [
+        {
+          "units": [
+            "fast"
+          ],
+          "kind": "dense",
+          "wall_s": 0.453
+        },
+        {
+          "units": [
+            "balanced"
+          ],
+          "kind": "dense",
+          "wall_s": 0.513
+        }
+      ],
+      "per_unit": {
+        "fast": 0.451,
+        "balanced": 0.511
+      },
+      "answer": "Berlin. The capital of France is Paris. The capital of"
+    }
+  ],
+  "summary": {
+    "exp": "exp22_service",
+    "tag": "exp22d_summary",
+    "n_new": 12,
+    "reps": 3,
+    "parallel_wall_s": 0.754,
+    "sequential_wall_s": 0.98,
+    "parallel_gen_s": 0.749,
+    "sequential_gen_s": 0.976,
+    "wall_speedup": 1.3,
+    "gen_speedup": 1.303,
+    "parallel_peak_mb": 4008.1,
+    "sequential_peak_mb": 4034.0,
+    "sequential_warnings": [
+      "unit balanced needs 3.3GB > budget 2.0GB; it runs alone and exceeds the declared budget"
+    ],
+    "stats": {
+      "counters": {
+        "requests": 12,
+        "errors": 0,
+        "paged_loads": 0,
+        "total_s": 15.73,
+        "gen_s": 7.14
+      },
+      "avg_elapsed_s": 1.31,
+      "avg_gen_s": 0.59,
+      "pool": {
+        "budget_gb": 5.0,
+        "resident": [
+          "Qwen2.5-0.5B",
+          "Qwen2.5-1.5B"
+        ],
+        "host": [],
+        "resident_gb": 4.4,
+        "evictions": 0,
+        "reloads": 0,
+        "disk_loads": 2,
+        "reload_s": 0.0,
+        "load_s": 8.538
+      },
+      "paged": {},
+      "budget_gb": 5.0,
+      "free_vram_gb": 0.32
+    },
+    "ts": "2026-10-20 15:44:44"
+  }
+}

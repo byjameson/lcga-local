@@ -1,0 +1,16 @@
+[p8] data train=466759153 valid=4691305 device=cuda
+[p8] resume step=3000 schedule=related
+[p8] C0 = ['tok', 'L0.attn', 'L0.mlp', 'L1.attn', 'L2.attn', 'L3.attn', 'L4.attn', 'L5.attn', 'L6.attn', 'L7.attn', 'L7.mlp', 'norm']
+[p8] C1 = ['L1.mlp', 'L2.mlp', 'L3.mlp', 'L4.mlp', 'L5.mlp', 'L6.mlp']
+[p8] start_val @3000 = 1.7141 (ppl=5.55)
+  [p8 step 3100] loss=1.9323 lr=9.52e-04 621ms vram=5.80G
+  [p8 step 3200] loss=2.2639 lr=9.48e-04 621ms vram=5.80G
+  [p8 step 3300] loss=2.6906 lr=9.44e-04 620ms vram=5.80G
+  [p8 step 3400] loss=3.1038 lr=9.40e-04 620ms vram=5.80G
+  [p8 eval @3500] val_loss=3.2427 ppl=25.60
+  [p8 best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p8_rel_best.pt
+  [p8 step 3500] loss=3.2489 lr=9.36e-04 621ms vram=5.80G
+  [p8 step 3600] loss=3.3461 lr=9.32e-04 621ms vram=5.80G
+  [p8 step 3700] loss=3.1955 lr=9.28e-04 620ms vram=5.80G
+  [p8 step 3800] loss=3.1108 lr=9.23e-04 620ms vram=5.80G
+  [p8 step 3900] loss=3.0233 lr=9.19e-04 622ms vram=5.80G

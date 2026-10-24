@@ -1,0 +1,99 @@
+[data] train=221093014 tok (tok2_ctrl8k_train.pt) | valid=602715 tok (tok2_ctrl8k_valid.pt) | valid_bytes=2493514
+[plan] 6000 adim x 32x512 = 98M token (~0.44 epoch)
+[model] params=10.23M cfg={'arch': 'minilm', 'vocab': 8192, 'dim': 384, 'layers': 4, 'heads': 6, 'ctx': 512, 'mlp_hidden': 1024, 'loops': 1}
+  [eval @0] val_loss=9.0677 ppl=8670.31 bpb=3.1621
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_best.pt
+  [step 0] loss=9.0560 lr=3.33e-06 415ms emb_norm=35.49 vram=2.89G
+  [step 100] loss=4.2312 lr=3.37e-04 284ms emb_norm=40.00 vram=2.90G
+  [step 200] loss=3.2231 lr=6.70e-04 284ms emb_norm=49.76 vram=2.90G
+  [step 300] loss=2.9249 lr=1.00e-03 283ms emb_norm=61.47 vram=2.90G
+  [step 400] loss=2.5830 lr=9.99e-04 284ms emb_norm=72.64 vram=2.90G
+  [eval @500] val_loss=2.5399 ppl=12.68 bpb=0.8857
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_best.pt
+  [step 500] loss=2.5557 lr=9.97e-04 284ms emb_norm=81.19 vram=2.90G
+  [step 600] loss=2.4560 lr=9.94e-04 283ms emb_norm=86.98 vram=2.90G
+  [step 700] loss=2.2907 lr=9.89e-04 283ms emb_norm=91.49 vram=2.90G
+  [step 800] loss=2.1691 lr=9.83e-04 284ms emb_norm=93.85 vram=2.90G
+  [step 900] loss=2.2118 lr=9.76e-04 285ms emb_norm=96.47 vram=2.90G
+  [eval @1000] val_loss=2.1956 ppl=8.99 bpb=0.7656
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_best.pt
+  [step 1000] loss=2.1253 lr=9.67e-04 284ms emb_norm=97.97 vram=2.90G
+  [ckpt] step 1000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_ckpt.pt
+  [step 1100] loss=2.0820 lr=9.57e-04 283ms emb_norm=99.43 vram=2.90G
+  [step 1200] loss=2.1090 lr=9.46e-04 283ms emb_norm=100.42 vram=2.90G
+  [step 1300] loss=2.1109 lr=9.33e-04 284ms emb_norm=100.95 vram=2.90G
+  [step 1400] loss=2.0559 lr=9.20e-04 283ms emb_norm=101.52 vram=2.90G
+  [eval @1500] val_loss=2.0679 ppl=7.91 bpb=0.7211
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_best.pt
+  [step 1500] loss=2.1119 lr=9.05e-04 285ms emb_norm=101.81 vram=2.90G
+  [step 1600] loss=1.9313 lr=8.89e-04 284ms emb_norm=102.15 vram=2.90G
+  [step 1700] loss=1.9794 lr=8.73e-04 284ms emb_norm=102.17 vram=2.90G
+  [step 1800] loss=1.9386 lr=8.55e-04 284ms emb_norm=102.26 vram=2.90G
+  [step 1900] loss=1.9082 lr=8.36e-04 284ms emb_norm=102.26 vram=2.90G
+  [eval @2000] val_loss=1.9729 ppl=7.19 bpb=0.6880
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_best.pt
+  [sample @2000 1.8s] Once upon a time, there was a kind boy. He wanted to be a very helpful cat, so he went to the shop to buy some food. He tried a lot of food and some food and he ate.  Suddenly, he saw a little girl. The girl was three years old, and she loved watching him. She asked him, "Do you want some food?"  Th
+  [step 2000] loss=2.0075 lr=8.17e-04 308ms emb_norm=101.89 vram=2.90G
+  [ckpt] step 2000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_ckpt.pt
+  [step 2100] loss=1.8923 lr=7.96e-04 284ms emb_norm=101.47 vram=2.90G
+  [step 2200] loss=1.9250 lr=7.75e-04 284ms emb_norm=101.51 vram=2.90G
+  [step 2300] loss=1.9739 lr=7.53e-04 283ms emb_norm=101.31 vram=2.90G
+  [step 2400] loss=1.8593 lr=7.31e-04 284ms emb_norm=101.33 vram=2.90G
+  [eval @2500] val_loss=1.9085 ppl=6.74 bpb=0.6655
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_best.pt
+  [step 2500] loss=1.8277 lr=7.08e-04 284ms emb_norm=101.10 vram=2.90G
+  [step 2600] loss=1.8696 lr=6.84e-04 284ms emb_norm=100.67 vram=2.90G
+  [step 2700] loss=1.8179 lr=6.60e-04 284ms emb_norm=100.67 vram=2.90G
+  [step 2800] loss=1.7896 lr=6.36e-04 283ms emb_norm=100.40 vram=2.90G
+  [step 2900] loss=1.8801 lr=6.12e-04 284ms emb_norm=100.07 vram=2.90G
+  [eval @3000] val_loss=1.8558 ppl=6.40 bpb=0.6472
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_best.pt
+  [step 3000] loss=1.8386 lr=5.87e-04 284ms emb_norm=99.89 vram=2.90G
+  [ckpt] step 3000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_ckpt.pt
+  [step 3100] loss=1.8588 lr=5.62e-04 283ms emb_norm=99.50 vram=2.90G
+  [step 3200] loss=1.7975 lr=5.38e-04 284ms emb_norm=99.28 vram=2.90G
+  [step 3300] loss=1.8085 lr=5.13e-04 284ms emb_norm=99.20 vram=2.90G
+  [step 3400] loss=1.8673 lr=4.88e-04 284ms emb_norm=98.76 vram=2.90G
+  [eval @3500] val_loss=1.8106 ppl=6.11 bpb=0.6314
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_best.pt
+  [step 3500] loss=1.7837 lr=4.64e-04 284ms emb_norm=98.48 vram=2.90G
+  [step 3600] loss=1.8365 lr=4.40e-04 284ms emb_norm=98.19 vram=2.90G
+  [step 3700] loss=1.7857 lr=4.16e-04 284ms emb_norm=97.91 vram=2.90G
+  [step 3800] loss=1.7854 lr=3.92e-04 284ms emb_norm=97.76 vram=2.90G
+  [step 3900] loss=1.7423 lr=3.69e-04 285ms emb_norm=97.47 vram=2.90G
+  [eval @4000] val_loss=1.7735 ppl=5.89 bpb=0.6185
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_best.pt
+  [sample @4000 1.9s] Once upon a time, there was a little girl named Lily. She loved to play with her toys and have fun. One day, she went to the park to play with her friends. But when she got there, she slipped and she fell. She hurt her knee and cried. Her friends came running to help her, but she couldn't do it.  Li
+  [step 4000] loss=1.8438 lr=3.47e-04 301ms emb_norm=97.25 vram=2.90G
+  [ckpt] step 4000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_ckpt.pt
+  [step 4100] loss=1.7275 lr=3.25e-04 284ms emb_norm=96.94 vram=2.90G
+  [step 4200] loss=1.8107 lr=3.04e-04 284ms emb_norm=96.69 vram=2.90G
+  [step 4300] loss=1.6700 lr=2.83e-04 284ms emb_norm=96.44 vram=2.90G
+  [step 4400] loss=1.7224 lr=2.64e-04 284ms emb_norm=96.28 vram=2.90G
+  [eval @4500] val_loss=1.7446 ppl=5.72 bpb=0.6084
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_best.pt
+  [step 4500] loss=1.7155 lr=2.45e-04 284ms emb_norm=96.09 vram=2.90G
+  [step 4600] loss=1.7052 lr=2.27e-04 283ms emb_norm=95.86 vram=2.90G
+  [step 4700] loss=1.6760 lr=2.11e-04 284ms emb_norm=95.59 vram=2.90G
+  [step 4800] loss=1.6988 lr=1.95e-04 284ms emb_norm=95.48 vram=2.90G
+  [step 4900] loss=1.6188 lr=1.80e-04 284ms emb_norm=95.29 vram=2.90G
+  [eval @5000] val_loss=1.7152 ppl=5.56 bpb=0.5981
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_best.pt
+  [step 5000] loss=1.6866 lr=1.67e-04 284ms emb_norm=95.18 vram=2.90G
+  [ckpt] step 5000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_ckpt.pt
+  [step 5100] loss=1.6960 lr=1.54e-04 283ms emb_norm=95.02 vram=2.90G
+  [step 5200] loss=1.7276 lr=1.43e-04 284ms emb_norm=94.83 vram=2.90G
+  [step 5300] loss=1.6437 lr=1.33e-04 284ms emb_norm=94.68 vram=2.90G
+  [step 5400] loss=1.7204 lr=1.24e-04 284ms emb_norm=94.56 vram=2.90G
+  [eval @5500] val_loss=1.7007 ppl=5.48 bpb=0.5931
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_best.pt
+  [step 5500] loss=1.6634 lr=1.17e-04 284ms emb_norm=94.46 vram=2.90G
+  [step 5600] loss=1.7266 lr=1.11e-04 284ms emb_norm=94.36 vram=2.90G
+  [step 5700] loss=1.6712 lr=1.06e-04 284ms emb_norm=94.24 vram=2.90G
+  [step 5800] loss=1.6269 lr=1.03e-04 284ms emb_norm=94.14 vram=2.90G
+  [step 5900] loss=1.6717 lr=1.01e-04 283ms emb_norm=94.06 vram=2.90G
+  [eval @6000] val_loss=1.6888 ppl=5.41 bpb=0.5889
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4_flat4_best.pt
+  [sample @6000 1.0s] Once upon a time, there was a little boy named Timmy. Timmy loved to play outside in the garden. One day, he saw a big bird with a shiny crown on its head.   "Wow, look at that bird!" said Timmy.   "I wish I could fly like that one," said Timmy.   The bird flew high up into the sky and Timmy felt ha
+  [sample @6001 1.1s] Once upon a time, there was a little girl named Lily. She loved to play outside in the sunshine. One day, she saw a bee buzzing around and she wanted to catch it. But the bee flew away and Lily was sad.  Lily went back to her house and asked her mommy for help. Her mommy gave her some medicine and L
+[done] best_val=1.6888 ppl=5.41 bpb=0.5889 wall=28.7min tokens/s=57163

@@ -1,0 +1,163 @@
+{
+ "exp": "exp9_decode",
+ "ts": "2026-10-16 14:06:08",
+ "tag": "c_phase",
+ "ckpt": "C:\\Users\\biris\\Desktop\\opencode\\ai gelistir\\checkpoints\\v2_best.pt",
+ "steps": 64,
+ "budget": 0.25,
+ "gqa_sdpa": true,
+ "contexts": {
+  "T1024": {
+   "dense_naive_ms": 86.698,
+   "dense_fast_gqa_ms": 95.164,
+   "dense_fast_expanded_ms": 69.854,
+   "sparse_naive_ms": 99.426,
+   "sparse_fast_ms": 127.576,
+   "parity_dense_gqa": [
+    0.0234375,
+    1.0
+   ],
+   "parity_dense_expanded": [
+    0.0,
+    1.0
+   ],
+   "parity_sparse": [
+    0.0439453,
+    1.0
+   ],
+   "parity_dense_graph": [
+    0.0,
+    1.0
+   ],
+   "dense_graph_ms": 13.032,
+   "parity_sparse_graph": [
+    0.0439453,
+    1.0
+   ],
+   "parity_sparse_graph_vsf": [
+    0.0,
+    1.0
+   ],
+   "sparse_graph_ms": 13.504,
+   "speedup_vs_dense_naive": {
+    "sparse_fast": 0.68,
+    "dense_gqa": 0.911
+   },
+   "sparse_vs_dense_fast": 0.746
+  },
+  "T2048": {
+   "dense_naive_ms": 90.736,
+   "dense_fast_gqa_ms": 124.003,
+   "dense_fast_expanded_ms": 112.257,
+   "sparse_naive_ms": 129.464,
+   "sparse_fast_ms": 122.343,
+   "parity_dense_gqa": [
+    0.015625,
+    1.0
+   ],
+   "parity_dense_expanded": [
+    0.0,
+    1.0
+   ],
+   "parity_sparse": [
+    0.03125,
+    1.0
+   ],
+   "parity_dense_graph": [
+    0.0,
+    1.0
+   ],
+   "dense_graph_ms": 14.628,
+   "parity_sparse_graph": [
+    0.03125,
+    1.0
+   ],
+   "parity_sparse_graph_vsf": [
+    0.0,
+    1.0
+   ],
+   "sparse_graph_ms": 14.34,
+   "speedup_vs_dense_naive": {
+    "sparse_fast": 0.742,
+    "dense_gqa": 0.732
+   },
+   "sparse_vs_dense_fast": 1.014
+  },
+  "T4096": {
+   "dense_naive_ms": 93.11,
+   "dense_fast_gqa_ms": 88.662,
+   "dense_fast_expanded_ms": 105.851,
+   "sparse_naive_ms": 138.844,
+   "sparse_fast_ms": 141.528,
+   "parity_dense_gqa": [
+    0.015625,
+    1.0
+   ],
+   "parity_dense_expanded": [
+    0.0,
+    1.0
+   ],
+   "parity_sparse": [
+    0.0292969,
+    1.0
+   ],
+   "parity_dense_graph": [
+    0.0,
+    1.0
+   ],
+   "dense_graph_ms": 17.861,
+   "parity_sparse_graph": [
+    0.0292969,
+    1.0
+   ],
+   "parity_sparse_graph_vsf": [
+    0.0,
+    1.0
+   ],
+   "sparse_graph_ms": 15.897,
+   "speedup_vs_dense_naive": {
+    "sparse_fast": 0.658,
+    "dense_gqa": 1.05
+   },
+   "sparse_vs_dense_fast": 0.626
+  },
+  "T8192": {
+   "dense_naive_ms": 97.81,
+   "dense_fast_gqa_ms": 99.366,
+   "dense_fast_expanded_ms": 98.772,
+   "sparse_naive_ms": 133.569,
+   "sparse_fast_ms": 137.153,
+   "parity_dense_gqa": [
+    0.0234375,
+    1.0
+   ],
+   "parity_dense_expanded": [
+    0.0,
+    1.0
+   ],
+   "parity_sparse": [
+    0.0820312,
+    1.0
+   ],
+   "parity_dense_graph": [
+    0.0,
+    1.0
+   ],
+   "dense_graph_ms": 24.211,
+   "parity_sparse_graph": [
+    0.0820312,
+    1.0
+   ],
+   "parity_sparse_graph_vsf": [
+    0.0,
+    1.0
+   ],
+   "sparse_graph_ms": 19.082,
+   "speedup_vs_dense_naive": {
+    "sparse_fast": 0.713,
+    "dense_gqa": 0.984
+   },
+   "sparse_vs_dense_fast": 0.724
+  }
+ }
+}

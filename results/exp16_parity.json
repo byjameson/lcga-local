@@ -1,0 +1,11 @@
+{
+  "model": "Qwen2.5-0.5B",
+  "max_abs_diff": 3.260374069213867e-05,
+  "mean_abs_diff": 4.158747287874576e-06,
+  "argmax_match": 1.0,
+  "ref_shape": [
+    1,
+    5,
+    151936
+  ]
+}

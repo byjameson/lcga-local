@@ -1,0 +1,676 @@
+{
+  "rows": [
+    {
+      "category": "ins_tr",
+      "prompt": "Sadece 'mavi' yaz.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.348,
+      "text": "mavi",
+      "chat_score": -0.0841
+    },
+    {
+      "category": "ins_tr",
+      "prompt": "2 + 2 kac? Sadece sayiyi yaz.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.855,
+      "text": "4",
+      "chat_score": -0.0501
+    },
+    {
+      "category": "ins_tr",
+      "prompt": "Uc maddede su icmenin faydalarini yaz.",
+      "unit": "chat",
+      "reason": "quality: liste formati -> 1.5B Instruct",
+      "quality": 0.0,
+      "gen_s": 5.302,
+      "text": "1. **Kontrolü Arttırır:** Su icmen, vücudun kontrol sistemi üzerinde önemli bir etkiye sahiptir. Bu, oksijen alımını artırmak için sağlar.\n\n2. **Yüksek Üretim Durumu:** Su icmen, vücud",
+      "chat_score": -1.1312
+    },
+    {
+      "category": "ins_tr",
+      "prompt": "Su cumleyi Turkceye cevir: The cat is on the table.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 2.455,
+      "text": "Kedi tablede.",
+      "chat_score": -0.5555
+    },
+    {
+      "category": "ins_tr",
+      "prompt": "Istanbul mu daha kalabalik, Ankara mi? Kisa cevap ver.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 3.389,
+      "text": "İstanbul daha kalabalık.",
+      "chat_score": -0.3366
+    },
+    {
+      "category": "ins_tr",
+      "prompt": "Merhaba, nasilsin?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 8.797,
+      "text": "Merhaba, ben bir yapay zeka asistanıyım. Nasılsın?",
+      "chat_score": -0.227
+    },
+    {
+      "category": "fact_tr",
+      "prompt": "Fransa'nin baskenti neresi?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 2.839,
+      "text": "Paris'in basğıdır.",
+      "chat_score": -0.1296
+    },
+    {
+      "category": "fact_tr",
+      "prompt": "Turkiye'nin baskenti neresi?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.688,
+      "text": "Ankara",
+      "chat_score": -0.1738
+    },
+    {
+      "category": "fact_tr",
+      "prompt": "Gunes sistemindeki en buyuk gezegen hangisi?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.677,
+      "text": "Jüpiter",
+      "chat_score": -0.6057
+    },
+    {
+      "category": "fact_tr",
+      "prompt": "Altinin kimyasal sembolu nedir?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 0.0,
+      "gen_s": 0.754,
+      "text": "O",
+      "chat_score": -0.5982
+    },
+    {
+      "category": "fact_tr",
+      "prompt": "Su kac derecede kaynar?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 6.576,
+      "text": "Su her zaman 100 derece kaynaktan geliyor.",
+      "chat_score": -0.5923
+    },
+    {
+      "category": "fact_tr",
+      "prompt": "Bir yilda kac ay vardir?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 2.266,
+      "text": "12 aydır.",
+      "chat_score": -0.4031
+    },
+    {
+      "category": "fact_en",
+      "prompt": "What is the capital of France?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.954,
+      "text": "Paris",
+      "chat_score": -0.3477
+    },
+    {
+      "category": "fact_en",
+      "prompt": "What is the capital of Germany?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.762,
+      "text": "Berlin",
+      "chat_score": -0.2988
+    },
+    {
+      "category": "fact_en",
+      "prompt": "What is the largest planet in the solar system?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.177,
+      "text": "Jupiter",
+      "chat_score": -0.0149
+    },
+    {
+      "category": "fact_en",
+      "prompt": "What is the chemical symbol for gold?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.776,
+      "text": "Au",
+      "chat_score": -0.0116
+    },
+    {
+      "category": "fact_en",
+      "prompt": "At what temperature does water boil (Celsius)?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 2.174,
+      "text": "100°C",
+      "chat_score": -0.1817
+    },
+    {
+      "category": "fact_en",
+      "prompt": "How many months are there in a year?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.543,
+      "text": "12 months",
+      "chat_score": -0.0415
+    },
+    {
+      "category": "ins_en",
+      "prompt": "Reply with exactly the word 'blue'.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.81,
+      "text": "blue",
+      "chat_score": -0.0711
+    },
+    {
+      "category": "ins_en",
+      "prompt": "What is 7 * 8? Answer with just the number.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.263,
+      "text": "56",
+      "chat_score": -0.0012
+    },
+    {
+      "category": "ins_en",
+      "prompt": "List three primary colors.",
+      "unit": "chat",
+      "reason": "quality: liste formati -> 1.5B Instruct",
+      "quality": 0.0,
+      "gen_s": 1.254,
+      "text": "Red, blue, and yellow are the primary colors.",
+      "chat_score": -0.2295
+    },
+    {
+      "category": "ins_en",
+      "prompt": "Translate 'good morning' into Turkish.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 0.0,
+      "gen_s": 2.559,
+      "text": "İyi gününüz!",
+      "chat_score": -0.2712
+    },
+    {
+      "category": "ins_en",
+      "prompt": "Write one short sentence about the sea.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 7.954,
+      "text": "The sea is a vast body of saltwater covering most of the Earth's surface.",
+      "chat_score": -0.2576
+    },
+    {
+      "category": "ins_en",
+      "prompt": "Say hello in Turkish.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.573,
+      "text": "Merhaba",
+      "chat_score": -0.1007
+    },
+    {
+      "category": "fact_tr",
+      "prompt": "Ispanya'nin baskenti neresi?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 5.207,
+      "text": "İspanya'nın başkenti Madrid'dır.",
+      "chat_score": -0.1343
+    },
+    {
+      "category": "fact_tr",
+      "prompt": "Almanya'nin baskenti neresi?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.824,
+      "text": "Berlin",
+      "chat_score": -0.0846
+    },
+    {
+      "category": "fact_tr",
+      "prompt": "Italya'nin baskenti neresi?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 5.363,
+      "text": "Italiya'nın başkenti Rome'dır.",
+      "chat_score": -0.1968
+    },
+    {
+      "category": "fact_tr",
+      "prompt": "Dunyadaki en buyuk okyanus hangisi?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 0.0,
+      "gen_s": 3.733,
+      "text": "Baltýk okyanusu.",
+      "chat_score": -0.4771
+    },
+    {
+      "category": "fact_tr",
+      "prompt": "Insan vucudundaki en buyuk organ hangisi?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 0.0,
+      "gen_s": 6.941,
+      "text": "Dilimizde en büyük organ insan vücutunda beyin.",
+      "chat_score": -0.5416
+    },
+    {
+      "category": "fact_tr",
+      "prompt": "Bir haftada kac gun vardir?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 2.032,
+      "text": "7 gün vardır.",
+      "chat_score": -0.2654
+    },
+    {
+      "category": "fact_en",
+      "prompt": "What is the capital of Spain?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.223,
+      "text": "Madrid",
+      "chat_score": -0.3582
+    },
+    {
+      "category": "fact_en",
+      "prompt": "What is the capital of Italy?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.281,
+      "text": "Rome",
+      "chat_score": -0.0478
+    },
+    {
+      "category": "fact_en",
+      "prompt": "What is the largest ocean on Earth?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 4.475,
+      "text": "The largest ocean on Earth is the Pacific Ocean.",
+      "chat_score": -0.0364
+    },
+    {
+      "category": "fact_en",
+      "prompt": "What is the largest organ in the human body?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 4.773,
+      "text": "The largest organ in the human body is the skin.",
+      "chat_score": -0.0082
+    },
+    {
+      "category": "fact_en",
+      "prompt": "How many days are there in a week?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.299,
+      "text": "7 days",
+      "chat_score": -0.009
+    },
+    {
+      "category": "fact_en",
+      "prompt": "At what temperature does water freeze (Celsius)?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.334,
+      "text": "0°C",
+      "chat_score": -0.2482
+    },
+    {
+      "category": "ins_tr",
+      "prompt": "Sadece 'kirmizi' yaz.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.747,
+      "text": "kirmizi",
+      "chat_score": -0.0714
+    },
+    {
+      "category": "ins_tr",
+      "prompt": "3 + 5 kac? Sadece sayiyi yaz.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.787,
+      "text": "8",
+      "chat_score": -0.0137
+    },
+    {
+      "category": "ins_tr",
+      "prompt": "Tesekkur etmek icin kisa bir cumle yaz.",
+      "unit": "chat",
+      "reason": "quality: kisa nezaket cumlesi -> 1.5B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.846,
+      "text": "\"Teşekkür ederim!\"",
+      "chat_score": -0.3719
+    },
+    {
+      "category": "ins_tr",
+      "prompt": "Su cumleyi Ingilizceye cevir: Kitap masada.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 2.649,
+      "text": "Book on the table.",
+      "chat_score": -0.3357
+    },
+    {
+      "category": "ins_tr",
+      "prompt": "'Evet' kelimesini iceren kisa bir cumle yaz.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 5.684,
+      "text": "Evet, size yardımcı olabilmek istiyorum.",
+      "chat_score": -0.3732
+    },
+    {
+      "category": "ins_tr",
+      "prompt": "5'ten 1'e kadar sayilari yaz.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 5.426,
+      "text": "5, 4, 3, 2, 1",
+      "chat_score": -0.038
+    },
+    {
+      "category": "ins_en",
+      "prompt": "Reply with exactly the word 'red'.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.775,
+      "text": "red",
+      "chat_score": -0.0484
+    },
+    {
+      "category": "ins_en",
+      "prompt": "What is 3 + 5? Answer with just the number.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.803,
+      "text": "8",
+      "chat_score": -0.001
+    },
+    {
+      "category": "ins_en",
+      "prompt": "Write a short thank-you sentence.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 2.583,
+      "text": "Thank you so much.",
+      "chat_score": -0.2837
+    },
+    {
+      "category": "ins_en",
+      "prompt": "Translate 'The book is on the table' into Turkish.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 2.657,
+      "text": "Kitap masa üzerinde.",
+      "chat_score": -0.6295
+    },
+    {
+      "category": "ins_en",
+      "prompt": "Write one short sentence containing the word 'yes'.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 3.844,
+      "text": "Yes, I can help with that.",
+      "chat_score": -0.3322
+    },
+    {
+      "category": "ins_en",
+      "prompt": "Count down from 5 to 1.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 5.589,
+      "text": "5, 4, 3, 2, 1",
+      "chat_score": -0.2101
+    },
+    {
+      "category": "math",
+      "prompt": "12 * 7 = ? Sadece sayiyi yaz.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.264,
+      "text": "84",
+      "chat_score": -0.0069
+    },
+    {
+      "category": "math",
+      "prompt": "100 - 37 = ? Sadece sayiyi yaz.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.341,
+      "text": "63",
+      "chat_score": -0.0049
+    },
+    {
+      "category": "math",
+      "prompt": "9 + 6 * 2 = ? Islem onceligine dikkat et.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 0.0,
+      "gen_s": 1.212,
+      "text": "51",
+      "chat_score": -0.49
+    },
+    {
+      "category": "math",
+      "prompt": "Bir duzine kac eder? Sadece sayiyi yaz.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.301,
+      "text": "12",
+      "chat_score": -0.1424
+    },
+    {
+      "category": "math",
+      "prompt": "15'in yarisi kac? Sadece sayiyi yaz.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.852,
+      "text": "7",
+      "chat_score": -0.0567
+    },
+    {
+      "category": "math",
+      "prompt": "2^5 = ? Sadece sayiyi yaz.",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.219,
+      "text": "32",
+      "chat_score": -0.0102
+    },
+    {
+      "category": "list",
+      "prompt": "Uc meyve listele.",
+      "unit": "chat",
+      "reason": "quality: liste formati -> 1.5B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.696,
+      "text": "1. Elma\n2. Avocado (Avocado)\n3. Moro (Moro)",
+      "chat_score": -0.6805
+    },
+    {
+      "category": "list",
+      "prompt": "List three animals.",
+      "unit": "chat",
+      "reason": "quality: liste formati -> 1.5B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.975,
+      "text": "1. Dog\n2. Cat\n3. Bird",
+      "chat_score": -0.2103
+    },
+    {
+      "category": "list",
+      "prompt": "Uc renk listele.",
+      "unit": "chat",
+      "reason": "quality: liste formati -> 1.5B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.631,
+      "text": "Renkler: \n1. Mavi\n2. Sari\n3. Beyaz",
+      "chat_score": -0.4055
+    },
+    {
+      "category": "list",
+      "prompt": "List three programming languages.",
+      "unit": "chat",
+      "reason": "quality: liste formati -> 1.5B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.868,
+      "text": "1. Python\n2. Java\n3. C++",
+      "chat_score": -0.0961
+    },
+    {
+      "category": "list",
+      "prompt": "Uc ulke listele.",
+      "unit": "chat",
+      "reason": "quality: liste formati -> 1.5B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.663,
+      "text": "1. Amerika Birleşik Devletleri\n2. Avustralya\n3. İtalya",
+      "chat_score": -0.2926
+    },
+    {
+      "category": "list",
+      "prompt": "List three days of the week.",
+      "unit": "chat",
+      "reason": "quality: liste formati -> 1.5B Instruct",
+      "quality": 0.0,
+      "gen_s": 0.391,
+      "text": "Monday, Tuesday, Wednesday",
+      "chat_score": -0.3282
+    }
+  ],
+  "summary": {
+    "exp": "exp33_quality_route_eval",
+    "tag": "exp33_60_quality2_summary",
+    "input": "results\\exp30_60_chat3b_quality.json",
+    "n": 60,
+    "prompt_set": "exp26",
+    "quality": 0.8667,
+    "always_chat_quality": 0.7833,
+    "always_chat3b_quality": 0.7833,
+    "oracle_quality": 0.8833,
+    "avg_gen_s": 2.4505,
+    "always_chat_gen_s": 1.1137,
+    "always_chat3b_gen_s": 3.0246,
+    "units": {
+      "chat3b": 51,
+      "chat": 9
+    },
+    "by_category": {
+      "fact_en": {
+        "n": 12,
+        "quality": 1.0,
+        "units": {
+          "chat3b": 12
+        },
+        "avg_gen_s": 1.8142
+      },
+      "fact_tr": {
+        "n": 12,
+        "quality": 0.75,
+        "units": {
+          "chat3b": 12
+        },
+        "avg_gen_s": 3.325
+      },
+      "ins_en": {
+        "n": 12,
+        "quality": 0.8333,
+        "units": {
+          "chat3b": 11,
+          "chat": 1
+        },
+        "avg_gen_s": 2.6387
+      },
+      "ins_tr": {
+        "n": 12,
+        "quality": 0.9167,
+        "units": {
+          "chat3b": 10,
+          "chat": 2
+        },
+        "avg_gen_s": 3.2738
+      },
+      "list": {
+        "n": 6,
+        "quality": 0.8333,
+        "units": {
+          "chat": 6
+        },
+        "avg_gen_s": 1.204
+      },
+      "math": {
+        "n": 6,
+        "quality": 0.8333,
+        "units": {
+          "chat3b": 6
+        },
+        "avg_gen_s": 1.1982
+      }
+    },
+    "note": "Cue router was designed on the 60-prompt exp26 set; this report is only independent when --input is holdout.",
+    "ts": "2026-10-20 18:38:53"
+  }
+}

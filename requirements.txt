@@ -1,0 +1,19 @@
+# LCGA deneyleri — doğrulanmış ortam (Windows 11, RTX 3050 Laptop 6GB, Python 3.11)
+# Kurulum:
+#   pip install torch --index-url https://download.pytorch.org/whl/cu126
+#   pip install -r requirements.txt
+# Not: Triton kernel'leri Windows'ta `triton-windows` paketiyle derlenir;
+#      Linux'ta `triton` (aynı API) kullanılır.
+torch==2.13.0+cu126
+triton-windows==3.8.0.post29
+transformers==5.19.0
+safetensors==0.8.0
+tokenizers==0.23.3
+accelerate==1.15.0
+datasets==5.1.0
+huggingface-hub==2.2.0
+numpy==2.4.6
+psutil==7.2.2
+matplotlib==3.11.2
+# RAG corpus builder only; runtime retrieval is pure stdlib.
+requests==2.34.2

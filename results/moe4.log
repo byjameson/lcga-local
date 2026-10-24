@@ -1,0 +1,112 @@
+[data] train=466759153 tok (ts_train.pt) | valid=4691305 tok (ts_valid.pt)
+[plan] 6000 adim x 32x512 = 98M token (~0.21 epoch)
+[model] params=17.32M cfg={'arch': 'minilm', 'vocab': 8192, 'dim': 384, 'layers': 8, 'heads': 6, 'ctx': 512, 'mlp_hidden': 256, 'loops': 1, 'moe': 4}
+  [eval @0] val_loss=9.0920 ppl=8883.99
+  [moe @0] L0[0.21,0.51,0.12,0.16] L1[0.20,0.49,0.10,0.22] L2[0.75,0.11,0.10,0.04] L3[0.03,0.76,0.05,0.16] L4[0.03,0.10,0.20,0.67] L5[0.12,0.07,0.07,0.75] L6[0.13,0.13,0.26,0.49] L7[0.20,0.37,0.03,0.40]
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_best.pt
+  [step 0] loss=9.1950 lr=3.33e-06 755ms emb_norm=35.47 vram=3.49G
+  [step 100] loss=4.6526 lr=3.37e-04 504ms emb_norm=39.86 vram=3.62G
+  [step 200] loss=3.4949 lr=6.70e-04 500ms emb_norm=50.96 vram=3.62G
+  [step 300] loss=2.9960 lr=1.00e-03 504ms emb_norm=62.72 vram=3.62G
+  [step 400] loss=2.8348 lr=9.99e-04 499ms emb_norm=73.55 vram=3.62G
+  [eval @500] val_loss=2.5046 ppl=12.24
+  [moe @500] L0[0.26,0.28,0.25,0.21] L1[0.26,0.25,0.26,0.24] L2[0.25,0.31,0.17,0.27] L3[0.25,0.24,0.25,0.27] L4[0.23,0.20,0.25,0.32] L5[0.24,0.26,0.22,0.28] L6[0.27,0.20,0.29,0.25] L7[0.25,0.25,0.22,0.28]
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_best.pt
+  [step 500] loss=2.6130 lr=9.97e-04 492ms emb_norm=81.89 vram=3.62G
+  [step 600] loss=2.3823 lr=9.94e-04 501ms emb_norm=87.75 vram=3.62G
+  [step 700] loss=2.4759 lr=9.89e-04 500ms emb_norm=91.58 vram=3.62G
+  [step 800] loss=2.2876 lr=9.83e-04 509ms emb_norm=94.61 vram=3.62G
+  [step 900] loss=2.2888 lr=9.76e-04 493ms emb_norm=96.58 vram=3.62G
+  [eval @1000] val_loss=2.1409 ppl=8.51
+  [moe @1000] L0[0.23,0.24,0.29,0.24] L1[0.26,0.26,0.20,0.29] L2[0.20,0.27,0.28,0.25] L3[0.24,0.24,0.23,0.28] L4[0.23,0.28,0.24,0.25] L5[0.23,0.21,0.27,0.29] L6[0.26,0.22,0.27,0.26] L7[0.26,0.25,0.21,0.27]
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_best.pt
+  [step 1000] loss=2.2755 lr=9.67e-04 509ms emb_norm=98.13 vram=3.62G
+  [ckpt] step 1000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_ckpt.pt
+  [step 1100] loss=2.2919 lr=9.57e-04 507ms emb_norm=99.06 vram=3.62G
+  [step 1200] loss=2.1695 lr=9.46e-04 507ms emb_norm=99.20 vram=3.62G
+  [step 1300] loss=2.0895 lr=9.33e-04 508ms emb_norm=99.78 vram=3.62G
+  [step 1400] loss=2.1068 lr=9.20e-04 504ms emb_norm=100.38 vram=3.62G
+  [eval @1500] val_loss=2.0077 ppl=7.45
+  [moe @1500] L0[0.25,0.21,0.26,0.27] L1[0.27,0.27,0.26,0.20] L2[0.21,0.22,0.30,0.27] L3[0.24,0.20,0.28,0.28] L4[0.25,0.23,0.20,0.31] L5[0.23,0.26,0.26,0.25] L6[0.26,0.24,0.26,0.24] L7[0.25,0.25,0.23,0.27]
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_best.pt
+  [step 1500] loss=2.1135 lr=9.05e-04 509ms emb_norm=100.23 vram=3.62G
+  [step 1600] loss=2.0525 lr=8.89e-04 498ms emb_norm=100.04 vram=3.62G
+  [step 1700] loss=2.0616 lr=8.73e-04 496ms emb_norm=100.14 vram=3.62G
+  [step 1800] loss=2.0755 lr=8.55e-04 501ms emb_norm=100.29 vram=3.62G
+  [step 1900] loss=2.0201 lr=8.36e-04 508ms emb_norm=100.26 vram=3.62G
+  [eval @2000] val_loss=1.9178 ppl=6.81
+  [moe @2000] L0[0.22,0.22,0.31,0.25] L1[0.25,0.27,0.25,0.23] L2[0.26,0.23,0.26,0.25] L3[0.25,0.25,0.21,0.30] L4[0.26,0.28,0.24,0.22] L5[0.23,0.25,0.24,0.29] L6[0.26,0.22,0.27,0.25] L7[0.26,0.24,0.22,0.28]
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_best.pt
+  [sample @2000 4.9s] Once upon a time, there was a little boy named Timmy. Timmy was very curious and loved to play in the garden. One day, he found an old tap in the garden and he wanted to play with it.  Timmy took the tap to the garden and played with it. But when he was playing, he saw a big cat stuck in the tap. Ti
+  [step 2000] loss=2.0551 lr=8.17e-04 546ms emb_norm=100.07 vram=3.62G
+  [ckpt] step 2000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_ckpt.pt
+  [step 2100] loss=1.9504 lr=7.96e-04 503ms emb_norm=100.20 vram=3.62G
+  [step 2200] loss=1.9647 lr=7.75e-04 502ms emb_norm=99.91 vram=3.62G
+  [step 2300] loss=2.0627 lr=7.53e-04 503ms emb_norm=100.01 vram=3.62G
+  [step 2400] loss=1.8769 lr=7.31e-04 497ms emb_norm=99.80 vram=3.62G
+  [eval @2500] val_loss=1.8516 ppl=6.37
+  [moe @2500] L0[0.23,0.26,0.26,0.25] L1[0.26,0.28,0.20,0.26] L2[0.23,0.28,0.24,0.25] L3[0.26,0.24,0.25,0.26] L4[0.26,0.25,0.23,0.26] L5[0.24,0.26,0.23,0.26] L6[0.27,0.21,0.27,0.25] L7[0.25,0.24,0.23,0.28]
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_best.pt
+  [step 2500] loss=1.8405 lr=7.08e-04 510ms emb_norm=99.53 vram=3.62G
+  [step 2600] loss=1.9533 lr=6.84e-04 499ms emb_norm=99.59 vram=3.62G
+  [step 2700] loss=1.9600 lr=6.60e-04 506ms emb_norm=99.51 vram=3.62G
+  [step 2800] loss=1.8919 lr=6.36e-04 494ms emb_norm=99.46 vram=3.62G
+  [step 2900] loss=1.7998 lr=6.12e-04 503ms emb_norm=99.16 vram=3.62G
+  [eval @3000] val_loss=1.7917 ppl=6.00
+  [moe @3000] L0[0.25,0.25,0.26,0.24] L1[0.25,0.26,0.22,0.27] L2[0.29,0.23,0.22,0.26] L3[0.27,0.25,0.24,0.24] L4[0.27,0.26,0.21,0.26] L5[0.26,0.24,0.24,0.26] L6[0.27,0.25,0.26,0.23] L7[0.24,0.24,0.23,0.28]
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_best.pt
+  [step 3000] loss=1.8622 lr=5.87e-04 506ms emb_norm=99.02 vram=3.62G
+  [ckpt] step 3000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_ckpt.pt
+  [step 3100] loss=1.9294 lr=5.62e-04 508ms emb_norm=98.71 vram=3.62G
+  [step 3200] loss=1.7834 lr=5.38e-04 511ms emb_norm=98.51 vram=3.62G
+  [step 3300] loss=1.8681 lr=5.13e-04 500ms emb_norm=98.20 vram=3.62G
+  [step 3400] loss=1.8569 lr=4.88e-04 498ms emb_norm=98.14 vram=3.62G
+  [eval @3500] val_loss=1.7503 ppl=5.76
+  [moe @3500] L0[0.24,0.27,0.24,0.25] L1[0.25,0.26,0.25,0.24] L2[0.22,0.26,0.26,0.26] L3[0.28,0.21,0.27,0.24] L4[0.28,0.25,0.23,0.24] L5[0.28,0.25,0.24,0.24] L6[0.26,0.23,0.27,0.24] L7[0.25,0.25,0.22,0.28]
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_best.pt
+  [step 3500] loss=1.9222 lr=4.64e-04 498ms emb_norm=98.16 vram=3.62G
+  [step 3600] loss=1.7701 lr=4.40e-04 509ms emb_norm=98.26 vram=3.62G
+  [step 3700] loss=1.7666 lr=4.16e-04 499ms emb_norm=97.88 vram=3.62G
+  [step 3800] loss=1.8507 lr=3.92e-04 504ms emb_norm=97.52 vram=3.62G
+  [step 3900] loss=1.8152 lr=3.69e-04 497ms emb_norm=97.33 vram=3.62G
+  [eval @4000] val_loss=1.7126 ppl=5.54
+  [moe @4000] L0[0.21,0.27,0.25,0.27] L1[0.25,0.26,0.25,0.24] L2[0.28,0.25,0.24,0.23] L3[0.28,0.23,0.26,0.24] L4[0.25,0.24,0.25,0.26] L5[0.25,0.28,0.24,0.23] L6[0.27,0.23,0.26,0.24] L7[0.25,0.25,0.23,0.28]
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_best.pt
+  [sample @4000 6.0s] Once upon a time, there was a little girl named Lily. She loved to play outside in the park with her friends. One day, Lily saw a thin raven flying around. She wanted to catch it and watch it fly. The raven flew up high and got very fast.  Lily ran after the raven, but it was too fast for her. She f
+  [step 4000] loss=1.8594 lr=3.47e-04 525ms emb_norm=97.10 vram=3.62G
+  [ckpt] step 4000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_ckpt.pt
+  [step 4100] loss=1.7283 lr=3.25e-04 502ms emb_norm=96.79 vram=3.62G
+  [step 4200] loss=1.8714 lr=3.04e-04 503ms emb_norm=96.56 vram=3.62G
+  [step 4300] loss=1.7839 lr=2.83e-04 501ms emb_norm=96.31 vram=3.62G
+  [step 4400] loss=1.7449 lr=2.64e-04 498ms emb_norm=96.12 vram=3.62G
+  [eval @4500] val_loss=1.6788 ppl=5.36
+  [moe @4500] L0[0.24,0.24,0.28,0.24] L1[0.26,0.27,0.24,0.24] L2[0.25,0.26,0.25,0.23] L3[0.31,0.23,0.24,0.22] L4[0.25,0.24,0.24,0.27] L5[0.25,0.25,0.25,0.25] L6[0.27,0.22,0.27,0.24] L7[0.25,0.25,0.23,0.28]
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_best.pt
+  [step 4500] loss=1.7975 lr=2.45e-04 492ms emb_norm=96.04 vram=3.62G
+  [step 4600] loss=1.7690 lr=2.27e-04 503ms emb_norm=95.86 vram=3.62G
+  [step 4700] loss=1.7547 lr=2.11e-04 501ms emb_norm=95.70 vram=3.62G
+  [step 4800] loss=1.8187 lr=1.95e-04 495ms emb_norm=95.51 vram=3.62G
+  [step 4900] loss=1.6642 lr=1.80e-04 497ms emb_norm=95.39 vram=3.62G
+  [eval @5000] val_loss=1.6533 ppl=5.22
+  [moe @5000] L0[0.25,0.25,0.25,0.24] L1[0.25,0.27,0.26,0.23] L2[0.28,0.25,0.22,0.26] L3[0.26,0.24,0.26,0.24] L4[0.25,0.25,0.25,0.25] L5[0.25,0.25,0.25,0.25] L6[0.27,0.23,0.26,0.24] L7[0.25,0.25,0.23,0.28]
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_best.pt
+  [step 5000] loss=1.6390 lr=1.67e-04 489ms emb_norm=95.35 vram=3.62G
+  [ckpt] step 5000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_ckpt.pt
+  [step 5100] loss=1.7229 lr=1.54e-04 506ms emb_norm=95.22 vram=3.62G
+  [step 5200] loss=1.7508 lr=1.43e-04 512ms emb_norm=95.14 vram=3.62G
+  [step 5300] loss=1.6968 lr=1.33e-04 499ms emb_norm=94.98 vram=3.62G
+  [step 5400] loss=1.6701 lr=1.24e-04 501ms emb_norm=94.85 vram=3.62G
+  [eval @5500] val_loss=1.6372 ppl=5.14
+  [moe @5500] L0[0.24,0.23,0.29,0.24] L1[0.24,0.27,0.24,0.24] L2[0.25,0.26,0.24,0.25] L3[0.28,0.24,0.24,0.24] L4[0.26,0.24,0.24,0.26] L5[0.24,0.26,0.25,0.25] L6[0.27,0.23,0.26,0.24] L7[0.25,0.25,0.23,0.28]
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_best.pt
+  [step 5500] loss=1.7545 lr=1.17e-04 498ms emb_norm=94.74 vram=3.62G
+  [step 5600] loss=1.7711 lr=1.11e-04 498ms emb_norm=94.66 vram=3.62G
+  [step 5700] loss=1.5918 lr=1.06e-04 504ms emb_norm=94.61 vram=3.62G
+  [step 5800] loss=1.6684 lr=1.03e-04 515ms emb_norm=94.56 vram=3.62G
+  [step 5900] loss=1.9058 lr=1.01e-04 519ms emb_norm=94.48 vram=3.62G
+  [eval @6000] val_loss=1.6264 ppl=5.09
+  [moe @6000] L0[0.24,0.24,0.26,0.26] L1[0.25,0.27,0.25,0.23] L2[0.26,0.26,0.22,0.26] L3[0.26,0.24,0.27,0.24] L4[0.25,0.25,0.24,0.26] L5[0.25,0.24,0.25,0.26] L6[0.27,0.22,0.27,0.24] L7[0.25,0.25,0.23,0.27]
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\moe4_best.pt
+  [sample @6000 8.2s] Once upon a time, there was a little girl named Lily. She loved to play outside and pick flowers. One day, she found a big leaf that she had never seen before. She was so happy and decided to pick it up.   But when she was walking back home, she saw a bug on her leaf. The bug was gray and had spots 
+  [sample @6001 7.3s] Once upon a time, there was a little girl named Lily. She loved to play outside in the sun. One day, she found a big rock and decided to push it. She pushed it to the ground and it felt very heavy.   Lily's friend, Timmy, came over to play. He saw that Lily was sad and asked if he could help. Lily s
+[done] best_val=1.6264 ppl=5.09 wall=50.7min tokens/s=32295

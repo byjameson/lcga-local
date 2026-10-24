@@ -1,0 +1,163 @@
+{
+ "exp": "exp9_decode",
+ "ts": "2026-10-24 01:18:23",
+ "tag": "decode_graph_diag",
+ "ckpt": "checkpoints/abl_diag_best.pt",
+ "steps": 32,
+ "budget": 0.25,
+ "gqa_sdpa": true,
+ "contexts": {
+  "T1024": {
+   "dense_naive_ms": 53.529,
+   "dense_fast_gqa_ms": 56.711,
+   "dense_fast_expanded_ms": 57.571,
+   "sparse_naive_ms": 111.972,
+   "sparse_fast_ms": 74.102,
+   "parity_dense_gqa": [
+    0.015625,
+    1.0
+   ],
+   "parity_dense_expanded": [
+    0.0,
+    1.0
+   ],
+   "parity_sparse": [
+    0.1136475,
+    1.0
+   ],
+   "parity_dense_graph": [
+    0.0,
+    1.0
+   ],
+   "dense_graph_ms": 12.922,
+   "parity_sparse_graph": [
+    0.1136475,
+    1.0
+   ],
+   "parity_sparse_graph_vsf": [
+    0.0,
+    1.0
+   ],
+   "sparse_graph_ms": 13.472,
+   "speedup_vs_dense_naive": {
+    "sparse_fast": 0.722,
+    "dense_gqa": 0.944
+   },
+   "sparse_vs_dense_fast": 0.765
+  },
+  "T2048": {
+   "dense_naive_ms": 51.981,
+   "dense_fast_gqa_ms": 60.95,
+   "dense_fast_expanded_ms": 57.12,
+   "sparse_naive_ms": 81.507,
+   "sparse_fast_ms": 78.454,
+   "parity_dense_gqa": [
+    0.0214844,
+    1.0
+   ],
+   "parity_dense_expanded": [
+    0.0,
+    1.0
+   ],
+   "parity_sparse": [
+    0.0249023,
+    1.0
+   ],
+   "parity_dense_graph": [
+    0.0,
+    1.0
+   ],
+   "dense_graph_ms": 14.6,
+   "parity_sparse_graph": [
+    0.0249023,
+    1.0
+   ],
+   "parity_sparse_graph_vsf": [
+    0.0,
+    1.0
+   ],
+   "sparse_graph_ms": 14.159,
+   "speedup_vs_dense_naive": {
+    "sparse_fast": 0.663,
+    "dense_gqa": 0.853
+   },
+   "sparse_vs_dense_fast": 0.777
+  },
+  "T4096": {
+   "dense_naive_ms": 55.026,
+   "dense_fast_gqa_ms": 57.23,
+   "dense_fast_expanded_ms": 52.249,
+   "sparse_naive_ms": 78.902,
+   "sparse_fast_ms": 75.694,
+   "parity_dense_gqa": [
+    0.0222168,
+    1.0
+   ],
+   "parity_dense_expanded": [
+    0.0,
+    1.0
+   ],
+   "parity_sparse": [
+    0.0664062,
+    1.0
+   ],
+   "parity_dense_graph": [
+    0.0,
+    1.0
+   ],
+   "dense_graph_ms": 17.69,
+   "parity_sparse_graph": [
+    0.0664062,
+    1.0
+   ],
+   "parity_sparse_graph_vsf": [
+    0.0,
+    1.0
+   ],
+   "sparse_graph_ms": 15.715,
+   "speedup_vs_dense_naive": {
+    "sparse_fast": 0.727,
+    "dense_gqa": 0.961
+   },
+   "sparse_vs_dense_fast": 0.756
+  },
+  "T8192": {
+   "dense_naive_ms": 56.705,
+   "dense_fast_gqa_ms": 92.927,
+   "dense_fast_expanded_ms": 53.638,
+   "sparse_naive_ms": 78.13,
+   "sparse_fast_ms": 75.514,
+   "parity_dense_gqa": [
+    0.0292969,
+    1.0
+   ],
+   "parity_dense_expanded": [
+    0.0,
+    1.0
+   ],
+   "parity_sparse": [
+    0.0244141,
+    1.0
+   ],
+   "parity_dense_graph": [
+    0.0,
+    1.0
+   ],
+   "dense_graph_ms": 24.112,
+   "parity_sparse_graph": [
+    0.0244141,
+    1.0
+   ],
+   "parity_sparse_graph_vsf": [
+    0.0,
+    1.0
+   ],
+   "sparse_graph_ms": 18.957,
+   "speedup_vs_dense_naive": {
+    "sparse_fast": 0.751,
+    "dense_gqa": 0.61
+   },
+   "sparse_vs_dense_fast": 1.231
+  }
+ }
+}

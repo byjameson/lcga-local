@@ -1,0 +1,16 @@
+[data] train=221093014 tok (tok2_ctrl8k_train.pt) | valid=602715 tok (tok2_ctrl8k_valid.pt) | valid_bytes=2493514
+[plan] 30 adim x 32x512 = 0M token (~0.00 epoch)
+[model] params=10.23M cfg={'arch': 'minilm', 'vocab': 8192, 'dim': 384, 'layers': 4, 'heads': 6, 'ctx': 512, 'mlp_hidden': 1024, 'loops': 2}
+  [eval @0] val_loss=9.0841 ppl=8814.32 bpb=3.1678
+  [loop-sweep @0] L=1 bpb=3.1701 L=2 bpb=3.1678 L=4 bpb=3.1663 L=8 bpb=3.1665
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4smoke_gpu_best.pt
+  [step 0] loss=9.0535 lr=2.00e-04 632ms emb_norm=35.48 vram=4.24G
+  [eval @15] val_loss=5.8599 ppl=350.70 bpb=2.0435
+  [loop-sweep @15] L=1 bpb=2.0432 L=2 bpb=2.0435 L=4 bpb=2.0444 L=8 bpb=2.0454
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4smoke_gpu_best.pt
+  [eval @30] val_loss=5.6200 ppl=275.89 bpb=1.9598
+  [loop-sweep @30] L=1 bpb=1.9532 L=2 bpb=1.9598 L=4 bpb=1.9704 L=8 bpb=1.9835
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\p4smoke_gpu_best.pt
+  [sample @30 0.5s] Once upon a time, and.    The day you, a ". The are the the.  to the and it his.
+  [sample @31 0.5s] Once upon a time. She was the and.                         ,.. a.
+[done] best_val=5.6200 ppl=275.89 bpb=1.9598 wall=0.3min tokens/s=29905

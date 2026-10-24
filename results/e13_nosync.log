@@ -1,0 +1,14 @@
+[data] train=221093014 tok | valid=602715 tok | valid_bytes=2493514
+[shards] 4 x ~55.3M tok (tok2_ctrl8k_train.pt)
+[plan] nosync: 1000 adim/isci x 4 isci x 32x512 = 66M token toplam
+[model] params=17.31M x 4 replica cfg={'arch': 'minilm', 'vocab': 8192, 'dim': 384, 'layers': 8, 'heads': 6, 'ctx': 512, 'mlp_hidden': 1024, 'loops': 1}
+  [eval @0] val_loss=9.0780 bpb=3.1657 div=0
+  [eval @250] replica bpb=[1.004, 1.0051, 1.0046, 0.9962] mean=1.0025 div=0.352354
+  [eval @500] replica bpb=[0.8453, 0.846, 0.8407, 0.8383] mean=0.8426 div=0.516243
+  [eval @750] replica bpb=[0.7655, 0.7665, 0.7625, 0.7626] mean=0.7643 div=0.555693
+  [eval @1000] replica bpb=[0.7314, 0.735, 0.7291, 0.7285] mean=0.731 div=0.561911
+  [soup] val_loss=2.5294 bpb=0.882 div_final=0.5619
+  [sample 3.7s] Once upon a time, there was a big, green garden. The sky was very small and it was very bright.  The little girl wanted to take the big rock to the world. She saw the tiny, colorful rocks, and the sky was very big. The trees were green and the sky was the whole pond. The little girl was so happy tha
+  [sample 3.2s] Once upon a time, there was a little boy named Tim. He loved to play with his toys and have fun. One day, he went to the park to play with his toys. He found a big, blue ball, and she thought it was a fun to play with it.  When Tim got to the park, he saw that the toy was a big red ball. He was so h
+[ckpt] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\e13_nosync.pt
+[done] tag=e13_nosync mode=nosync final_bpb=0.731 wall=32.2min med_step=477ms

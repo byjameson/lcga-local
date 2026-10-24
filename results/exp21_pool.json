@@ -1,0 +1,345 @@
+{
+  "requests": [
+    [
+      "Unit(name='qwen0.5b', model_path='C:\\\\Users\\\\biris\\\\Desktop\\\\opencode\\\\ai gelistir\\\\models\\\\Qwen2.5-0.5B', est_gb=1.1, prompt='The capital of France is', max_new_tokens=16, text=' Paris. It is the largest city in Europe and the second largest in the world', gen_s=0.9457088999915868, score=-0.7835688277846202)",
+      "Unit(name='qwen1.5b', model_path='C:\\\\Users\\\\biris\\\\Desktop\\\\opencode\\\\ai gelistir\\\\models\\\\Qwen2.5-1.5B', est_gb=3.3, prompt='Once upon a time, there was a', max_new_tokens=16, text=' little girl named Lily. She lived in a small village with her parents and grandparents', gen_s=0.9622244000202045, score=-0.8240980752743781)"
+    ],
+    [
+      "Unit(name='qwen0.5b', model_path='C:\\\\Users\\\\biris\\\\Desktop\\\\opencode\\\\ai gelistir\\\\models\\\\Qwen2.5-0.5B', est_gb=1.1, prompt='The capital of Germany is', max_new_tokens=16, text=' Berlin. It is the capital of Germany and the largest city in Germany. It', gen_s=1.2879840999958105, score=-0.9114726688712835)",
+      "Unit(name='qwen1.5b', model_path='C:\\\\Users\\\\biris\\\\Desktop\\\\opencode\\\\ai gelistir\\\\models\\\\Qwen2.5-1.5B', est_gb=3.3, prompt='In a distant galaxy,', max_new_tokens=16, text=' a star system is observed to have a peculiar phenomenon. The star system is composed', gen_s=1.393347300007008, score=-0.9752535056322813)"
+    ],
+    [
+      "Unit(name='qwen1.5b', model_path='C:\\\\Users\\\\biris\\\\Desktop\\\\opencode\\\\ai gelistir\\\\models\\\\Qwen2.5-1.5B', est_gb=3.3, prompt='The quick brown fox', max_new_tokens=16, text=' jumps over the lazy dog.\\nThe quick brown fox jumps over the lazy dog.', gen_s=1.0138390000211075, score=-0.3893079840345308)"
+    ]
+  ],
+  "tight_requests": [
+    [
+      "Unit(name='qwen0.5b', model_path='C:\\\\Users\\\\biris\\\\Desktop\\\\opencode\\\\ai gelistir\\\\models\\\\Qwen2.5-0.5B', est_gb=1.1, prompt='The capital of Italy is', max_new_tokens=16, text=' located in the south of the country. The capital is Rome, the capital of', gen_s=0.6514362000161782, score=-1.1060474887490273)"
+    ],
+    [
+      "Unit(name='qwen1.5b', model_path='C:\\\\Users\\\\biris\\\\Desktop\\\\opencode\\\\ai gelistir\\\\models\\\\Qwen2.5-1.5B', est_gb=3.3, prompt='Once upon a time, there was a', max_new_tokens=16, text=' little girl named Lily. She lived in a small village with her parents and grandparents', gen_s=0.8978093999903649, score=-0.8240980752743781)"
+    ],
+    [
+      "Unit(name='qwen0.5b', model_path='C:\\\\Users\\\\biris\\\\Desktop\\\\opencode\\\\ai gelistir\\\\models\\\\Qwen2.5-0.5B', est_gb=1.1, prompt='The capital of Spain is', max_new_tokens=16, text=' Madrid. It is the capital of the autonomous community of Andalusia. It', gen_s=0.7109225000021979, score=-0.7881745182094164)"
+    ]
+  ],
+  "rows": [
+    {
+      "exp": "exp21_pool",
+      "tag": "m4_pool_v2_nopool",
+      "scenario": "nopool",
+      "req": 1,
+      "units": [
+        "qwen0.5b",
+        "qwen1.5b"
+      ],
+      "prompts": [
+        "The capital of France is",
+        "Once upon a time, there was a"
+      ],
+      "load_s": 8.71,
+      "gen_s": 1.36,
+      "unload_s": 1.27,
+      "wall_s": 11.38,
+      "texts": {
+        "qwen0.5b": " Paris. It is the largest city in Europe and the second largest in the world",
+        "qwen1.5b": " little girl named Lily. She lived in a small village with her parents and grandparents"
+      },
+      "scores": {
+        "qwen0.5b": -0.7836,
+        "qwen1.5b": -0.8241
+      },
+      "peak_alloc_mb": 3933.4,
+      "peak_reserved_mb": 4192.0
+    },
+    {
+      "exp": "exp21_pool",
+      "tag": "m4_pool_v2_nopool",
+      "scenario": "nopool",
+      "req": 2,
+      "units": [
+        "qwen0.5b",
+        "qwen1.5b"
+      ],
+      "prompts": [
+        "The capital of Germany is",
+        "In a distant galaxy,"
+      ],
+      "load_s": 5.54,
+      "gen_s": 1.39,
+      "unload_s": 1.18,
+      "wall_s": 8.13,
+      "texts": {
+        "qwen0.5b": " Berlin. It is the capital of Germany and the largest city in Germany. It",
+        "qwen1.5b": " a star system is observed to have a peculiar phenomenon. The star system is composed"
+      },
+      "scores": {
+        "qwen0.5b": -0.9115,
+        "qwen1.5b": -0.9753
+      },
+      "peak_alloc_mb": 3947.0,
+      "peak_reserved_mb": 4230.0
+    },
+    {
+      "exp": "exp21_pool",
+      "tag": "m4_pool_v2_nopool",
+      "scenario": "nopool",
+      "req": 3,
+      "units": [
+        "qwen1.5b"
+      ],
+      "prompts": [
+        "The quick brown fox"
+      ],
+      "load_s": 4.12,
+      "gen_s": 0.81,
+      "unload_s": 0.7,
+      "wall_s": 5.65,
+      "texts": {
+        "qwen1.5b": " jumps over the lazy dog.\nThe quick brown fox jumps over the lazy dog."
+      },
+      "scores": {
+        "qwen1.5b": -0.3893
+      },
+      "peak_alloc_mb": 2996.9,
+      "peak_reserved_mb": 3248.0
+    },
+    {
+      "exp": "exp21_pool",
+      "tag": "m4_pool_v2_pool",
+      "scenario": "pool",
+      "req": 1,
+      "units": [
+        "qwen0.5b",
+        "qwen1.5b"
+      ],
+      "prompts": [
+        "The capital of France is",
+        "Once upon a time, there was a"
+      ],
+      "load_s": 5.55,
+      "gen_s": 0.96,
+      "unload_s": 0.0,
+      "wall_s": 6.52,
+      "texts": {
+        "qwen0.5b": " Paris. It is the largest city in Europe and the second largest in the world",
+        "qwen1.5b": " little girl named Lily. She lived in a small village with her parents and grandparents"
+      },
+      "scores": {
+        "qwen0.5b": -0.7836,
+        "qwen1.5b": -0.8241
+      },
+      "stats": {
+        "budget_gb": 5.0,
+        "resident": [
+          "Qwen2.5-0.5B",
+          "Qwen2.5-1.5B"
+        ],
+        "host": [],
+        "resident_gb": 4.4,
+        "evictions": 0,
+        "reloads": 0,
+        "disk_loads": 2,
+        "reload_s": 0.0,
+        "load_s": 5.546
+      },
+      "peak_alloc_mb": 3972.6,
+      "peak_reserved_mb": 4290.0
+    },
+    {
+      "exp": "exp21_pool",
+      "tag": "m4_pool_v2_pool",
+      "scenario": "pool",
+      "req": 2,
+      "units": [
+        "qwen0.5b",
+        "qwen1.5b"
+      ],
+      "prompts": [
+        "The capital of Germany is",
+        "In a distant galaxy,"
+      ],
+      "load_s": 0.0,
+      "gen_s": 1.39,
+      "unload_s": 0.0,
+      "wall_s": 1.63,
+      "texts": {
+        "qwen0.5b": " Berlin. It is the capital of Germany and the largest city in Germany. It",
+        "qwen1.5b": " a star system is observed to have a peculiar phenomenon. The star system is composed"
+      },
+      "scores": {
+        "qwen0.5b": -0.9115,
+        "qwen1.5b": -0.9753
+      },
+      "stats": {
+        "budget_gb": 5.0,
+        "resident": [
+          "Qwen2.5-0.5B",
+          "Qwen2.5-1.5B"
+        ],
+        "host": [],
+        "resident_gb": 4.4,
+        "evictions": 0,
+        "reloads": 0,
+        "disk_loads": 2,
+        "reload_s": 0.0,
+        "load_s": 5.546
+      },
+      "peak_alloc_mb": 3988.3,
+      "peak_reserved_mb": 4354.0
+    },
+    {
+      "exp": "exp21_pool",
+      "tag": "m4_pool_v2_pool",
+      "scenario": "pool",
+      "req": 3,
+      "units": [
+        "qwen1.5b"
+      ],
+      "prompts": [
+        "The quick brown fox"
+      ],
+      "load_s": 0.0,
+      "gen_s": 1.01,
+      "unload_s": 0.0,
+      "wall_s": 1.02,
+      "texts": {
+        "qwen1.5b": " jumps over the lazy dog.\nThe quick brown fox jumps over the lazy dog."
+      },
+      "scores": {
+        "qwen1.5b": -0.3893
+      },
+      "stats": {
+        "budget_gb": 5.0,
+        "resident": [
+          "Qwen2.5-0.5B",
+          "Qwen2.5-1.5B"
+        ],
+        "host": [],
+        "resident_gb": 4.4,
+        "evictions": 0,
+        "reloads": 0,
+        "disk_loads": 2,
+        "reload_s": 0.0,
+        "load_s": 5.546
+      },
+      "peak_alloc_mb": 3987.6,
+      "peak_reserved_mb": 4386.0
+    },
+    {
+      "exp": "exp21_pool",
+      "tag": "m4_pool_v2_tight",
+      "scenario": "tight",
+      "req": 1,
+      "units": [
+        "qwen0.5b"
+      ],
+      "prompts": [
+        "The capital of Italy is"
+      ],
+      "load_s": 1.4,
+      "gen_s": 0.65,
+      "unload_s": 0.0,
+      "wall_s": 2.05,
+      "texts": {
+        "qwen0.5b": " located in the south of the country. The capital is Rome, the capital of"
+      },
+      "scores": {
+        "qwen0.5b": -1.106
+      },
+      "stats": {
+        "budget_gb": 2.5,
+        "resident": [
+          "Qwen2.5-0.5B"
+        ],
+        "host": [],
+        "resident_gb": 1.1,
+        "evictions": 0,
+        "reloads": 0,
+        "disk_loads": 1,
+        "reload_s": 0.0,
+        "load_s": 1.4
+      },
+      "peak_alloc_mb": 1050.2,
+      "peak_reserved_mb": 1224.0
+    },
+    {
+      "exp": "exp21_pool",
+      "tag": "m4_pool_v2_tight",
+      "scenario": "tight",
+      "req": 2,
+      "units": [
+        "qwen1.5b"
+      ],
+      "prompts": [
+        "Once upon a time, there was a"
+      ],
+      "load_s": 4.49,
+      "gen_s": 0.9,
+      "unload_s": 0.0,
+      "wall_s": 5.39,
+      "texts": {
+        "qwen1.5b": " little girl named Lily. She lived in a small village with her parents and grandparents"
+      },
+      "scores": {
+        "qwen1.5b": -0.8241
+      },
+      "stats": {
+        "budget_gb": 2.5,
+        "resident": [
+          "Qwen2.5-1.5B"
+        ],
+        "host": [
+          "Qwen2.5-0.5B"
+        ],
+        "resident_gb": 3.3,
+        "evictions": 1,
+        "reloads": 0,
+        "disk_loads": 2,
+        "reload_s": 0.0,
+        "load_s": 5.508
+      },
+      "peak_alloc_mb": 3053.8,
+      "peak_reserved_mb": 3388.0
+    },
+    {
+      "exp": "exp21_pool",
+      "tag": "m4_pool_v2_tight",
+      "scenario": "tight",
+      "req": 3,
+      "units": [
+        "qwen0.5b"
+      ],
+      "prompts": [
+        "The capital of Spain is"
+      ],
+      "load_s": 1.03,
+      "gen_s": 0.71,
+      "unload_s": 0.0,
+      "wall_s": 1.74,
+      "texts": {
+        "qwen0.5b": " Madrid. It is the capital of the autonomous community of Andalusia. It"
+      },
+      "scores": {
+        "qwen0.5b": -0.7882
+      },
+      "stats": {
+        "budget_gb": 2.5,
+        "resident": [
+          "Qwen2.5-0.5B"
+        ],
+        "host": [
+          "Qwen2.5-1.5B"
+        ],
+        "resident_gb": 1.1,
+        "evictions": 2,
+        "reloads": 1,
+        "disk_loads": 2,
+        "reload_s": 0.348,
+        "load_s": 5.508
+      },
+      "peak_alloc_mb": 3042.8,
+      "peak_reserved_mb": 3388.0
+    }
+  ]
+}

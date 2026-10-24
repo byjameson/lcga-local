@@ -1,0 +1,99 @@
+[data] train=144520003 tok (tok2_sw8k_train.pt) | valid=396690 tok (tok2_sw8k_valid.pt) | valid_bytes=2493514
+[plan] 6000 adim x 32x512 = 98M token (~0.68 epoch)
+[model] params=17.31M cfg={'arch': 'minilm', 'vocab': 8192, 'dim': 384, 'layers': 8, 'heads': 6, 'ctx': 512, 'mlp_hidden': 1024}
+  [eval @0] val_loss=9.0882 ppl=8849.87 bpb=2.0859
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_best.pt
+  [step 0] loss=9.0834 lr=3.33e-06 683ms emb_norm=35.47 vram=4.28G
+  [step 100] loss=7.7279 lr=3.37e-04 477ms emb_norm=36.42 vram=4.56G
+  [step 200] loss=5.7243 lr=6.70e-04 478ms emb_norm=45.24 vram=4.56G
+  [step 300] loss=4.9615 lr=1.00e-03 479ms emb_norm=56.67 vram=4.56G
+  [step 400] loss=4.3703 lr=9.99e-04 480ms emb_norm=65.69 vram=4.56G
+  [eval @500] val_loss=4.1079 ppl=60.82 bpb=0.9428
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_best.pt
+  [step 500] loss=4.1053 lr=9.97e-04 479ms emb_norm=71.52 vram=4.56G
+  [step 600] loss=3.8495 lr=9.94e-04 478ms emb_norm=75.25 vram=4.56G
+  [step 700] loss=3.6458 lr=9.89e-04 479ms emb_norm=77.73 vram=4.56G
+  [step 800] loss=3.4699 lr=9.83e-04 477ms emb_norm=79.63 vram=4.56G
+  [step 900] loss=3.4313 lr=9.76e-04 478ms emb_norm=81.19 vram=4.56G
+  [eval @1000] val_loss=3.4071 ppl=30.18 bpb=0.7820
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_best.pt
+  [step 1000] loss=3.3934 lr=9.67e-04 479ms emb_norm=82.42 vram=4.56G
+  [ckpt] step 1000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_ckpt.pt
+  [step 1100] loss=3.3243 lr=9.57e-04 479ms emb_norm=83.43 vram=4.56G
+  [step 1200] loss=3.2761 lr=9.46e-04 478ms emb_norm=84.21 vram=4.56G
+  [step 1300] loss=3.1660 lr=9.33e-04 479ms emb_norm=84.87 vram=4.56G
+  [step 1400] loss=3.1868 lr=9.20e-04 480ms emb_norm=85.38 vram=4.56G
+  [eval @1500] val_loss=3.1596 ppl=23.56 bpb=0.7252
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_best.pt
+  [step 1500] loss=3.0143 lr=9.05e-04 479ms emb_norm=85.86 vram=4.56G
+  [step 1600] loss=3.1303 lr=8.89e-04 479ms emb_norm=86.28 vram=4.56G
+  [step 1700] loss=3.0488 lr=8.73e-04 479ms emb_norm=86.77 vram=4.56G
+  [step 1800] loss=2.9715 lr=8.55e-04 480ms emb_norm=87.08 vram=4.56G
+  [step 1900] loss=3.0245 lr=8.36e-04 479ms emb_norm=87.38 vram=4.56G
+  [eval @2000] val_loss=3.0152 ppl=20.39 bpb=0.6920
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_best.pt
+  [sample @2000 1.9s] Once upon a time, as they were walking towards the car. Mary was so excited and she shouted out: "Jen, look! I found a car that was really fast!"  When they got home, Dave smiled and said "I think we should go up to the car!" Mary said "Let's have an adventure!"  Dayan smiled and said, "Yes, let's g
+  [step 2000] loss=2.9070 lr=8.17e-04 542ms emb_norm=87.63 vram=4.56G
+  [ckpt] step 2000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_ckpt.pt
+  [step 2100] loss=2.9702 lr=7.96e-04 485ms emb_norm=87.86 vram=4.56G
+  [step 2200] loss=2.9133 lr=7.75e-04 481ms emb_norm=88.01 vram=4.56G
+  [step 2300] loss=2.8214 lr=7.53e-04 480ms emb_norm=88.18 vram=4.56G
+  [step 2400] loss=3.0632 lr=7.31e-04 480ms emb_norm=88.26 vram=4.56G
+  [eval @2500] val_loss=2.9124 ppl=18.40 bpb=0.6684
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_best.pt
+  [step 2500] loss=2.9124 lr=7.08e-04 478ms emb_norm=88.30 vram=4.56G
+  [step 2600] loss=2.8179 lr=6.84e-04 480ms emb_norm=88.40 vram=4.56G
+  [step 2700] loss=2.9099 lr=6.60e-04 482ms emb_norm=88.40 vram=4.56G
+  [step 2800] loss=2.8288 lr=6.36e-04 481ms emb_norm=88.40 vram=4.56G
+  [step 2900] loss=2.7412 lr=6.12e-04 481ms emb_norm=88.39 vram=4.56G
+  [eval @3000] val_loss=2.8324 ppl=16.99 bpb=0.6501
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_best.pt
+  [step 3000] loss=2.8099 lr=5.87e-04 480ms emb_norm=88.36 vram=4.56G
+  [ckpt] step 3000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_ckpt.pt
+  [step 3100] loss=2.8107 lr=5.62e-04 478ms emb_norm=88.39 vram=4.56G
+  [step 3200] loss=2.7949 lr=5.38e-04 480ms emb_norm=88.34 vram=4.56G
+  [step 3300] loss=2.7720 lr=5.13e-04 479ms emb_norm=88.33 vram=4.56G
+  [step 3400] loss=2.7997 lr=4.88e-04 481ms emb_norm=88.24 vram=4.56G
+  [eval @3500] val_loss=2.7603 ppl=15.80 bpb=0.6335
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_best.pt
+  [step 3500] loss=2.6644 lr=4.64e-04 480ms emb_norm=88.06 vram=4.56G
+  [step 3600] loss=2.5631 lr=4.40e-04 480ms emb_norm=87.98 vram=4.56G
+  [step 3700] loss=2.6827 lr=4.16e-04 479ms emb_norm=87.90 vram=4.56G
+  [step 3800] loss=2.6993 lr=3.92e-04 481ms emb_norm=87.79 vram=4.56G
+  [step 3900] loss=2.7412 lr=3.69e-04 481ms emb_norm=87.66 vram=4.56G
+  [eval @4000] val_loss=2.6963 ppl=14.83 bpb=0.6189
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_best.pt
+  [sample @4000 2.5s] Once upon a time. Teddy was so excited! He wanted to go outside and play, but his mother said he couldn't go outside.  So, Teddy decided to go to the park and play with his friends. They included playing tag and tag, but Teddy was having a really good time. There were no butterflies and dogs running
+  [step 4000] loss=2.6911 lr=3.47e-04 647ms emb_norm=87.59 vram=4.56G
+  [ckpt] step 4000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_ckpt.pt
+  [step 4100] loss=2.5625 lr=3.25e-04 478ms emb_norm=87.54 vram=4.56G
+  [step 4200] loss=2.7140 lr=3.04e-04 480ms emb_norm=87.45 vram=4.56G
+  [step 4300] loss=2.6011 lr=2.83e-04 478ms emb_norm=87.32 vram=4.56G
+  [step 4400] loss=2.7008 lr=2.64e-04 483ms emb_norm=87.18 vram=4.56G
+  [eval @4500] val_loss=2.6457 ppl=14.09 bpb=0.6072
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_best.pt
+  [step 4500] loss=2.5711 lr=2.45e-04 481ms emb_norm=87.08 vram=4.56G
+  [step 4600] loss=2.6001 lr=2.27e-04 482ms emb_norm=86.93 vram=4.56G
+  [step 4700] loss=2.5490 lr=2.11e-04 482ms emb_norm=86.83 vram=4.56G
+  [step 4800] loss=2.6388 lr=1.95e-04 483ms emb_norm=86.75 vram=4.56G
+  [step 4900] loss=2.5821 lr=1.80e-04 480ms emb_norm=86.66 vram=4.56G
+  [eval @5000] val_loss=2.6065 ppl=13.55 bpb=0.5982
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_best.pt
+  [step 5000] loss=2.5988 lr=1.67e-04 479ms emb_norm=86.58 vram=4.56G
+  [ckpt] step 5000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_ckpt.pt
+  [step 5100] loss=2.5965 lr=1.54e-04 480ms emb_norm=86.49 vram=4.56G
+  [step 5200] loss=2.4861 lr=1.43e-04 481ms emb_norm=86.40 vram=4.56G
+  [step 5300] loss=2.5517 lr=1.33e-04 481ms emb_norm=86.32 vram=4.56G
+  [step 5400] loss=2.4928 lr=1.24e-04 479ms emb_norm=86.23 vram=4.56G
+  [eval @5500] val_loss=2.5826 ppl=13.23 bpb=0.5927
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_best.pt
+  [step 5500] loss=2.4476 lr=1.17e-04 480ms emb_norm=86.14 vram=4.56G
+  [step 5600] loss=2.5710 lr=1.11e-04 483ms emb_norm=86.07 vram=4.56G
+  [step 5700] loss=2.4256 lr=1.06e-04 480ms emb_norm=86.00 vram=4.56G
+  [step 5800] loss=2.4637 lr=1.03e-04 482ms emb_norm=85.96 vram=4.56G
+  [step 5900] loss=2.5662 lr=1.01e-04 480ms emb_norm=85.89 vram=4.56G
+  [eval @6000] val_loss=2.5663 ppl=13.02 bpb=0.5890
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw8k_best.pt
+  [sample @6000 4.6s] Once upon a time? Come on! It's very nice to meet you!"  The family of ducks were so excited for the adventure to begin. When they got to their destination, the two ducks stopped by the river. The driver stopped and said, ???Hello! This is the river I used to see when I was a young duck.??  The thre
+  [sample @6001 0.4s] Once upon a time, all the animals were happy, and thanked the man for the special gift.
+[done] best_val=2.5663 ppl=13.02 bpb=0.5890 wall=48.5min tokens/s=33811

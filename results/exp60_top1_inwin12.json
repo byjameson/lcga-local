@@ -1,0 +1,22 @@
+{
+ "exp": "exp60_needle",
+ "tag": "top1_inwin12",
+ "ckpt": "checkpoints/needle_top1_c64_final.pt",
+ "ts": "2026-10-24 03:49:52",
+ "results": {
+  "T1024_d0.9": {
+   "dense": {
+    "ce": 0.13226128866275152,
+    "exact": 1.0
+   },
+   "topk": {
+    "ce": 0.2776731935640176,
+    "exact": 0.16666666666666666
+   },
+   "window": {
+    "ce": 0.22047609214981398,
+    "exact": 1.0
+   }
+  }
+ }
+}

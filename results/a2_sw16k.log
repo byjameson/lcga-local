@@ -1,0 +1,99 @@
+[data] train=122729085 tok (tok2_sw16k_train.pt) | valid=336613 tok (tok2_sw16k_valid.pt) | valid_bytes=2493514
+[plan] 6000 adim x 32x512 = 98M token (~0.80 epoch)
+[model] params=20.45M cfg={'arch': 'minilm', 'vocab': 16384, 'dim': 384, 'layers': 8, 'heads': 6, 'ctx': 512, 'mlp_hidden': 1024}
+  [eval @0] val_loss=9.7810 ppl=17694.53 bpb=1.9049
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_best.pt
+  [step 0] loss=9.7797 lr=3.33e-06 804ms emb_norm=50.17 vram=5.66G
+  [step 100] loss=8.7729 lr=3.37e-04 565ms emb_norm=51.11 vram=5.67G
+  [step 200] loss=7.0250 lr=6.70e-04 565ms emb_norm=58.55 vram=5.67G
+  [step 300] loss=5.9657 lr=1.00e-03 565ms emb_norm=71.66 vram=5.67G
+  [step 400] loss=5.3381 lr=9.99e-04 565ms emb_norm=83.41 vram=5.67G
+  [eval @500] val_loss=4.9092 ppl=135.53 bpb=0.9561
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_best.pt
+  [step 500] loss=4.9383 lr=9.97e-04 566ms emb_norm=91.42 vram=5.67G
+  [step 600] loss=4.4836 lr=9.94e-04 565ms emb_norm=96.88 vram=5.67G
+  [step 700] loss=4.2897 lr=9.89e-04 566ms emb_norm=100.83 vram=5.67G
+  [step 800] loss=3.9721 lr=9.83e-04 564ms emb_norm=103.73 vram=5.67G
+  [step 900] loss=3.9984 lr=9.76e-04 566ms emb_norm=105.51 vram=5.67G
+  [eval @1000] val_loss=4.0000 ppl=54.60 bpb=0.7790
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_best.pt
+  [step 1000] loss=4.0072 lr=9.67e-04 566ms emb_norm=107.04 vram=5.67G
+  [ckpt] step 1000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_ckpt.pt
+  [step 1100] loss=3.8306 lr=9.57e-04 565ms emb_norm=108.37 vram=5.67G
+  [step 1200] loss=3.8090 lr=9.46e-04 567ms emb_norm=109.32 vram=5.67G
+  [step 1300] loss=3.6901 lr=9.33e-04 566ms emb_norm=110.03 vram=5.67G
+  [step 1400] loss=3.6521 lr=9.20e-04 564ms emb_norm=110.76 vram=5.67G
+  [eval @1500] val_loss=3.6835 ppl=39.79 bpb=0.7174
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_best.pt
+  [step 1500] loss=3.6225 lr=9.05e-04 566ms emb_norm=111.31 vram=5.67G
+  [step 1600] loss=3.5509 lr=8.89e-04 566ms emb_norm=111.85 vram=5.67G
+  [step 1700] loss=3.5223 lr=8.73e-04 565ms emb_norm=112.30 vram=5.67G
+  [step 1800] loss=3.5511 lr=8.55e-04 568ms emb_norm=112.54 vram=5.67G
+  [step 1900] loss=3.4889 lr=8.36e-04 565ms emb_norm=112.82 vram=5.67G
+  [eval @2000] val_loss=3.4888 ppl=32.75 bpb=0.6795
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_best.pt
+  [sample @2000 1.2s] Once upon a time, all of the animals started to become very happy too. They even found a special kind of way to make everything even stronger - just like they used their special powers!
+  [step 2000] loss=3.4220 lr=8.17e-04 566ms emb_norm=113.00 vram=5.67G
+  [ckpt] step 2000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_ckpt.pt
+  [step 2100] loss=3.5316 lr=7.96e-04 565ms emb_norm=113.22 vram=5.67G
+  [step 2200] loss=3.4448 lr=7.75e-04 566ms emb_norm=113.34 vram=5.67G
+  [step 2300] loss=3.2930 lr=7.53e-04 567ms emb_norm=113.52 vram=5.67G
+  [step 2400] loss=3.3527 lr=7.31e-04 566ms emb_norm=113.61 vram=5.67G
+  [eval @2500] val_loss=3.3720 ppl=29.14 bpb=0.6567
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_best.pt
+  [step 2500] loss=3.3664 lr=7.08e-04 567ms emb_norm=113.65 vram=5.67G
+  [step 2600] loss=3.2314 lr=6.84e-04 566ms emb_norm=113.75 vram=5.67G
+  [step 2700] loss=3.2687 lr=6.60e-04 565ms emb_norm=113.76 vram=5.67G
+  [step 2800] loss=3.3100 lr=6.36e-04 564ms emb_norm=113.64 vram=5.67G
+  [step 2900] loss=3.1465 lr=6.12e-04 566ms emb_norm=113.57 vram=5.67G
+  [eval @3000] val_loss=3.2756 ppl=26.46 bpb=0.6379
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_best.pt
+  [step 3000] loss=3.2029 lr=5.87e-04 567ms emb_norm=113.46 vram=5.67G
+  [ckpt] step 3000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_ckpt.pt
+  [step 3100] loss=3.1840 lr=5.62e-04 565ms emb_norm=113.33 vram=5.67G
+  [step 3200] loss=3.2626 lr=5.38e-04 565ms emb_norm=113.20 vram=5.67G
+  [step 3300] loss=3.0779 lr=5.13e-04 565ms emb_norm=113.05 vram=5.67G
+  [step 3400] loss=3.2622 lr=4.88e-04 566ms emb_norm=112.82 vram=5.67G
+  [eval @3500] val_loss=3.1868 ppl=24.21 bpb=0.6207
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_best.pt
+  [step 3500] loss=3.1037 lr=4.64e-04 567ms emb_norm=112.60 vram=5.67G
+  [step 3600] loss=3.0936 lr=4.40e-04 563ms emb_norm=112.34 vram=5.67G
+  [step 3700] loss=3.2403 lr=4.16e-04 564ms emb_norm=112.10 vram=5.67G
+  [step 3800] loss=3.0282 lr=3.92e-04 564ms emb_norm=111.84 vram=5.67G
+  [step 3900] loss=2.9613 lr=3.69e-04 563ms emb_norm=111.57 vram=5.67G
+  [eval @4000] val_loss=3.1220 ppl=22.69 bpb=0.6080
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_best.pt
+  [sample @4000 1.1s] Once upon a time. This is why it's so cold."  Little Tom looked around and he thought he knew what it was like to keep warm. He put down the march and started to shiver with happiness and warmth.  Suddenly, a voice said, "Why do you mind if I take this marbles?"  Little Tom looked at him and shook h
+  [step 4000] loss=3.1816 lr=3.47e-04 563ms emb_norm=111.39 vram=5.67G
+  [ckpt] step 4000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_ckpt.pt
+  [step 4100] loss=3.0865 lr=3.25e-04 562ms emb_norm=111.19 vram=5.67G
+  [step 4200] loss=3.0085 lr=3.04e-04 563ms emb_norm=110.94 vram=5.67G
+  [step 4300] loss=2.9879 lr=2.83e-04 564ms emb_norm=110.72 vram=5.67G
+  [step 4400] loss=3.0633 lr=2.64e-04 562ms emb_norm=110.54 vram=5.67G
+  [eval @4500] val_loss=3.0567 ppl=21.26 bpb=0.5953
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_best.pt
+  [step 4500] loss=2.9697 lr=2.45e-04 563ms emb_norm=110.32 vram=5.67G
+  [step 4600] loss=2.9699 lr=2.27e-04 563ms emb_norm=110.11 vram=5.67G
+  [step 4700] loss=3.0762 lr=2.11e-04 563ms emb_norm=109.95 vram=5.67G
+  [step 4800] loss=3.0372 lr=1.95e-04 563ms emb_norm=109.75 vram=5.67G
+  [step 4900] loss=2.9218 lr=1.80e-04 563ms emb_norm=109.56 vram=5.67G
+  [eval @5000] val_loss=3.0109 ppl=20.31 bpb=0.5864
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_best.pt
+  [step 5000] loss=2.9537 lr=1.67e-04 563ms emb_norm=109.37 vram=5.67G
+  [ckpt] step 5000 -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_ckpt.pt
+  [step 5100] loss=2.9000 lr=1.54e-04 562ms emb_norm=109.20 vram=5.67G
+  [step 5200] loss=2.8743 lr=1.43e-04 563ms emb_norm=109.06 vram=5.67G
+  [step 5300] loss=2.8403 lr=1.33e-04 563ms emb_norm=108.92 vram=5.67G
+  [step 5400] loss=2.7716 lr=1.24e-04 562ms emb_norm=108.78 vram=5.67G
+  [eval @5500] val_loss=2.9791 ppl=19.67 bpb=0.5802
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_best.pt
+  [step 5500] loss=2.9179 lr=1.17e-04 563ms emb_norm=108.67 vram=5.67G
+  [step 5600] loss=2.9053 lr=1.11e-04 563ms emb_norm=108.56 vram=5.67G
+  [step 5700] loss=2.8864 lr=1.06e-04 563ms emb_norm=108.44 vram=5.67G
+  [step 5800] loss=2.9350 lr=1.03e-04 564ms emb_norm=108.33 vram=5.67G
+  [step 5900] loss=2.8729 lr=1.01e-04 563ms emb_norm=108.23 vram=5.67G
+  [eval @6000] val_loss=2.9621 ppl=19.34 bpb=0.5769
+  [best] -> C:\Users\biris\Desktop\opencode\ai gelistir\checkpoints\a2_sw16k_best.pt
+  [sample @6000 3.5s] Once upon a time, an old man stepped forward and looked fierce.  The old man looked over at their feet and said, "Do you think this will happen?"  Little Despite his curiosity, the old man said, "What do you think of this wood?"  "I think this is an old wood," said the old man. "And I can show you a
+  [sample @6001 1.4s] Once upon a time, an old man was waiting for a lecture to get in their car.  The old man asked the old man, "Do you need help?"  The old man said, "Yes, I can help. I need your help."  The old man asked, "Can you help me? My car has a broken wheel."  The old man said, "Yes, I can help." He took the 
+[done] best_val=2.9621 ppl=19.34 bpb=0.5769 wall=56.9min tokens/s=28806

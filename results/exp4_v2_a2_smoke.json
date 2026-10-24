@@ -1,0 +1,63 @@
+{
+ "exp": "exp4_speed",
+ "ts": "2026-10-16 09:32:49",
+ "ckpt": "checkpoints\\v2_best.pt",
+ "tag": "v2_a2_smoke",
+ "meta": {
+  "args": {
+   "steps": 2000,
+   "seq": 1024,
+   "batch": 1,
+   "lr_router": 0.0003,
+   "lr_lora": 0.001,
+   "lam_kl": 0.5,
+   "lam_mse": 0.3,
+   "budget": 0.25,
+   "lora_attn": 16,
+   "lora_mlp": 0,
+   "tag": "v2",
+   "eval_every": 250,
+   "log_every": 20,
+   "seed": 0,
+   "warmup": 100,
+   "init_ckpt": "checkpoints\\v1_best.pt",
+   "dense_control": false,
+   "ckpt_gather": true,
+   "tf32": false,
+   "mem_profile": false
+  },
+  "step": 1250,
+  "dev_sparse_ppl": 14.63968276977539,
+  "dev_dense_ppl": 11.500496864318848
+ },
+ "prefill": {
+  "T1024": {
+   "dense_pinned": true,
+   "dense_ms": 110.3574,
+   "dense_min": 109.6446,
+   "sparse_ms": 120.4956,
+   "sparse_min": 119.6503,
+   "speedup": 0.916,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 6.546,
+    "kernel_ms": 3.423,
+    "coarse_ms": 18.331
+   }
+  },
+  "T4096": {
+   "dense_pinned": true,
+   "dense_ms": 435.8512,
+   "dense_min": 435.4876,
+   "sparse_ms": 446.276,
+   "sparse_min": 445.7226,
+   "speedup": 0.977,
+   "breakdown_ms_per_fwd": {
+    "router_ms": 22.89,
+    "kernel_ms": 27.057,
+    "coarse_ms": 55.807
+   }
+  }
+ },
+ "decode": {},
+ "note": "clean dense-first, backends pinned"
+}

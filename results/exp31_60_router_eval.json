@@ -1,0 +1,310 @@
+{
+  "exp": "exp31_router_eval",
+  "tag": "exp31_60_summary",
+  "input": "results\\exp30_60_chat3b_quality.json",
+  "n": 60,
+  "quality_definition": "exact if defined, else keyword, else strict list",
+  "latency_definition": "generation seconds only; cascade adds both calls",
+  "baselines": [
+    {
+      "policy": "always_chat",
+      "n": 60,
+      "threshold": null,
+      "quality": 0.7833,
+      "avg_gen_s": 1.114,
+      "escalation_rate": 0.0
+    },
+    {
+      "policy": "always_chat3b",
+      "n": 60,
+      "threshold": null,
+      "quality": 0.7833,
+      "avg_gen_s": 3.025,
+      "escalation_rate": 0.0
+    },
+    {
+      "policy": "oracle",
+      "n": 60,
+      "threshold": null,
+      "quality": 0.8833,
+      "avg_gen_s": 1.481,
+      "escalation_rate": 0.0
+    }
+  ],
+  "dev_n": 30,
+  "test_n": 30,
+  "cv": [
+    {
+      "lambda_per_s": 0.02,
+      "threshold": -1.075,
+      "dev": {
+        "policy": "cascade",
+        "n": 30,
+        "threshold": -1.075,
+        "quality": 0.8333,
+        "avg_gen_s": 2.002,
+        "escalation_rate": 0.033
+      },
+      "test": {
+        "policy": "cascade",
+        "n": 30,
+        "threshold": -1.075,
+        "quality": 0.7667,
+        "avg_gen_s": 0.891,
+        "escalation_rate": 0.0
+      }
+    },
+    {
+      "lambda_per_s": 0.05,
+      "threshold": -1.1312,
+      "dev": {
+        "policy": "cascade",
+        "n": 30,
+        "threshold": -1.1312,
+        "quality": 0.8,
+        "avg_gen_s": 1.336,
+        "escalation_rate": 0.0
+      },
+      "test": {
+        "policy": "cascade",
+        "n": 30,
+        "threshold": -1.1312,
+        "quality": 0.7667,
+        "avg_gen_s": 0.891,
+        "escalation_rate": 0.0
+      }
+    },
+    {
+      "lambda_per_s": 0.1,
+      "threshold": -1.1312,
+      "dev": {
+        "policy": "cascade",
+        "n": 30,
+        "threshold": -1.1312,
+        "quality": 0.8,
+        "avg_gen_s": 1.336,
+        "escalation_rate": 0.0
+      },
+      "test": {
+        "policy": "cascade",
+        "n": 30,
+        "threshold": -1.1312,
+        "quality": 0.7667,
+        "avg_gen_s": 0.891,
+        "escalation_rate": 0.0
+      }
+    },
+    {
+      "lambda_per_s": 0.2,
+      "threshold": -1.1312,
+      "dev": {
+        "policy": "cascade",
+        "n": 30,
+        "threshold": -1.1312,
+        "quality": 0.8,
+        "avg_gen_s": 1.336,
+        "escalation_rate": 0.0
+      },
+      "test": {
+        "policy": "cascade",
+        "n": 30,
+        "threshold": -1.1312,
+        "quality": 0.7667,
+        "avg_gen_s": 0.891,
+        "escalation_rate": 0.0
+      }
+    },
+    {
+      "lambda_per_s": 0.5,
+      "threshold": -1.1312,
+      "dev": {
+        "policy": "cascade",
+        "n": 30,
+        "threshold": -1.1312,
+        "quality": 0.8,
+        "avg_gen_s": 1.336,
+        "escalation_rate": 0.0
+      },
+      "test": {
+        "policy": "cascade",
+        "n": 30,
+        "threshold": -1.1312,
+        "quality": 0.7667,
+        "avg_gen_s": 0.891,
+        "escalation_rate": 0.0
+      }
+    }
+  ],
+  "pareto_full": [
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -1.1312,
+      "quality": 0.7833,
+      "avg_gen_s": 1.114,
+      "escalation_rate": 0.0
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -1.0747,
+      "quality": 0.8,
+      "avg_gen_s": 1.447,
+      "escalation_rate": 0.017
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -1.0182,
+      "quality": 0.8,
+      "avg_gen_s": 1.447,
+      "escalation_rate": 0.017
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.9617,
+      "quality": 0.8,
+      "avg_gen_s": 1.447,
+      "escalation_rate": 0.017
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.9052,
+      "quality": 0.8,
+      "avg_gen_s": 1.447,
+      "escalation_rate": 0.017
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.8486,
+      "quality": 0.8,
+      "avg_gen_s": 1.447,
+      "escalation_rate": 0.017
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.7921,
+      "quality": 0.8,
+      "avg_gen_s": 1.447,
+      "escalation_rate": 0.017
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.7356,
+      "quality": 0.8,
+      "avg_gen_s": 1.447,
+      "escalation_rate": 0.017
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.6791,
+      "quality": 0.7833,
+      "avg_gen_s": 1.523,
+      "escalation_rate": 0.033
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.6226,
+      "quality": 0.8,
+      "avg_gen_s": 1.567,
+      "escalation_rate": 0.05
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.5661,
+      "quality": 0.8,
+      "avg_gen_s": 1.717,
+      "escalation_rate": 0.1
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.5096,
+      "quality": 0.8167,
+      "avg_gen_s": 1.874,
+      "escalation_rate": 0.133
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.4531,
+      "quality": 0.8167,
+      "avg_gen_s": 1.956,
+      "escalation_rate": 0.167
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.3966,
+      "quality": 0.8,
+      "avg_gen_s": 2.063,
+      "escalation_rate": 0.2
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.3401,
+      "quality": 0.7833,
+      "avg_gen_s": 2.247,
+      "escalation_rate": 0.267
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.2835,
+      "quality": 0.7833,
+      "avg_gen_s": 2.618,
+      "escalation_rate": 0.383
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.227,
+      "quality": 0.7833,
+      "avg_gen_s": 2.894,
+      "escalation_rate": 0.467
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.1705,
+      "quality": 0.7667,
+      "avg_gen_s": 3.338,
+      "escalation_rate": 0.567
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.114,
+      "quality": 0.7833,
+      "avg_gen_s": 3.494,
+      "escalation_rate": 0.617
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.0575,
+      "quality": 0.7667,
+      "avg_gen_s": 3.64,
+      "escalation_rate": 0.717
+    },
+    {
+      "policy": "cascade",
+      "n": 60,
+      "threshold": -0.001,
+      "quality": 0.7833,
+      "avg_gen_s": 4.125,
+      "escalation_rate": 0.983
+    }
+  ],
+  "ts": "2026-10-20 18:28:23",
+  "limit": "n is small; threshold selection is CV on a small synthetic set"
+}

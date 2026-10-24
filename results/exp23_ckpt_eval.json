@@ -1,0 +1,54 @@
+{
+  "rows": [
+    {
+      "variant": "base",
+      "checkpoint": null,
+      "ce": 2.61063,
+      "ce_chunks": 4,
+      "ce_seq": 256,
+      "ce_s": 1.92,
+      "load_s": 6.02,
+      "gen_s": 2.627,
+      "n_new": 8,
+      "tok_s": 3.535,
+      "peak_vram_mb": 4896.5,
+      "quant_err_max": 0.00394,
+      "text": " Berlin. The capital of the United States",
+      "decoded": " Berlin. The capital of the United States"
+    },
+    {
+      "variant": "tuned",
+      "checkpoint": "qwen3b_full_adaf_t300_best.pt",
+      "ce": 2.37003,
+      "ce_chunks": 4,
+      "ce_seq": 256,
+      "ce_s": 1.68,
+      "load_s": 6.17,
+      "gen_s": 2.511,
+      "n_new": 8,
+      "tok_s": 3.58,
+      "peak_vram_mb": 4896.5,
+      "quant_err_max": 0.00394,
+      "text": " Berlin. The capital of the United States",
+      "decoded": " Berlin. The capital of the United States"
+    }
+  ],
+  "summary": {
+    "exp": "exp23_ckpt_eval",
+    "tag": "exp23_summary",
+    "model": "Qwen2.5-3B",
+    "checkpoint": "qwen3b_full_adaf_t300_best.pt",
+    "ce_base": 2.61063,
+    "ce_tuned": 2.37003,
+    "ce_delta": -0.2406,
+    "ce_rel_pct": -9.22,
+    "gen_base_s": 2.627,
+    "gen_tuned_s": 2.511,
+    "peak_base_mb": 4896.5,
+    "peak_tuned_mb": 4896.5,
+    "chunks": 4,
+    "seq": 256,
+    "n_new": 8,
+    "ts": "2026-10-20 15:55:02"
+  }
+}

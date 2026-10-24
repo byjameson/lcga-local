@@ -1,0 +1,72 @@
+{"corpus": "data/rag/world_facts.jsonl", "docs": 326, "note": "Each covered row should retrieve; each expected term should occur in the retrieved context. This is not a semantic score."}
+{"kind": "covered", "id": "tr-eg", "lang": "tr", "q": "Mısır'ın başkenti neresi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"kahire": true}, "sources": ["Kahire"], "source_count": 1, "ctx_chars": 459}
+{"kind": "covered", "id": "tr-tr", "lang": "tr", "q": "Türkiye'nin başkenti neresi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"ankara": true}, "sources": ["Türkiye"], "source_count": 1, "ctx_chars": 499}
+{"kind": "covered", "id": "tr-fr", "lang": "tr", "q": "Fransa'nın başkenti neresi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"paris": true}, "sources": ["Paris"], "source_count": 1, "ctx_chars": 484}
+{"kind": "covered", "id": "tr-jp", "lang": "tr", "q": "Japonya'nın başkenti neresi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"tokyo": true}, "sources": ["Tokyo"], "source_count": 1, "ctx_chars": 388}
+{"kind": "covered", "id": "tr-au", "lang": "tr", "q": "Avustralya'nın başkenti neresi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"kanberra": false, "canberra": true}, "sources": ["Avustralya"], "source_count": 1, "ctx_chars": 522}
+{"kind": "covered", "id": "tr-de", "lang": "tr", "q": "Almanya'nın başkenti neresi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"berlin": true}, "sources": ["Berlin"], "source_count": 1, "ctx_chars": 409}
+{"kind": "covered", "id": "tr-ca", "lang": "tr", "q": "Kanada'nın başkenti neresi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"ottawa": true}, "sources": ["Kanada"], "source_count": 1, "ctx_chars": 402}
+{"kind": "covered", "id": "tr-it", "lang": "tr", "q": "İtalya'nın başkenti neresi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"roma": true}, "sources": ["İtalya"], "source_count": 1, "ctx_chars": 505}
+{"kind": "covered", "id": "tr-ocean", "lang": "tr", "q": "Dünyanın en büyük okyanusu hangisi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"pasifik": true}, "sources": ["Büyük Okyanus"], "source_count": 1, "ctx_chars": 464}
+{"kind": "covered", "id": "tr-au-sym", "lang": "tr", "q": "Altının kimyasal sembolü nedir?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"au": true}, "sources": ["Altın"], "source_count": 1, "ctx_chars": 414}
+{"kind": "covered", "id": "tr-water", "lang": "tr", "q": "Su kaç derecede kaynar?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"100": true}, "sources": ["Su"], "source_count": 1, "ctx_chars": 402}
+{"kind": "covered", "id": "tr-heart", "lang": "tr", "q": "İnsan kalbinde kaç odacık vardır?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"4": false, "dort": true}, "sources": ["Kalp"], "source_count": 1, "ctx_chars": 415}
+{"kind": "covered", "id": "en-eg", "lang": "en", "q": "What is the capital of Egypt?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"cairo": true}, "sources": ["Cairo"], "source_count": 1, "ctx_chars": 393}
+{"kind": "covered", "id": "en-au", "lang": "en", "q": "What is the capital of Australia?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"canberra": true}, "sources": ["Canberra"], "source_count": 1, "ctx_chars": 466}
+{"kind": "covered", "id": "en-ca", "lang": "en", "q": "What is the capital of Canada?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"ottawa": true}, "sources": ["Ottawa"], "source_count": 1, "ctx_chars": 391}
+{"kind": "covered", "id": "en-gold", "lang": "en", "q": "What is the chemical symbol for gold?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"au": true}, "sources": ["Gold"], "source_count": 1, "ctx_chars": 413}
+{"kind": "covered", "id": "en-water", "lang": "en", "q": "At what temperature does water boil?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"100": true}, "sources": ["Boiling point"], "source_count": 1, "ctx_chars": 528}
+{"kind": "covered", "id": "en-heart", "lang": "en", "q": "How many chambers does the human heart have?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"4": false, "four": true}, "sources": ["Heart"], "source_count": 1, "ctx_chars": 435}
+{"kind": "covered", "id": "en-ocean", "lang": "en", "q": "What is the largest ocean?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"pacific": true}, "sources": ["Pacific Ocean"], "source_count": 1, "ctx_chars": 407}
+{"kind": "covered", "id": "en-planet", "lang": "en", "q": "What is the largest planet?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"jupiter": true}, "sources": ["Jupiter"], "source_count": 1, "ctx_chars": 475}
+{"kind": "covered", "id": "tr-no", "lang": "tr", "q": "Norveç'in başkenti neresi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"oslo": true}, "sources": ["Oslo"], "source_count": 1, "ctx_chars": 369}
+{"kind": "covered", "id": "tr-pl", "lang": "tr", "q": "Polonya'nın başkenti neresi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"varsova": true}, "sources": ["Varşova"], "source_count": 1, "ctx_chars": 395}
+{"kind": "covered", "id": "tr-pt", "lang": "tr", "q": "Portekiz'in başkenti neresi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"lizbon": true}, "sources": ["Lizbon"], "source_count": 1, "ctx_chars": 538}
+{"kind": "covered", "id": "tr-gr", "lang": "tr", "q": "Yunanistan'ın başkenti neresi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"atina": true}, "sources": ["Atina"], "source_count": 1, "ctx_chars": 486}
+{"kind": "covered", "id": "tr-ke", "lang": "tr", "q": "Kenya'nın başkenti neresi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"nairobi": true}, "sources": ["Kenya"], "source_count": 1, "ctx_chars": 369}
+{"kind": "covered", "id": "tr-nl", "lang": "tr", "q": "Hollanda'nın başkenti neresi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"amsterdam": true}, "sources": ["Amsterdam"], "source_count": 1, "ctx_chars": 378}
+{"kind": "covered", "id": "tr-ng", "lang": "tr", "q": "Nijerya'nın başkenti neresi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"abuja": true}, "sources": ["Nijerya"], "source_count": 1, "ctx_chars": 435}
+{"kind": "covered", "id": "tr-br", "lang": "tr", "q": "Brezilya'nın başkenti neresi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"brasilia": true}, "sources": ["Brezilya"], "source_count": 1, "ctx_chars": 424}
+{"kind": "covered", "id": "tr-h", "lang": "tr", "q": "Hidrojenin kimyasal sembolü nedir?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"h": true}, "sources": ["Hidrojen"], "source_count": 1, "ctx_chars": 386}
+{"kind": "covered", "id": "tr-he", "lang": "tr", "q": "Helyumun kimyasal sembolü nedir?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"he": true}, "sources": ["Helyum"], "source_count": 1, "ctx_chars": 431}
+{"kind": "covered", "id": "tr-ag", "lang": "tr", "q": "Gümüşün kimyasal sembolü nedir?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"ag": true}, "sources": ["Gümüş"], "source_count": 1, "ctx_chars": 470}
+{"kind": "covered", "id": "tr-asia", "lang": "tr", "q": "Dünyanın en büyük kıtası hangisi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"asya": true}, "sources": ["Asya"], "source_count": 1, "ctx_chars": 541}
+{"kind": "covered", "id": "tr-nile", "lang": "tr", "q": "Dünyanın en uzun nehri hangisi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"nil": true}, "sources": ["Nil"], "source_count": 1, "ctx_chars": 364}
+{"kind": "covered", "id": "tr-everest", "lang": "tr", "q": "Dünyanın en yüksek dağı hangisi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"everest": true}, "sources": ["Everest Dağı"], "source_count": 1, "ctx_chars": 510}
+{"kind": "covered", "id": "tr-atlantic", "lang": "tr", "q": "Dünyanın en büyük ikinci okyanusu hangisi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"atlas": true, "atlantik": true}, "sources": ["Atlas Okyanusu"], "source_count": 1, "ctx_chars": 436}
+{"kind": "covered", "id": "tr-ww1", "lang": "tr", "q": "I. Dünya Savaşı hangi yıllar arasında oldu?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"1914": true, "1918": true}, "sources": ["I. Dünya Savaşı"], "source_count": 1, "ctx_chars": 449}
+{"kind": "covered", "id": "tr-ww2", "lang": "tr", "q": "II. Dünya Savaşı hangi yıl bitti?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"1945": true}, "sources": ["II. Dünya Savaşı"], "source_count": 1, "ctx_chars": 390}
+{"kind": "covered", "id": "tr-lang", "lang": "tr", "q": "Türkçe hangi dil ailesine aittir?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"turk": true}, "sources": ["Türkçe"], "source_count": 1, "ctx_chars": 453}
+{"kind": "covered", "id": "tr-whale", "lang": "tr", "q": "Dünyanın en büyük hayvanı hangisi?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"mavi": true, "balina": true}, "sources": ["Mavi balina"], "source_count": 1, "ctx_chars": 436}
+{"kind": "covered", "id": "en-no", "lang": "en", "q": "What is the capital of Norway?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"oslo": true}, "sources": ["Oslo"], "source_count": 1, "ctx_chars": 366}
+{"kind": "covered", "id": "en-pl", "lang": "en", "q": "What is the capital of Poland?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"warsaw": true}, "sources": ["Warsaw"], "source_count": 1, "ctx_chars": 416}
+{"kind": "covered", "id": "en-pt", "lang": "en", "q": "What is the capital of Portugal?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"lisbon": true}, "sources": ["Lisbon"], "source_count": 1, "ctx_chars": 554}
+{"kind": "covered", "id": "en-gr", "lang": "en", "q": "What is the capital of Greece?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"athens": true}, "sources": ["Athens"], "source_count": 1, "ctx_chars": 370}
+{"kind": "covered", "id": "en-ng", "lang": "en", "q": "What is the capital of Nigeria?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"abuja": true}, "sources": ["Abuja"], "source_count": 1, "ctx_chars": 470}
+{"kind": "covered", "id": "en-br", "lang": "en", "q": "What is the capital of Brazil?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"brasilia": true}, "sources": ["Brasília"], "source_count": 1, "ctx_chars": 450}
+{"kind": "covered", "id": "en-c", "lang": "en", "q": "What is the chemical symbol for carbon?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"c": true}, "sources": ["Carbon"], "source_count": 1, "ctx_chars": 413}
+{"kind": "covered", "id": "en-o", "lang": "en", "q": "What is the chemical symbol for oxygen?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"o": true}, "sources": ["Oxygen"], "source_count": 1, "ctx_chars": 398}
+{"kind": "covered", "id": "en-na", "lang": "en", "q": "What is the chemical symbol for sodium?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"na": true}, "sources": ["Sodium"], "source_count": 1, "ctx_chars": 414}
+{"kind": "covered", "id": "en-light", "lang": "en", "q": "What is the speed of light in a vacuum?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"299792458": true, "299": false}, "sources": ["Speed of light"], "source_count": 1, "ctx_chars": 489}
+{"kind": "covered", "id": "en-sound", "lang": "en", "q": "What is the speed of sound in air?", "rag": true, "expected_in_ctx": true, "keyword_hits": {"343": true}, "sources": ["Speed of sound"], "source_count": 1, "ctx_chars": 473}
+{"kind": "control", "id": "ctl-greet", "q": "Merhaba, nasılsın?", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-blue", "q": "Sadece 'mavi' yaz.", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-math", "q": "2 + 2 kaç eder?", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-list", "q": "Üç meyve listele.", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-code", "q": "İki sayıyı toplayan bir Python fonksiyonu yaz.", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-joke", "q": "Bana kısa bir şaka yap.", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-birthday", "q": "Bir arkadaşıma doğum günü mesajı yaz.", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-motivation", "q": "Bana kısa bir motivasyon sözü yaz.", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-narnia", "q": "Narnia'nın başkenti neresi?", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-narnia-en", "q": "What is the capital of Narnia?", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-poem", "q": "Bana kısa bir şiir yaz.", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-story", "q": "Bana kısa bir hikaye yaz.", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-email", "q": "Bir e-posta taslağı yaz.", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-apology", "q": "Bir arkadaşıma özür mesajı yaz.", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-multiply", "q": "İki sayıyı çarpan bir Python fonksiyonu yaz.", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-list5", "q": "Beş renk listele.", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-exact", "q": "Sadece 'merhaba' yaz.", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-zorbania", "q": "Zorbania'nın başkenti neresi?", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-atlantis", "q": "Atlantis'in kralı kimdi?", "rag": false, "sources": [], "ctx_chars": 0}
+{"kind": "control", "id": "ctl-riddle", "q": "Bana kısa bir bilmece sor.", "rag": false, "sources": [], "ctx_chars": 0}
+{"covered_with_context": "50/50", "covered_expected_in_context": "50/50", "covered_single_source": "50/50", "controls_without_rag": "20/20"}

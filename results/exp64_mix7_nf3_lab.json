@@ -1,0 +1,36 @@
+{
+ "exp": "exp64_query_swap",
+ "tag": "mix7_nf3_lab",
+ "ckpt": "checkpoints/mix7_nf3_lab_final.pt",
+ "ts": "2026-10-24 19:31:01",
+ "results": {
+  "d0.2": {
+   "secret": {
+    "ce": 3.1813039779663086,
+    "exact": 0.0,
+    "hit_secret": 0.7083333333333334,
+    "hit_backup": 0.875
+   },
+   "backup": {
+    "ce": 0.3009815216064453,
+    "exact": 0.0,
+    "hit_secret": 0.6666666666666666,
+    "hit_backup": 0.8333333333333334
+   }
+  },
+  "d0.5": {
+   "secret": {
+    "ce": 1.178261160850525,
+    "exact": 0.0,
+    "hit_secret": 0.5833333333333334,
+    "hit_backup": 0.9583333333333334
+   },
+   "backup": {
+    "ce": 0.21412821114063263,
+    "exact": 1.0,
+    "hit_secret": 0.5833333333333334,
+    "hit_backup": 0.9166666666666666
+   }
+  }
+ }
+}

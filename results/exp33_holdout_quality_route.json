@@ -1,0 +1,426 @@
+{
+  "rows": [
+    {
+      "category": "fact_tr",
+      "prompt": "Japonya'nin baskenti neresi?",
+      "unit": "chat",
+      "reason": "quality: kisa olgu -> 1.5B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.696,
+      "text": "Japonya'nın başkenti Tokyo'dur.",
+      "chat_score": -0.1018
+    },
+    {
+      "category": "fact_tr",
+      "prompt": "Misir'in baskenti neresi?",
+      "unit": "chat",
+      "reason": "quality: kisa olgu -> 1.5B Instruct",
+      "quality": 0.0,
+      "gen_s": 1.457,
+      "text": "Misir'in baskenti, İskoçya'da bulunur.",
+      "chat_score": -0.7335
+    },
+    {
+      "category": "fact_tr",
+      "prompt": "Dunyanin en buyuk colu hangisi?",
+      "unit": "chat",
+      "reason": "quality: kisa olgu -> 1.5B Instruct",
+      "quality": 0.0,
+      "gen_s": 1.612,
+      "text": "Dunya'nın en büyük ülke, Amerika Birleşik Devletleri'dir.",
+      "chat_score": -0.3216
+    },
+    {
+      "category": "fact_tr",
+      "prompt": "Bir yilda kac hafta vardir?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 2.779,
+      "text": "52 hafta.",
+      "chat_score": -0.3254
+    },
+    {
+      "category": "fact_tr",
+      "prompt": "Insan kalbinde kac odacik vardir?",
+      "unit": "chat3b",
+      "reason": "quality: genel -> 3B Instruct",
+      "quality": 0.0,
+      "gen_s": 7.09,
+      "text": "İnsan kalbinde 20-25 odak bulunur.",
+      "chat_score": -0.9883
+    },
+    {
+      "category": "fact_tr",
+      "prompt": "Avustralya'nin baskenti neresi?",
+      "unit": "chat",
+      "reason": "quality: kisa olgu -> 1.5B Instruct",
+      "quality": 0.0,
+      "gen_s": 1.053,
+      "text": "Avustralya'nın başkenti Sydney'dir.",
+      "chat_score": -0.162
+    },
+    {
+      "category": "fact_en",
+      "prompt": "What is the capital of Canada?",
+      "unit": "chat",
+      "reason": "quality: kisa olgu -> 1.5B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.612,
+      "text": "The capital of Canada is Ottawa.",
+      "chat_score": -0.026
+    },
+    {
+      "category": "fact_en",
+      "prompt": "What is the chemical symbol for silver?",
+      "unit": "chat",
+      "reason": "quality: kisa olgu -> 1.5B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.184,
+      "text": "Ag",
+      "chat_score": -0.2595
+    },
+    {
+      "category": "fact_en",
+      "prompt": "How many continents are there?",
+      "unit": "chat",
+      "reason": "quality: kisa olgu -> 1.5B Instruct",
+      "quality": 0.0,
+      "gen_s": 2.424,
+      "text": "There are seven continents in the world: Africa, Antarctica, Asia, Europe, Australia (or Oceania), North America, and South America.",
+      "chat_score": -0.1515
+    },
+    {
+      "category": "fact_en",
+      "prompt": "What is the largest mammal?",
+      "unit": "chat",
+      "reason": "quality: kisa olgu -> 1.5B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.672,
+      "text": "The largest mammal is the blue whale (Balaenoptera musculus).",
+      "chat_score": -0.1025
+    },
+    {
+      "category": "fact_en",
+      "prompt": "At what temperature does water boil in Fahrenheit?",
+      "unit": "chat",
+      "reason": "quality: kisa olgu -> 1.5B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.488,
+      "text": "212°F",
+      "chat_score": -0.1765
+    },
+    {
+      "category": "fact_en",
+      "prompt": "How many sides does a hexagon have?",
+      "unit": "chat",
+      "reason": "quality: kisa olgu -> 1.5B Instruct",
+      "quality": 0.0,
+      "gen_s": 0.665,
+      "text": "A hexagon has six sides.",
+      "chat_score": -0.063
+    },
+    {
+      "category": "ins_tr",
+      "prompt": "Sadece 'yesil' yaz.",
+      "unit": "chat3b",
+      "reason": "quality: talimat/ceviri -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.135,
+      "text": "yesil",
+      "chat_score": -0.0399
+    },
+    {
+      "category": "ins_tr",
+      "prompt": "4 + 7 kac? Sadece sayiyi yaz.",
+      "unit": "chat3b",
+      "reason": "quality: matematik -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.128,
+      "text": "11",
+      "chat_score": -0.0072
+    },
+    {
+      "category": "ins_tr",
+      "prompt": "Tesekkur eden kisa bir cumle yaz.",
+      "unit": "chat",
+      "reason": "quality: kisa nezaket cumlesi -> 1.5B Instruct",
+      "quality": 0.0,
+      "gen_s": 0.766,
+      "text": "Tabii ki, \"Selam!\"",
+      "chat_score": -0.7105
+    },
+    {
+      "category": "ins_tr",
+      "prompt": "Su cumleyi Ingilizceye cevir: Kopek bahcede.",
+      "unit": "chat3b",
+      "reason": "quality: talimat/ceviri -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 2.359,
+      "text": "Dog in the yard.",
+      "chat_score": -0.5985
+    },
+    {
+      "category": "ins_tr",
+      "prompt": "'Hayir' kelimesini iceren kisa bir cumle yaz.",
+      "unit": "chat3b",
+      "reason": "quality: talimat/ceviri -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 5.748,
+      "text": "Hayır, çamaşır makinesini unuttum.",
+      "chat_score": -0.6849
+    },
+    {
+      "category": "ins_tr",
+      "prompt": "10'dan 6'ya kadar sayilari yaz.",
+      "unit": "chat3b",
+      "reason": "quality: talimat/ceviri -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 5.736,
+      "text": "10, 9, 8, 7, 6",
+      "chat_score": -0.2508
+    },
+    {
+      "category": "ins_en",
+      "prompt": "Reply with exactly the word 'green'.",
+      "unit": "chat3b",
+      "reason": "quality: talimat/ceviri -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.733,
+      "text": "green",
+      "chat_score": -0.0954
+    },
+    {
+      "category": "ins_en",
+      "prompt": "What is 4 + 7? Answer with just the number.",
+      "unit": "chat3b",
+      "reason": "quality: matematik -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.179,
+      "text": "11",
+      "chat_score": -0.0007
+    },
+    {
+      "category": "ins_en",
+      "prompt": "Write a short thank-you sentence.",
+      "unit": "chat3b",
+      "reason": "quality: talimat/ceviri -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 2.242,
+      "text": "Thank you so much.",
+      "chat_score": -0.2837
+    },
+    {
+      "category": "ins_en",
+      "prompt": "Translate 'The dog is in the garden' into Turkish.",
+      "unit": "chat3b",
+      "reason": "quality: talimat/ceviri -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 12.372,
+      "text": "Kedi inAndı bahçede. (If you meant to say \"dog\", it's: Kedi bahçede inAndı.)",
+      "chat_score": -0.4237
+    },
+    {
+      "category": "ins_en",
+      "prompt": "Write one short sentence containing the word 'no'.",
+      "unit": "chat3b",
+      "reason": "quality: talimat/ceviri -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 4.299,
+      "text": "No, I don't have time for that.",
+      "chat_score": -0.3553
+    },
+    {
+      "category": "ins_en",
+      "prompt": "Count down from 10 to 6.",
+      "unit": "chat3b",
+      "reason": "quality: talimat/ceviri -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 5.603,
+      "text": "10, 9, 8, 7, 6",
+      "chat_score": -0.2654
+    },
+    {
+      "category": "math",
+      "prompt": "8 * 9 = ? Sadece sayiyi yaz.",
+      "unit": "chat3b",
+      "reason": "quality: matematik -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.095,
+      "text": "72",
+      "chat_score": -0.0064
+    },
+    {
+      "category": "math",
+      "prompt": "50 - 18 = ? Sadece sayiyi yaz.",
+      "unit": "chat3b",
+      "reason": "quality: matematik -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.127,
+      "text": "32",
+      "chat_score": -0.0079
+    },
+    {
+      "category": "math",
+      "prompt": "7 + 8 * 2 = ? Islem onceligine dikkat et.",
+      "unit": "chat3b",
+      "reason": "quality: matematik -> 3B Instruct",
+      "quality": 0.0,
+      "gen_s": 14.725,
+      "text": "7 + 8 * 2 = 23\n\nAşağıda öncelikli işlem (çarpma) sonraki işlem (toplama)dan önce yapılır.",
+      "chat_score": -0.4469
+    },
+    {
+      "category": "math",
+      "prompt": "20'nin yarisi kac? Sadece sayiyi yaz.",
+      "unit": "chat3b",
+      "reason": "quality: matematik -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.1,
+      "text": "10",
+      "chat_score": -0.3263
+    },
+    {
+      "category": "math",
+      "prompt": "3^3 = ? Sadece sayiyi yaz.",
+      "unit": "chat3b",
+      "reason": "quality: matematik -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.098,
+      "text": "27",
+      "chat_score": -0.0033
+    },
+    {
+      "category": "math",
+      "prompt": "100'un yarisi kac? Sadece sayiyi yaz.",
+      "unit": "chat3b",
+      "reason": "quality: matematik -> 3B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.113,
+      "text": "50",
+      "chat_score": -0.2426
+    },
+    {
+      "category": "list",
+      "prompt": "Uc hayvan listele.",
+      "unit": "chat",
+      "reason": "quality: liste formati -> 1.5B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.476,
+      "text": "1. Kedi\n2. Cekici\n3. Sürücü",
+      "chat_score": -0.7559
+    },
+    {
+      "category": "list",
+      "prompt": "List three fruits.",
+      "unit": "chat",
+      "reason": "quality: liste formati -> 1.5B Instruct",
+      "quality": 0.0,
+      "gen_s": 0.556,
+      "text": "Apple, banana, orange.",
+      "chat_score": -0.3722
+    },
+    {
+      "category": "list",
+      "prompt": "Uc meslek listele.",
+      "unit": "chat",
+      "reason": "quality: liste formati -> 1.5B Instruct",
+      "quality": 1.0,
+      "gen_s": 1.247,
+      "text": "1. Mühendislik\n2. Sağlık\n3. Eğitim",
+      "chat_score": -0.5844
+    },
+    {
+      "category": "list",
+      "prompt": "List three European countries.",
+      "unit": "chat",
+      "reason": "quality: liste formati -> 1.5B Instruct",
+      "quality": 1.0,
+      "gen_s": 0.918,
+      "text": "1. France\n2. Germany\n3. Italy",
+      "chat_score": -0.1869
+    },
+    {
+      "category": "list",
+      "prompt": "Uc sebze listele.",
+      "unit": "chat",
+      "reason": "quality: liste formati -> 1.5B Instruct",
+      "quality": 1.0,
+      "gen_s": 3.087,
+      "text": "1. Muz\n2. Zeytinyağı\n3. Karışık Sebzeler (örneğin: Pera, Morfin, Yumurta)",
+      "chat_score": -0.9525
+    }
+  ],
+  "summary": {
+    "exp": "exp33_quality_route_eval",
+    "tag": "exp33_holdout_summary",
+    "input": "results\\exp34_holdout_chat3b_quality.json",
+    "n": 35,
+    "prompt_set": "holdout",
+    "quality": 0.7429,
+    "always_chat_quality": 0.7143,
+    "always_chat3b_quality": 0.7429,
+    "oracle_quality": 0.8571,
+    "avg_gen_s": 2.645,
+    "always_chat_gen_s": 1.0851,
+    "always_chat3b_gen_s": 3.4611,
+    "units": {
+      "chat": 16,
+      "chat3b": 19
+    },
+    "by_category": {
+      "fact_en": {
+        "n": 6,
+        "quality": 0.6667,
+        "units": {
+          "chat": 6
+        },
+        "avg_gen_s": 1.0075
+      },
+      "fact_tr": {
+        "n": 6,
+        "quality": 0.3333,
+        "units": {
+          "chat": 4,
+          "chat3b": 2
+        },
+        "avg_gen_s": 2.6145
+      },
+      "ins_en": {
+        "n": 6,
+        "quality": 1.0,
+        "units": {
+          "chat3b": 6
+        },
+        "avg_gen_s": 4.4047
+      },
+      "ins_tr": {
+        "n": 6,
+        "quality": 0.8333,
+        "units": {
+          "chat3b": 5,
+          "chat": 1
+        },
+        "avg_gen_s": 2.812
+      },
+      "list": {
+        "n": 5,
+        "quality": 0.8,
+        "units": {
+          "chat": 5
+        },
+        "avg_gen_s": 1.4568
+      },
+      "math": {
+        "n": 6,
+        "quality": 0.8333,
+        "units": {
+          "chat3b": 6
+        },
+        "avg_gen_s": 3.3763
+      }
+    },
+    "note": "Cue router was designed on the 60-prompt exp26 set; this report is only independent when --input is holdout.",
+    "ts": "2026-10-20 18:36:05"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "tag": "exp8_3b_cap035",
+  "model": "models/Qwen2.5-3B",
+  "mode": "both",
+  "steps": 3,
+  "seq": 1024,
+  "lr": 0.001,
+  "r": 16,
+  "chunk": 128,
+  "cap_fraction": 0.35,
+  "seed": 0,
+  "gpu_total_gb": 6.44,
+  "naive": {
+    "oom": true,
+    "error": "CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 6.00 GiB of which 2.95 GiB is free. 2.10 GiB allowed; Of the allocated memory 2.05 GiB is allocated by PyTorch, and 40.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)"
+  },
+  "stream": {
+    "losses": [
+      2.07291,
+      1.810655,
+      2.459325
+    ],
+    "times_s": [
+      8.657,
+      7.359,
+      7.336
+    ],
+    "peak_gb": [
+      1.401,
+      1.401,
+      1.401
+    ],
+    "n_lora": 7372800,
+    "host_rss_gb": 7.62
+  }
+}

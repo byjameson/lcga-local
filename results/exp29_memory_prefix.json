@@ -1,0 +1,131 @@
+{
+  "exp": "exp29_memory_prefix",
+  "n": 5,
+  "summary": {
+    "plain": {
+      "n": 5,
+      "keyword_recall": 0.6,
+      "errors": 0,
+      "avg_elapsed_s": 0.818
+    },
+    "prefix": {
+      "n": 5,
+      "keyword_recall": 0.8,
+      "errors": 0,
+      "avg_elapsed_s": 0.744
+    }
+  },
+  "rows": [
+    {
+      "variant": "plain",
+      "scenario": "isim",
+      "fact": "Benim adim Ali.",
+      "question": "Benim adim ne?",
+      "memory": "Kullanicinin adi Ali.",
+      "answer": "Ben sizin adınız.",
+      "keyword_hit": false,
+      "elapsed_s": 0.862,
+      "error": null
+    },
+    {
+      "variant": "plain",
+      "scenario": "kedi",
+      "fact": "Kedimin adi Pamuk.",
+      "question": "Kedimin adi ne?",
+      "memory": "Kedinin adi Pamuk.",
+      "answer": "Kedimin adı Pamuk.",
+      "keyword_hit": true,
+      "elapsed_s": 0.641,
+      "error": null
+    },
+    {
+      "variant": "plain",
+      "scenario": "renk",
+      "fact": "En sevdigim renk mavi.",
+      "question": "En sevdigim renk ne?",
+      "memory": "Kullanicinin en sevdigi renk mavi.",
+      "answer": "Ben sana en sevdiginiz renk hakkında bilgi veremiyorum. Herkes farklı bir şeyse",
+      "keyword_hit": false,
+      "elapsed_s": 1.583,
+      "error": null
+    },
+    {
+      "variant": "plain",
+      "scenario": "hava",
+      "fact": "Bugun hava cok guzel.",
+      "question": "Bugun hava nasil?",
+      "memory": "Bugun hava cok guzel.",
+      "answer": "Hava güzel görünüyor.",
+      "keyword_hit": true,
+      "elapsed_s": 0.421,
+      "error": null
+    },
+    {
+      "variant": "plain",
+      "scenario": "toplanti",
+      "fact": "Yarin sabah toplantim var.",
+      "question": "Yarin ne var?",
+      "memory": "Yarin sabah toplanti var.",
+      "answer": "Yarin sabah toplantım var.",
+      "keyword_hit": true,
+      "elapsed_s": 0.583,
+      "error": null
+    },
+    {
+      "variant": "prefix",
+      "scenario": "isim",
+      "fact": "Benim adim Ali.",
+      "question": "Benim adim ne?",
+      "memory": "Kullanicinin adi Ali.",
+      "answer": "Ben sizinle beraber oluyorum. Size nasıl yardımcı olabilirim?",
+      "keyword_hit": false,
+      "elapsed_s": 1.079,
+      "error": null
+    },
+    {
+      "variant": "prefix",
+      "scenario": "kedi",
+      "fact": "Kedimin adi Pamuk.",
+      "question": "Kedimin adi ne?",
+      "memory": "Kedinin adi Pamuk.",
+      "answer": "Kedimin adı Pamuk.",
+      "keyword_hit": true,
+      "elapsed_s": 0.628,
+      "error": null
+    },
+    {
+      "variant": "prefix",
+      "scenario": "renk",
+      "fact": "En sevdigim renk mavi.",
+      "question": "En sevdigim renk ne?",
+      "memory": "Kullanicinin en sevdigi renk mavi.",
+      "answer": "En sevdiginiz renk mavi.",
+      "keyword_hit": true,
+      "elapsed_s": 0.783,
+      "error": null
+    },
+    {
+      "variant": "prefix",
+      "scenario": "hava",
+      "fact": "Bugun hava cok guzel.",
+      "question": "Bugun hava nasil?",
+      "memory": "Bugun hava cok guzel.",
+      "answer": "Bugün hava çok güzel görünüyor.",
+      "keyword_hit": true,
+      "elapsed_s": 0.637,
+      "error": null
+    },
+    {
+      "variant": "prefix",
+      "scenario": "toplanti",
+      "fact": "Yarin sabah toplantim var.",
+      "question": "Yarin ne var?",
+      "memory": "Yarin sabah toplanti var.",
+      "answer": "Yarin sabah toplantımı var.",
+      "keyword_hit": true,
+      "elapsed_s": 0.592,
+      "error": null
+    }
+  ],
+  "ts": "2026-10-20 17:18:40"
+}

@@ -1,0 +1,239 @@
+[covered/baseline] tr-eg kw=False exact=False list=None rag=False cit=False t=5.033s sources=[]
+Q: Mısır'ın başkenti neresi?
+A: Mısır'ın başkenti **Kairo**'dur.
+
+[covered/rag] tr-eg kw=True exact=False list=None rag=True cit=True t=5.393s sources=['Mısır', 'Kahire']
+Q: Mısır'ın başkenti neresi?
+A: Mısır'ın başkenti Kahire'dir [2].
+
+[covered/baseline] tr-tr kw=True exact=False list=None rag=False cit=False t=3.525s sources=[]
+Q: Türkiye'nin başkenti neresi?
+A: Türkiye'nin başkenti Ankara'dır.
+
+[covered/rag] tr-tr kw=True exact=False list=None rag=True cit=True t=4.479s sources=['Türkiye', 'Ankara']
+Q: Türkiye'nin başkenti neresi?
+A: Türkiye'nin başkenti Ankara'dır [1].
+
+[covered/baseline] tr-fr kw=True exact=False list=None rag=False cit=False t=3.799s sources=[]
+Q: Fransa'nın başkenti neresi?
+A: Fransa'nın başkenti Paris'tir.
+
+[covered/rag] tr-fr kw=True exact=False list=None rag=True cit=True t=4.805s sources=['Paris', 'Fransa']
+Q: Fransa'nın başkenti neresi?
+A: Fransa'nın başkenti Paris'tir [2].
+
+[covered/baseline] tr-jp kw=True exact=False list=None rag=False cit=False t=5.336s sources=[]
+Q: Japonya'nın başkenti neresi?
+A: Japonya'nın başkenti **Tokyo**'dur.
+
+[covered/rag] tr-jp kw=True exact=False list=None rag=True cit=True t=5.45s sources=['Tokyo', 'Pekin']
+Q: Japonya'nın başkenti neresi?
+A: Japonya'nın başkenti Tokyo'dur [1].
+
+[covered/baseline] tr-au kw=True exact=False list=None rag=False cit=False t=5.056s sources=[]
+Q: Avustralya'nın başkenti neresi?
+A: Avustralya'nın başkenti **Canberra**'dır.
+
+[covered/rag] tr-au kw=True exact=False list=None rag=True cit=True t=5.08s sources=['Avustralya', 'Canberra']
+Q: Avustralya'nın başkenti neresi?
+A: Avustralya'nın başkenti Canberra'dır [2].
+
+[covered/baseline] tr-de kw=True exact=False list=None rag=False cit=False t=4.106s sources=[]
+Q: Almanya'nın başkenti neresi?
+A: Almanya'nın başkenti Berlin'dir.
+
+[covered/rag] tr-de kw=True exact=False list=None rag=True cit=True t=5.155s sources=['Berlin', 'Almanya']
+Q: Almanya'nın başkenti neresi?
+A: Almanya'nın başkenti Berlin'dir [1].
+
+[covered/baseline] tr-ca kw=True exact=False list=None rag=False cit=False t=5.37s sources=[]
+Q: Kanada'nın başkenti neresi?
+A: Kanada'nın başkenti **Ottawa**'dır.
+
+[covered/rag] tr-ca kw=True exact=False list=None rag=True cit=True t=5.095s sources=['Kanada', 'Ottawa']
+Q: Kanada'nın başkenti neresi?
+A: Kanada'nın başkenti Ottawa'dır [1].
+
+[covered/baseline] tr-it kw=True exact=False list=None rag=False cit=False t=5.376s sources=[]
+Q: İtalya'nın başkenti neresi?
+A: İtalya'nın başkenti **Roma**'dır.
+
+[covered/rag] tr-it kw=True exact=False list=None rag=True cit=True t=5.475s sources=['İtalya', 'Roma']
+Q: İtalya'nın başkenti neresi?
+A: İtalya'nın başkenti Roma'dır [2].
+
+[covered/baseline] tr-ocean kw=False exact=None list=None rag=False cit=False t=6.265s sources=[]
+Q: Dünyanın en büyük okyanusu hangisi?
+A: Dünyanın en büyük okyanusu **Hint Okyanusu**'dur.
+
+[covered/rag] tr-ocean kw=True exact=None list=None rag=True cit=True t=8.504s sources=['Büyük Okyanus', 'Atlas Okyanusu']
+Q: Dünyanın en büyük okyanusu hangisi?
+A: Dünyanın en büyük okyanusu Büyük Okyanus (Pasifik Okyanusu)tır [1].
+
+[covered/baseline] tr-au-sym kw=True exact=False list=None rag=False cit=False t=4.74s sources=[]
+Q: Altının kimyasal sembolü nedir?
+A: Altının kimyasal sembolü **Au**'dur.
+
+[covered/rag] tr-au-sym kw=True exact=False list=None rag=True cit=True t=5.084s sources=['Altın', 'Altın oran']
+Q: Altının kimyasal sembolü nedir?
+A: Altının kimyasal sembolü Au'dur [1].
+
+[covered/baseline] tr-water kw=True exact=None list=None rag=False cit=False t=7.191s sources=[]
+Q: Su kaç derecede kaynar?
+A: Su, 100 derece Celsius'te (1 atm basıncında) kaynar.
+
+[covered/rag] tr-water kw=True exact=None list=None rag=True cit=True t=5.402s sources=['Kurşun', 'Su']
+Q: Su kaç derecede kaynar?
+A: Su 100 °C'de kaynar. [2]
+
+[covered/baseline] tr-heart kw=True exact=None list=None rag=False cit=False t=20.147s sources=[]
+Q: İnsan kalbinde kaç odacık vardır?
+A: İnsan kalbinde **4 odacık** vardır:   / - Sağ atrium (sağ kalp odacığı)   / - Sol atrium (sol kalp odacığı)   / - Sağ ventrikül (sağ kalp odacığı)   / - Sol ventrikül (sol
+
+[covered/rag] tr-heart kw=True exact=None list=None rag=True cit=True t=9.717s sources=['Kalp', 'Köpek']
+Q: İnsan kalbinde kaç odacık vardır?
+A: İnsan kalbinde dört odacık vardır: iki üst atriyum ve iki alt ventrikül [1].
+
+[covered/baseline] en-eg kw=True exact=False list=None rag=False cit=False t=2.569s sources=[]
+Q: What is the capital of Egypt?
+A: The capital of Egypt is Cairo.
+
+[covered/rag] en-eg kw=True exact=False list=None rag=True cit=True t=3.509s sources=['Egypt', 'Cairo']
+Q: What is the capital of Egypt?
+A: The capital of Egypt is Cairo [2].
+
+[covered/baseline] en-au kw=True exact=False list=None rag=False cit=False t=2.597s sources=[]
+Q: What is the capital of Australia?
+A: The capital of Australia is Canberra.
+
+[covered/rag] en-au kw=True exact=False list=None rag=True cit=True t=3.466s sources=['Canberra', 'Australia']
+Q: What is the capital of Australia?
+A: The capital of Australia is Canberra [1].
+
+[covered/baseline] en-ca kw=True exact=False list=None rag=False cit=False t=2.584s sources=[]
+Q: What is the capital of Canada?
+A: The capital of Canada is Ottawa.
+
+[covered/rag] en-ca kw=True exact=False list=None rag=True cit=True t=3.49s sources=['Ottawa', 'Canada']
+Q: What is the capital of Canada?
+A: The capital of Canada is Ottawa [2].
+
+[covered/baseline] en-gold kw=True exact=True list=None rag=False cit=False t=0.733s sources=[]
+Q: What is the chemical symbol for gold?
+A: Au
+
+[covered/rag] en-gold kw=True exact=False list=None rag=True cit=True t=4.07s sources=['Gold', 'Potassium']
+Q: What is the chemical symbol for gold?
+A: The chemical symbol for gold is Au. [1]
+
+[covered/baseline] en-water kw=True exact=None list=None rag=False cit=False t=5.953s sources=[]
+Q: At what temperature does water boil?
+A: Water boils at 100°C (212°F) at sea level.
+
+[covered/rag] en-water kw=True exact=None list=None rag=True cit=True t=8.644s sources=['Water', 'Boiling point']
+Q: At what temperature does water boil?
+A: Water boils at 100 °C (212 °F) at standard pressure at sea level [1].
+
+[covered/baseline] en-heart kw=True exact=None list=None rag=False cit=False t=2.607s sources=[]
+Q: How many chambers does the human heart have?
+A: The human heart has four chambers.
+
+[covered/rag] en-heart kw=True exact=None list=None rag=True cit=True t=3.878s sources=['Heart', 'Human body']
+Q: How many chambers does the human heart have?
+A: The human heart has four chambers. [1]
+
+[covered/baseline] en-ocean kw=True exact=False list=None rag=False cit=False t=2.924s sources=[]
+Q: What is the largest ocean?
+A: The largest ocean is the Pacific Ocean.
+
+[covered/rag] en-ocean kw=True exact=False list=None rag=True cit=True t=3.874s sources=['Pacific Ocean', 'Arctic Ocean']
+Q: What is the largest ocean?
+A: The largest ocean is the Pacific Ocean [1].
+
+[covered/baseline] en-planet kw=True exact=False list=None rag=False cit=False t=3.802s sources=[]
+Q: What is the largest planet?
+A: Jupiter is the largest planet in our solar system.
+
+[covered/rag] en-planet kw=True exact=False list=None rag=True cit=True t=4.545s sources=['Mercury (planet)', 'Jupiter']
+Q: What is the largest planet?
+A: The largest planet in the Solar System is Jupiter [2].
+
+[uncovered/baseline] ctl-greet kw=None exact=None list=None rag=False cit=False t=5.961s sources=[]
+Q: Merhaba, nasılsın?
+A: Merhaba! İyi teşekkür ederim, sen nasılsın? 😊
+
+[uncovered/rag] ctl-greet kw=None exact=None list=None rag=False cit=False t=5.946s sources=[]
+Q: Merhaba, nasılsın?
+A: Merhaba! İyi teşekkür ederim, sen nasılsın? 😊
+
+[uncovered/baseline] ctl-blue kw=None exact=None list=None rag=False cit=False t=1.043s sources=[]
+Q: Sadece 'mavi' yaz.
+A: mavi
+
+[uncovered/rag] ctl-blue kw=None exact=None list=None rag=False cit=False t=1.021s sources=[]
+Q: Sadece 'mavi' yaz.
+A: mavi
+
+[uncovered/baseline] ctl-math kw=None exact=None list=None rag=False cit=False t=2.603s sources=[]
+Q: 2 + 2 kaç eder?
+A: 2 + 2 = 4
+
+[uncovered/rag] ctl-math kw=None exact=None list=None rag=False cit=False t=2.563s sources=[]
+Q: 2 + 2 kaç eder?
+A: 2 + 2 = 4
+
+[uncovered/baseline] ctl-list kw=None exact=None list=True rag=False cit=False t=3.167s sources=[]
+Q: Üç meyve listele.
+A: 1. Elma / 2. muz / 3. armut
+
+[uncovered/rag] ctl-list kw=None exact=None list=True rag=False cit=False t=3.209s sources=[]
+Q: Üç meyve listele.
+A: 1. Elma / 2. muz / 3. armut
+
+[uncovered/baseline] ctl-code kw=None exact=None list=None rag=False cit=False t=5.651s sources=[]
+Q: İki sayıyı toplayan bir Python fonksiyonu yaz.
+A: ```python / def topla(a, b): /     return a + b / ```
+
+[uncovered/rag] ctl-code kw=None exact=None list=None rag=False cit=False t=5.633s sources=[]
+Q: İki sayıyı toplayan bir Python fonksiyonu yaz.
+A: ```python / def topla(a, b): /     return a + b / ```
+
+[uncovered/baseline] ctl-joke kw=None exact=None list=None rag=False cit=False t=13.328s sources=[]
+Q: Bana kısa bir şaka yap.
+A: Neden okula gittin?   / — Çünki yemek yemek istedim, ama annem dedi: "Sadece öğrenmek için gittin!" 😄
+
+[uncovered/rag] ctl-joke kw=None exact=None list=None rag=False cit=False t=13.307s sources=[]
+Q: Bana kısa bir şaka yap.
+A: Neden okula gittin?   / — Çünki yemek yemek istedim, ama annem dedi: "Sadece öğrenmek için gittin!" 😄
+
+[uncovered/baseline] ctl-birthday kw=None exact=None list=None rag=False cit=False t=20.062s sources=[]
+Q: Bir arkadaşıma doğum günü mesajı yaz.
+A: Elbette! İşte kısaca ve duygusal bir doğum günü mesajı: /  / "Seninle birlikte olmak beni çok mutlu ediyor! Sağlıklı, mutlu ve dört gözle izlenen bir yıl dilerim! 🎉🎂" /  / İstersen
+
+[uncovered/rag] ctl-birthday kw=None exact=None list=None rag=False cit=False t=20.112s sources=[]
+Q: Bir arkadaşıma doğum günü mesajı yaz.
+A: Elbette! İşte kısaca ve duygusal bir doğum günü mesajı: /  / "Seninle birlikte olmak beni çok mutlu ediyor! Sağlıklı, mutlu ve dört gözle izlenen bir yıl dilerim! 🎉🎂" /  / İstersen
+
+[uncovered/baseline] ctl-motivation kw=None exact=None list=None rag=False cit=False t=12.417s sources=[]
+Q: Bana kısa bir motivasyon sözü yaz.
+A: Her gün biraz daha iyi olmak için başla. Başarı, sabırın sonucu değil, her adımda ilerlemekle başlar. 💪
+
+[uncovered/rag] ctl-motivation kw=None exact=None list=None rag=False cit=False t=12.384s sources=[]
+Q: Bana kısa bir motivasyon sözü yaz.
+A: Her gün biraz daha iyi olmak için başla. Başarı, sabırın sonucu değil, her adımda ilerlemekle başlar. 💪
+
+[uncovered/baseline] ctl-narnia kw=None exact=None list=None rag=False cit=False t=20.146s sources=[]
+Q: Narnia'nın başkenti neresi?
+A: Narnia'nın resmi bir başkenti yoktur. Olaylar genellikle Narnia'nın kuzeyindeki "Kraliyet" veya "Kraliçe" gibi yerlerde geçer. Ancak, Narnia'nın en bilinen yerler
+
+[uncovered/rag] ctl-narnia kw=None exact=None list=None rag=False cit=False t=20.145s sources=[]
+Q: Narnia'nın başkenti neresi?
+A: Narnia'nın resmi bir başkenti yoktur. Olaylar genellikle Narnia'nın kuzeyindeki "Kraliyet" veya "Kraliçe" gibi yerlerde geçer. Ancak, Narnia'nın en bilinen yerler
+
+[uncovered/baseline] ctl-narnia-en kw=None exact=None list=None rag=False cit=False t=20.186s sources=[]
+Q: What is the capital of Narnia?
+A: Narnia doesn't have a real capital because it's a fictional world from C.S. Lewis's books. However, in the stories, the capital of Narnia is often considered to be **Caerleon** or **Narnia's central city**, though it's not clearly defined. The most commonly
+
+[uncovered/rag] ctl-narnia-en kw=None exact=None list=None rag=False cit=False t=20.158s sources=[]
+Q: What is the capital of Narnia?
+A: Narnia doesn't have a real capital because it's a fictional world from C.S. Lewis's books. However, in the stories, the capital of Narnia is often considered to be **Caerleon** or **Narnia's central city**, though it's not clearly defined. The most commonly
