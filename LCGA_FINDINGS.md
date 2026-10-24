@@ -4,8 +4,10 @@ Measured on one RTX 3050 Laptop 6 GB (Windows 11/WDDM), AC power. Base:
 Qwen2.5-0.5B, frozen; only the router (and, in stage-2 runs, LoRA) is trained.
 Reproduce with `experiments/exp2_train_router.py`, `exp3_eval.py`, `exp4_speed.py`,
 `exp58_eval_long.py`, `exp59_selection_stats.py`, `exp60_needle.py`,
-`exp61_train_router_needle.py`, `exp62_needle_gen.py`; raw rows in
-`results/results.jsonl`.
+`exp61_train_router_needle.py`, `exp62_needle_gen.py`, `exp64_query_swap.py`,
+`exp65_teacher_accuracy.py`; raw rows in `results/results.jsonl`, summarised by
+`scripts/summarize_needle.py` and `scripts/aggregate_needle.py`. Runs invalidated by
+the loader bug are kept for the audit trail in `results/invalid/`.
 
 ---
 
@@ -48,7 +50,8 @@ below was produced with the fixed code.
 4. **Content selection is learnable — with the right objective and the right head.**
    Training at the answer positions with a *retrieval* target gives
    **exact match 1.00 at a 25% budget** (dense 1.00, window 0.00) and it transfers
-   from 1k training to 8k evaluation. Content blocks rise to **19% / 57.5% / 69.2%**.
+   from 1k training to 8k evaluation. Content blocks rise to **19% / 57.5% / 69.2%**
+   (labelled run; the label-free one 19.5 / 61.7 / 71.6%).
 5. **Plain attention distillation does not get there — a content-focused one does.**
    Full KL (the original LCGA objective) stalls at p(fact) = 0.11 and fails the needle
    test; content-restricted KL works at 8k but not at 1k; **distilling the teacher's
@@ -59,10 +62,21 @@ below was produced with the fixed code.
    content-blind at initialisation (softmax over K concepts, block-mean pooled →
    score gradient ~1/K²). With a direct bilinear content path the same objective
    reaches p(fact) = 0.86 in **60 steps**.
-7. **It is a trade, not a free win**: the needle-trained router loses plain-LM
-   quality (27.7 vs 25.1 at 1k), and it does not generalise to a re-phrased fact.
-8. **Speed is unchanged**: prefill **1.71× at 32k**, graph decode **1.27× at 8k**;
+7. **Generalisation is partial.** Position transfers from 1k training to 8k (three
+   seeds, exact 1.00) but **not to 2k or 16k**; a re-phrased fact scores exact 0.00; the
+   router selects *fact-like* content, not the block that answers the question
+   (§5.5). Multi-fact training helps the multi-fact cases; multi-phrasing training does
+   not fix the phrasing gap.
+8. **One router can serve both behaviours** (the practical result). Mixing one needle
+   step per seven LM steps keeps exact 1.00 in all five cells — including the 1k
+   in-window case a needle-only router loses — while plain-LM PPL is only **+0.60
+   (1k) / +0.37 (4k)** above the budget-matched window, versus +2.65/+4.44 for
+   needle-only training. Seeds 0/1/2 all give 15/15 cells.
+9. **Speed is unchanged**: prefill **1.71× at 32k**, graph decode **1.27× at 8k**;
    eager decode loses. Still compute/bandwidth, **not** KV memory.
+10. **Scope**: one base model (Qwen2.5-0.5B). The same recipe on 1.5B is inconclusive
+   because that model's dense attention does not retrieve the needle at the training
+   length, so the teacher is noise (§8).
 
 ---
 
@@ -324,10 +338,14 @@ route the fact.
 **not to 2k**: with dense at 1.00 the router scores 0.00 (CE 0.49–0.96) at all three
 depths, and raising the budget to 0.5 does not fix it. The failure is not in the
 selection — at 2k depth 0.1, **16/24 layers still select the fact block** — but in
-using it (CE 0.54 vs dense 0.28). At 16k it fails outright (§5.3), and at 4k the 0.5B
-**dense model itself** stops retrieving (exact 0.00–0.25), so that cell says nothing
-about the router. Transfer is therefore real at 8× but **not monotone in length**; we
-did not resolve why 2k is worse than both 1k and 8k.
+using it (CE 0.54 vs dense 0.28). Training *at* 2k (`seq2k`, 600 steps) does not fix
+2k either (exact 0.00), though it does improve 16k: depth 0.5 goes 0.00 → **0.50**
+while 8k stays 1.00. A kernel-parity check at ρ = 1.0 (all blocks selected) shows the
+sparse path matches dense at 2k (top-1 agreement 0.998, CE difference 0.0002), so this
+is not a sparse-path bug. The 2k anomaly is therefore a property of the router's
+selection/use at that length and remains unexplained. At 16k the 1k-trained router fails outright, and at 4k the 0.5B **dense
+model itself** stops retrieving (exact 0.00–0.25), so that cell says nothing about the
+router.
 
 **Phrasing.** A held-out phrasing ("Account recovery token: N.", `exp62`, T=2048, 6
 prompts) drops exact match to **0.00** while the router still finds a fact-like block
@@ -339,17 +357,26 @@ generalising it.
 
 **Multiple facts and the question.** `exp64` plants two facts with distinct phrasings
 in the same context and asks about each in turn. At 2k the budget has 6 free slots, so
-**both** fact blocks are selected regardless of the question (`hit(secret) = 0.96` for
-both questions; only 7/24 layers change their selection at all). The answers are still
-exact because both facts fit in the budget. With three facts (`exp62`, T=2048) exact
-match collapses (0.00 except one cell where the window also succeeds).
+the selection is **not query-specific**: `hit(secret) = 0.83` (needle-only model) and
+`0.92` (mix7) regardless of which fact the question asks about, while `hit(backup)`
+stays at 0.46–0.79. The answer then depends on whether the queried fact happens to be
+inside the selection: at depths 0.2 and 0.8 mix7 answers *both* questions exactly, but
+at depth 0.5 the backup question fails (CE 0.509) because the backup block is selected
+in only 54% of layers. The router learns "select fact-like content", not "select the
+block that answers this question"; with the single-fact task (and with as many facts as
+the free slots can hold) that is sufficient.
 
-So the honest statement is: the router learns to select **fact-like content**, not
-"the block that answers this question". That is sufficient for the single-fact task
-(and for as many facts as the free slots can hold) and insufficient in general. Making
-it query-selective is the obvious next experiment; the budget at 2k (6 free slots) is
-large enough that it was never forced to choose, which is probably why it did not
-learn to.
+Training with multiple facts per context (`nf2`, paraphrase on, two facts, 900 steps)
+is the obvious remedy and it does improve the multi-fact cells: on the same 2k probe
+the three-fact condition goes from exact 0.00 to **1.00** at depth 0.1 and the held-out
+phrasing reaches **1.00** there as well (10 prompts: seen 0.70, held-out phrasing
+**1.00**, two facts **1.00**, three facts **1.00**, hit 0.34–0.80). It does not turn the
+router into a query-selective one — it makes the fact-like blocks it already selects
+sufficient for the budget. `nf2` is needle-only, so it loses the 1k in-window case
+(0.00). Combining the two (`mix7_nf2` = `--lm_every 7 --paraphrase 1 --n_facts 2`)
+keeps 5/5 cells at 1.00 and PPL 25.648, and reaches **1.00** on the held-out phrasing
+and two facts at 2k depth 0.1 (three facts 0.70) — it is the better general-purpose
+configuration, mix7 the cleaner single-task one.
 
 Cells where dense itself is not exact (T=2048 depths 0.5/0.9, 6 prompts) are noisy and
 should not be over-read.
@@ -391,6 +418,28 @@ budget-matched window. The mechanism is the same one that explains the needle-on
 failure (§5.8): the LM steps keep the recency prior strong, so at 1k the two free slots
 are split between the recent window and distant content; with needle-only training the
 content score scale overrides the prior and both slots go to content.
+
+Robustness: seeds 0, 1 and 2 all give exact **1.00 in all five cells (15/15)**, and a
+10-prompt re-run of seed 0 gives 1.00 in all five as well. PPL is stable across seeds:
+**25.651 / 25.684 / 25.655** at 1k (window 25.051) and **12.459** at 8k (window 12.160).
+The 1:2 schedule is included to show the trend (more needle steps → better 1k retrieval
+is *not* what happens: fewer LM steps hurt the prior, so 1:2 scores 0.83 where 1:7
+scores 1.00). Selection composition for the mixed router (`exp59`): content **14.1 /
+38.5 / 40.6%** at 1k / 4k / 8k — lower than the needle-only model's 19.5 / 61.7 /
+71.6%, which is exactly what "the LM steps keep the prior" predicts.
+
+**The budget can be much smaller at 8k.** Evaluating the same checkpoint with a reduced
+budget (`exp60 --budget`, no retraining): at 8k, ρ = 0.125 (16 of 128 blocks) and even
+**ρ = 0.0625 (8 of 128 blocks, i.e. 6.25% of the context)** still give exact **1.00**
+at depths 0.1 and 0.5, where the budget-matched window scores 0.00. So the retrieval
+result is not an artefact of the 25% budget: a sixteenth of the context is enough at
+8k.
+
+**Combining everything** (`mix7_nf2` = mixed schedule + paraphrase + two facts per
+context, 900 steps): 5/5 cells at exact 1.00 and PPL **25.648**, i.e. the same LM cost
+as mix7, while the held-out phrasing and the two-fact condition at 2k reach **1.00**
+(three facts 0.70). It is the better general-purpose configuration; mix7 is the
+cleaner single-task one.
 
 ### 5.8 Budget and the prior: why more slots did not help
 
@@ -495,11 +544,14 @@ compute and bandwidth only.
   4–5 prompts, so exact-match differences of one prompt are noise. The selection
   measurements (content fraction, p(fact)) are averages over thousands of blocks and
   are stable.
-- **Scale is not demonstrated.** The same recipe on Qwen2.5-1.5B is *inconclusive*: at
-  the training length (1k) the 1.5B dense model does not retrieve this needle reliably
-  (dense exact 0.00, CE 0.29–0.72), so the teacher is noise; at 8k, where dense does
-  retrieve (exact 1.00), the 1k-trained router fails (0.00). A 2k retry is in
-  `results/`. Everything above is one base model (0.5B).
+- **Scale is not demonstrated.** The same recipe on Qwen2.5-1.5B is *inconclusive at
+  1k and negative at 2k*: at 1k the 1.5B dense model does not retrieve this needle
+  reliably (dense exact 0.00, CE 0.29–0.72), so the teacher is noise; trained at 2k
+  (where its dense model does retrieve, exact 1.00) the router learns the training
+  metric (p(fact) 0.52, top-1 0.64) but scores exact **0.00** at 2k and 8k at eval.
+  A kernel-parity check at ρ = 1.0 rules out a sparse-path bug (sparse ≈ dense,
+  top-1 agreement 0.998–0.999), so this is a router/training effect we did not
+  explain. Everything above is one base model (0.5B).
 - The retrieval router was trained at T=1024; the 8k evaluation is a transfer test,
   not a long-context training run. Transfer **fails at 2k and at 16k** and is
   uninformative at 4k (dense itself fails there) — the length curve is not monotone
