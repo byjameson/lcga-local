@@ -35,7 +35,16 @@ def main() -> int:
     ap.add_argument("--no-hf", action="store_false", dest="hf")
     ap.add_argument("--ms", action="store_true", default=True)
     ap.add_argument("--no-ms", action="store_false", dest="ms")
+    ap.add_argument("--only", default="",
+                    help="comma-separated repo suffixes to update (e.g. lcga-v3-0.5b); "
+                         "default = all. Needed because the 17M P3 model is unrelated "
+                         "to the LCGA findings.")
     args = ap.parse_args()
+
+    only = {s.strip() for s in args.only.split(",") if s.strip()}
+
+    def wanted(rid: str) -> bool:
+        return not only or rid.split("/")[-1] in only
 
     section = (ROOT / args.section).read_text(encoding="utf-8").strip() + "\n"
 
@@ -48,6 +57,9 @@ def main() -> int:
 
             api = HfApi(token=hf_token)
             for rid in HF_REPOS:
+                if not wanted(rid):
+                    print(f"[hf] {rid}: skipped (--only)", flush=True)
+                    continue
                 try:
                     cur = Path(hf_hub_download(rid, "README.md", token=hf_token,
                                                force_download=True)).read_text(encoding="utf-8")
@@ -75,6 +87,9 @@ def main() -> int:
             api = HubApi()
             api.login(ms_token)
             for rid in MS_REPOS:
+                if not wanted(rid):
+                    print(f"[ms] {rid}: skipped (--only)", flush=True)
+                    continue
                 try:
                     files = api.get_model_files(rid, recursive=True)
                     readme = next((f for f in files

@@ -20,6 +20,8 @@ what was tried, including the bugs).
 
 **ModelScope mirror:** [LCGA v3 0.5B](https://modelscope.cn/models/byjameson/lcga-v3-0.5b) · [LCGA P3 17M](https://modelscope.cn/models/byjameson/lcga-p3-17m) — same cards, same weights (donation section included).
 
+**Latest LCGA research (25 Oct 2026):** the learned router equals a budget-matched static window on plain language modelling (content blocks 1.7–7.0%, PPL +0.005…+0.133), but on retrieval-style data, training at the answer positions with a *content-focused* target — including a label-free one — reaches dense exact match at a 25% block budget (1k→8k transfer), where the window scores 0.00. Mixing 1 retrieval step per 7 language-modelling steps keeps plain-LM PPL within **+0.6** of the window while retaining that retrieval, so one router can serve both. Corrected numbers, controls, limits and repro commands: [`LCGA_FINDINGS.md`](LCGA_FINDINGS.md).
+
 ## Product: LCGA Local — one-command local chat
 
 The product surface is not an API. It is a local chat assistant:

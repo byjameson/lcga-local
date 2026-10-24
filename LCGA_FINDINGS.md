@@ -150,6 +150,9 @@ steps, batch 2, lr 3e-3. The teacher is the **token-level attention of the answe
 tokens** aggregated to blocks (block-averaged dense mass dilutes a 3-token answer
 across a 64-token block by ~20×, which alone destroys the signal — the v1 mass
 target is not usable here). The loss is applied only at the answer query rows.
+Because the teacher is computed from the *same* forward pass's q/k (layer-wise
+distillation), it is the dense attention over the sparse model's own hidden states,
+not an independent dense run — this is the standard setup here and matches v1.
 
 ### 5.1 Objectives
 
@@ -161,7 +164,14 @@ target is not usable here). The loss is applied only at the answer query rows.
 | retrieval | the fact block itself | yes (oracle) | **0.912** | **0.918** |
 | retrieval, shuffled labels | random block | yes (control) | 0.067 | 0.069 |
 
-Chance is 1/16 = 0.0625. Three observations:
+Chance is 1/16 = 0.0625. Observations:
+
+**A caveat on p(fact).** Distilling a *hard* argmax target lets the router's learnable
+softmax temperature drift upwards, so the reported probability flattens while the
+**ranking (which is what top-k selection uses) stays correct**. After training, the
+label-free checkpoint shows p(fact) ≈ 0.05–1.00 depending on layer, yet still selects
+the fact block in 17/24 layers and answers exactly (below). Treat p(fact) as a
+training diagnostic, and **selection rate / exact match as the real metric**.
 
 - **Full KL cannot work**, and the reason is visible in the teacher itself: at the
   answer rows ~50% of dense mass sits on the sink block and ~20% on the query block;
@@ -195,6 +205,18 @@ tokens, so at initialisation it is nearly constant across blocks and its gradien
 ~1/K². **This, not the data, is why earlier LCGA runs plateaued at the prior** — it
 is a head-capacity/signal-scale problem, not an impossibility result.
 
+The same comparison with the **label-free** objective (600 steps each) makes the
+capacity effect even clearer:
+
+| content path width | p(fact) | 1k depth 0.5 | 8k depth 0.1 | 8k depth 0.5 |
+|---:|---:|---:|---:|---:|
+| 0 (concept graph only) | 0.066 | 0.764 / 0.00 | 0.185 / 1.00 | 3.150 / 0.00 |
+| 16 | 0.430 | 0.206 / 1.00 | 0.320 / 1.00 | 0.543 / 0.00 |
+| 64 | 0.530 | 0.208 / 1.00 | 0.361 / 1.00 | 0.285 / 1.00 |
+
+A rank-16 content path is enough at these lengths; the concept-only router cannot
+learn the label-free target at all (p = 0.066 with zero gradient movement).
+
 ### 5.3 End-to-end needle result at a 25% budget
 
 `needle_ret_c64`, trained at T=1024 only, evaluated at three lengths (5 prompts per
@@ -226,6 +248,31 @@ re-prefill, 8 tokens) gives the same string, `7311`, for dense and sparse at 1k;
 label-free router at 8k also generates `7311` identically to dense, with 21/24 layers
 selecting the fact block.
 
+**Multi-seed check of the label-free router** (3 seeds × 6 prompts per cell, `exp60`,
+25% budget; mean and range of exact match):
+
+| cell | dense | **label-free router** | budget-matched window |
+|---|---:|---:|---:|
+| 1k, depth 0.5 (out of window) | 1.00 | **1.00 (1.00–1.00)** | 0.00 |
+| 8k, depth 0.1 (out of window) | 1.00 | **1.00 (1.00–1.00)** | 0.00 |
+| 8k, depth 0.5 (out of window) | 1.00 | **1.00 (1.00–1.00)** | 0.00 |
+| 1k, depth 0.9 (**in** window) | 1.00 | 0.39 (0.00–1.00) | 1.00 |
+| 8k, depth 0.9 (**in** window) | 1.00 | 1.00 | 1.00 |
+| 1k, depth 0.1 (start of context) | 0.00 | 0.00 | 0.00 |
+
+Two honest caveats visible here. At **1k the in-window case is fragile**: the budget
+is only m = 4 blocks, of which sink + self are mandatory, so the router has **two free
+slots** and must choose between the recent window and distant content — training on
+content costs the local case (0.17 exact over 12 prompts for seed 0; 0.39 mean over
+three seeds at 6 prompts; the window scores 1.00). At 8k there are 30 free slots and
+both fit (1.00/1.00). And the depth-0.1 cell at 1k is one where **dense itself** fails
+(CE 0.667, exact 0.00), so it carries no information about the router.
+
+**Transfer stops at 8k.** The same checkpoint (trained at T=1024) at 16k: dense exact
+1.00 at depths 0.5/0.9, router exact 0.00 (CE 0.568/0.585). At 32k the 0.5B dense
+model itself no longer retrieves (exact 0.00 in every cell), so the probe is
+uninformative there. Content selection transfers over an 8× context increase, not 16×.
+
 ### 5.4 The label-free version works
 
 Same data, same head (`content_rank=64`), same answer-position rows; only the target
@@ -255,32 +302,59 @@ needle locations are used. Its selection composition is **19.5 / 61.7 / 71.6%**
 content at 1k / 4k / 8k (`exp59`) — essentially the same as the labelled router's
 19.0 / 57.5 / 69.2%.
 
-### 5.5 Generalisation (`exp62`, T=2048, 4 prompts)
+**Where the loss is applied matters as much as what it targets.** The same target and
+head trained on *all* query rows (v1-style supervision, block-mass teacher) instead of
+the answer rows gives exact **0.75 at 8k and 0.00 at 1k** (p(fact) 0.074, 600 steps) —
+the answer-position restriction is worth ~25 points of exact match at 8k and is the
+difference between working and not working at 1k.
 
-`hit` = fraction of layers selecting the *target* fact block at the query row.
+**The student beats its own teacher's per-instance accuracy.** Measured on the trained
+checkpoint (`exp65`, teacher computed from the trained router's own hidden states),
+the teacher's content argmax equals the planted fact block in only **15.3%** of
+(layer, sample) pairs, yet the student selects the fact block in **71%** of layers on
+a probe sample and answers exactly. The student is shared across samples, so it
+averages out the teacher's per-instance noise and learns the *consistent* part (the
+fact sentence), which is exactly what we want. This also explains why the objective
+plateaus in p(fact) while the end-to-end metric saturates: 1% of layers is enough to
+route the fact.
 
-| condition | depth | dense | learned (CE / exact / hit) | window |
-|---|---:|---:|---|---:|
-| seen phrasing, 1 fact | 0.1 | 0.218 / 1.00 | **0.202 / 1.00 / 1.00** | 3.170 / 0.00 |
-| seen phrasing, 1 fact | 0.5 | 0.316 / 0.00 | 0.292 / 0.25 / 0.87 | 3.125 / 0.00 |
-| seen phrasing, 1 fact | 0.9 | 0.598 / 0.00 | 0.702 / 0.00 / 0.84 | 0.563 / 0.00 |
-| unseen phrasing | 0.1 | 0.197 / 1.00 | 0.551 / 0.00 / 0.55 | 3.039 / 0.00 |
-| unseen phrasing | 0.5 | 0.403 / 0.00 | 3.039 / 0.00 / 0.54 | 2.988 / 0.00 |
-| unseen phrasing | 0.9 | 0.501 / 0.00 | 0.400 / 0.00 / 0.71 | 0.280 / 0.75 |
-| two facts, ask the backup | 0.1 | 0.147 / 1.00 | 0.621 / 0.00 / 0.79 | 3.050 / 0.00 |
-| two facts, ask the backup | 0.5 | 0.298 / 0.50 | 1.984 / 0.00 / 1.00 | 3.034 / 0.00 |
-| two facts, ask the backup | 0.9 | 0.763 / 0.00 | 1.045 / 0.00 / 0.59 | 0.539 / 0.00 |
+### 5.5 Generalisation, and what the router keys on (`exp62`, `exp64`)
 
-Reading: **position generalises, phrasing does not.** The router trained on one
-sentence ("The secret code is N.") transfers to unseen depths and 8× longer contexts,
-but a re-phrased fact ("Account recovery token: N.") drops exact match to 0.00 even
-though it still finds a fact-like block 55–71% of the time. With two facts it often
-selects the *queried* block (hit up to 1.00) yet still fails to produce the answer,
-which suggests the residual stream needs the fact at more than one layer for this
-harder task. Cells where dense itself is not exact (0.5/0.9, 4 prompts) are noisy and
+**Length.** The 1k-trained router transfers to 8k (three seeds, exact 1.00, §5.3) but
+**not to 2k**: with dense at 1.00 the router scores 0.00 (CE 0.49–0.96) at all three
+depths, and raising the budget to 0.5 does not fix it. The failure is not in the
+selection — at 2k depth 0.1, **16/24 layers still select the fact block** — but in
+using it (CE 0.54 vs dense 0.28). At 16k it fails outright (§5.3), and at 4k the 0.5B
+**dense model itself** stops retrieving (exact 0.00–0.25), so that cell says nothing
+about the router. Transfer is therefore real at 8× but **not monotone in length**; we
+did not resolve why 2k is worse than both 1k and 8k.
+
+**Phrasing.** A held-out phrasing ("Account recovery token: N.", `exp62`, T=2048, 6
+prompts) drops exact match to **0.00** while the router still finds a fact-like block
+31–55% of the time (hit rate). Training on three matched phrasings (`para900`, 900
+steps) does **not** fix it — the held-out phrasing is still 0.00 — and it costs
+accuracy on the trained phrasings (8k depth 0.5: 0.67 vs 1.00 for the single-phrase
+model). At this size and step budget, more phrasings diluted the signal rather than
+generalising it.
+
+**Multiple facts and the question.** `exp64` plants two facts with distinct phrasings
+in the same context and asks about each in turn. At 2k the budget has 6 free slots, so
+**both** fact blocks are selected regardless of the question (`hit(secret) = 0.96` for
+both questions; only 7/24 layers change their selection at all). The answers are still
+exact because both facts fit in the budget. With three facts (`exp62`, T=2048) exact
+match collapses (0.00 except one cell where the window also succeeds).
+
+So the honest statement is: the router learns to select **fact-like content**, not
+"the block that answers this question". That is sufficient for the single-fact task
+(and for as many facts as the free slots can hold) and insufficient in general. Making
+it query-selective is the obvious next experiment; the budget at 2k (6 free slots) is
+large enough that it was never forced to choose, which is probably why it did not
+learn to.
+
+Cells where dense itself is not exact (T=2048 depths 0.5/0.9, 6 prompts) are noisy and
 should not be over-read.
 
-### 5.5 The price: plain-LM quality
+### 5.6 The price: plain-LM quality
 
 The same checkpoint on WikiText (`exp58`):
 
@@ -290,11 +364,77 @@ The same checkpoint on WikiText (`exp58`):
 | 4096 | 10.950 | 18.221 | **13.783** | 17.471 |
 
 The retrieval router is as bad as random on plain text — it sacrificed the LM prior
-for content matching. This is a **specialist**, not a drop-in replacement; a
-production version would need either a mixed objective or a per-request switch.
+for content matching. **Warm-starting from the LM-trained router does not fix it**:
+fine-tuning `abl_diag_best` with the needle objective for 300 steps gives p(fact) =
+0.28 and PPL 27.001 (1k) / 17.095 (4k), worse than training from scratch on both axes
+— the LM prior fights the new objective. This is a **specialist**, not a drop-in
+replacement; serving both behaviours needs a task switch or a mixed objective (§7).
+
+### 5.7 Mixed objective: one router, both behaviours
+
+Mixing the two step types (`--lm_every K`: one needle step per K+1, the rest plain-LM
+full-KL steps on WikiText) resolves the specialist trade-off. 900 steps each, same
+head (`content_rank=64`), 25% budget:
+
+| schedule | 1k d0.5 | 1k d0.9 (in-win) | 8k d0.1 | 8k d0.5 | PPL 1k | PPL 4k |
+|---|---:|---:|---:|---:|---:|---:|
+| needle only | 1.00 | 0.17 | 1.00 | 1.00 | 27.70 | 18.22 |
+| 1 needle : 2 LM | 0.83 | 0.17 | 1.00 | 1.00 | 25.87 | 14.79 |
+| **1 needle : 7 LM** | **1.00** | **1.00** | **1.00** | **1.00** | **25.66** | **14.15** |
+| static window (control) | 0.00 | 1.00 | 0.00 | 0.00 | **25.05** | **13.78** |
+| dense | 1.00 | 1.00 | 1.00 | 1.00 | 17.32 | 10.95 |
+
+**The 1:7 schedule is the practical answer.** It retrieves exactly where the static
+window cannot (four out-of-window cells, 0.00 → 1.00), keeps the in-window case the
+needle-only router loses, and costs **+0.60 PPL at 1k / +0.37 at 4k** against the
+budget-matched window. The mechanism is the same one that explains the needle-only
+failure (§5.8): the LM steps keep the recency prior strong, so at 1k the two free slots
+are split between the recent window and distant content; with needle-only training the
+content score scale overrides the prior and both slots go to content.
+
+### 5.8 Budget and the prior: why more slots did not help
+
+At 1k the label-free router loses the in-window case (0.17 exact over 12 prompts)
+while the static window scores 1.00. The intuitive fix — give the router more slots —
+does not work: at ρ = 0.375 (m = 6, four free slots) p(fact) *drops* to 0.358 and the
+in-window case stays at exact 0.00 (CE 1.978 at 1k depth 0.9, 12 prompts). The reason
+is visible in the score composition: training the content path pushes its score scale
+up until it overrides the fixed recency prior, so the router stops ranking recent
+blocks highly at all; extra slots simply go to more content blocks. The fix has to be
+in the objective or the data:
+
+- adding a KL term on the **non-content** part of the teacher (`--lam_window 1.0`,
+  600 steps) restores the local case (1k depth 0.9 exact 1.00 over 12 prompts) but
+  costs out-of-window retrieval (8k depths 0.1/0.5: 0.50 / 0.00) — the two terms
+  compete on every needle step;
+- mixing the **data** instead (§5.7, 1 needle : 7 LM) gives 1.00 in *every* cell while
+  keeping PPL within +0.6 of the window: the LM steps calibrate the prior without
+  competing with content on the needle steps.
+
+### 5.9 Recipe (the practical takeaway)
+
+```text
+data      needle/QA contexts PLUS a majority of plain-LM steps (1 : 7). Needle-only
+          training works but is a specialist (PPL 27.7); the LM steps keep the
+          position prior calibrated and cost 0.6 PPL instead of 2.7
+loss      answer positions only; target = teacher's content argmax outside
+          {sink, self, last m-1 blocks}, renormalised; skip rows with content mass < 0.03
+head      bilinear content path (content_rank 16-64); the concept graph alone is
+          gradient-starved (~1/K^2) and does not learn the label-free target
+hyper     900 mixed steps, batch 2, seq 1024, lr 3e-3, budget 0.25 (m=4, 2 free slots)
+expect    needle exact match = dense in every tested cell at 1k and 8k, where the
+          budget-matched window scores 0.00 out of window;
+          plain-LM PPL 25.66 / 14.15 (window 25.05 / 13.78)
+limit     transfer stops at 8k (16k fails); re-phrased and multi-fact contexts are
+          partial; no KV-memory saving
+```
+
+The code is `experiments/exp61_train_router_needle.py`; the three ingredients can be
+switched independently (`--loss kl|residual|top1content|retrieval --rows answer|all
+--content_rank N`) so the contribution of each is measurable, and `exp60/exp62/exp64`
+evaluate them without training.
 
 ## 6. Speed (unchanged; `exp4` always loaded correctly)
-
 Prefill (single request, AC power, eager router):
 
 | T | dense | sparse | speedup |
@@ -355,8 +495,26 @@ compute and bandwidth only.
   4–5 prompts, so exact-match differences of one prompt are noise. The selection
   measurements (content fraction, p(fact)) are averages over thousands of blocks and
   are stable.
+- **Scale is not demonstrated.** The same recipe on Qwen2.5-1.5B is *inconclusive*: at
+  the training length (1k) the 1.5B dense model does not retrieve this needle reliably
+  (dense exact 0.00, CE 0.29–0.72), so the teacher is noise; at 8k, where dense does
+  retrieve (exact 1.00), the 1k-trained router fails (0.00). A 2k retry is in
+  `results/`. Everything above is one base model (0.5B).
 - The retrieval router was trained at T=1024; the 8k evaluation is a transfer test,
-  not a long-context training run.
+  not a long-context training run. Transfer **fails at 2k and at 16k** and is
+  uninformative at 4k (dense itself fails there) — the length curve is not monotone
+  and we did not find out why 2k is worse than 1k and 8k (§5.5).
+- The router selects fact-like content, **not the block that answers the question**:
+  with two facts at 2k both are selected regardless of the query, and with more facts
+  than free slots this would fail (§5.5). A held-out phrasing scores exact 0.00.
+- At 1k the budget leaves only two free slots (m = 4, sink + self mandatory), so
+  content selection trades against the recent window: the label-free router scores
+  0.39 exact on the in-window case where the static window scores 1.00. At 8k both
+  fit and the conflict disappears. A budget of 0.375 at 1k is tested in §5.4's
+  follow-up runs (see `results/`).
+- Plain-LM quality collapses under needle-only training (27.7 vs 25.1 PPL at 1k) and
+  warm-starting from the LM router does not rescue it (§5.6). The mixed objective is
+  an open item.
 - The teacher is the answer-token attention of the *dense* model at the same layer;
   "content" is therefore defined by where dense attention looks, not by an
   information-theoretic criterion.

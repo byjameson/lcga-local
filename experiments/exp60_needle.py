@@ -81,17 +81,25 @@ def main() -> int:
     ap.add_argument("--tag", default="needle")
     ap.add_argument("--policies", default="dense,topk,window,random,local,oracle",
                     help="oracle = top-m by TRUE dense block mass (ceiling for any router)")
+    ap.add_argument("--budget", type=float, default=0.0,
+                    help="override the checkpoint's block budget at evaluation time "
+                         "(tests how tight the budget can be without retraining)")
+    ap.add_argument("--model", default="",
+                    help="base model dir; default = the one recorded in the checkpoint")
     ap.add_argument("--v2", action="store_true")
     ap.add_argument("--merge", action="store_true")
     args = ap.parse_args()
 
     from transformers import AutoTokenizer
 
-    model = load_model(MODEL_DIR, device=DEV)
-    tok = AutoTokenizer.from_pretrained(MODEL_DIR)
     meta = torch.load(args.ckpt, map_location="cpu", weights_only=False).get("meta", {})
     margs = meta.get("args", {})
-    wrappers = patch_model(model, budget=margs.get("budget", 0.25),
+    model_dir = args.model or margs.get("model", "models/Qwen2.5-0.5B")
+    if not os.path.isabs(model_dir):
+        model_dir = os.path.join(ROOT, model_dir)
+    model = load_model(model_dir, device=DEV)
+    tok = AutoTokenizer.from_pretrained(model_dir)
+    wrappers = patch_model(model, budget=(args.budget or margs.get("budget", 0.25)),
                            n_concepts=margs.get("n_concepts", 64),
                            graph_rank=margs.get("graph_rank", 16),
                            dynamic=margs.get("dynamic", False),

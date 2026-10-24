@@ -42,6 +42,8 @@ SEEN = (" The secret code is {c}.", " Question: What is the secret code? Answer:
 UNSEEN = (" Account recovery token: {c}.",
           " Question: What is the account recovery token? Answer:")
 BACKUP = (" The backup key is {c}.", " Question: What is the backup key? Answer:")
+PASSWORD = (" The old password is {c}.",
+            " Question: What was the old password? Answer:")
 
 
 def load_ckpt(model, path):
@@ -71,12 +73,13 @@ def build(tok, filler, T, facts, question, block=64):
     for i in order:
         depth = facts[i][2]
         p = min(int(body_total * depth), body_total - len(fact_tok[i]) - 8)
-        p = max(p, cur + 1)
+        p = max(p, cur + 24)
         out.extend(filler[cur:p])
         out.extend(fact_tok[i])
         cur = p
         if i == target:
-            target_pos = len(out) - 1
+            target_pos = len(out) - 2      # -2: the last token is ".", the code digits
+                                           # are just before it (block-boundary safe)
     out.extend(filler[cur:body_total])
     body = out[:body_total]
     assert target_pos is not None and target_pos < len(body), (target_pos, len(body))
@@ -114,16 +117,21 @@ def main() -> int:
     ap.add_argument("--depths", default="0.1,0.5,0.9")
     ap.add_argument("--n_prompts", type=int, default=4)
     ap.add_argument("--tag", default="gen")
+    ap.add_argument("--model", default="",
+                    help="base model dir; default = the one recorded in the checkpoint")
     ap.add_argument("--v2", action="store_true")
     ap.add_argument("--merge", action="store_true")
     args = ap.parse_args()
 
     from transformers import AutoTokenizer
 
-    model = load_model(MODEL_DIR, device=DEV)
-    tok = AutoTokenizer.from_pretrained(MODEL_DIR)
     meta = torch.load(args.ckpt, map_location="cpu", weights_only=False).get("meta", {})
     margs = meta.get("args", {})
+    model_dir = args.model or margs.get("model", "models/Qwen2.5-0.5B")
+    if not os.path.isabs(model_dir):
+        model_dir = os.path.join(ROOT, model_dir)
+    model = load_model(model_dir, device=DEV)
+    tok = AutoTokenizer.from_pretrained(model_dir)
     patch_model(model, budget=margs.get("budget", 0.25),
                 n_concepts=margs.get("n_concepts", 64),
                 graph_rank=margs.get("graph_rank", 16),
@@ -150,6 +158,11 @@ def main() -> int:
             "unseen": [(UNSEEN[0], str(rng.randrange(1000, 9999)), depth)],
             "two_facts": [(SEEN[0], str(rng.randrange(1000, 9999)), d_secret),
                           (BACKUP[0], str(rng.randrange(1000, 9999)), depth)],
+            "three_facts": [(PASSWORD[0], str(rng.randrange(1000, 9999)),
+                             max(0.1, depth - 0.3)),
+                            (SEEN[0], str(rng.randrange(1000, 9999)), depth),
+                            (BACKUP[0], str(rng.randrange(1000, 9999)),
+                             min(0.9, depth + 0.3))],
         }
         for name, facts in conds.items():
             question = SEEN[1] if name == "seen" else (

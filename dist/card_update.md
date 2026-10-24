@@ -1,73 +1,96 @@
-## Latest findings (25 Oct 2026) — corrected, and a positive follow-up
+## Latest findings (25 Oct 2026) — corrected, extended, and a working recipe
 
-> **Correction first.** An earlier note said the router selects **0.0%** content
-> blocks and is *identical* to a budget-matched static window. Both numbers came from
+> **Correction first.** An earlier note said the router selects **0.0%** content blocks
+> and is *identical* to a budget-matched static window. Both numbers came from
 > evaluation scripts that loaded the checkpoint **before** patching the model, so an
 > uninitialised router was being measured. The scripts are fixed and every number
 > below is re-measured. (The older `exp3` PPL table — 14.30 dense / 21.84 learned —
 > was never affected.)
 
-**1. On WikiText the learned router is essentially a position prior.**
-- Content blocks (outside sink + recent window): **1.7 / 6.0 / 7.0%** at 1k / 4k / 8k.
-- PPL, 25% budget: learned **25.166 / 13.788 / 12.176 / 12.001** vs budget-matched
-  window **25.051 / 13.783 / 12.160 / 11.868** at 1k / 4k / 8k / 16k.
-- So learning adds nothing measurable here; the **budget** does. The gap to dense
-  falls from +45% (1k) to +11% (16k) at a fixed 25% of blocks.
+**1. On plain language modelling the negative result stands.** At a 25% block budget
+the learned router is a position prior: content blocks are **1.7 / 6.0 / 7.0 / 6.7%**
+of its selections at 1k / 4k / 8k / 16k, and perplexity is **25.166 / 13.788 / 12.176
+/ 12.001** versus a budget-matched static window's **25.051 / 13.783 / 12.160 /
+11.868** — the learning adds nothing (it is 0.005–0.133 PPL *worse*). What helps is the
+budget: the gap to dense falls from +45% (1k) to +11% (16k) at a fixed 25% of blocks.
+This is correct behaviour, not a training failure: on WikiText the dense teacher
+itself puts almost no mass on distant blocks.
 
-**2. Where distant content matters, a static window fails.** Needle-in-a-haystack at
-8k, 25% budget, 4 prompts: dense exact **1.00**, budget-matched window exact **0.00**
-(CE ≈ 3.0). Perplexity can never show this regime.
+**2. Retrieval is the regime where content matters.** Needle at 8k, 25% budget, 4
+prompts: dense answers exactly (exact **1.00**, CE 0.14–0.39), the budget-matched
+window cannot (exact **0.00**, CE ≈ 3.0). Perplexity can never show this.
 
-**3. The router *can* learn content selection — with a retrieval objective.**
-Trained at T=1024 only, evaluated at 1k / 2k / 8k:
-- exact match equals dense in **7 of 9** cells (8k: CE **0.175** vs dense 0.161 and
-  window 3.048);
-- **24/24 layers** select the fact block at the query row;
-- content blocks rise to **19% / 57.5% / 69.2%** (1k / 4k / 8k; label-free version:
-  19.5 / 61.7 / 71.6);
-- it transfers to 8k without retraining.
+**3. The router can learn it — and the three ingredients are separable**:
 
-**4. Distillation works — if the target is focused on content.** Same data, same head,
-same answer-position loss:
+| ingredient | good | bad | effect (needle exact) |
+|---|---|---|---|
+| where the loss is applied | answer positions | all query rows | 1.00 vs 0.75 (8k), 1.00 vs 0.00 (1k) |
+| what the target is | teacher's content argmax | full attention distribution | works vs 0.11 p(fact), fails |
+| router head | + bilinear content path | concept graph only | works vs p=0.066, fails |
 
-| objective | probability on the fact block |
-|---|---:|
-| full KL (the v1 objective, at answer rows) | 0.11 |
-| KL restricted to content blocks | 0.18 |
-| **teacher content-argmax (no labels)** | **0.53** |
-| explicit fact label (upper bound) | 0.91 |
-| shuffled label (control) | 0.067 = chance |
+The full attention distribution fails because ~50% of the teacher's mass at the answer
+rows sits on the sink block and ~20% on the query block; the content signal is a few
+percent of the gradient. Restricting the KL to content blocks helps at 8k but not at
+1k (the teacher's content mass is still diffuse). Focusing on the teacher's content
+**argmax** works at both, and **needs no needle labels** — the target is read off the
+dense attention.
 
-End-to-end needle result at a 25% budget, out-of-window cells (CE / exact match):
+**4. Label-free result, 3 seeds × 6 prompts** (trained at T=1024, evaluated at 1k/8k):
 
-| policy | 1k depth 0.5 | 8k depth 0.1 | 8k depth 0.5 |
+| cell | dense | **label-free router** | budget-matched window |
 |---|---:|---:|---:|
-| budget-matched window | 2.96 / 0.00 | 3.08 / 0.00 | 3.11 / 0.00 |
-| full KL (v1 objective) | 2.36 / 0.00 | 2.09 / 0.25 | 1.90 / 0.25 |
-| content KL | 0.55 / 0.00 | 0.16 / **1.00** | 0.20 / **1.00** |
-| **teacher content-argmax (no labels)** | **0.21 / 1.00** | **0.37 / 1.00** | **0.29 / 1.00** |
-| dense (no sparsity) | 0.14 / 1.00 | 0.16 / 1.00 | 0.39 / 1.00 |
+| 1k, depth 0.5 (out of window) | 1.00 | **1.00 (1.00–1.00)** | 0.00 |
+| 8k, depth 0.1 (out of window) | 1.00 | **1.00 (1.00–1.00)** | 0.00 |
+| 8k, depth 0.5 (out of window) | 1.00 | **1.00 (1.00–1.00)** | 0.00 |
+| 1k, depth 0.9 (**in** window) | 1.00 | 0.39 (0.00–1.00) | 1.00 |
+| 8k, depth 0.9 (**in** window) | 1.00 | 1.00 | 1.00 |
 
-So the router learns retrieval **without any needle labels**: the target is read off
-the dense teacher's attention at the answer positions, with the sink/window part
-removed. The original full-KL objective is the one thing that fails. Full attention
-distillation is dominated by the sink + recent-window mass that the position prior
-already provides.
+Selection: **24/24 layers** pick the fact block at the query row; content blocks rise
+to **19.5 / 61.7 / 71.6%** (1k/4k/8k). Greedy generation with full re-prefill produces
+the same answer as dense (`7311`). The in-window weakness at 1k is a budget artefact
+(2 free slots, see 6); at 8k it disappears.
 
-**5. The head matters as much as the objective.** The concept-graph head is
-content-blind at initialisation (softmax over K concepts, block-mean pooled → score
-gradient ≈ 1/K²); with a direct bilinear content path the same label run reaches
-p = 0.86 in **60 steps** instead of never.
+**5. Controls and mechanism.**
+- Shuffled-label training learns nothing (p(fact) 0.067 = chance, exact 0.00).
+- The teacher's own per-instance content argmax points at the fact in only **15.3%**
+  of (layer, sample) pairs, yet the student selects it in **71%** of layers: a shared
+  router averages out per-instance teacher noise and learns the consistent part (the
+  fact sentence). This is why the objective plateaus in p(fact) while end-to-end
+  accuracy saturates — one routed layer is enough.
+- The softmax temperature drifts under a hard argmax target, so p(fact) flattens after
+  training while the **ranking** (what top-k uses) stays correct. Selection rate and
+  exact match are the metrics to trust.
 
-**6. The price.** The needle-trained router is worse on plain text (27.7 vs 25.1 PPL
-at 1k — as bad as random). It is a **specialist**, not a drop-in replacement, and it
-does not generalise to a re-phrased fact (exact 0.00) or fully to two-fact contexts.
-That is a real limit, stated as such.
+**6. One router for both behaviours (the practical result).** Mixing one needle step
+per seven LM steps (`mix7`, 900 steps) keeps retrieval where the window fails **and**
+keeps plain-LM quality:
 
-**7. Speed is unchanged by any of this.** Prefill **1.71× at 32k**; graph decode
-**1.27× at 8k**; eager decode loses; still compute/bandwidth only, **no KV-memory
-saving**.
+| schedule | 1k d0.5 | 1k d0.9 | 8k d0.1 | 8k d0.5 | PPL 1k | PPL 4k |
+|---|---:|---:|---:|---:|---:|---:|
+| needle only | 1.00 | 0.17 | 1.00 | 1.00 | 27.70 | 18.22 |
+| 1 needle : 2 LM | 0.83 | 0.17 | 1.00 | 1.00 | 25.87 | 14.79 |
+| **1 needle : 7 LM** | **1.00** | **1.00** | **1.00** | **1.00** | **25.66** | **14.15** |
+| static window (control) | 0.00 | 1.00 | 0.00 | 0.00 | **25.05** | **13.78** |
+| dense | 1.00 | 1.00 | 1.00 | 1.00 | 17.32 | 10.95 |
 
-Full tables, limits and reproduction commands:
+**+0.60 PPL at 1k (2.4%) buys exact retrieval on every out-of-window cell**, at a 25%
+compute budget. Warm-starting the LM router on needles instead (300 steps) does *not*
+work: p(fact) 0.28 and PPL 27.0 — the LM prior fights the new objective.
+
+**7. Limits, stated plainly.**
+- Transfer stops at **8k**: at 16k the same router scores exact 0.00 where dense scores
+  1.00; at 32k the 0.5B dense model itself fails, so the probe says nothing.
+- A re-phrased fact ("Account recovery token: …") and multi-fact contexts are only
+  partially handled (`exp62`); numbers in `LCGA_FINDINGS.md` §5.5.
+- No KV-memory saving — this is compute/bandwidth only, so it does not extend the
+  context that fits on a 6 GB card.
+- One base model (0.5B), one task family (4-digit needle), no serving path: all needle
+  numbers are teacher-forced scoring of the answer span plus one greedy-generation
+  check.
+
+**8. Speed is unchanged.** Prefill **1.71× at 32k**; graph decode **1.27× at 8k**;
+eager decode loses; no KV-memory saving.
+
+Full tables, ablations, controls, limits and reproduction commands:
 [`LCGA_FINDINGS.md`](https://github.com/byjameson/lcga-local/blob/main/LCGA_FINDINGS.md).
-The licence, weights and donation section below are unchanged.
+The licence, weights and donation section above are unchanged.

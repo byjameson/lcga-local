@@ -37,3 +37,7 @@ gpu_samples.csv
 .idea/
 Thumbs.db
 Desktop.ini
+
+# ModelScope staging (the READMEs are mirrored on ModelScope; weights are not versioned)
+dist/modelscope/
+

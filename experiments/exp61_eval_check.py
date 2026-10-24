@@ -72,14 +72,19 @@ def main() -> int:
     ap.add_argument("--gen", type=int, default=0,
                     help="also greedily generate this many tokens with full-sequence "
                          "re-prefill (dense vs sparse)")
+    ap.add_argument("--model", default="",
+                    help="base model dir; default = the one recorded in the checkpoint")
     args = ap.parse_args()
 
     from transformers import AutoTokenizer
 
-    model = load_model(MODEL_DIR, device=DEV)
-    tok = AutoTokenizer.from_pretrained(MODEL_DIR)
     meta = torch.load(args.ckpt, map_location="cpu", weights_only=False).get("meta", {})
     margs = meta.get("args", {})
+    model_dir = args.model or margs.get("model", "models/Qwen2.5-0.5B")
+    if not os.path.isabs(model_dir):
+        model_dir = os.path.join(ROOT, model_dir)
+    model = load_model(model_dir, device=DEV)
+    tok = AutoTokenizer.from_pretrained(model_dir)
     print(f"[meta] { {k: margs[k] for k in ('loss', 'content_rank', 'budget', 'seq') if k in margs} }", flush=True)
     patch_model(model, budget=margs.get("budget", 0.25),
                 n_concepts=margs.get("n_concepts", 64),

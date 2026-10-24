@@ -1,0 +1,22 @@
+{
+ "exp": "exp60_needle",
+ "tag": "bud375_inwin12",
+ "ckpt": "checkpoints/bud375_final.pt",
+ "ts": "2026-10-24 04:12:52",
+ "results": {
+  "T1024_d0.9": {
+   "dense": {
+    "ce": 0.13226128866275152,
+    "exact": 1.0
+   },
+   "topk": {
+    "ce": 1.8175855875015259,
+    "exact": 0.0
+   },
+   "window": {
+    "ce": 0.1869215965270996,
+    "exact": 1.0
+   }
+  }
+ }
+}

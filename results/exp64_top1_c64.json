@@ -1,0 +1,50 @@
+{
+ "exp": "exp64_query_swap",
+ "tag": "top1_c64",
+ "ckpt": "checkpoints/needle_top1_c64_final.pt",
+ "ts": "2026-10-24 04:13:06",
+ "results": {
+  "d0.2": {
+   "secret": {
+    "ce": 0.17321540415287018,
+    "exact": 1.0,
+    "hit_secret": 0.0,
+    "hit_backup": 0.0
+   },
+   "backup": {
+    "ce": 0.21098963916301727,
+    "exact": 1.0,
+    "hit_secret": 0.0,
+    "hit_backup": 0.0
+   }
+  },
+  "d0.5": {
+   "secret": {
+    "ce": 0.14212177693843842,
+    "exact": 1.0,
+    "hit_secret": 0.0,
+    "hit_backup": 0.0
+   },
+   "backup": {
+    "ce": 0.35256141424179077,
+    "exact": 0.0,
+    "hit_secret": 0.0,
+    "hit_backup": 0.0
+   }
+  },
+  "d0.8": {
+   "secret": {
+    "ce": 0.1719808727502823,
+    "exact": 1.0,
+    "hit_secret": 0.0,
+    "hit_backup": 0.0
+   },
+   "backup": {
+    "ce": 0.24678203463554382,
+    "exact": 1.0,
+    "hit_secret": 0.0,
+    "hit_backup": 0.0
+   }
+  }
+ }
+}
