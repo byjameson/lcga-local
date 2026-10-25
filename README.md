@@ -68,6 +68,7 @@ Published articles (DEV Community):
 [Fine-tuning a 32B model on a 6 GB laptop GPU — and the three measurements that nearly fooled me](https://dev.to/mycute_97b39c4e34027570f9/fine-tuning-a-32b-model-on-a-6-gb-laptop-gpu-and-the-three-measurements-that-nearly-fooled-me-2ojm)
 
 Also on Medium: [Fine-tuning a 32B model on a 6 GB laptop GPU](https://medium.com/@myredditacc9393/fine-tuning-a-32b-model-on-a-6-gb-laptop-gpu-e749df447229).
+The planner announcement: [Will it fit? A free check before you download 19 GB of weights](https://medium.com/@myredditacc9393/will-it-fit-a-free-check-before-you-download-19-gb-of-weights-9097e1fcf93f).
 
 ## Model artifacts
 
