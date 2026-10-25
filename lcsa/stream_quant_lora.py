@@ -22,7 +22,16 @@ from .stream_train import _layer_out, chunked_lm_loss_and_backward
 
 
 def chunked_lm_loss_and_backward_masked(head, h, ys, chunk=128, ignore_index=-100):
-    """Chunked CE with an ignore_index (for SFT prompt masking)."""
+    """Chunked CE with an ignore_index (for SFT prompt masking).
+
+    KNOWN ISSUE (frozen snapshot): each chunk is divided by that chunk's own valid-token
+    count, so on uneven masks the accumulated gradient over-weights chunks with few
+    unmasked tokens (112-427% error measured on synthetic masks). The reported loss is
+    still the correct mean, so every SFT run in this archive that used this path still
+    shows the right curve; its gradient steps were mis-weighted. Fixed in the maintained
+    engine: stream-finetune 0.2.1 (global valid count + two tests).
+    """
+
     B, T, _ = h.shape
     total = torch.zeros((), device=h.device, dtype=torch.float32)
     valid_total = 0
