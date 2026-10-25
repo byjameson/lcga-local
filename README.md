@@ -9,7 +9,7 @@ and had to publish corrections for.
 > **The practical trainer has moved to its own repository:
 > [byjameson/stream-finetune](https://github.com/byjameson/stream-finetune).**
 > It is the streaming-NF4 engine that fine-tunes a **32B** model on this card at
-> **1024 tokens/step, 36.7 tok/s, 4.61 GB**, plus the measured guide. This repo keeps the
+> **1024 tokens/step, 36.7 tok/s, 4.61 GB**, plus the measured guide and a free "will it fit?" planner. This repo keeps the
 > research; that one keeps the tool. `lcsa/stream_*`, `lcsa/disk_quant_store.py` and
 > `experiments/exp54_disk_qlora.py` here are a **frozen snapshot** — the maintained copy
 > lives in the trainer repo as the `streamft/` package.
