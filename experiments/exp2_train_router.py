@@ -36,14 +36,34 @@ def save_ckpt(model, path, meta):
 
 
 def load_ckpt(model, path):
+    """Copy every saved tensor into the model; raise if the checkpoint does not fit.
+
+    The 19.10.2026 incident: load_ckpt ran BEFORE patch_model, the router parameters
+    did not exist, and the copy silently skipped them (the eval script) or crashed with
+    a KeyError (here). Both are now an explicit error naming the first missing tensor.
+    """
     ckpt = torch.load(path, map_location="cpu", weights_only=False)
     base = model.model
+    missing = []
+    loaded = 0
     for i, layer in enumerate(base.layers):
         w = layer.self_attn
         sd = ckpt["state"][i]
         own = dict(w.named_parameters())
         for n, t in sd.items():
-            own[n].data.copy_(t.to(own[n].device))
+            if n in own:
+                own[n].data.copy_(t.to(own[n].device))
+                loaded += 1
+            else:
+                missing.append(f"layer{i}.{n}")
+    total = sum(len(s) for s in ckpt["state"])
+    if missing:
+        raise RuntimeError(
+            f"load_ckpt: {len(missing)}/{total} checkpoint tensors have no home in the model "
+            f"(first: {missing[0]}). The router modules are probably not installed: call "
+            f"patch_model() BEFORE load_ckpt(). Refusing to continue with a partially "
+            f"initialised router. Checkpoint: {path}"
+        )
     return ckpt.get("meta", {})
 
 
